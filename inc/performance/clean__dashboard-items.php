@@ -22,4 +22,13 @@ add_action ( 'wp_dashboard_setup', function () {
 	// remove_meta_box ( 'dashboard_site_health', 'dashboard', 'normal' ); // Site Health
 	remove_meta_box ( 'dashboard_php_nag', 'dashboard', 'normal' ); // PHP nag
 	remove_action ( 'welcome_panel', 'wp_welcome_panel' ); // Remove Welcome Panel
+
+	// plugins
+	unset($wp_meta_boxes['dashboard']['normal']['core']['yoast_db_widget']);
+	unset($wp_meta_boxes['dashboard']['normal']['core']['wpseo-dashboard-overview']);
+	unset($wp_meta_boxes['dashboard']['normal']['core']['zerospam_dashboard_widget']);
+	unset($wp_meta_boxes['dashboard']['normal']['core']['simple_history_dashboard_widget']);
+	unset($wp_meta_boxes['dashboard']['side']['high']['wpa_dashboard_widget']);
+
+	// TODO : Add unwated plugins
 } );
