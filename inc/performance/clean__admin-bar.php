@@ -1,7 +1,7 @@
 <?php
 
 /*
-Snippet Name: Clean admin bar
+Snippet Name: Clean Admin Bar
 Version: 1.0.0
 Tag(s): Performance
 Description:

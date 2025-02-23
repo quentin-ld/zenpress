@@ -1,7 +1,7 @@
 <?php
 
 /*
-Snippet Name: Remove dashboard items
+Snippet Name: Remove Dashboard Items
 Version: 1.0.0
 Tag(s): Performance
 Description:
