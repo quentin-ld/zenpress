@@ -4,7 +4,7 @@
 Snippet Name: Disable emoji scripts
 Version: 1.0.0
 Tag(s): Performance
-Description: 
+Description:
 */
 
 if (!defined('ABSPATH')) die();

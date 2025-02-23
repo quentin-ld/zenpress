@@ -4,7 +4,7 @@
 Snippet Name: Disable author archives
 Version: 1.0.0
 Tag(s): Security
-Description: 
+Description:
 */
 
 if (!defined('ABSPATH')) die();

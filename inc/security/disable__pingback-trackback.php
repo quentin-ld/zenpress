@@ -4,7 +4,7 @@
 Snippet Name: Disable Pingback & Trackback
 Version: 1.0.0
 Tag(s): Security, Performance
-Description: 
+Description:
 */
 
 if (!defined('ABSPATH')) die();

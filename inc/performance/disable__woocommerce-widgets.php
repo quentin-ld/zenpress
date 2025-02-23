@@ -4,12 +4,12 @@
 Snippet Name: Disable WooCommerce Widgets
 Version: 1.0.0
 Tag(s): Performance
-Description: 
+Description:
 */
 
 if (!defined('ABSPATH')) die();
 
-if ( class_exists( 'woocommerce' ) ) { 
+if ( class_exists( 'woocommerce' ) ) {
 
 	add_action('widgets_init', 'ripperdoc_disable_woocommerce_widgets', 99);
 	function ripperdoc_disable_woocommerce_widgets() {

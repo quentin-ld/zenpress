@@ -4,7 +4,7 @@
 Snippet Name: Protect wp-login form
 Version: 1.0.0
 Tag(s): Security
-Description: 
+Description:
 */
 
 

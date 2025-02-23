@@ -4,13 +4,13 @@
 Snippet Name: Disable WooCommerce Scripts & Styles
 Version: 1.0.0
 Tag(s): Performance
-Description: 
+Description:
 */
 
 if (!defined('ABSPATH')) die();
 
-if ( class_exists( 'woocommerce' ) ) { 
-	
+if ( class_exists( 'woocommerce' ) ) {
+
 	// Disable WooCommerce scripts and styles
 	if (!is_woocommerce() && !is_cart() && !is_checkout() && !is_account_page() && !is_product() && !is_product_category() && !is_shop()) {
 		//Dequeue WooCommerce Styles
