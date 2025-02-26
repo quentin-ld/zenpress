@@ -1,18 +1,24 @@
 <?php
 
-/*
-Snippet Name: Disable WooCommerce Widgets
-Version: 1.0.0
-Tag(s): Performance
-Description:
-*/
+/**
+ * Disables WooCommerce widgets
+ *
+ * This function disables various WooCommerce widgets that are typically
+ * registered by default. By unregistering these widgets, you can improve
+ * site performance by preventing the loading of unnecessary widgets on
+ * the frontend.
+ *
+ * @return void
+ *
+ * @since 1.0.0
+ */
 
 if (!defined('ABSPATH')) die();
 
 if (class_exists('woocommerce')) {
 
-	add_action('widgets_init', 'ripperdoc_disable_woocommerce_widgets', 99);
-	function ripperdoc_disable_woocommerce_widgets()
+	add_action('widgets_init', 'zenpress_disable_woocommerce_widgets', 99);
+	function zenpress_disable_woocommerce_widgets()
 	{
 		unregister_widget('WC_Widget_Products');
 		unregister_widget('WC_Widget_Product_Categories');

@@ -1,17 +1,20 @@
 <?php
 
-/*
-Snippet Name: Disable Dashicons
-Version: 1.0.0
-Tag(s): Performance
-Description:
-*/
+/**
+ * Disables Dashicons for non-logged-in users
+ *
+ * This function prevents WordPress from loading the Dashicons CSS for visitors
+ * who are not logged in, which can improve frontend performance.
+ *
+ * @return void
+ *
+ * @since 1.0.0
+ */
 
 if (!defined('ABSPATH')) die();
 
-// Dashicons
-add_action('wp_enqueue_scripts', 'ripperdoc_disabledashicons');
-function ripperdoc_disabledashicons()
+add_action('wp_enqueue_scripts', 'zenpress_disable_dashicons');
+function zenpress_disable_dashicons()
 {
 	if (!is_user_logged_in()) {
 		wp_dequeue_style('dashicons');

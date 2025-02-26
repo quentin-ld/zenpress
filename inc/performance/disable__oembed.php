@@ -1,17 +1,21 @@
 <?php
 
-/*
-Snippet Name: Disable oembed
-Version: 1.0.0
-Tag(s): Performance
-Description:
-*/
+/**
+ * Disables oEmbed functionality in WordPress
+ *
+ * This function removes all features related to oEmbed, including
+ * auto-discovery, embedding of external content, and the wp-embed script,
+ * to improve site performance by eliminating unnecessary API calls and scripts.
+ *
+ * @return void
+ *
+ * @since 1.0.0
+ */
 
 if (!defined('ABSPATH')) die();
 
-// Hook the function to WordPress init action
-add_action('init', 'ripperdoc_disableoembed');
-function ripperdoc_disableoembed()
+add_action('init', 'zenpress_disable_oembed');
+function zenpress_disable_oembed()
 {
 	// Remove oEmbed from query vars
 	global $wp;

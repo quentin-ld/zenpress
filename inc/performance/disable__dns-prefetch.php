@@ -1,11 +1,15 @@
 <?php
 
-/*
-Snippet Name: Disable DNS Prefetch
-Version: 1.0.0
-Tag(s): Performance
-Description:
-*/
+/**
+ * Disables DNS prefetch in WordPress
+ *
+ * This function removes DNS prefetch resource hints from the wp_head,
+ * which can reduce unnecessary DNS lookups for some websites.
+ *
+ * @return void
+ *
+ * @since 1.0.0
+ */
 
 if (!defined('ABSPATH')) die();
 

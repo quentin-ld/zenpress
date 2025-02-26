@@ -1,20 +1,27 @@
 <?php
 
-/*
-Snippet Name: Block user-enumeration
-Version: 1.0.0
-Tag(s): Security
-Description:
-*/
+/**
+ * Blocks user enumeration via author query string
+ *
+ * This function prevents the user enumeration that can be exploited by attackers
+ * to gather information about users on the WordPress site. It blocks both
+ * the default and permalink-based user enumeration URLs that reveal user IDs
+ * through author query strings, improving security.
+ *
+ * @return void
+ *
+ * @since 1.0.0
+ */
 
 if (!defined('ABSPATH')) die();
 
-if (! is_admin()) {
-	// default URL format
+if (!is_admin()) {
+	// Default URL format
 	if (preg_match('/author=([0-9]*)/i', $_SERVER['QUERY_STRING']))
 		die();
+
+	// Block permalink URL format
 	add_filter('redirect_canonical', function ($redirect, $request) {
-		// permalink URL format
 		if (preg_match('/\?author=([0-9]*)(\/*)/i', $request))
 			die();
 		else
