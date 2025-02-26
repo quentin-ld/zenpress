@@ -11,8 +11,9 @@ if (!defined('ABSPATH')) die();
 
 
 add_action('wp_enqueue_scripts', 'ripperdoc_disable_woocommerce_scripts_styles', 11);
-function ripperdoc_disable_woocommerce_scripts_styles() {
-    if (class_exists('woocommerce')) {
+function ripperdoc_disable_woocommerce_scripts_styles()
+{
+	if (class_exists('woocommerce')) {
 
 		// Disable WooCommerce scripts and styles
 		if (!is_woocommerce() && !is_cart() && !is_checkout() && !is_account_page() && !is_product() && !is_product_category() && !is_shop()) {
@@ -43,5 +44,3 @@ function ripperdoc_disable_woocommerce_scripts_styles() {
 		}
 	}
 }
-
-
