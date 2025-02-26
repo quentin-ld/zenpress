@@ -9,7 +9,7 @@ Description:
 
 add_filter(
 	'fallback_intermediate_image_sizes',
-	function() {
+	function () {
 		return array();
 	}
 );

@@ -9,13 +9,13 @@ Description:
 
 if (!defined('ABSPATH')) die();
 
-remove_filter ( 'template_redirect', 'redirect_canonical' );
-add_action ( 'template_redirect', function () {
-	if (is_author ()) {
+remove_filter('template_redirect', 'redirect_canonical');
+add_action('template_redirect', function () {
+	if (is_author()) {
 		global $wp_query;
-		$wp_query->set_404 ();
-		status_header ( 404 );
+		$wp_query->set_404();
+		status_header(404);
 	} else {
-		redirect_canonical ();
+		redirect_canonical();
 	}
-} );
+});

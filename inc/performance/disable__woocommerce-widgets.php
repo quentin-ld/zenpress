@@ -9,10 +9,11 @@ Description:
 
 if (!defined('ABSPATH')) die();
 
-if ( class_exists( 'woocommerce' ) ) {
+if (class_exists('woocommerce')) {
 
 	add_action('widgets_init', 'ripperdoc_disable_woocommerce_widgets', 99);
-	function ripperdoc_disable_woocommerce_widgets() {
+	function ripperdoc_disable_woocommerce_widgets()
+	{
 		unregister_widget('WC_Widget_Products');
 		unregister_widget('WC_Widget_Product_Categories');
 		unregister_widget('WC_Widget_Product_Tag_Cloud');

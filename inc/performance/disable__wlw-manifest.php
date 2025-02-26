@@ -9,4 +9,4 @@ Description:
 
 if (!defined('ABSPATH')) die();
 
-remove_action ( 'wp_head', 'wlwmanifest_link' );
+remove_action('wp_head', 'wlwmanifest_link');

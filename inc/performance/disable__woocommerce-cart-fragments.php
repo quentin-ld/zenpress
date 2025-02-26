@@ -9,7 +9,11 @@ Description:
 
 if (!defined('ABSPATH')) die();
 
-if ( class_exists( 'woocommerce' ) ) {
-    // Disable WooCommerce Cart Fragments
-    wp_dequeue_script('wc-cart-fragments');
+function ripperdoc_disable_cart_fragments() {
+    if (class_exists('woocommerce')) {
+        // Disable WooCommerce Cart Fragments
+        wp_dequeue_script('wc-cart-fragments');
+    }
 }
+// Hook into the proper WordPress action for handling scripts
+add_action('wp_enqueue_scripts', 'ripperdoc_disable_cart_fragments', 11);
