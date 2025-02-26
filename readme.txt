@@ -1,13 +1,13 @@
 === ZenPress ===
-Contributors: quentinldd
-Donate link: https://holdmywp.com/
-Tags: remove bloat, optimization, performance, security, woocommerce, wordpress optimization
-Requires at least: 4.7
-Tested up to: 6.2
+Contributors: @quentinldd
+Donate link: https://github.com/sponsors/quentin-ld/
+Tags: remove bloat, optimization, performance, security, woocommerce
+Requires at least: 6.0
+Tested up to: 6.7
 Stable tag: 1.0
 Requires PHP: 7.4
 License: GPLv2 or later
-License URI: https://www.gnu.org/licenses/gpl-2.0.html
+License URI: https://www.gnu.org/licenses/gpl-2.0.html/
 Photo CC0 licensed photo by Chandra WordPress Photo Directory: https://wordpress.org/photos/photo/76967b30b3/
 
 A performance and security plugin for WordPress, improving site speed and security with several optimizations.
@@ -24,12 +24,32 @@ With ZenPress, you can:
 
 ZenPress provides an easy way to improve both the speed and security of your WordPress site with minimal configuration required.
 
+== Privacy Statement ==
+
+ZenPress is private by default and always will be. It does not store any data. It does not send data to any third party, nor does it include any third party resources.
+
+== Accessibility Statement ==
+
+ZenPress aims to be fully accessible to all of its users.
+
+== Frequently Asked Questions ==
+
+= Does this plugin work with PHP 8 =
+
+Yes, it's actively tested and working up to PHP 8.2.
+
+= Do you accept donations? =
+
+I am accepting sponsorships via the GitHub Sponsors program: https://github.com/sponsors/quentin-ld/. If you work at an agency that develops with WordPress, ask your company to provide sponsorship in order to invest in its supply chain. The tools that I maintain probably save your company time and money, and GitHub sponsorship can now be done at the organisation level.
+
+In addition, if you like the plugin then I'd love for you to leave a review. Tell all your friends about it too!
+
 == Changelog ==
 
 = 1.0 =
-This version fixes a security related bug.  Upgrade immediately.
+First release of ZenPress, yaaaaayyy !
 
-== Description ==
+== Other credits ==
 * https://developer.wordpress.org/advanced-administration/security/hardening/
 * https://wordpress.org/plugins/disable-everything/
 * https://wordpress.org/plugins/disable-dashboard-for-woocommerce/
