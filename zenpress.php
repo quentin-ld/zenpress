@@ -191,7 +191,6 @@ if (!defined('ZENPRESS_DASHBOARD_CLEANUP') || ZENPRESS_DASHBOARD_CLEANUP !== fal
 /*****
  * TODOLIST ▓▒░(°◡°)░▒▓
  ****/
-// TODO: Fix for plugincheck
 // TODO: Add a unique button with dropdown in adminbar to clean all caches types onclick (will work with : Autooptimize, Cache enabler, Redis Object Cache, SQL Object Cache, APCU Manager).
 // TODO: Remove Rest API link from frontend
 // TODO: Remove all RSS feeds links and Disable it except main one
