@@ -14,7 +14,7 @@
  * Version:      1.0
  * Plugin URI:   https://wordpress.org/plugins/zenpress/
  * Author:       Quentin Le Duff
- * Author URI:   https://querymonitor.com/
+ * Author URI:   https://holdmywp.com/
  * Text Domain:  zenpress
  * Domain Path:  /languages/
  * Requires at least: 6.0
