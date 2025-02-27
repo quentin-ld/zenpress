@@ -2,7 +2,7 @@
 
 
 /**
- * Cleans up the WordPress Admin Bar
+ * Clean up the WordPress Admin Bar
  *
  * This function removes redundant or unnecessary items from the WordPress Admin Bar,
  * both in the backend and frontend. By cleaning up the Admin Bar, you can streamline

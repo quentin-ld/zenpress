@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Protects the wp-login form from brute force attacks
+ * Protect the wp-login form from brute force attacks
  *
  * This function adds a layer of protection to the WordPress login form by:
  * - Removing detailed login error messages to prevent attackers from knowing if the username or password is incorrect.
@@ -17,7 +17,7 @@ if (!defined('ABSPATH')) die();
 
 // Remove login error message
 add_filter('login_errors', function () {
-	return 'Erreur de connexion.';
+	return __('Login error.', 'zenpress');
 });
 
 // Limit login attempts based on IP

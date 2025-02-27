@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Removes unnecessary items from the WordPress Dashboard
+ * Remove redundant items from the WordPress Dashboard
  *
  * This function removes various default and plugin-related widgets from the WordPress dashboard,
  * including the Quick Press widget, Incoming Links, and the Welcome Panel. This helps declutter

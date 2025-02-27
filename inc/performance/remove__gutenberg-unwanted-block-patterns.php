@@ -1,9 +1,9 @@
 <?php
 
 /**
- * Disables unwanted default block patterns in WordPress
+ * Disable unwanted default block patterns in gutenberg editor
  *
- * This function disables the loading of remote block patterns and removes
+ * This function Disable the loading of remote block patterns and removes
  * the core block patterns that WordPress includes by default. This can
  * improve performance by preventing unnecessary block patterns from
  * being loaded in the editor.

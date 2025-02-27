@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Disables WooCommerce scripts and styles on non-WooCommerce pages
+ * Disable WooCommerce scripts and styles on non-WooCommerce pages
  *
  * This function dequeues the WooCommerce scripts and styles on pages
  * where WooCommerce functionality is not required, such as the homepage,

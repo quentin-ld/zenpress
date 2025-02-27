@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Disables DNS prefetch in WordPress
+ * Disable DNS prefetch
  *
  * This function removes DNS prefetch resource hints from the wp_head,
  * which can reduce unnecessary DNS lookups for some websites.

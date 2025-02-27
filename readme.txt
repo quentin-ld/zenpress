@@ -1,28 +1,110 @@
-=== ZenPress ===
+=== ZenPress - Unbloat, Performance & Security ===
 Contributors: @quentinldd
 Donate link: https://github.com/sponsors/quentin-ld/
-Tags: remove bloat, optimization, performance, security, woocommerce
+Tags: optimization, performance, security, woocommerce, bloat
 Requires at least: 6.0
 Tested up to: 6.7
 Stable tag: 1.0
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html/
-Photo CC0 licensed photo by Chandra WordPress Photo Directory: https://wordpress.org/photos/photo/76967b30b3/
 
-A performance and security plugin for WordPress, improving site speed and security with several optimizations.
+The zeniest unbloat, performance and security lightweight plugin for WordPress and WooCommerce. Install, activate, and done!
 
 == Description ==
 
-ZenPress is a powerful plugin designed to enhance the performance and security of your WordPress website. It disables unnecessary features, optimizes performance, and hardens security to protect your site. This plugin comes with various functionalities like disabling unused scripts, removing unnecessary WordPress and WooCommerce features, and securing login pages, among others.
+ZenPress is a lightweight, super-fast plugin that boosts your WordPress & WooCommerce website through a wide range of solid actions. This is a simple solution for improving your WordPress website's performance and security while enjoying a simpler and lighter UI.
+Need some features that it removes? You can simply tell it to leave them alone using a WordPress constant.
+No database clutter, no ads, no pro version. Just install, activate, and forget about it!
 
-With ZenPress, you can:
+== Features ==
 
-    Disable performance-impacting features like emojis, oEmbed, and query strings
-    Improve security by blocking user enumeration and protecting the login page
-    Clean up the WordPress admin bar and dashboard to create a streamlined user interface
+Following features are included :
 
-ZenPress provides an easy way to improve both the speed and security of your WordPress site with minimal configuration required.
+= Performance =
+
+* Disable adjacent posts link tags in the WordPress header
+* Disable Dashicons for non-logged-in users
+* Disable DNS prefetch
+* Disable WordPress emoji scripts and styles
+* Disable jQuery Migrate on the frontend
+* Disable oEmbed
+* Disable PDF thumbnails
+* Disable WordPress shortlink generation
+* Disable the Windows Live Writer (WLW) manifest link
+* Disable WooCommerce cart fragments script
+* Disable WooCommerce scripts and styles on non-WooCommerce pages
+* Disable unnecessary Stripe scripts on WooCommerce pages
+* Disable WooCommerce widgets
+* Disable unwanted default block patterns in gutenberg editor
+* Remove WooCommerce patterns
+* Enables separate loading of core block styles
+
+= Security =
+
+* Blocks user enumeration via author query string
+* Disable author archives and redirects to 404
+* Disable pingback and trackback
+* Disable XML-RPC and removes the RSD (Really Simple Discovery) link
+* Hide WooCommerce version from HTTP headers, scripts, and styles
+* Hide WordPress version from HTTP headers, scripts, and styles
+* Protect the wp-login form from brute force attacks
+
+= User interface =
+
+* Cleans up the WordPress Admin Bar
+* Removes redudant items from the WordPress Dashboard
+
+ == Configuration options ==
+
+All ZenPress optimizations are enabled by default. You can disable specific
+functionalities by defining constants in your wp-config.php or functions.php file and setting them to false.
+
+= Performance constants =
+
+define('ZENPRESS_DISABLE_ADJACENT_POSTS', false);                // Allow adjacent posts queries
+define('ZENPRESS_DISABLE_DASHICONS', false);                     // Allow dashicons for non-admin users
+define('ZENPRESS_DISABLE_DNS_PREFETCH', false);                  // Allow DNS prefetch
+define('ZENPRESS_DISABLE_EMOJIS', false);                        // Allow WordPress emoji scripts
+define('ZENPRESS_DISABLE_JQUERY_MIGRATE', false);                // Allow jQuery Migrate
+define('ZENPRESS_DISABLE_OEMBED', false);                        // Allow oEmbed functionality
+define('ZENPRESS_DISABLE_PDF_THUMBNAILS', false);                // Allow PDF thumbnail generation
+define('ZENPRESS_DISABLE_SHORTLINK', false);                     // Allow WordPress shortlink
+define('ZENPRESS_DISABLE_WLW_MANIFEST', false);                  // Allow Windows Live Writer manifest
+define('ZENPRESS_DISABLE_WC_CART_FRAGMENTS', false);             // Allow WooCommerce cart fragments
+define('ZENPRESS_DISABLE_WC_SCRIPTS_STYLES', false);             // Allow WooCommerce scripts and styles
+define('ZENPRESS_DISABLE_WC_STRIPE_SCRIPTS', false);             // Allow WooCommerce Stripe scripts
+define('ZENPRESS_DISABLE_WC_WIDGETS', false);                    // Allow WooCommerce widgets
+define('ZENPRESS_REMOVE_GUTENBERG_BLOCK_PATTERNS', false);       // Allow Gutenberg default patterns
+define('ZENPRESS_REMOVE_WC_PATTERNS', false);                    // Allow WooCommerce default patterns
+define('ZENPRESS_SEPARATE_GUTENBERG_CORE_BLOCK_STYLES', false);  // Don't separate Gutenberg core block styles
+
+= Security constants =
+
+define('ZENPRESS_BLOCK_USER_ENUMERATION_PROTECTION', false);     // Allow user enumeration
+define('ZENPRESS_DISABLE_AUTHOR_ARCHIVES', false);               // Allow author archives
+define('ZENPRESS_DISABLE_PINGBACK_TRACKBACK', false);            // Allow pingback and trackback
+define('ZENPRESS_DISABLE_XMLRPC_RSDLINK', false);                // Allow XML-RPC and RSD link
+define('ZENPRESS_HIDE_WC_VERSION', false);                       // Allow WooCommerce version display
+define('ZENPRESS_HIDE_WP_VERSION', false);                       // Allow WordPress version display
+define('ZENPRESS_LOGIN_PROTECTION', false);                      // Remove login protection
+
+= User interface constants =
+
+define('ZENPRESS_ADMIN_BAR_CLEANUP', false);                     // Disable admin bar cleanup
+define('ZENPRESS_DASHBOARD_CLEANUP', false);                     // Disable dashboard cleanup
+
+== Screenshots ==
+
+1. Dashboard without ZenPress.
+2. Dashboard with ZenPress.
+3. Site editor without ZenPress.
+4. Site editor with ZenPress.
+5. Login page without ZenPress login protection.
+6. Login page with ZenPress login protection.
+7. Login page with ZenPress login protection after trying to brute force it.
+8. Website head without ZenPress.
+9. Website head with ZenPress.
 
 == Privacy Statement ==
 
@@ -33,6 +115,10 @@ ZenPress is private by default and always will be. It does not store any data. I
 ZenPress aims to be fully accessible to all of its users.
 
 == Frequently Asked Questions ==
+
+= Can I disable some ZenPress functions ? =
+
+Yes! You can easily disable them by setting a constant in your wp-config.php or functions.php file. Please refer to the configuration section for more details.
 
 = Does this plugin work with PHP 8 =
 
@@ -47,14 +133,24 @@ In addition, if you like the plugin then I'd love for you to leave a review. Tel
 == Changelog ==
 
 = 1.0 =
-First release of ZenPress, yaaaaayyy !
 
-== Other credits ==
+First release of ZenPress, yaaaaayyy!
+
+== Upgrade Notice ==
+
+= 1.0 =
+
+Let's boost your WordPress website!
+
+== Credits ==
+* Photo CC0 licensed photo by Chandra WordPress Photo Directory: https://wordpress.org/photos/photo/76967b30b3/
 * https://developer.wordpress.org/advanced-administration/security/hardening/
 * https://wordpress.org/plugins/disable-everything/
 * https://wordpress.org/plugins/disable-dashboard-for-woocommerce/
-* https://fr.wordpress.org/plugins/secupress/
-* https://perfmatters.io/
+* https://gist.github.com/MarieComet/dd8e7f3869232ef5becaadd082089e02/
+* https://github.com/vinkla/headache/
+* https://secupress.me/features/
+* https://perfmatters.io/features/
 * https://faq.o2switch.fr/hebergement-mutualise/tutoriels-cpanel/wptiger/
-* https://mariecomet.fr/
-* https://github.com/vinkla/headache
+* https://faq.o2switch.fr/hebergement-mutualise/tutoriels-cpanel/tiger-protect/
+* https://wordpress.org/plugins/limit-login-attempts-reloaded/

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Disables adjacent posts link tags in the WordPress header
+ * Disable adjacent posts link tags in the header
  *
  * This function removes the rel="prev" and rel="next" link tags from the wp_head
  * output, which can improve performance by reducing unnecessary HTML in the header.

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Disables oEmbed functionality in WordPress
+ * Disable oEmbed
  *
  * This function removes all features related to oEmbed, including
  * auto-discovery, embedding of external content, and the wp-embed script,

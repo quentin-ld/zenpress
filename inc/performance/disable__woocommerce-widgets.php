@@ -1,9 +1,9 @@
 <?php
 
 /**
- * Disables WooCommerce widgets
+ * Disable WooCommerce widgets
  *
- * This function disables various WooCommerce widgets that are typically
+ * This function Disable various WooCommerce widgets that are typically
  * registered by default. By unregistering these widgets, you can improve
  * site performance by preventing the loading of unnecessary widgets on
  * the frontend.

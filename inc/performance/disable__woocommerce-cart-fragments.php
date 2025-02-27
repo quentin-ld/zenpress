@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Disables WooCommerce cart fragments script
+ * Disable WooCommerce cart fragments script
  *
  * This function removes the WooCommerce cart fragments JavaScript,
  * which is responsible for dynamically updating the cart contents

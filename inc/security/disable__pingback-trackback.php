@@ -1,9 +1,9 @@
 <?php
 
 /**
- * Disables pingback and trackback functionality in WordPress
+ * Disable pingback and trackback
  *
- * This function removes the X-Pingback header, disables pingbacks and trackbacks
+ * This function removes the X-Pingback header, Disable pingbacks and trackbacks
  * for new posts, and prevents self-pingbacks (where WordPress pings its own site).
  * This can help improve security and performance by preventing unnecessary requests
  * and reducing the risk of spam and DDoS attacks.

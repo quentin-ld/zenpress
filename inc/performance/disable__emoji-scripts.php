@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Disables WordPress emoji scripts and styles
+ * Disable WordPress emoji scripts and styles
  *
  * This function removes all emoji-related scripts, styles, and filters
  * from both frontend and admin areas to improve performance.

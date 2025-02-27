@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Disables the Windows Live Writer (WLW) manifest link
+ * Disable the Windows Live Writer (WLW) manifest link
  *
  * This function removes the WLW manifest link from the `<head>` section
  * of WordPress pages. The WLW manifest is used by the Windows Live Writer

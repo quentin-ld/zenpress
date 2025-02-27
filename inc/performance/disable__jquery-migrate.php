@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Disables jQuery Migrate on the frontend
+ * Disable jQuery Migrate on the frontend
  *
  * This function removes jQuery Migrate script from loading on the frontend
  * of the website to improve performance while keeping it enabled in the admin area.

@@ -1,9 +1,9 @@
 <?php
 
 /**
- * Disables PDF thumbnails in WordPress
+ * Disable PDF thumbnails
  *
- * This function disables the generation of PDF thumbnails by filtering
+ * This function Disable the generation of PDF thumbnails by filtering
  * out the fallback image sizes, which helps in improving performance
  * by avoiding the creation of unnecessary image files for PDFs.
  *

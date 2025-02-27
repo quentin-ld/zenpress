@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Disables WordPress shortlink generation
+ * Disable WordPress shortlink generation
  *
  * This function removes the shortlink functionality in WordPress by
  * disabling both the header and template redirect actions that output

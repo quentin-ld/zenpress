@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Hides WordPress version from HTTP headers, scripts, and styles
+ * Hide WordPress version from HTTP headers, scripts, and styles
  *
  * This function removes the WordPress version number from the HTML head (via
  * the `wp_generator` meta tag), the `the_generator` filter, and from
