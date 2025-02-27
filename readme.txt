@@ -143,6 +143,7 @@ First release of ZenPress, yaaaaayyy!
 Let's boost your WordPress website!
 
 == Credits ==
+
 * Photo CC0 licensed photo by Chandra WordPress Photo Directory: https://wordpress.org/photos/photo/76967b30b3/
 * https://developer.wordpress.org/advanced-administration/security/hardening/
 * https://wordpress.org/plugins/disable-everything/
