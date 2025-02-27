@@ -145,13 +145,3 @@ Let's boost your WordPress website!
 == Credits ==
 
 * Photo CC0 licensed photo by Chandra WordPress Photo Directory: https://wordpress.org/photos/photo/76967b30b3/
-* https://developer.wordpress.org/advanced-administration/security/hardening/
-* https://wordpress.org/plugins/disable-everything/
-* https://wordpress.org/plugins/disable-dashboard-for-woocommerce/
-* https://gist.github.com/MarieComet/dd8e7f3869232ef5becaadd082089e02/
-* https://github.com/vinkla/headache/
-* https://secupress.me/features/
-* https://perfmatters.io/features/
-* https://faq.o2switch.fr/hebergement-mutualise/tutoriels-cpanel/wptiger/
-* https://faq.o2switch.fr/hebergement-mutualise/tutoriels-cpanel/tiger-protect/
-* https://wordpress.org/plugins/limit-login-attempts-reloaded/
