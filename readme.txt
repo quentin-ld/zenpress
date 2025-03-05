@@ -132,6 +132,10 @@ In addition, if you like the plugin then I'd love for you to leave a review. Tel
 
 == Changelog ==
 
+= 1.0.1 =
+
+Fix script loading error on WC home admin page
+
 = 1.0 =
 
 First release of ZenPress, yaaaaayyy!

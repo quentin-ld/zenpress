@@ -15,8 +15,7 @@
 
 if (!defined('ABSPATH')) die();
 
-if (class_exists('woocommerce')) {
-
+if (class_exists('woocommerce') && !is_admin()) {
 	// Hide WooCommerce version from HTTP headers
 	add_filter('wp_headers', 'zenpress_remove_woocommerce_version');
 	function zenpress_remove_woocommerce_version($headers)
