@@ -13,27 +13,29 @@
  * @since 1.0.0
  */
 
-if (!defined('ABSPATH')) die();
+if (!defined('ABSPATH')) {
+    die();
+}
 
 if (class_exists('woocommerce') && !is_admin()) {
-	// Hide WooCommerce version from HTTP headers
-	add_filter('wp_headers', 'zenpress_remove_woocommerce_version');
-	function zenpress_remove_woocommerce_version($headers)
-	{
-		if (isset($headers['X-WooCommerce-Version'])) {
-			unset($headers['X-WooCommerce-Version']);
-		}
-		return $headers;
-	}
+    // Hide WooCommerce version from HTTP headers
+    add_filter('wp_headers', 'zenpress_remove_woocommerce_version');
+    function zenpress_remove_woocommerce_version($headers) {
+        if (isset($headers['X-WooCommerce-Version'])) {
+            unset($headers['X-WooCommerce-Version']);
+        }
 
-	// Remove WooCommerce version from scripts and styles URLs
-	add_filter('style_loader_src', 'zenpress_remove_woocommerce_version_scripts_styles', 10, 2);
-	add_filter('script_loader_src', 'zenpress_remove_woocommerce_version_scripts_styles', 10, 2);
-	function zenpress_remove_woocommerce_version_scripts_styles($src)
-	{
-		if (strpos($src, 'ver=') && strpos($src, 'woocommerce')) {
-			$src = remove_query_arg('ver', $src);
-		}
-		return $src;
-	}
+        return $headers;
+    }
+
+    // Remove WooCommerce version from scripts and styles URLs
+    add_filter('style_loader_src', 'zenpress_remove_woocommerce_version_scripts_styles', 10);
+    add_filter('script_loader_src', 'zenpress_remove_woocommerce_version_scripts_styles', 10);
+    function zenpress_remove_woocommerce_version_scripts_styles($src) {
+        if (strpos($src, 'ver=') && strpos($src, 'woocommerce')) {
+            $src = remove_query_arg('ver', $src);
+        }
+
+        return $src;
+    }
 }

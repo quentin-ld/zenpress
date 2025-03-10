@@ -13,6 +13,8 @@
  * @since 1.0.0
  */
 
-if (!defined('ABSPATH')) die();
+if (!defined('ABSPATH')) {
+    die();
+}
 
 add_filter('should_load_separate_core_block_assets', '__return_true');

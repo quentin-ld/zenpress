@@ -12,7 +12,9 @@
  *
  * @since 1.0.0
  */
-if (!defined('ABSPATH')) die();
+if (!defined('ABSPATH')) {
+    die();
+}
 
 add_filter('xmlrpc_enabled', '__return_false');
 remove_action('wp_head', 'rsd_link');

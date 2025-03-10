@@ -14,23 +14,24 @@
  * @since 1.0.0
  */
 
-if (!defined('ABSPATH')) die();
+if (!defined('ABSPATH')) {
+    die();
+}
 
 remove_action('wp_head', 'wp_generator');
 
 add_filter('the_generator', 'zenpress_remove_wordpress_version');
-function zenpress_remove_wordpress_version()
-{
-	return '';
+function zenpress_remove_wordpress_version() {
+    return '';
 }
 
 // Remove WordPress version from scripts and styles
 add_filter('style_loader_src', 'zenpress_remove_version_from_style_js');
 add_filter('script_loader_src', 'zenpress_remove_version_from_style_js');
-function zenpress_remove_version_from_style_js($src)
-{
-	if (strpos($src, 'ver=' . get_bloginfo('version'))) {
-		$src = remove_query_arg('ver', $src);
-	}
-	return $src;
+function zenpress_remove_version_from_style_js($src) {
+    if (strpos($src, 'ver=' . get_bloginfo('version'))) {
+        $src = remove_query_arg('ver', $src);
+    }
+
+    return $src;
 }

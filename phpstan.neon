@@ -1,0 +1,20 @@
+includes:
+    - vendor/szepeviktor/phpstan-wordpress/extension.neon
+
+parameters:
+    level: 5
+    excludePaths:
+        - .php-cs-fixer.php
+        - vendor/*
+    ignoreErrors:
+        # Ignore all errors about WooCommerce functions not found
+        - '#Function is_woocommerce not found#'
+        - '#Function is_cart not found#'
+        - '#Function is_account_page not found#'
+        - '#Function is_product not found#'
+        - '#Function is_product_category not found#'
+        - '#Function is_shop not found#'
+        - '#Function is_checkout not found#'
+        # Ignore errors related to WooCommerce Blocks
+        - '#Call to static method container\(\) on an unknown class Automattic\\WooCommerce\\Blocks\\Package#'
+        - '#Class Automattic\\WooCommerce\\Blocks\\BlockPatterns not found#'

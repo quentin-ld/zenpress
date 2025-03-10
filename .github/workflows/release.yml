@@ -1,0 +1,32 @@
+name: Create release
+
+on:
+  push:
+    tags:
+      - '[0-9]+.[0-9]+.[0-9]+'
+
+jobs:
+  build-zip-upload:
+    runs-on: ubuntu-latest
+    env:
+      RELEASE_NAME: 'zenpress'
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+
+      # Zip the theme into a clean release
+      - name: Zip release
+        uses: thedoctor0/zip-release@0.7.1
+        with:
+          type: 'zip'
+          filename: '${{ env.RELEASE_NAME }}.zip'
+          path: 'LICENSE readme.txt index.php zenpress.php inc/ languages/ assets/'
+
+      # Publish the release
+      - name: Publish release
+        uses: ncipollo/release-action@v1
+        with:
+          artifacts: '${{ env.RELEASE_NAME }}.zip'
+          generateReleaseNotes: true
