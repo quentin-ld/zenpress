@@ -71,122 +71,118 @@
  *
  */
 
-if (!defined('ABSPATH')) die();
-
-add_action('plugins_loaded', 'zenpress_load_textdomain');
-function zenpress_load_textdomain() {
-    load_plugin_textdomain('zenpress', false, dirname(plugin_basename(__FILE__)) . '/languages');
+if (!defined('ABSPATH')) {
+    die();
 }
 
 /*****
  * PERFORMANCE (つ≧▽≦)つ
  ****/
 if (!defined('ZENPRESS_DISABLE_ADJACENT_POSTS') || ZENPRESS_DISABLE_ADJACENT_POSTS !== false) {
-    include(plugin_dir_path(__FILE__) . 'inc/performance/disable__adjacent-posts.php');
+    include plugin_dir_path(__FILE__) . 'inc/performance/disable__adjacent-posts.php';
 }
 
 if (!defined('ZENPRESS_DISABLE_DASHICONS') || ZENPRESS_DISABLE_DASHICONS !== false) {
-    include(plugin_dir_path(__FILE__) . 'inc/performance/disable__dashicons.php');
+    include plugin_dir_path(__FILE__) . 'inc/performance/disable__dashicons.php';
 }
 
 if (!defined('ZENPRESS_DISABLE_DNS_PREFETCH') || ZENPRESS_DISABLE_DNS_PREFETCH !== false) {
-    include(plugin_dir_path(__FILE__) . 'inc/performance/disable__dns-prefetch.php');
+    include plugin_dir_path(__FILE__) . 'inc/performance/disable__dns-prefetch.php';
 }
 
 if (!defined('ZENPRESS_DISABLE_EMOJIS') || ZENPRESS_DISABLE_EMOJIS !== false) {
-    include(plugin_dir_path(__FILE__) . 'inc/performance/disable__emoji-scripts.php');
+    include plugin_dir_path(__FILE__) . 'inc/performance/disable__emoji-scripts.php';
 }
 
 if (!defined('ZENPRESS_DISABLE_JQUERY_MIGRATE') || ZENPRESS_DISABLE_JQUERY_MIGRATE !== false) {
-    include(plugin_dir_path(__FILE__) . 'inc/performance/disable__jquery-migrate.php');
+    include plugin_dir_path(__FILE__) . 'inc/performance/disable__jquery-migrate.php';
 }
 
 if (!defined('ZENPRESS_DISABLE_OEMBED') || ZENPRESS_DISABLE_OEMBED !== false) {
-    include(plugin_dir_path(__FILE__) . 'inc/performance/disable__oembed.php');
+    include plugin_dir_path(__FILE__) . 'inc/performance/disable__oembed.php';
 }
 
 if (!defined('ZENPRESS_DISABLE_PDF_THUMBNAILS') || ZENPRESS_DISABLE_PDF_THUMBNAILS !== false) {
-    include(plugin_dir_path(__FILE__) . 'inc/performance/disable__pdf-thumbnails.php');
+    include plugin_dir_path(__FILE__) . 'inc/performance/disable__pdf-thumbnails.php';
 }
 
 if (!defined('ZENPRESS_DISABLE_SHORTLINK') || ZENPRESS_DISABLE_SHORTLINK !== false) {
-    include(plugin_dir_path(__FILE__) . 'inc/performance/disable__shortlink.php');
+    include plugin_dir_path(__FILE__) . 'inc/performance/disable__shortlink.php';
 }
 
 if (!defined('ZENPRESS_DISABLE_WLW_MANIFEST') || ZENPRESS_DISABLE_WLW_MANIFEST !== false) {
-    include(plugin_dir_path(__FILE__) . 'inc/performance/disable__wlw-manifest.php');
+    include plugin_dir_path(__FILE__) . 'inc/performance/disable__wlw-manifest.php';
 }
 
 if (!defined('ZENPRESS_DISABLE_WC_CART_FRAGMENTS') || ZENPRESS_DISABLE_WC_CART_FRAGMENTS !== false) {
-    include(plugin_dir_path(__FILE__) . 'inc/performance/disable__woocommerce-cart-fragments.php');
+    include plugin_dir_path(__FILE__) . 'inc/performance/disable__woocommerce-cart-fragments.php';
 }
 
 if (!defined('ZENPRESS_DISABLE_WC_SCRIPTS_STYLES') || ZENPRESS_DISABLE_WC_SCRIPTS_STYLES !== false) {
-    include(plugin_dir_path(__FILE__) . 'inc/performance/disable__woocommerce-scripts-styles.php');
+    include plugin_dir_path(__FILE__) . 'inc/performance/disable__woocommerce-scripts-styles.php';
 }
 
 if (!defined('ZENPRESS_DISABLE_WC_STRIPE_SCRIPTS') || ZENPRESS_DISABLE_WC_STRIPE_SCRIPTS !== false) {
-    include(plugin_dir_path(__FILE__) . 'inc/performance/disable__woocommerce-stripe-scripts.php');
+    include plugin_dir_path(__FILE__) . 'inc/performance/disable__woocommerce-stripe-scripts.php';
 }
 
 if (!defined('ZENPRESS_DISABLE_WC_WIDGETS') || ZENPRESS_DISABLE_WC_WIDGETS !== false) {
-    include(plugin_dir_path(__FILE__) . 'inc/performance/disable__woocommerce-widgets.php');
+    include plugin_dir_path(__FILE__) . 'inc/performance/disable__woocommerce-widgets.php';
 }
 
 if (!defined('ZENPRESS_REMOVE_GUTENBERG_BLOCK_PATTERNS') || ZENPRESS_REMOVE_GUTENBERG_BLOCK_PATTERNS !== false) {
-    include(plugin_dir_path(__FILE__) . 'inc/performance/remove__gutenberg-unwanted-block-patterns.php');
+    include plugin_dir_path(__FILE__) . 'inc/performance/remove__gutenberg-unwanted-block-patterns.php';
 }
 
 if (!defined('ZENPRESS_REMOVE_WC_PATTERNS') || ZENPRESS_REMOVE_WC_PATTERNS !== false) {
-    include(plugin_dir_path(__FILE__) . 'inc/performance/remove__woocommerce-patterns.php');
+    include plugin_dir_path(__FILE__) . 'inc/performance/remove__woocommerce-patterns.php';
 }
 
 if (!defined('ZENPRESS_SEPARATE_GUTENBERG_CORE_BLOCK_STYLES') || ZENPRESS_SEPARATE_GUTENBERG_CORE_BLOCK_STYLES !== false) {
-    include(plugin_dir_path(__FILE__) . 'inc/performance/separate__gutenberg-core-block-styles.php');
+    include plugin_dir_path(__FILE__) . 'inc/performance/separate__gutenberg-core-block-styles.php';
 }
 
 /*****
  * SECURITY ┐(︶▽︶)┌
  ****/
 if (!defined('ZENPRESS_BLOCK_USER_ENUMERATION_PROTECTION') || ZENPRESS_BLOCK_USER_ENUMERATION_PROTECTION !== false) {
-    include(plugin_dir_path(__FILE__) . 'inc/security/block__user-enumeration.php');
+    include plugin_dir_path(__FILE__) . 'inc/security/block__user-enumeration.php';
 }
 
 if (!defined('ZENPRESS_DISABLE_AUTHOR_ARCHIVES') || ZENPRESS_DISABLE_AUTHOR_ARCHIVES !== false) {
-    include(plugin_dir_path(__FILE__) . 'inc/security/disable__author-archives.php');
+    include plugin_dir_path(__FILE__) . 'inc/security/disable__author-archives.php';
 }
 
 if (!defined('ZENPRESS_DISABLE_PINGBACK_TRACKBACK') || ZENPRESS_DISABLE_PINGBACK_TRACKBACK !== false) {
-    include(plugin_dir_path(__FILE__) . 'inc/security/disable__pingback-trackback.php');
+    include plugin_dir_path(__FILE__) . 'inc/security/disable__pingback-trackback.php';
 }
 
 if (!defined('ZENPRESS_DISABLE_XMLRPC_RSDLINK') || ZENPRESS_DISABLE_XMLRPC_RSDLINK !== false) {
-    include(plugin_dir_path(__FILE__) . 'inc/security/disable__xmlrpc-rsdlink.php');
+    include plugin_dir_path(__FILE__) . 'inc/security/disable__xmlrpc-rsdlink.php';
 }
 
 if (!defined('ZENPRESS_HIDE_WC_VERSION') || ZENPRESS_HIDE_WC_VERSION !== false) {
-    include(plugin_dir_path(__FILE__) . 'inc/security/hide__woocommerce-version.php');
+    include plugin_dir_path(__FILE__) . 'inc/security/hide__woocommerce-version.php';
 }
 
 if (!defined('ZENPRESS_HIDE_WP_VERSION') || ZENPRESS_HIDE_WP_VERSION !== false) {
-    include(plugin_dir_path(__FILE__) . 'inc/security/hide__wordpress-version.php');
+    include plugin_dir_path(__FILE__) . 'inc/security/hide__wordpress-version.php';
 }
 
 if (!defined('ZENPRESS_LOGIN_PROTECTION') || ZENPRESS_LOGIN_PROTECTION !== false) {
-    include(plugin_dir_path(__FILE__) . 'inc/security/protect__wp-login.php');
+    include plugin_dir_path(__FILE__) . 'inc/security/protect__wp-login.php';
 }
 
 /*****
  * USER INTERFACE ヾ(☆▽☆)
  ****/
 if (!defined('ZENPRESS_ADMIN_BAR_CLEANUP') || ZENPRESS_ADMIN_BAR_CLEANUP !== false) {
-    include(plugin_dir_path(__FILE__) . 'inc/ui/clean__admin-bar.php');
+    include plugin_dir_path(__FILE__) . 'inc/ui/clean__admin-bar.php';
 }
 
 if (!defined('ZENPRESS_DASHBOARD_CLEANUP') || ZENPRESS_DASHBOARD_CLEANUP !== false) {
-    include(plugin_dir_path(__FILE__) . 'inc/ui/clean__dashboard-items.php');
+    include plugin_dir_path(__FILE__) . 'inc/ui/clean__dashboard-items.php';
 }
-
 
 /*****
  * TODOLIST ▓▒░(°◡°)░▒▓

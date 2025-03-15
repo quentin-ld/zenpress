@@ -1,0 +1,29 @@
+{
+	"name": "zenpress/zenpress",
+	"description": "The zeniest unbloat, performance and security lightweight plugin for WordPress and WooCommerce",
+	"type": "wordpress-plugin",
+	"license": "GPL-2.0-or-later",
+	"authors": [
+		{
+			"name": "Quentin Le Duff",
+			"email": "quentin@holdmywp.com"
+		}
+	],
+	"minimum-stability": "stable",
+	"require": {
+		"php": ">=7.4"
+	},
+	"require-dev": {
+		"friendsofphp/php-cs-fixer": "v3.64.0",
+		"wp-cli/wp-cli-bundle": "v2.11.0",
+		"phpstan/phpstan": "^2.1",
+		"szepeviktor/phpstan-wordpress": "^2.0",
+		"squizlabs/php_codesniffer": "^3.11"
+	},
+	"scripts": {
+		"lint:php": [
+			"vendor/bin/php-cs-fixer fix -v --show-progress=dots --using-cache=no --config=.php-cs-fixer.php zenpress.php inc",
+			"vendor/bin/phpstan analyse --memory-limit=2048M zenpress.php inc"
+		]
+	}
+}

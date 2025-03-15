@@ -14,12 +14,13 @@
  * @since 1.0.0
  */
 
-if (!defined('ABSPATH')) die();
+if (!defined('ABSPATH')) {
+    die();
+}
 
 add_action('wp_enqueue_scripts', 'zenpress_disable_cart_fragments', 11);
-function zenpress_disable_cart_fragments()
-{
-	if (class_exists('woocommerce')) {
-		wp_dequeue_script('wc-cart-fragments');
-	}
+function zenpress_disable_cart_fragments() {
+    if (class_exists('woocommerce')) {
+        wp_dequeue_script('wc-cart-fragments');
+    }
 }

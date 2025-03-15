@@ -13,6 +13,8 @@
  * @since 1.0.0
  */
 
-if (!defined('ABSPATH')) die();
+if (!defined('ABSPATH')) {
+    die();
+}
 
 remove_action('wp_head', 'wlwmanifest_link');

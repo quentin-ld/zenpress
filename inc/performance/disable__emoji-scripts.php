@@ -11,8 +11,9 @@
  * @since 1.0.0
  */
 
-if (!defined('ABSPATH')) die();
-
+if (!defined('ABSPATH')) {
+    die();
+}
 
 // Remove emoji detection script
 remove_action('wp_head', 'print_emoji_detection_script', 7);
@@ -32,5 +33,5 @@ add_filter('emoji_svg_url', '__return_false');
 
 // Remove emoji from TinyMCE
 add_filter('tiny_mce_plugins', function ($plugins) {
-	return array_diff($plugins, array('wpemoji'));
+    return array_diff($plugins, ['wpemoji']);
 });

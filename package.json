@@ -1,0 +1,10 @@
+{
+    "name": "zenpress",
+    "description": "",
+    "version": "0.0.1",
+    "repository": "https://github.com/quentin-ld/zenpress",
+    "license": "GPL-2.0-or-later",
+    "scripts": {
+      "zip-plugin": "node zip-plugin.js"
+    }
+  }

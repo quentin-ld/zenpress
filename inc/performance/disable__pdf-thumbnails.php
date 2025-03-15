@@ -12,11 +12,13 @@
  * @since 1.0.0
  */
 
-if (!defined('ABSPATH')) die();
+if (!defined('ABSPATH')) {
+    die();
+}
 
 add_filter(
-	'fallback_intermediate_image_sizes',
-	function () {
-		return array();
-	}
+    'fallback_intermediate_image_sizes',
+    function () {
+        return [];
+    }
 );

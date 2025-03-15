@@ -1,6 +1,5 @@
 <?php
 
-
 /**
  * Clean up the WordPress Admin Bar
  *
@@ -13,37 +12,33 @@
  * @since 1.0.0
  */
 
-if (!defined('ABSPATH')) die();
+if (!defined('ABSPATH')) {
+    die();
+}
 
 add_action('admin_bar_menu', function ($wp_admin_bar) {
-	global $wp_admin_bar;
+    global $wp_admin_bar;
 
-	/**
-	 * * BACKEND **
-	 */
-	// remove WP logo and subsequent drop-down menu
-	// $wp_admin_bar->remove_node('wp-logo');
+    /**
+     * * BACKEND **
+     */
+    // remove "+ New" drop-down menu
+    $wp_admin_bar->remove_node('new-content');
 
-	// remove View Site text
-	// $wp_admin_bar->remove_node('view-site');
+    // remove Comments
+    $wp_admin_bar->remove_node('comments');
 
-	// remove "+ New" drop-down menu
-	$wp_admin_bar->remove_node('new-content');
+    // remove plugin updates count
+    $wp_admin_bar->remove_node('updates');
 
-	// remove Comments
-	$wp_admin_bar->remove_node('comments');
+    $wp_admin_bar->remove_node('wpseo-menu');
 
-	// remove plugin updates count
-	$wp_admin_bar->remove_node('updates');
+    /**
+     * * FRONTEND **
+     */
+    // remove Dashboard link
+    $wp_admin_bar->remove_node('dashboard');
 
-	$wp_admin_bar->remove_node('wpseo-menu');
-
-	/**
-	 * * FRONTEND **
-	 */
-	// remove Dashboard link
-	$wp_admin_bar->remove_node('dashboard');
-
-	// remove Themes, Widgets, Menus, Header links
-	$wp_admin_bar->remove_node('appearance');
+    // remove Themes, Widgets, Menus, Header links
+    $wp_admin_bar->remove_node('appearance');
 }, 99);

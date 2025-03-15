@@ -13,17 +13,22 @@
  * @since 1.0.0
  */
 
-if (!defined('ABSPATH')) die();
+if (!defined('ABSPATH')) {
+    die();
+}
 
 if (!is_admin()) {
-	// Default URL format
-	if (isset($_SERVER['QUERY_STRING']) && preg_match('/author=([0-9]*)/i', sanitize_text_field(wp_unslash($_SERVER['QUERY_STRING']))))
-		die();
-	// Block permalink URL format
-	add_filter('redirect_canonical', function ($redirect, $request) {
-		if (preg_match('/\?author=([0-9]*)(\/*)/i', sanitize_text_field(wp_unslash($request))))
-			die();
-		else
-			return $redirect;
-	}, 10, 2);
+    // Default URL format
+    if (isset($_SERVER['QUERY_STRING']) && preg_match('/author=([0-9]*)/i', sanitize_text_field(wp_unslash($_SERVER['QUERY_STRING'])))) {
+        die();
+    }
+    // Block permalink URL format
+    add_filter('redirect_canonical', function ($redirect, $request) {
+        if (preg_match('/\?author=([0-9]*)(\/*)/i', sanitize_text_field(wp_unslash($request)))) {
+            die();
+        }
+        else {
+            return $redirect;
+        }
+    }, 10, 2);
 }
