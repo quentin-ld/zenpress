@@ -4,7 +4,7 @@ Donate link: https://github.com/sponsors/quentin-ld/
 Tags: optimization, performance, security, woocommerce, bloat
 Requires at least: 6.0
 Tested up to: 6.7
-Stable tag: 1.0.1
+Stable tag: 1.0.2
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html/
@@ -132,6 +132,13 @@ In addition, if you like the plugin then I'd love for you to leave a review. Tel
 
 == Changelog ==
 
+= 1.0.2 =
+
+- Remove load_plugin_textdomain, not needed since WordPress 4.6.
+- Protect wp login : Add zenpress_ prefix to transients.
+- Remove woocommerce patterns : Add zenpress_ prefix to function.
+- Lint and fix PHP code with phpstan.
+
 = 1.0.1 =
 
 Fix script loading error on WC home admin page
@@ -141,6 +148,10 @@ Fix script loading error on WC home admin page
 First release of ZenPress, yaaaaayyy!
 
 == Upgrade Notice ==
+
+= 1.0.* =
+
+Small fixes for WordPress Directory Submission
 
 = 1.0 =
 
