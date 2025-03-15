@@ -24,12 +24,11 @@ add_filter('authenticate', 'zenpress_login_protection', 30, 3);
 function zenpress_login_protection(mixed $user, string $username, string $password): mixed {
     $MAX_LOGIN_ATTEMPTS = 5;
     $BLOCK_DURATION = 30; // 5 minutes
-    $TRANSIENT_PREFIX = 'login_block_';
 
     $ipAddress = isset($_SERVER['REMOTE_ADDR']) ?
         filter_var(wp_unslash($_SERVER['REMOTE_ADDR']), FILTER_VALIDATE_IP) : 'unknown';
 
-    $transientKey = $TRANSIENT_PREFIX . $ipAddress;
+    $transientKey = 'zenpress_login_block_' . $ipAddress;
     if ($user instanceof WP_User) {
         delete_transient($transientKey);
 
@@ -39,7 +38,7 @@ function zenpress_login_protection(mixed $user, string $username, string $passwo
         header('HTTP/1.0 403 Forbidden');
         die('Access Denied');
     }
-    $attemptsData = get_transient('login_attempts_' . $ipAddress);
+    $attemptsData = get_transient('zenpress_login_attempts_' . $ipAddress);
     $attempts = $attemptsData['count'] ?? 0;
     $attempts++;
     if ($attempts > $MAX_LOGIN_ATTEMPTS) {
@@ -48,7 +47,7 @@ function zenpress_login_protection(mixed $user, string $username, string $passwo
         die('Access Denied');
     }
     // Store attempts
-    set_transient('login_attempts_' . $ipAddress, ['count' => $attempts], $BLOCK_DURATION);
+    set_transient('zenpress_login_attempts_' . $ipAddress, ['count' => $attempts], $BLOCK_DURATION);
 
     return $user;
 }

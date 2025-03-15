@@ -15,8 +15,8 @@ Contributors: rahe, chaton666, beapi
  *
  * @return void
  */
-
-function prefix_remove_wc_patterns(): void {
+add_action('woocommerce_blocks_loaded', 'zenpress_remove_wc_patterns');
+function zenpress_remove_wc_patterns(): void {
     remove_action(
         'init',
         [
@@ -25,5 +25,3 @@ function prefix_remove_wc_patterns(): void {
         ]
     );
 }
-
-add_action('woocommerce_blocks_loaded', 'prefix_remove_wc_patterns');

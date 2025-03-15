@@ -22,12 +22,6 @@ add_action('admin_bar_menu', function ($wp_admin_bar) {
     /**
      * * BACKEND **
      */
-    // remove WP logo and subsequent drop-down menu
-    // $wp_admin_bar->remove_node('wp-logo');
-
-    // remove View Site text
-    // $wp_admin_bar->remove_node('view-site');
-
     // remove "+ New" drop-down menu
     $wp_admin_bar->remove_node('new-content');
 
