@@ -1,7 +1,7 @@
 {
     "name": "zenpress",
     "description": "",
-    "version": "0.0.1",
+    "version": "1.0.3",
     "repository": "https://github.com/quentin-ld/zenpress",
     "license": "GPL-2.0-or-later",
     "scripts": {

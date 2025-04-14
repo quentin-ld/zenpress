@@ -40,4 +40,5 @@ add_action('wp_dashboard_setup', function () {
     remove_meta_box('wpa_dashboard_widget', 'dashboard', 'side'); // WP Armour Pro advertising widget
     remove_meta_box('wpexplorer_dashboard_widget', 'dashboard', 'normal'); // HSTSWP Donation widget
     remove_meta_box('dashboard_rediscache', 'dashboard', 'normal'); // Redis Object Cache Pro advertising widget
+    remove_meta_box('arve_dashboard_widget', 'dashboard', 'normal'); // AARVE advertising widget
 });

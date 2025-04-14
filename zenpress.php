@@ -11,14 +11,14 @@
  *
  * Plugin Name: ZenPress - Unbloat, Performance & Security
  * Description: The zeniest unbloat, performance and security lightweight plugin for WordPress and WooCommerce. Install, activate, and done!
- * Version: 1.0.2
+ * Version: 1.0.3
  * Plugin URI: https://wordpress.org/plugins/zenpress/
  * Author: Quentin Le Duff
  * Author URI: https://holdmywp.com/zenpress/
  * Text Domain: zenpress
  * Domain Path: /languages/
  * Requires at least: 6.0
- * Tested up to: 6.7
+ * Tested up to: 6.8
  * Requires PHP: 7.4
  * License URI: https://www.gnu.org/licenses/old-licenses/gpl-2.0.html/
  * License: GPL v2 or later
