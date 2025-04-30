@@ -11,7 +11,7 @@
  *
  * Plugin Name: ZenPress - Unbloat, Performance & Security
  * Description: The zeniest unbloat, performance and security lightweight plugin for WordPress and WooCommerce. Install, activate, and done!
- * Version: 1.0.3
+ * Version: 1.0.4
  * Plugin URI: https://wordpress.org/plugins/zenpress/
  * Author: Quentin Le Duff
  * Author URI: https://holdmywp.com/zenpress/
@@ -32,42 +32,6 @@
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- *
- *
- * CONFIGURATION OPTIONS:
- * All ZenPress optimizations are enabled by default. You can disable specific
- * functionalities by defining constants in your wp-config.php file and setting them to false.
- *
- * PERFORMANCE CONSTANTS:
- * define('ZENPRESS_DISABLE_ADJACENT_POSTS', false);                // Allow adjacent posts queries
- * define('ZENPRESS_DISABLE_DASHICONS', false);                     // Allow dashicons for non-admin users
- * define('ZENPRESS_DISABLE_DNS_PREFETCH', false);                  // Allow DNS prefetch
- * define('ZENPRESS_DISABLE_EMOJIS', false);                        // Allow WordPress emoji scripts
- * define('ZENPRESS_DISABLE_JQUERY_MIGRATE', false);                // Allow jQuery Migrate
- * define('ZENPRESS_DISABLE_OEMBED', false);                        // Allow oEmbed functionality
- * define('ZENPRESS_DISABLE_PDF_THUMBNAILS', false);                // Allow PDF thumbnail generation
- * define('ZENPRESS_DISABLE_SHORTLINK', false);                     // Allow WordPress shortlink
- * define('ZENPRESS_DISABLE_WLW_MANIFEST', false);                  // Allow Windows Live Writer manifest
- * define('ZENPRESS_DISABLE_WC_CART_FRAGMENTS', false);             // Allow WooCommerce cart fragments
- * define('ZENPRESS_DISABLE_WC_SCRIPTS_STYLES', false);             // Allow WooCommerce scripts and styles
- * define('ZENPRESS_DISABLE_WC_STRIPE_SCRIPTS', false);             // Allow WooCommerce Stripe scripts
- * define('ZENPRESS_DISABLE_WC_WIDGETS', false);                    // Allow WooCommerce widgets
- * define('ZENPRESS_REMOVE_GUTENBERG_BLOCK_PATTERNS', false);       // Allow Gutenberg default patterns
- * define('ZENPRESS_REMOVE_WC_PATTERNS', false);                    // Allow WooCommerce default patterns
- * define('ZENPRESS_SEPARATE_GUTENBERG_CORE_BLOCK_STYLES', false);  // Don't separate Gutenberg core block styles
- *
- * SECURITY CONSTANTS:
- * define('ZENPRESS_BLOCK_USER_ENUMERATION_PROTECTION', false);     // Allow user enumeration
- * define('ZENPRESS_DISABLE_AUTHOR_ARCHIVES', false);               // Allow author archives
- * define('ZENPRESS_DISABLE_PINGBACK_TRACKBACK', false);            // Allow pingback and trackback
- * define('ZENPRESS_DISABLE_XMLRPC_RSDLINK', false);                // Allow XML-RPC and RSD link
- * define('ZENPRESS_HIDE_WC_VERSION', false);                       // Allow WooCommerce version display
- * define('ZENPRESS_HIDE_WP_VERSION', false);                       // Allow WordPress version display
- * define('ZENPRESS_LOGIN_PROTECTION', false);                      // Remove login protection
- *
- * USER INTERFACE CONSTANTS:
- * define('ZENPRESS_ADMIN_BAR_CLEANUP', false);                     // Disable admin bar cleanup
- * define('ZENPRESS_DASHBOARD_CLEANUP', false);                     // Disable dashboard cleanup
  *
  */
 
@@ -106,6 +70,10 @@ if (!defined('ZENPRESS_DISABLE_PDF_THUMBNAILS') || ZENPRESS_DISABLE_PDF_THUMBNAI
     include plugin_dir_path(__FILE__) . 'inc/performance/disable__pdf-thumbnails.php';
 }
 
+if (!defined('ZENPRESS_DISABLE_RSS') || ZENPRESS_DISABLE_RSS !== false) {
+    include plugin_dir_path(__FILE__) . 'inc/performance/disable__rss.php';
+}
+
 if (!defined('ZENPRESS_DISABLE_SHORTLINK') || ZENPRESS_DISABLE_SHORTLINK !== false) {
     include plugin_dir_path(__FILE__) . 'inc/performance/disable__shortlink.php';
 }
@@ -132,6 +100,10 @@ if (!defined('ZENPRESS_DISABLE_WC_WIDGETS') || ZENPRESS_DISABLE_WC_WIDGETS !== f
 
 if (!defined('ZENPRESS_REMOVE_GUTENBERG_BLOCK_PATTERNS') || ZENPRESS_REMOVE_GUTENBERG_BLOCK_PATTERNS !== false) {
     include plugin_dir_path(__FILE__) . 'inc/performance/remove__gutenberg-unwanted-block-patterns.php';
+}
+
+if (!defined('ZENPRESS_REMOVE_REST_API_LINK') || ZENPRESS_REMOVE_REST_API_LINK !== false) {
+    include plugin_dir_path(__FILE__) . 'inc/performance/remove__rest-api-link.php';
 }
 
 if (!defined('ZENPRESS_REMOVE_WC_PATTERNS') || ZENPRESS_REMOVE_WC_PATTERNS !== false) {

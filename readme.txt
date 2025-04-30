@@ -4,7 +4,7 @@ Donate link: https://github.com/sponsors/quentin-ld/
 Tags: optimization, performance, security, woocommerce, bloat
 Requires at least: 6.0
 Tested up to: 6.8
-Stable tag: 1.0.3
+Stable tag: 1.0.4
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html/
@@ -69,6 +69,7 @@ define('ZENPRESS_DISABLE_EMOJIS', false);                        // Allow WordPr
 define('ZENPRESS_DISABLE_JQUERY_MIGRATE', false);                // Allow jQuery Migrate
 define('ZENPRESS_DISABLE_OEMBED', false);                        // Allow oEmbed functionality
 define('ZENPRESS_DISABLE_PDF_THUMBNAILS', false);                // Allow PDF thumbnail generation
+define('ZENPRESS_DISABLE_RSS', false);					 		 // Allow all RSS feeds and links
 define('ZENPRESS_DISABLE_SHORTLINK', false);                     // Allow WordPress shortlink
 define('ZENPRESS_DISABLE_WLW_MANIFEST', false);                  // Allow Windows Live Writer manifest
 define('ZENPRESS_DISABLE_WC_CART_FRAGMENTS', false);             // Allow WooCommerce cart fragments
@@ -76,6 +77,7 @@ define('ZENPRESS_DISABLE_WC_SCRIPTS_STYLES', false);             // Allow WooCom
 define('ZENPRESS_DISABLE_WC_STRIPE_SCRIPTS', false);             // Allow WooCommerce Stripe scripts
 define('ZENPRESS_DISABLE_WC_WIDGETS', false);                    // Allow WooCommerce widgets
 define('ZENPRESS_REMOVE_GUTENBERG_BLOCK_PATTERNS', false);       // Allow Gutenberg default patterns
+define('ZENPRESS_REMOVE_REST_API_LINK', false);					 // Allow REST API link in head
 define('ZENPRESS_REMOVE_WC_PATTERNS', false);                    // Allow WooCommerce default patterns
 define('ZENPRESS_SEPARATE_GUTENBERG_CORE_BLOCK_STYLES', false);  // Don't separate Gutenberg core block styles
 
@@ -126,11 +128,19 @@ Yes, it's actively tested and working up to PHP 8.2.
 
 = Do you accept donations? =
 
-I am accepting sponsorships via the GitHub Sponsors program: https://github.com/sponsors/quentin-ld/. If you work at an agency that develops with WordPress, ask your company to provide sponsorship in order to invest in its supply chain. The tools that I maintain probably save your company time and money, and GitHub sponsorship can now be done at the organisation level.
+I am accepting donations on my buymeacoffee page : https://buymeacoffee.com/quentinld. If you work at an agency that develops with WordPress, ask your company to provide sponsorship in order to invest in its supply chain. The tools that I maintain probably save your company time and money, and GitHub sponsorship can now be done at the organisation level.
 
 In addition, if you like the plugin then I'd love for you to leave a review. Tell all your friends about it too!
 
 == Changelog ==
+
+= 1.0.4 =
+
+- Fix ABSPATH on woocommerce patterns snippets.
+- Disable RSS feeds except main one.
+- Remove RSS feeds links in head except main one.
+- Remove Rest API link in head.
+- Remove WP Mail SMTP ads widget.
 
 = 1.0.3 =
 

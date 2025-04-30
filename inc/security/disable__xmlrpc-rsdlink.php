@@ -12,6 +12,7 @@
  *
  * @since 1.0.0
  */
+
 if (!defined('ABSPATH')) {
     die();
 }

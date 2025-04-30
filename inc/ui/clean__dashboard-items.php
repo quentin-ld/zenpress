@@ -34,11 +34,11 @@ add_action('wp_dashboard_setup', function () {
     /*
     ** PLUGINS
     */
-    // TODO : Add unwanted plugins dashboard widget
     remove_meta_box('wpseo-dashboard-overview', 'dashboard', 'normal'); // Yoast SEO Widget
     remove_meta_box('wpseo-wincher-dashboard-overview', 'dashboard', 'normal'); // Wincher advertising widget
     remove_meta_box('wpa_dashboard_widget', 'dashboard', 'side'); // WP Armour Pro advertising widget
     remove_meta_box('wpexplorer_dashboard_widget', 'dashboard', 'normal'); // HSTSWP Donation widget
     remove_meta_box('dashboard_rediscache', 'dashboard', 'normal'); // Redis Object Cache Pro advertising widget
     remove_meta_box('arve_dashboard_widget', 'dashboard', 'normal'); // AARVE advertising widget
+    remove_meta_box('wp_mail_smtp_reports_widget_lite', 'dashboard', 'normal'); // WP Mail SMTP avertising widget
 });

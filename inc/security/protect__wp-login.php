@@ -12,14 +12,15 @@
  *
  * @since 1.0.0
  */
+
 if (!defined('ABSPATH')) {
     die();
 }
-// Remove login error message
+
 add_filter('login_errors', function () {
     return __('Login error.', 'zenpress');
 });
-// Limit login attempts based on IP
+
 add_filter('authenticate', 'zenpress_login_protection', 30, 3);
 function zenpress_login_protection(mixed $user, string $username, string $password): mixed {
     $MAX_LOGIN_ATTEMPTS = 5;
@@ -46,7 +47,6 @@ function zenpress_login_protection(mixed $user, string $username, string $passwo
         header('HTTP/1.0 403 Forbidden');
         die('Access Denied');
     }
-    // Store attempts
     set_transient('zenpress_login_attempts_' . $ipAddress, ['count' => $attempts], $BLOCK_DURATION);
 
     return $user;

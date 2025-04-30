@@ -1,5 +1,9 @@
 <?php
 
+if (!defined('ABSPATH')) {
+    die();
+}
+
 use Automattic\WooCommerce\Blocks\Package;
 
 /*
