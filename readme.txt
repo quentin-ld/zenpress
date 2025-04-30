@@ -30,6 +30,7 @@ Following features are included :
 * Disable jQuery Migrate on the frontend
 * Disable oEmbed
 * Disable PDF thumbnails
+* Disable RSS feeds except main one and remove links from the site head
 * Disable WordPress shortlink generation
 * Disable the Windows Live Writer (WLW) manifest link
 * Disable WooCommerce cart fragments script
@@ -37,6 +38,7 @@ Following features are included :
 * Disable unnecessary Stripe scripts on WooCommerce pages
 * Disable WooCommerce widgets
 * Disable unwanted default block patterns in gutenberg editor
+* Remove REST API link from the site head
 * Remove WooCommerce patterns
 * Enables separate loading of core block styles
 
