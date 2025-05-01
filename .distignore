@@ -19,6 +19,7 @@ multisite.xml.dist
 package.json
 package-lock.json
 php-cs-fixer.php
+.php-cs-fixer.php
 phpcs.ruleset.xml
 phpstan.neon
 phpunit.xml
