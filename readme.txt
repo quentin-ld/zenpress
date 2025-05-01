@@ -71,7 +71,7 @@ define('ZENPRESS_DISABLE_EMOJIS', false);                        // Allow WordPr
 define('ZENPRESS_DISABLE_JQUERY_MIGRATE', false);                // Allow jQuery Migrate
 define('ZENPRESS_DISABLE_OEMBED', false);                        // Allow oEmbed functionality
 define('ZENPRESS_DISABLE_PDF_THUMBNAILS', false);                // Allow PDF thumbnail generation
-define('ZENPRESS_DISABLE_RSS', false);					 		 // Allow all RSS feeds and links
+define('ZENPRESS_DISABLE_RSS', false);                           // Allow all RSS feeds and display their links in the head
 define('ZENPRESS_DISABLE_SHORTLINK', false);                     // Allow WordPress shortlink
 define('ZENPRESS_DISABLE_WLW_MANIFEST', false);                  // Allow Windows Live Writer manifest
 define('ZENPRESS_DISABLE_WC_CART_FRAGMENTS', false);             // Allow WooCommerce cart fragments
@@ -79,7 +79,7 @@ define('ZENPRESS_DISABLE_WC_SCRIPTS_STYLES', false);             // Allow WooCom
 define('ZENPRESS_DISABLE_WC_STRIPE_SCRIPTS', false);             // Allow WooCommerce Stripe scripts
 define('ZENPRESS_DISABLE_WC_WIDGETS', false);                    // Allow WooCommerce widgets
 define('ZENPRESS_REMOVE_GUTENBERG_BLOCK_PATTERNS', false);       // Allow Gutenberg default patterns
-define('ZENPRESS_REMOVE_REST_API_LINK', false);					 // Allow REST API link in head
+define('ZENPRESS_REMOVE_REST_API_LINK', false);                  // Display REST API link in head
 define('ZENPRESS_REMOVE_WC_PATTERNS', false);                    // Allow WooCommerce default patterns
 define('ZENPRESS_SEPARATE_GUTENBERG_CORE_BLOCK_STYLES', false);  // Don't separate Gutenberg core block styles
 
