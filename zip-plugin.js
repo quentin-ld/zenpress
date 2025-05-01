@@ -8,9 +8,12 @@ const currentDir = path.basename(__dirname);
 const zipCommand = `
   zip -r ${currentDir}-temp.zip . \
   -x "*.git*" \
+	-x "*.github*" \
+	-x "*.wordpress-org*" \
   -x "node_modules/*" \
   -x "vendor/*" \
   -x ".vscode/*" \
+	-x ".distignore" \
   -x ".editorconfig" \
   -x ".gitignore" \
   -x ".php-cs-fixer.php" \
