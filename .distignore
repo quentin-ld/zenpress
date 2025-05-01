@@ -3,6 +3,7 @@
 .wordpress-org
 .git
 .gitignore
+.gitattributes
 .gitlab-ci.yml
 .travis.yml
 .DS_Store

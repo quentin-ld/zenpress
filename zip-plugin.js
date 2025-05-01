@@ -16,6 +16,7 @@ const zipCommand = `
 	-x ".distignore" \
   -x ".editorconfig" \
   -x ".gitignore" \
+	-x ".gitattributes" \
   -x ".php-cs-fixer.php" \
   -x "composer.json" \
   -x "composer.lock" \
