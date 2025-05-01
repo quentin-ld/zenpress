@@ -4,7 +4,7 @@ Donate link: https://github.com/sponsors/quentin-ld/
 Tags: optimization, performance, security, woocommerce, bloat
 Requires at least: 6.0
 Tested up to: 6.8
-Stable tag: 1.0.5
+Stable tag: 1.0.6
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html/
@@ -135,6 +135,12 @@ I am accepting donations on my buymeacoffee page : https://buymeacoffee.com/quen
 In addition, if you like the plugin then I'd love for you to leave a review. Tell all your friends about it too!
 
 == Changelog ==
+
+= 1.0.6 =
+
+- Remove the image assets from the plugin.
+- Plugin deployment with github actions.
+- No hidden files in plugin.
 
 = 1.0.5 =
 
