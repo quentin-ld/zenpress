@@ -3,8 +3,8 @@ Contributors: @quentinldd
 Donate link: https://github.com/sponsors/quentin-ld/
 Tags: optimization, performance, security, woocommerce, bloat
 Requires at least: 6.0
-Tested up to: 6.8
-Stable tag: 1.0.6
+Tested up to: 6.8.1
+Stable tag: 1.0.7
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html/
@@ -136,6 +136,12 @@ In addition, if you like the plugin then I'd love for you to leave a review. Tel
 
 == Changelog ==
 
+= 1.0.7 =
+
+- ZenPress tested for WordPress 6.8.1
+- UI : Remove site health meta box
+- UI : Remove WooCommerce admin dashboard setup metabox
+
 = 1.0.6 =
 
 - Remove the image assets from the plugin.
@@ -149,10 +155,10 @@ In addition, if you like the plugin then I'd love for you to leave a review. Tel
 = 1.0.4 =
 
 - Fix ABSPATH on woocommerce patterns snippets.
-- Disable RSS feeds except main one.
-- Remove RSS feeds links in head except main one.
-- Remove Rest API link in head.
-- Remove WP Mail SMTP ads widget.
+- Performance : Disable RSS feeds except main one.
+- Performance : Remove RSS feeds links in head except main one.
+- Performance : Remove Rest API link in head.
+- Performance : Remove WP Mail SMTP ads widget.
 
 = 1.0.3 =
 
@@ -168,21 +174,21 @@ In addition, if you like the plugin then I'd love for you to leave a review. Tel
 
 = 1.0.1 =
 
-Fix script loading error on WC home admin page
+- Fix script loading error on WC home admin page
 
-= 1.0 =
+= 1.0.0.2 =
 
-First release of ZenPress, yaaaaayyy!
+- First release of ZenPress, yaaaaayyy!
 
 == Upgrade Notice ==
 
-= 1.0.* =
+= 1.0.0.1 =
 
-Small fixes for WordPress Directory Submission
+- Small fixes for WordPress Directory Submission
 
 = 1.0 =
 
-Let's boost your WordPress website!
+- Let's boost your WordPress website!
 
 == Credits ==
 
