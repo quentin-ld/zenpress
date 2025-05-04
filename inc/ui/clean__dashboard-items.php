@@ -41,6 +41,7 @@ add_action('wp_dashboard_setup', function () {
     remove_meta_box('wpexplorer_dashboard_widget', 'dashboard', 'normal'); // HSTSWP Donation widget
     remove_meta_box('dashboard_rediscache', 'dashboard', 'normal'); // Redis Object Cache Pro advertising widget
     remove_meta_box('arve_dashboard_widget', 'dashboard', 'normal'); // AARVE advertising widget
+	remove_meta_box('wpforms_reports_widget_lite', 'dashboard', 'normal'); // WP forms avertising widget
     remove_meta_box('wp_mail_smtp_reports_widget_lite', 'dashboard', 'normal'); // WP Mail SMTP avertising widget
 	remove_meta_box('wc_admin_dashboard_setup', 'dashboard', 'normal'); // WooCommerce admin dashboard setup
 });
