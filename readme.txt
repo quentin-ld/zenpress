@@ -3,8 +3,8 @@ Contributors: @quentinldd
 Donate link: https://github.com/sponsors/quentin-ld/
 Tags: optimization, performance, security, woocommerce, bloat
 Requires at least: 6.0
-Tested up to: 6.8.1
-Stable tag: 1.0.7
+Tested up to: 6.8
+Stable tag: 1.0.8
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html/
@@ -37,7 +37,7 @@ Following features are included :
 * Disable WooCommerce scripts and styles on non-WooCommerce pages
 * Disable unnecessary Stripe scripts on WooCommerce pages
 * Disable WooCommerce widgets
-* Disable unwanted default block patterns in gutenberg editor
+* Remove unwanted default block patterns in gutenberg editor
 * Remove REST API link from the site head
 * Remove WooCommerce patterns
 * Enables separate loading of core block styles
@@ -54,8 +54,8 @@ Following features are included :
 
 = User interface =
 
-* Cleans up the WordPress Admin Bar
-* Removes redudant items from the WordPress Dashboard
+* Cleans up the WordPress admin Bar
+* Cleans up the WordPress dashboard items
 
  == Configuration options ==
 
@@ -135,6 +135,11 @@ I am accepting donations on my buymeacoffee page : https://buymeacoffee.com/quen
 In addition, if you like the plugin then I'd love for you to leave a review. Tell all your friends about it too!
 
 == Changelog ==
+
+= 1.0.8 =
+
+- UI : Remove smash baloon ads meta box
+- Global : Files naming and call for scalability
 
 = 1.0.7 =
 

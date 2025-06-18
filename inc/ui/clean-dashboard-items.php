@@ -44,4 +44,5 @@ add_action('wp_dashboard_setup', function () {
     remove_meta_box('wpforms_reports_widget_lite', 'dashboard', 'normal'); // WP forms avertising widget
     remove_meta_box('wp_mail_smtp_reports_widget_lite', 'dashboard', 'normal'); // WP Mail SMTP avertising widget
     remove_meta_box('wc_admin_dashboard_setup', 'dashboard', 'normal'); // WooCommerce admin dashboard setup
+    remove_meta_box('sb_dashboard_widget', 'dashboard', 'normal');
 });

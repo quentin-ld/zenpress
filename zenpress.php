@@ -11,14 +11,14 @@
  *
  * Plugin Name: ZenPress - Unbloat, Performance & Security
  * Description: The zeniest unbloat, performance and security lightweight plugin for WordPress and WooCommerce. Install, activate, and done!
- * Version: 1.0.7
+ * Version: 1.0.8
  * Plugin URI: https://wordpress.org/plugins/zenpress/
  * Author: Quentin Le Duff
  * Author URI: https://holdmywp.com/zenpress/
  * Text Domain: zenpress
  * Domain Path: /languages/
  * Requires at least: 6.0
- * Tested up to: 6.8.1
+ * Tested up to: 6.8
  * Requires PHP: 7.4
  * License URI: https://www.gnu.org/licenses/old-licenses/gpl-2.0.html/
  * License: GPL v2 or later
@@ -43,16 +43,12 @@ function zenpress_include_functions($zenpress_folder) {
     $zenpress_path = plugin_dir_path(__FILE__) . rtrim($zenpress_folder, '/') . '/';
 
     if (!is_dir($zenpress_path)) {
-        error_log("Directory does not exist: {$zenpress_path}");
-
         return;
     }
 
     $zenpress_files = glob($zenpress_path . '*.php');
 
     if ($zenpress_files === false) {
-        error_log("Failed to retrieve files from: {$zenpress_path}");
-
         return;
     }
 
@@ -65,8 +61,6 @@ function zenpress_include_functions($zenpress_folder) {
             if (!defined($constant_name) || constant($constant_name) !== false) {
                 include_once $file;
             }
-        } else {
-            error_log("File does not exist: {$file}");
         }
     }
 }
