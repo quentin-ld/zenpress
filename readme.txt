@@ -4,7 +4,7 @@ Donate link: https://github.com/sponsors/quentin-ld/
 Tags: optimization, performance, security, woocommerce, bloat
 Requires at least: 6.0
 Tested up to: 6.8
-Stable tag: 1.0.6
+Stable tag: 1.0.8
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html/
@@ -37,7 +37,7 @@ Following features are included :
 * Disable WooCommerce scripts and styles on non-WooCommerce pages
 * Disable unnecessary Stripe scripts on WooCommerce pages
 * Disable WooCommerce widgets
-* Disable unwanted default block patterns in gutenberg editor
+* Remove unwanted default block patterns in gutenberg editor
 * Remove REST API link from the site head
 * Remove WooCommerce patterns
 * Enables separate loading of core block styles
@@ -54,8 +54,8 @@ Following features are included :
 
 = User interface =
 
-* Cleans up the WordPress Admin Bar
-* Removes redudant items from the WordPress Dashboard
+* Cleans up the WordPress admin Bar
+* Cleans up the WordPress dashboard items
 
  == Configuration options ==
 
@@ -136,6 +136,17 @@ In addition, if you like the plugin then I'd love for you to leave a review. Tel
 
 == Changelog ==
 
+= 1.0.8 =
+
+- UI : Remove smash baloon ads meta box
+- Global : Files naming and call for scalability
+
+= 1.0.7 =
+
+- ZenPress tested for WordPress 6.8.1
+- UI : Remove site health meta box
+- UI : Remove WooCommerce admin dashboard setup metabox
+
 = 1.0.6 =
 
 - Remove the image assets from the plugin.
@@ -149,10 +160,10 @@ In addition, if you like the plugin then I'd love for you to leave a review. Tel
 = 1.0.4 =
 
 - Fix ABSPATH on woocommerce patterns snippets.
-- Disable RSS feeds except main one.
-- Remove RSS feeds links in head except main one.
-- Remove Rest API link in head.
-- Remove WP Mail SMTP ads widget.
+- Performance : Disable RSS feeds except main one.
+- Performance : Remove RSS feeds links in head except main one.
+- Performance : Remove Rest API link in head.
+- Performance : Remove WP Mail SMTP ads widget.
 
 = 1.0.3 =
 
@@ -168,21 +179,21 @@ In addition, if you like the plugin then I'd love for you to leave a review. Tel
 
 = 1.0.1 =
 
-Fix script loading error on WC home admin page
+- Fix script loading error on WC home admin page
 
-= 1.0 =
+= 1.0.0.2 =
 
-First release of ZenPress, yaaaaayyy!
+- First release of ZenPress, yaaaaayyy!
 
 == Upgrade Notice ==
 
-= 1.0.* =
+= 1.0.0.1 =
 
-Small fixes for WordPress Directory Submission
+- Small fixes for WordPress Directory Submission
 
 = 1.0 =
 
-Let's boost your WordPress website!
+- Let's boost your WordPress website!
 
 == Credits ==
 
