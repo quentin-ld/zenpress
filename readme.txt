@@ -4,7 +4,7 @@ Donate link: https://github.com/sponsors/quentin-ld/
 Tags: optimization, performance, security, woocommerce, bloat
 Requires at least: 6.0
 Tested up to: 6.8
-Stable tag: 1.0.8
+Stable tag: 1.0.9
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html/
@@ -56,6 +56,7 @@ Following features are included :
 
 * Cleans up the WordPress admin Bar
 * Cleans up the WordPress dashboard items
+* Disable the disable the language selector on the WordPress login page
 
  == Configuration options ==
 
@@ -85,18 +86,19 @@ define('ZENPRESS_SEPARATE_GUTENBERG_CORE_BLOCK_STYLES', false);  // Don't separa
 
 = Security constants =
 
-define('ZENPRESS_BLOCK_USER_ENUMERATION_PROTECTION', false);     // Allow user enumeration
+define('ZENPRESS_BLOCK_USER_ENUMERATION', false);                // Allow user enumeration
 define('ZENPRESS_DISABLE_AUTHOR_ARCHIVES', false);               // Allow author archives
 define('ZENPRESS_DISABLE_PINGBACK_TRACKBACK', false);            // Allow pingback and trackback
 define('ZENPRESS_DISABLE_XMLRPC_RSDLINK', false);                // Allow XML-RPC and RSD link
-define('ZENPRESS_HIDE_WC_VERSION', false);                       // Allow WooCommerce version display
-define('ZENPRESS_HIDE_WP_VERSION', false);                       // Allow WordPress version display
-define('ZENPRESS_LOGIN_PROTECTION', false);                      // Remove login protection
+define('ZENPRESS_HIDE_WOOCOMMERCE_VERSION', false);              // Allow WooCommerce version display
+define('ZENPRESS_HIDE_WORDPRESS_VERSION', false);                // Allow WordPress version display
+define('ZENPRESS_PROTECT_WP_LOGIN', false);                      // Remove login protection
 
 = User interface constants =
 
-define('ZENPRESS_ADMIN_BAR_CLEANUP', false);                     // Disable admin bar cleanup
-define('ZENPRESS_DASHBOARD_CLEANUP', false);                     // Disable dashboard cleanup
+define('ZENPRESS_CLEAN_ADMIN_BAR', false);                       // Disable admin bar cleanup
+define('ZENPRESS_CLEAN_DASHBOARD_ITEMS', false);                 // Disable dashboard cleanup
+define('ZENPRESS_DISABLE_LOGIN_LANGUAGE_SELECTOR', false);     // Disable login language selector
 
 == Screenshots ==
 
@@ -135,6 +137,12 @@ I am accepting donations on my buymeacoffee page : https://buymeacoffee.com/quen
 In addition, if you like the plugin then I'd love for you to leave a review. Tell all your friends about it too!
 
 == Changelog ==
+
+= 1.0.9 =
+
+- Compatibility : Plugin tested up to PHP 8.4
+- UI : Disable login language selector
+- Fix constant naming in readme.txt
 
 = 1.0.8 =
 
