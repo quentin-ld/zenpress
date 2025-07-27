@@ -4,7 +4,7 @@ Donate link: https://github.com/sponsors/quentin-ld/
 Tags: optimization, performance, security, woocommerce, bloat
 Requires at least: 6.0
 Tested up to: 6.8
-Stable tag: 1.0.9
+Stable tag: 1.0.9.1
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html/
@@ -98,7 +98,7 @@ define('ZENPRESS_PROTECT_WP_LOGIN', false);                      // Remove login
 
 define('ZENPRESS_CLEAN_ADMIN_BAR', false);                       // Disable admin bar cleanup
 define('ZENPRESS_CLEAN_DASHBOARD_ITEMS', false);                 // Disable dashboard cleanup
-define('ZENPRESS_DISABLE_LOGIN_LANGUAGE_SELECTOR', false);     // Disable login language selector
+define('ZENPRESS_DISABLE_LOGIN_LANGUAGE_SELECTOR', false);       // Disable login language selector
 
 == Screenshots ==
 
@@ -128,7 +128,7 @@ Yes! You can easily disable them by setting a constant in your wp-config.php or 
 
 = Does this plugin work with PHP 8 =
 
-Yes, it's actively tested and working up to PHP 8.2.
+Yes, it's actively tested and working up to PHP 8.4.
 
 = Do you accept donations? =
 
@@ -137,6 +137,10 @@ I am accepting donations on my buymeacoffee page : https://buymeacoffee.com/quen
 In addition, if you like the plugin then I'd love for you to leave a review. Tell all your friends about it too!
 
 == Changelog ==
+
+= 1.0.9.1 =
+
+- Compatibility : Plugin tested up to PHP 8.4
 
 = 1.0.9 =
 
