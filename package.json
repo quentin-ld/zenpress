@@ -1,0 +1,15 @@
+{
+  "name": "zenpress",
+  "description": "The zeniest unbloat, performance and security lightweight plugin for WordPress and WooCommerce",
+	"type": "wordpress-plugin",
+  "main": "build/index.js",
+  "scripts": {
+    "start": "wp-scripts start",
+    "build": "wp-scripts build"
+  },
+  "author": "Quentin Le Duff",
+  "license": "GPL-2.0-or-later",
+  "devDependencies": {
+    "@wordpress/scripts": "^30.22.0"
+  }
+}

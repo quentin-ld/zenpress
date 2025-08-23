@@ -35,53 +35,177 @@
  *
  */
 
+/*****
+ * TODOLIST ▓▒░(°◡°)░▒▓
+****/
+// TODO: Disable comments URL
+// TODO: Disable author URL in generatepress theme
+
 if (!defined('ABSPATH')) {
     die();
 }
 
-function zenpress_include_functions($zenpress_folder) {
-    $zenpress_path = plugin_dir_path(__FILE__) . rtrim($zenpress_folder, '/') . '/';
+/**
+ * Enqueue scripts and styles used by the plugin.
+ */
+add_action('admin_enqueue_scripts', 'zenpress_admin_enqueue_scripts');
+function zenpress_admin_enqueue_scripts($admin_page) {
+    // Check if the current admin page is not the ZenPress settings page
+    if ('settings_page_zenpress' !== $admin_page) { return; }
 
-    if (!is_dir($zenpress_path)) {
-        return;
-    }
+    // Define the path to the asset file
+    $asset_file = plugin_dir_path(__FILE__) . 'build/index.asset.php';
+    // Check if the asset file exists
+    if (!file_exists($asset_file)) { return; }
 
+    // Include the asset file to get dependencies and version information
+    $asset = include $asset_file;
+
+    // Enqueue the main JavaScript file for the plugin
+    wp_enqueue_script(
+        'zenpress-scripts',
+        plugins_url('build/index.js', __FILE__),
+        $asset['dependencies'],
+        $asset['version'],
+        array('in_footer' => true)
+    );
+
+    // Enqueue the main CSS file for the plugin
+    wp_enqueue_style(
+        'zenpress-style',
+        plugins_url('build/index.css', __FILE__),
+        array_filter(
+            $asset['dependencies'],
+            function ($style) {
+                return wp_style_is($style, 'registered');
+            }
+        ),
+        $asset['version'],
+    );
+}
+
+/**
+ * Add a custom options page under the Settings menu.
+ */
+add_action('admin_menu', 'zenpress_add_option_page');
+function zenpress_add_option_page() {
+    // Add a new submenu page under the Settings menu
+    add_options_page(
+        __('ZenPress options', 'zenpress'), // Page title
+        __('ZenPress', 'zenpress'),         // Menu title
+        'manage_options',                   // Capability required to access the page
+        'zenpress',                         // Menu slug
+        'zenpress_options_page'             // Function to display the page content
+    );
+}
+
+/**
+ * Add a placeholder within the plugin's settings page.
+ */
+function zenpress_options_page() {
+    // Output the HTML for the settings page
+    printf(
+        '<div class="wrap">' .
+        '<h1>' . esc_html__('ZenPress settings', 'zenpress') . '</h1>' .
+        '<div class="wrap" id="zenpress-settings">%s</div> .
+        </div>',
+        esc_html__('Loading page…', 'zenpress')
+    );
+}
+
+/**
+ * Register settings for each snippet.
+ */
+function zenpress_register_snippet_settings() {
+    // Define the path to the snippets directory
+    $zenpress_path = plugin_dir_path(__FILE__) . 'inc/snippets/';
+    // Get all PHP files in the snippets directory
     $zenpress_files = glob($zenpress_path . '*.php');
+    $available_snippets = array();
 
-    if ($zenpress_files === false) {
-        return;
-    }
-
-    foreach ($zenpress_files as $file) {
-        if (file_exists($file)) {
-            $base_name = basename($file, '.php');
-
-            $constant_name = 'ZENPRESS_' . strtoupper(str_replace(['-', '_'], '_', $base_name));
-
-            if (!defined($constant_name) || constant($constant_name) !== false) {
-                include_once $file;
+    // Check if there are any snippet files
+    if ($zenpress_files !== false) {
+        // Loop through each file to get the snippet names
+        foreach ($zenpress_files as $file) {
+            if (file_exists($file)) {
+                $base_name = basename($file, '.php');
+                $available_snippets[] = $base_name;
             }
         }
     }
+
+    // Register settings for each available snippet
+    foreach ($available_snippets as $snippet) {
+        $default = array(
+            'enable-snippet' => false,
+        );
+        $schema = array(
+            'type' => 'object',
+            'properties' => array(
+                'enable-snippet' => array(
+                    'type' => 'boolean',
+                ),
+            ),
+        );
+        register_setting(
+            'options',
+            'zenpress_' . $snippet,
+            array(
+                'type'         => 'object',
+                'default'      => $default,
+                'show_in_rest' => array(
+                    'schema' => $schema,
+                ),
+            )
+        );
+    }
+}
+// Hook the function to the 'init' action to register settings
+add_action('init', 'zenpress_register_snippet_settings');
+
+/**
+ * Load all ZenPress snippets and return loaded snippets.
+ *
+ * @param string $zenpress_folder The folder where snippets are stored.
+ * @return array An array of loaded snippet names.
+ */
+function zenpress_load_snippets($zenpress_folder) {
+    // Define the path to the snippets directory
+    $zenpress_path = plugin_dir_path(__FILE__) . rtrim($zenpress_folder, '/') . '/';
+
+    // Check if the directory exists
+    if (!is_dir($zenpress_path)) {
+        return array();
+    }
+
+    // Get all PHP files in the snippets directory
+    $zenpress_files = glob($zenpress_path . '*.php');
+    if ($zenpress_files === false) {
+        return array();
+    }
+
+    $loaded_snippets = array();
+    foreach ($zenpress_files as $file) {
+        if (file_exists($file)) {
+            // Get the base name of the file without the .php extension
+            $base_name = basename($file, '.php');
+            // Create a constant name for the snippet
+            $constant_name = 'ZENPRESS_' . strtoupper(str_replace(['-', '_'], '_', $base_name));
+
+            // Check if the snippet is enabled in the options
+            $snippet_option = get_option('zenpress_' . $base_name, array('enable-snippet' => false));
+            $is_enabled = isset($snippet_option['enable-snippet']) ? $snippet_option['enable-snippet'] : false;
+
+            // Load the snippet if it is enabled and not disabled by a constant
+            if ($is_enabled && (!defined($constant_name) || constant($constant_name) !== false)) {
+                include_once $file;
+                $loaded_snippets[] = $base_name;
+            }
+        }
+    }
+    return $loaded_snippets;
 }
 
-/*****
- * PERFORMANCE (つ≧▽≦)つ
- ****/
-zenpress_include_functions('inc/performance/');
+// Load snippets from the specified directory
+zenpress_load_snippets('inc/snippets/');
 
-/*****
- * SECURITY ┐(︶▽︶)┌
- ****/
-zenpress_include_functions('inc/security/');
-
-/*****
- * USER INTERFACE ヾ(☆▽☆)
- ****/
-zenpress_include_functions('inc/ui/');
-
-/*****
- * TODOLIST ▓▒░(°◡°)░▒▓
- ****/
-// TODO: Disable comments URL
-// TODO: Disable author URL in generatepress theme
