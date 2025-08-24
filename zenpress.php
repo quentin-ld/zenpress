@@ -11,7 +11,7 @@
  *
  * Plugin Name: ZenPress - Unbloat, Performance & Security
  * Description: The zeniest unbloat, performance and security lightweight plugin for WordPress and WooCommerce. Install, activate, and done!
- * Version: 1.0.9.1
+ * Version: 2.0
  * Plugin URI: https://wordpress.org/plugins/zenpress/
  * Author: Quentin Le Duff
  * Author URI: https://holdmywp.com/zenpress/
@@ -40,6 +40,15 @@
 ****/
 // TODO: Disable comments URL
 // TODO: Disable author URL in generatepress theme
+// TODO: CHECK THE OPTIONS DATA AND CREATE MISSING ONES (PHP)
+// TODO: USE OBJECT CACHE OR TRANSIENTS (PHP)
+// TODO: CHECK IF EVERYTHING IS TRANSLATABLE (PHP, JS)
+// TODO: MERGE BUILD AND SRC IN ASSETS FOLDER
+// TODO: CHECK ALL THE TEXTS
+// TODO: EDIT THE README
+// TODO: UPDATE IMAGES
+// TODO: CHECK THE DEPLOYMENT WORKING PROPERLY
+// TODO: ORDER CATEGORIES A-Z
 
 if (!defined('ABSPATH')) {
     die();

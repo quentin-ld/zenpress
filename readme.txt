@@ -4,7 +4,7 @@ Donate link: https://github.com/sponsors/quentin-ld/
 Tags: optimization, performance, security, woocommerce, bloat
 Requires at least: 6.0
 Tested up to: 6.8
-Stable tag: 1.0.9.1
+Stable tag: 2.0
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html/
@@ -137,6 +137,13 @@ I am accepting donations on my buymeacoffee page : https://buymeacoffee.com/quen
 In addition, if you like the plugin then I'd love for you to leave a review. Tell all your friends about it too!
 
 == Changelog ==
+
+= 2.0 =
+
+-
+-
+-
+-
 
 = 1.0.9.1 =
 
