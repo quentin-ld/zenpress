@@ -1,19 +1,76 @@
-#, fuzzy
+# Copyright (C) 2025 Quentin Le Duff
+# This file is distributed under the GPL v2 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: ZenPress\n"
-"POT-Creation-Date: 2025-02-27 12:53+0100\n"
-"PO-Revision-Date: 2025-02-27\n"
-"Last-Translator: Quentin Le Duff\n"
-"Language-Team: \n"
+"Project-Id-Version: ZenPress - Unbloat, Performance & Security 2.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/zenpress\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.5\n"
-"X-Poedit-KeywordsList: __;_e;esc_html__;esc_html_e;esc_attr__;esc_attr_e\n"
-"X-Poedit-Basepath: ..\n"
-"X-Poedit-SearchPath-0: .\n"
+"POT-Creation-Date: 2025-08-24T10:58:12+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.12.0\n"
+"X-Domain: zenpress\n"
 
-#: inc/security/protect__wp-login.php:20
+#. Plugin Name of the plugin
+#: zenpress.php
+msgid "ZenPress - Unbloat, Performance & Security"
+msgstr ""
+
+#. Plugin URI of the plugin
+#: zenpress.php
+msgid "https://wordpress.org/plugins/zenpress/"
+msgstr ""
+
+#. Description of the plugin
+#: zenpress.php
+msgid "The zeniest unbloat, performance and security lightweight plugin for WordPress and WooCommerce. Install, activate, and done!"
+msgstr ""
+
+#. Author of the plugin
+#: zenpress.php
+msgid "Quentin Le Duff"
+msgstr ""
+
+#. Author URI of the plugin
+#: zenpress.php
+msgid "https://holdmywp.com/zenpress/"
+msgstr ""
+
+#: inc/snippets/disable-rss.php:30
+msgid "No feed available"
+msgstr ""
+
+#: inc/snippets/protect-wp-login.php:17
 msgid "Login error."
+msgstr ""
+
+#: zenpress.php:103
+msgid "ZenPress options"
+msgstr ""
+
+#: zenpress.php:104
+msgid "ZenPress"
+msgstr ""
+
+#: zenpress.php:119
+msgid "ZenPress settings"
+msgstr ""
+
+#: zenpress.php:121
+msgid "Loading settings…"
+msgstr ""
+
+#: build/index.js:252
+#: src/index.js:60
+#: build/index.js:119
+msgid "Settings saved."
+msgstr ""
+
+#: build/index.js:294
+#: src/index.js:94
+#: build/index.js:153
+msgid "Save"
 msgstr ""
