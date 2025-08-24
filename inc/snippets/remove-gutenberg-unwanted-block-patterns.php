@@ -1,19 +1,13 @@
 <?php
 
 /**
- * Disable unwanted default block patterns in gutenberg editor
- *
- * This function Disable the loading of remote block patterns and removes
- * the core block patterns that WordPress includes by default. This can
- * improve performance by preventing unnecessary block patterns from
- * being loaded in the editor.
- *
- * Tags: #performance
- *
- * @return void
- *
- * @since 1.0.0
- */
+* Title : Disable unwanted default block patterns in gutenberg editor
+* Category : performance
+* Description : This function Disable the loading of remote block patterns and removes the core block patterns that WordPress includes by default. This can improve performance by preventing unnecessary block patterns from being loaded in the editor.
+*
+* @return void
+* @since 1.0.0
+*/
 
 if (!defined('ABSPATH')) {
     die();

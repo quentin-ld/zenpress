@@ -126,7 +126,7 @@ const SettingsPage = () => {
     return (
         <>
             <Panel>
-                <PanelBody title={__('Snippets', 'zenpress')}>
+                <PanelBody title={__('Snippets', 'zenpress')} initialOpen={true}>
                     {/* Map through each snippet and create a toggle control */}
                     {Object.keys(snippets).map((snippetName) => (
                         <PanelRow key={snippetName}>
@@ -137,12 +137,14 @@ const SettingsPage = () => {
                             />
                         </PanelRow>
                     ))}
+					<PanelRow>
+						{/* Save button to save settings */}
+						<SaveButton onClick={saveSettings} />
+						{/* Component to display notices */}
+					</PanelRow>
+					<Notices />
                 </PanelBody>
             </Panel>
-            {/* Save button to save settings */}
-            <SaveButton onClick={saveSettings} />
-            {/* Component to display notices */}
-            <Notices />
         </>
     );
 };

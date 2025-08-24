@@ -1,17 +1,13 @@
 <?php
 
 /**
- * Disable WordPress emoji scripts and styles
- *
- * This function removes all emoji-related scripts, styles, and filters
- * from both frontend and admin areas to improve performance.
- *
- * Tags: #performance
- *
- * @return void
- *
- * @since 1.0.0
- */
+* Title : Disable WordPress emoji scripts and styles
+* Category : performance
+* Description : This function removes all emoji-related scripts, styles, and filters from both frontend and admin areas to improve performance.
+*
+* @return void
+* @since 1.0.0
+*/
 
 if (!defined('ABSPATH')) {
     die();

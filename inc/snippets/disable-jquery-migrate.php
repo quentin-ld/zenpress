@@ -1,19 +1,14 @@
 <?php
 
 /**
- * Disable jQuery Migrate on the frontend
- *
- * This function removes jQuery Migrate script from loading on the frontend
- * of the website to improve performance while keeping it enabled in the admin area.
- *
- * @param WP_Scripts $scripts WP_Scripts object containing registered scripts
- *
- * Tags: #performance
- *
- * @return void
- *
- * @since 1.0.0
- */
+* Title : Disable jQuery Migrate on the frontend
+* Category : performance
+* Description : This function removes jQuery Migrate script from loading on the frontend of the website to improve performance while keeping it enabled in the admin area.
+*
+* @param WP_Scripts $scripts WP_Scripts object containing registered scripts
+* @return void
+* @since 1.0.0
+*/
 
 if (!defined('ABSPATH')) {
     die();

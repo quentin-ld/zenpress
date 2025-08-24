@@ -1,0 +1,13 @@
+.zenpress {
+	&-dashboard-wrap {
+		max-width: 768px;
+
+		.components-panel {
+			&__body {
+				&-toggle {
+					border-bottom: 1px solid #d6e2ed;
+				}
+			}
+		}
+	}
+}

@@ -1,19 +1,13 @@
 <?php
 
 /**
- * Disable WooCommerce scripts and styles on non-WooCommerce pages
- *
- * This function dequeues the WooCommerce scripts and styles on pages
- * where WooCommerce functionality is not required, such as the homepage,
- * blog posts, or other custom pages. This helps improve site performance
- * by preventing the unnecessary loading of WooCommerce assets.
- *
- * Tags: #performance, #woocommerce
- *
- * @return void
- *
- * @since 1.0.0
- */
+* Title : Disable WooCommerce scripts and styles on non-WooCommerce pages
+* Category : woocommerce
+* Description : This function dequeues the WooCommerce scripts and styles on pages where WooCommerce functionality is not required, such as the homepage, blog posts, or other custom pages. This helps improve site performance by preventing the unnecessary loading of WooCommerce assets.
+*
+* @return void
+* @since 1.0.0
+*/
 
 if (!defined('ABSPATH')) {
     die();

@@ -106,10 +106,10 @@ function zenpress_options_page() {
     // Output the HTML for the settings page
     printf(
         '<div class="wrap">' .
-        '<h1>' . esc_html__('ZenPress settings', 'zenpress') . '</h1>' .
-        '<div class="wrap" id="zenpress-settings">%s</div> .
-        </div>',
-        esc_html__('Loading page…', 'zenpress')
+		'<div class="zenpress-dashboard-wrap">' .
+		'<h1>' . esc_html__('ZenPress settings', 'zenpress') . '</h1>' .
+        '<div id="zenpress-settings">%s</div></div></div>',
+        esc_html__('Loading settings…', 'zenpress')
     );
 }
 

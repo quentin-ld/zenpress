@@ -1,16 +1,13 @@
 <?php
 
 /**
- * Disable the Login Language Selector
- *
- * This function disable the language selector on the WordPress login page
- *
- * Tags: #security
- *
- * @return void
- *
- * @since 1.0.9
- */
+* Title :  Disable the Login Language Selector
+* Category : user interface
+* Description : This function disable the language selector on the WordPress login page
+*
+* @return void
+* @since 1.0.9
+*/
 
 if (!defined('ABSPATH')) {
     die();

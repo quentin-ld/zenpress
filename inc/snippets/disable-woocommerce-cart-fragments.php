@@ -1,20 +1,13 @@
 <?php
 
 /**
- * Disable WooCommerce cart fragments script
- *
- * This function removes the WooCommerce cart fragments JavaScript,
- * which is responsible for dynamically updating the cart contents
- * on the page without reloading. Disabling this script can improve
- * performance, especially for stores that do not require the dynamic
- * cart updates on the frontend.
- *
- * Tags: #performance
- *
- * @return void
- *
- * @since 1.0.0
- */
+* Title : Disable WooCommerce cart fragments script
+* Category : woocommerce
+* Description : This function removes the WooCommerce cart fragments JavaScript, which is responsible for dynamically updating the cart contents on the page without reloading. Disabling this script can improve performance, especially for stores that do not require the dynamic cart updates on the frontend.
+*
+* @return void
+* @since 1.0.0
+*/
 
 if (!defined('ABSPATH')) {
     die();

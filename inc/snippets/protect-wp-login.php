@@ -1,19 +1,13 @@
 <?php
 
 /**
- * Protect the wp-login form from brute force attacks
- *
- * This function adds a layer of protection to the WordPress login form by:
- * - Removing detailed login error messages to prevent attackers from knowing if the username or password is incorrect.
- * - Limiting login attempts per IP address and blocking further attempts after a certain number of failed logins,
- *   for a specified duration (e.g., 5 minutes). After this time, the IP address is allowed to attempt logging in again.
- *
- * Tags: #security
- *
- * @return void
- *
- * @since 1.0.0
- */
+* Title : Protect the wp-login form from brute force attacks
+* Category : security
+* Description : This function adds a layer of protection to the WordPress login form by: - Removing detailed login error messages to prevent attackers from knowing if the username or password is incorrect. - Limiting login attempts per IP address and blocking further attempts after a certain number of failed logins,   for a specified duration (e.g., 5 minutes). After this time, the IP address is allowed to attempt logging in again.
+*
+* @return void
+* @since 1.0.0
+*/
 
 if (!defined('ABSPATH')) {
     die();
