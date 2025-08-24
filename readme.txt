@@ -33,13 +33,8 @@ Following features are included :
 * Disable RSS feeds except main one and remove links from the site head
 * Disable WordPress shortlink generation
 * Disable the Windows Live Writer (WLW) manifest link
-* Disable WooCommerce cart fragments script
-* Disable WooCommerce scripts and styles on non-WooCommerce pages
-* Disable unnecessary Stripe scripts on WooCommerce pages
-* Disable WooCommerce widgets
 * Remove unwanted default block patterns in gutenberg editor
 * Remove REST API link from the site head
-* Remove WooCommerce patterns
 * Enables separate loading of core block styles
 
 = Security =
@@ -58,47 +53,12 @@ Following features are included :
 * Cleans up the WordPress dashboard items
 * Disable the disable the language selector on the WordPress login page
 
- == Configuration options ==
-
-All ZenPress optimizations are enabled by default. You can disable specific
-functionalities by defining constants in your wp-config.php or functions.php file and setting them to false.
-
-= Performance constants =
-
-define('ZENPRESS_DISABLE_ADJACENT_POSTS', false);                // Allow adjacent posts queries
-define('ZENPRESS_DISABLE_DASHICONS', false);                     // Allow dashicons for non-admin users
-define('ZENPRESS_DISABLE_DNS_PREFETCH', false);                  // Allow DNS prefetch
-define('ZENPRESS_DISABLE_EMOJIS', false);                        // Allow WordPress emoji scripts
-define('ZENPRESS_DISABLE_JQUERY_MIGRATE', false);                // Allow jQuery Migrate
-define('ZENPRESS_DISABLE_OEMBED', false);                        // Allow oEmbed functionality
-define('ZENPRESS_DISABLE_PDF_THUMBNAILS', false);                // Allow PDF thumbnail generation
-define('ZENPRESS_DISABLE_RSS', false);                           // Allow all RSS feeds and display their links in the head
-define('ZENPRESS_DISABLE_SHORTLINK', false);                     // Allow WordPress shortlink
-define('ZENPRESS_DISABLE_WLW_MANIFEST', false);                  // Allow Windows Live Writer manifest
-define('ZENPRESS_DISABLE_WC_CART_FRAGMENTS', false);             // Allow WooCommerce cart fragments
-define('ZENPRESS_DISABLE_WC_SCRIPTS_STYLES', false);             // Allow WooCommerce scripts and styles
-define('ZENPRESS_DISABLE_WC_STRIPE_SCRIPTS', false);             // Allow WooCommerce Stripe scripts
-define('ZENPRESS_DISABLE_WC_WIDGETS', false);                    // Allow WooCommerce widgets
-define('ZENPRESS_REMOVE_GUTENBERG_BLOCK_PATTERNS', false);       // Allow Gutenberg default patterns
-define('ZENPRESS_REMOVE_REST_API_LINK', false);                  // Display REST API link in head
-define('ZENPRESS_REMOVE_WC_PATTERNS', false);                    // Allow WooCommerce default patterns
-define('ZENPRESS_SEPARATE_GUTENBERG_CORE_BLOCK_STYLES', false);  // Don't separate Gutenberg core block styles
-
-= Security constants =
-
-define('ZENPRESS_BLOCK_USER_ENUMERATION', false);                // Allow user enumeration
-define('ZENPRESS_DISABLE_AUTHOR_ARCHIVES', false);               // Allow author archives
-define('ZENPRESS_DISABLE_PINGBACK_TRACKBACK', false);            // Allow pingback and trackback
-define('ZENPRESS_DISABLE_XMLRPC_RSDLINK', false);                // Allow XML-RPC and RSD link
-define('ZENPRESS_HIDE_WOOCOMMERCE_VERSION', false);              // Allow WooCommerce version display
-define('ZENPRESS_HIDE_WORDPRESS_VERSION', false);                // Allow WordPress version display
-define('ZENPRESS_PROTECT_WP_LOGIN', false);                      // Remove login protection
-
-= User interface constants =
-
-define('ZENPRESS_CLEAN_ADMIN_BAR', false);                       // Disable admin bar cleanup
-define('ZENPRESS_CLEAN_DASHBOARD_ITEMS', false);                 // Disable dashboard cleanup
-define('ZENPRESS_DISABLE_LOGIN_LANGUAGE_SELECTOR', false);       // Disable login language selector
+= WooCommerce =
+* Disable WooCommerce cart fragments script
+* Disable WooCommerce scripts and styles on non-WooCommerce pages
+* Disable unnecessary Stripe scripts on WooCommerce pages
+* Disable WooCommerce widgets
+* Remove WooCommerce patterns
 
 == Screenshots ==
 
