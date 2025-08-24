@@ -3,7 +3,7 @@
 /**
 * Title : Hide WordPress version from HTTP headers, scripts, and styles
 * Category : security
-* Description : This function removes the WordPress version number from the HTML head (via the `wp_generator` meta tag), the `the_generator` filter, and from the URLs of scripts and styles. This helps improve security by preventing attackers from easily identifying the version of WordPress you're using, which could be targeted for known vulnerabilities.
+* Description : Removes the WordPress version number from the HTML head (via the `wp_generator` meta tag), the `the_generator` filter, and from the URLs of scripts and styles. This helps improve security by preventing attackers from easily identifying the version of WordPress you're using, which could be targeted for known vulnerabilities.
 *
 * @return void
 * @since 1.0.0

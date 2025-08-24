@@ -3,7 +3,7 @@
 /**
  * Title : Clean up the WordPress Admin Bar
  * Category : user interface
- * Description : This function removes redundant or unnecessary items from the WordPress Admin Bar, both in the backend and frontend. By cleaning up the Admin Bar, you can streamline the admin experience and improve performance.
+ * Description : Removes redundant or unnecessary items from the WordPress Admin Bar, both in the backend and frontend. By cleaning up the Admin Bar, you can streamline the admin experience and improve performance.
  *
  * @return void
  * @since 1.0.0

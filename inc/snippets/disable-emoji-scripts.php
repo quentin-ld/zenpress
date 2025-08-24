@@ -3,7 +3,7 @@
 /**
 * Title : Disable WordPress emoji scripts and styles
 * Category : performance
-* Description : This function removes all emoji-related scripts, styles, and filters from both frontend and admin areas to improve performance.
+* Description : Removes all emoji-related scripts, styles, and filters from both frontend and admin areas to improve performance.
 *
 * @return void
 * @since 1.0.0

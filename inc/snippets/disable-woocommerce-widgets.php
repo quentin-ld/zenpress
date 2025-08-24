@@ -3,7 +3,7 @@
 /**
 * Title : Disable WooCommerce widgets
 * Category : woocommerce
-* Description : This function Disable various WooCommerce widgets that are typically registered by default. By unregistering these widgets, you can improve site performance by preventing the loading of unnecessary widgets on the frontend.
+* Description : Disable various WooCommerce widgets that are typically registered by default. By unregistering these widgets, you can improve site performance by preventing the loading of unnecessary widgets on the frontend.
 *
 * @return void
 * @since 1.0.0

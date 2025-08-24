@@ -3,7 +3,7 @@
 /**
 * Title :  Disable the Login Language Selector
 * Category : user interface
-* Description : This function disable the language selector on the WordPress login page
+* Description : Disable the language selector on the WordPress login page
 *
 * @return void
 * @since 1.0.9

@@ -3,7 +3,7 @@
 /**
 * Title : Disable PDF thumbnails
 * Category : performance
-* Description : This function Disable the generation of PDF thumbnails by filtering out the fallback image sizes, which helps in improving performance by avoiding the creation of unnecessary image files for PDFs.
+* Description : Disable the generation of PDF thumbnails by filtering out the fallback image sizes, which helps in improving performance by avoiding the creation of unnecessary image files for PDFs.
 *
 * @return void
 * @since 1.0.0

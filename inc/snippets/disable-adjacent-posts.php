@@ -3,7 +3,7 @@
 /**
  * Title : Disable adjacent posts link tags in the header
  * Category : performance
- * Description : This function removes the rel="prev" and rel="next" link tags from the wp_head output, which can improve performance by reducing unnecessary HTML in the header.
+ * Description : Removes the rel="prev" and rel="next" link tags from the wp_head output, which can improve performance by reducing unnecessary HTML in the header.
  *
  * @return void
  * @since 1.0.0

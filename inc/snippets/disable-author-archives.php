@@ -3,7 +3,7 @@
 /**
  * Title :  Disable author archives and redirects to 404
  * Category : security
- * Description : This function Disable author archive pages by redirecting them to a 404 page. This can help improve security by preventing attackers from trying to exploit author archive pages to gather information about authors and their posts.
+ * Description : Disable author archive pages by redirecting them to a 404 page. This can help improve security by preventing attackers from trying to exploit author archive pages to gather information about authors and their posts.
  *
  * @return void
  * @since 1.0.0

@@ -3,7 +3,7 @@
 /**
 * Title : Disable Dashicons for non-logged-in users
 * Category : performance
-* Description : This function prevents WordPress from loading the Dashicons CSS for visitors who are not logged in, which can improve frontend performance.
+* Description : Prevents WordPress from loading the Dashicons CSS for visitors who are not logged in, which can improve frontend performance.
 *
 * @return void
 * @since 1.0.0

@@ -3,7 +3,7 @@
 /**
 * Title : Disable oEmbed
 * Category : performance
-* Description : This function removes all features related to oEmbed, including auto-discovery, embedding of external content, and the wp-embed script, to improve site performance by eliminating unnecessary API calls and scripts.
+* Description : Removes all features related to oEmbed, including auto-discovery, embedding of external content, and the wp-embed script, to improve site performance by eliminating unnecessary API calls and scripts.
 *
 * @return void
 * @since 1.0.0

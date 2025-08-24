@@ -3,7 +3,7 @@
 /**
 * Title : Hide WooCommerce version from HTTP headers, scripts, and styles
 * Category : woocommerce
-* Description : This function removes the WooCommerce version number from the HTTP headers, and prevents the version from being exposed in the URLs of scripts and styles. This helps improve security by preventing attackers from easily identifying the version of WooCommerce you're using, which could be targeted for exploits.
+* Description : Removes the WooCommerce version number from the HTTP headers, and prevents the version from being exposed in the URLs of scripts and styles. This helps improve security by preventing attackers from easily identifying the version of WooCommerce you're using, which could be targeted for exploits.
 *
 * @return void
 * @since 1.0.0

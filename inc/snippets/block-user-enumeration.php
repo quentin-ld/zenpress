@@ -3,7 +3,7 @@
 /**
  * Title : Block user enumeration
  * Category : security
- * Description : Blocks user enumeration via author query string. This function prevents the user enumeration that can be exploited by attackers to gather information about users on the WordPress site. It blocks both the default and permalink-based user enumeration URLs that reveal user IDs through author query strings, improving security.
+ * Description : Prevents the user enumeration that can be exploited by attackers to gather information about users on the WordPress site. It blocks both the default and permalink-based user enumeration URLs that reveal user IDs through author query strings, improving security.
  *
  * @return void
  * @since 1.0.0

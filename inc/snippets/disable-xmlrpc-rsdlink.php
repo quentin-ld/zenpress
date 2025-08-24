@@ -3,7 +3,7 @@
 /**
 * Title : Disable XML-RPC and removes the RSD (Really Simple Discovery) link
 * Category : performance
-* Description : This function Disable XML-RPC functionality, which is commonly targeted for attacks such as brute force login attempts or DDoS. It also removes the RSD link from the HTML head, which can provide unnecessary exposure of your WordPress setup to external services.
+* Description : Disable XML-RPC functionality, which is commonly targeted for attacks such as brute force login attempts or DDoS. It also removes the RSD link from the HTML head, which can provide unnecessary exposure of your WordPress setup to external services.
 *
 * @return void
 * @since 1.0.0
