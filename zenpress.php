@@ -108,10 +108,48 @@ function zenpress_options_page() {
         '<div class="wrap">' .
 		'<div class="zenpress-dashboard-wrap">' .
 		'<h1>' . esc_html__('ZenPress settings', 'zenpress') . '</h1>' .
-        '<div id="zenpress-settings">%s</div></div></div>',
+        '<div id="zenpress-settings" class="zenpress-settings">%s</div></div></div>',
         esc_html__('Loading settings…', 'zenpress')
     );
 }
+
+/**
+ * Extract snippet metadata from the file content.
+ *
+ * @param string $file_path The path to the snippet file.
+ * @return array An array containing the title, description, and category.
+ */
+function zenpress_extract_snippet_metadata($file_path) {
+    $metadata = array(
+        'title' => '',
+        'description' => '',
+        'category' => ''
+    );
+
+    if (!file_exists($file_path)) {
+        return $metadata;
+    }
+
+    $file_content = file_get_contents($file_path);
+
+    // Extract title
+    if (preg_match('/\* Title\s*:\s*(.*?)\s*\*/', $file_content, $title_match)) {
+        $metadata['title'] = trim($title_match[1]);
+    }
+
+    // Extract description
+    if (preg_match('/\* Description\s*:\s*(.*?)\s*\*/', $file_content, $desc_match)) {
+        $metadata['description'] = trim($desc_match[1]);
+    }
+
+    // Extract category
+    if (preg_match('/\* Category\s*:\s*(.*?)\s*\*/', $file_content, $category_match)) {
+        $metadata['category'] = trim($category_match[1]);
+    }
+
+    return $metadata;
+}
+
 
 /**
  * Register settings for each snippet.
@@ -122,28 +160,39 @@ function zenpress_register_snippet_settings() {
     // Get all PHP files in the snippets directory
     $zenpress_files = glob($zenpress_path . '*.php');
     $available_snippets = array();
-
     // Check if there are any snippet files
     if ($zenpress_files !== false) {
-        // Loop through each file to get the snippet names
+        // Loop through each file to get the snippet names and metadata
         foreach ($zenpress_files as $file) {
             if (file_exists($file)) {
                 $base_name = basename($file, '.php');
-                $available_snippets[] = $base_name;
+                $metadata = zenpress_extract_snippet_metadata($file);
+                $available_snippets[$base_name] = $metadata;
             }
         }
     }
-
     // Register settings for each available snippet
-    foreach ($available_snippets as $snippet) {
+    foreach ($available_snippets as $snippet => $metadata) {
         $default = array(
             'enable-snippet' => false,
+            'title' => $metadata['title'],
+            'description' => $metadata['description'],
+            'category' => $metadata['category'],
         );
         $schema = array(
             'type' => 'object',
             'properties' => array(
                 'enable-snippet' => array(
                     'type' => 'boolean',
+                ),
+                'title' => array(
+                    'type' => 'string',
+                ),
+                'description' => array(
+                    'type' => 'string',
+                ),
+                'category' => array(
+                    'type' => 'string',
                 ),
             ),
         );

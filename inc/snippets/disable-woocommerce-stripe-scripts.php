@@ -2,7 +2,7 @@
 
 /**
 * Title : Disable unnecessary Stripe scripts on WooCommerce pages
-* Category :
+* Category : woocommerce
 * Description : This function Disable the loading of Stripe-related scripts on the product and cart pages when the "Payment Request Button Support" (PRBS) is disabled, helping to improve performance by preventing unnecessary JavaScript from loading on pages where it's not needed.
 *
 * @return void

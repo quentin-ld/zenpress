@@ -1,13 +1,40 @@
 .zenpress {
+	&-settings {
+		display: flex;
+		flex-direction: column;
+		justify-content: flex-start;
+		align-items: flex-start;
+		gap: 20px;
+	}
+
 	&-dashboard-wrap {
-		max-width: 768px;
+		max-width: 920px;
+
+		h1 {
+			margin-bottom: calc(.5em + 20px);
+		}
 
 		.components-panel {
 			&__body {
+				&-title {
+					text-transform: capitalize;
+				}
+
 				&-toggle {
 					border-bottom: 1px solid #d6e2ed;
+					text-transform: capitalize;
 				}
 			}
+		}
+
+		.components-toggle-control {
+			&__help {
+				font-size: 1.1em;
+			}
+		}
+
+		.components-notice-list {
+			width: 100%;
 		}
 	}
 }
