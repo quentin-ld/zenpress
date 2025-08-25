@@ -52,19 +52,6 @@ if (!defined('ABSPATH')) {
 }
 
 /**
- * Load plugin textdomain for translations.
- *
- * @return void
- */
-add_action('plugins_loaded', function (): void {
-    load_plugin_textdomain(
-        'zenpress',
-        false,
-        dirname(plugin_basename(__FILE__)) . '/languages/'
-    );
-});
-
-/**
  * Enqueue scripts and styles used by the plugin in admin area.
  *
  * @param string $admin_page Current admin page hook.

@@ -43,7 +43,10 @@ function zenpress_login_protection(mixed $user, string $username, string $passwo
 
     // Check if blocked
     if (get_transient($blockKey)) {
-        wp_die(__('Too many failed login attempts. Try again later.', 'zenpress'), 403);
+        wp_die(
+            esc_html__('Too many failed login attempts. Try again later.', 'zenpress'),
+            403
+        );
     }
 
     // Track failed attempts
@@ -53,7 +56,10 @@ function zenpress_login_protection(mixed $user, string $username, string $passwo
 
     if ($attempts > $MAX_LOGIN_ATTEMPTS) {
         set_transient($blockKey, true, $BLOCK_DURATION);
-        wp_die(__('Too many failed login attempts. Try again later.', 'zenpress'), 403);
+        wp_die(
+            esc_html__('Too many failed login attempts. Try again later.', 'zenpress'),
+            403
+        );
     }
 
     set_transient($attemptKey, ['count' => $attempts], $BLOCK_DURATION);

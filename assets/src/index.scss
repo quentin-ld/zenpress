@@ -1,17 +1,17 @@
 .zenpress {
 	&-settings {
+		align-items: flex-start;
 		display: flex;
 		flex-direction: column;
-		justify-content: flex-start;
-		align-items: flex-start;
 		gap: 20px;
+		justify-content: flex-start;
 	}
 
 	&-dashboard-wrap {
 		max-width: 920px;
 
 		h1 {
-			margin-bottom: calc(.5em + 20px);
+			margin-bottom: calc(0.5em + 20px);
 		}
 
 		.components-panel {
@@ -40,3 +40,5 @@
 		}
 	}
 }
+
+/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImluZGV4LnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEiLCJmaWxlIjoiaW5kZXguc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIi56ZW5wcmVzcyB7XG5cdCYtc2V0dGluZ3Mge1xuXHRcdGRpc3BsYXk6IGZsZXg7XG5cdFx0ZmxleC1kaXJlY3Rpb246IGNvbHVtbjtcblx0XHRqdXN0aWZ5LWNvbnRlbnQ6IGZsZXgtc3RhcnQ7XG5cdFx0YWxpZ24taXRlbXM6IGZsZXgtc3RhcnQ7XG5cdFx0Z2FwOiAyMHB4O1xuXHR9XG5cblx0Ji1kYXNoYm9hcmQtd3JhcCB7XG5cdFx0bWF4LXdpZHRoOiA5MjBweDtcblxuXHRcdGgxIHtcblx0XHRcdG1hcmdpbi1ib3R0b206IGNhbGMoMC41ZW0gKyAyMHB4KTtcblx0XHR9XG5cblx0XHQuY29tcG9uZW50cy1wYW5lbCB7XG5cdFx0XHR3aWR0aDogMTAwJTtcblxuXHRcdFx0Jl9fYm9keSB7XG5cdFx0XHRcdCYtdGl0bGUge1xuXHRcdFx0XHRcdHRleHQtdHJhbnNmb3JtOiBjYXBpdGFsaXplO1xuXHRcdFx0XHR9XG5cblx0XHRcdFx0Ji10b2dnbGUge1xuXHRcdFx0XHRcdGJvcmRlci1ib3R0b206IDFweCBzb2xpZCAjZDZlMmVkO1xuXHRcdFx0XHRcdHRleHQtdHJhbnNmb3JtOiBjYXBpdGFsaXplO1xuXHRcdFx0XHR9XG5cdFx0XHR9XG5cdFx0fVxuXG5cdFx0LmNvbXBvbmVudHMtdG9nZ2xlLWNvbnRyb2wge1xuXHRcdFx0Jl9faGVscCB7XG5cdFx0XHRcdGZvbnQtc2l6ZTogMS4xZW07XG5cdFx0XHR9XG5cdFx0fVxuXG5cdFx0LmNvbXBvbmVudHMtbm90aWNlLWxpc3Qge1xuXHRcdFx0d2lkdGg6IDEwMCU7XG5cdFx0fVxuXHR9XG59XG4iXX0= */
