@@ -13,12 +13,6 @@ if (!defined('ABSPATH')) {
     die();
 }
 
-$snippet_metadata = [
-    'title' => __('Disable WordPress emoji scripts and styles', 'zenpress'),
-    'description' => __('Removes all emoji-related scripts, styles, and filters from both frontend and admin areas to improve performance.', 'zenpress'),
-    'category' => __('Performance', 'zenpress')
-];
-
 // Remove emoji detection script
 remove_action('wp_head', 'print_emoji_detection_script', 7);
 remove_action('admin_print_scripts', 'print_emoji_detection_script');

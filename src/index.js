@@ -15,63 +15,43 @@ import './index.scss';
 
 // Custom hook to manage settings state
 const useSettings = () => {
-	// State to store snippets data
 	const [snippets, setSnippets] = useState({});
-	// State to track if settings are being saved
 	const [isSaving, setIsSaving] = useState(false);
-	// Get the function to create success notices
 	const { createSuccessNotice } = useDispatch(noticesStore);
-	// Effect to fetch settings data when component mounts
+
 	useEffect(() => {
-		// Fetch settings data from the REST API
 		apiFetch({ path: '/wp/v2/settings' }).then((settings) => {
 			const snippetsData = {};
-			// Loop through all keys in the settings
 			Object.keys(settings).forEach(key => {
-				// Check if the key starts with 'zenpress_'
 				if (key.startsWith('zenpress_')) {
-					// Extract the snippet name by removing 'zenpress_' prefix
 					const snippetName = key.replace('zenpress_', '');
-					// Store the snippet data
-					snippetsData[snippetName] = settings[key];
+					const enable = settings[key]?.['enable-snippet'] || false;
+					const meta = window.zenpressSnippetsMeta?.[snippetName] || {};
+					snippetsData[snippetName] = { ...meta, 'enable-snippet': enable };
 				}
 			});
-			// Update the state with the fetched snippets data
 			setSnippets(snippetsData);
 		});
-	}, []); // Empty dependency array ensures this effect runs only once on mount
-	// Function to save settings
+	}, []);
+
 	const saveSettings = () => {
 		setIsSaving(true);
-		// Prepare the data to send
-		const settingsData = {};
+		const data = {};
 		Object.keys(snippets).forEach(snippetName => {
-			// Prefix each snippet name with 'zenpress_' to match PHP registration
-			settingsData[`zenpress_${snippetName}`] = snippets[snippetName];
+			data[`zenpress_${snippetName}`] = {
+				'enable-snippet': snippets[snippetName]?.['enable-snippet'] || false,
+			};
 		});
-		// Send a POST request to update settings
 		apiFetch({
 			path: '/wp/v2/settings',
 			method: 'POST',
-			data: settingsData,
+			data,
 		}).then(() => {
-			// Show a success notice when settings are saved
-			createSuccessNotice(
-				__('Settings saved.', 'zenpress')
-			);
-		}).catch(() => {
-			// Optionally show an error notice if the save fails
-		}).finally(() => {
-			setIsSaving(false);
-		});
+			createSuccessNotice(__('Settings saved.', 'zenpress'));
+		}).finally(() => setIsSaving(false));
 	};
-	// Return the state and functions to be used by components
-	return {
-		snippets,
-		setSnippets,
-		saveSettings,
-		isSaving,
-	};
+
+	return { snippets, setSnippets, saveSettings, isSaving };
 };
 
 // Component for a toggle control for a snippet
@@ -111,73 +91,51 @@ const Notices = () => {
 
 // Main settings page component
 const SettingsPage = () => {
-	// Get the snippets state and functions from the custom hook
 	const { snippets, setSnippets, saveSettings, isSaving } = useSettings();
-	// Function to handle toggle changes
+
 	const handleToggleChange = (snippetName) => {
-		setSnippets(prevSnippets => ({
-			// Keep all existing snippets data
-			...prevSnippets,
-			// Update the specific snippet's enable-snippet value
+		setSnippets(prev => ({
+			...prev,
 			[snippetName]: {
-				...prevSnippets[snippetName],
-				'enable-snippet': !prevSnippets[snippetName]?.['enable-snippet']
+				...prev[snippetName],
+				'enable-snippet': !prev[snippetName]?.['enable-snippet']
 			}
 		}));
 	};
 
-	// Group snippets by category
-	const groupSnippetsByCategory = () => {
-		const groupedSnippets = {};
-		Object.keys(snippets).forEach(snippetName => {
-			const snippet = snippets[snippetName];
-			const category = snippet?.category || 'Uncategorized';
-			if (!groupedSnippets[category]) {
-				groupedSnippets[category] = [];
-			}
-			groupedSnippets[category].push({ name: snippetName, data: snippet });
-		});
-		return groupedSnippets;
-	};
+	const groupedSnippets = {};
+	Object.keys(snippets).forEach(snippetName => {
+		const snippet = snippets[snippetName];
+		const category = snippet?.category || __('Uncategorized', 'zenpress');
+		if (!groupedSnippets[category]) groupedSnippets[category] = [];
+		groupedSnippets[category].push({ name: snippetName, data: snippet });
+	});
 
-	const groupedSnippets = groupSnippetsByCategory();
-
-	// Render the settings page
 	return (
 		<>
 			{Object.keys(groupedSnippets).map(category => (
 				<Panel key={category}>
 					<PanelBody title={category} initialOpen={true}>
-						{groupedSnippets[category].map(({ name: snippetName, data: snippet }) => {
-							const title = snippet?.title || snippetName;
-							const description = snippet?.description || '';
-							const label = title;
-							return (
-								<PanelRow key={snippetName}>
-									<SnippetToggleControl
-										label={label}
-										value={snippet?.['enable-snippet'] || false}
-										onChange={() => handleToggleChange(snippetName)}
-										help={description}
-									/>
-								</PanelRow>
-							);
-						})}
+						{groupedSnippets[category].map(({ name, data }) => (
+							<PanelRow key={name}>
+								<SnippetToggleControl
+									label={data.title || name}
+									value={data?.['enable-snippet'] || false}
+									onChange={() => handleToggleChange(name)}
+									help={data.description || ''}
+								/>
+							</PanelRow>
+						))}
 					</PanelBody>
 				</Panel>
 			))}
-			{/* Save button to save settings */}
-			<SaveButton onClick={saveSettings} isBusy={isSaving} __next40pxDefaultSize={true}/>
-			{/* Component to display notices */}
+			<SaveButton onClick={saveSettings} isBusy={isSaving} />
 			<Notices />
 		</>
 	);
 };
-
 // Render the settings page when the DOM is ready
 domReady(() => {
-	const root = createRoot(
-		document.getElementById('zenpress-settings')
-	);
+	const root = createRoot(document.getElementById('zenpress-settings'));
 	root.render(<SettingsPage />);
 });

@@ -13,12 +13,6 @@ if (!defined('ABSPATH')) {
     die();
 }
 
-$snippet_metadata = [
-    'title' => __('Disable WooCommerce widgets', 'zenpress'),
-    'description' => __('Disable various WooCommerce widgets that are typically registered by default. By unregistering these widgets, you can improve site performance by preventing the loading of unnecessary widgets on the frontend.', 'zenpress'),
-    'category' => __('WooCommerce', 'zenpress')
-];
-
 if (class_exists('woocommerce')) {
 
     add_action('widgets_init', 'zenpress_disable_woocommerce_widgets', 99);

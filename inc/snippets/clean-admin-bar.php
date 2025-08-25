@@ -13,12 +13,6 @@ if (!defined('ABSPATH')) {
     die();
 }
 
-$snippet_metadata = [
-    'title' => __('Clean up the WordPress Admin Bar', 'zenpress'),
-    'description' => __('Removes redundant or unnecessary items from the WordPress Admin Bar, both in the backend and frontend. By cleaning up the Admin Bar, you can streamline the admin experience and improve performance.', 'zenpress'),
-    'category' => __('User interface', 'zenpress')
-];
-
 add_action('admin_bar_menu', function ($wp_admin_bar) {
     global $wp_admin_bar;
 

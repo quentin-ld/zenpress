@@ -13,12 +13,6 @@ if (!defined('ABSPATH')) {
     die();
 }
 
-$snippet_metadata = [
-    'title' => __('Remove WooCommerce remote patterns', 'zenpress'),
-    'description' => __('Remove all WooCommerce remote patterns', 'zenpress'),
-    'category' => __('WooCommerce', 'zenpress')
-];
-
 use Automattic\WooCommerce\Blocks\Package;
 
 add_action('woocommerce_blocks_loaded', 'zenpress_remove_wc_patterns');

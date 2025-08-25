@@ -13,12 +13,6 @@ if (!defined('ABSPATH')) {
     die();
 }
 
-$snippet_metadata = [
-    'title' => __('Disable WooCommerce scripts and styles on non-WooCommerce pages', 'zenpress'),
-    'description' => __('Dequeues the WooCommerce scripts and styles on pages where WooCommerce functionality is not required, such as the homepage, blog posts, or other custom pages. This helps improve site performance by preventing the unnecessary loading of WooCommerce assets.', 'zenpress'),
-    'category' => __('WooCommerce', 'zenpress')
-];
-
 add_action('wp_enqueue_scripts', 'zenpress_disable_woocommerce_scripts_styles', 11);
 function zenpress_disable_woocommerce_scripts_styles() {
     if (class_exists('woocommerce')) {
