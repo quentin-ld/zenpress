@@ -1,11 +1,16 @@
 <?php
+/**
+ * Metadata for "Enable separate loading of core block styles".
+ *
+ * @since 1.0.0
+ */
 
 if (!defined('ABSPATH')) {
-    die();
+    exit; // Prevent direct access.
 }
 
 return [
-    'title'       => __('Enables separate loading of core block styles', 'zenpress'),
-    'description' => __('Enables the separate loading of block styles for the core blocks in WordPress. By default, WordPress bundles block styles together, but this snippet forces them to be loaded separately, which can improve performance by loading only the necessary styles for the blocks being used.', 'zenpress'),
-    'category'    => __('Performance', 'zenpress'),
+    'title' => __('Enable separate loading of core block styles', 'zenpress'),
+    'description' => __('Forces WordPress to load core block styles separately, improving performance by only loading the styles required for the blocks used on a page.', 'zenpress'),
+    'category' => __('Performance', 'zenpress'),
 ];

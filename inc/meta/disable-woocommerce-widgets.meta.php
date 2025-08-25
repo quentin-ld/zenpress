@@ -1,11 +1,16 @@
 <?php
+/**
+ * Metadata for "Disable WooCommerce widgets".
+ *
+ * @since 1.0.0
+ */
 
 if (!defined('ABSPATH')) {
-    die();
+    exit; // Prevent direct access.
 }
 
 return [
-    'title'       => __('Disable WooCommerce widgets', 'zenpress'),
-    'description' => __('Disable various WooCommerce widgets that are typically registered by default. By unregistering these widgets, you can improve site performance by preventing the loading of unnecessary widgets on the frontend.', 'zenpress'),
-    'category'    => __('WooCommerce', 'zenpress'),
+    'title' => __('Disable WooCommerce widgets', 'zenpress'),
+    'description' => __('Unregisters default WooCommerce widgets such as cart, product filters, and product listings, improving performance by reducing unnecessary widget loading.', 'zenpress'),
+    'category' => __('WooCommerce', 'zenpress'),
 ];

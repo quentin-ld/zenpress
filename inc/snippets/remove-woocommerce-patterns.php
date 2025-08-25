@@ -1,16 +1,16 @@
 <?php
-
 /**
-* Title : Remove WooCommerce patterns
-* Category : WooCommerce
-* Description : Remove all WooCommerce remote patterns
-*
-* @return void
-* @since 1.0.4
-*/
+ * Remove WooCommerce patterns.
+ *
+ * Removes all WooCommerce remote block patterns to avoid
+ * unnecessary pattern registration in the editor.
+ *
+ * @since 1.0.4
+ * @return void
+ */
 
 if (!defined('ABSPATH')) {
-    die();
+    exit; // Prevent direct access.
 }
 
 use Automattic\WooCommerce\Blocks\Package;
@@ -21,7 +21,7 @@ function zenpress_remove_wc_patterns(): void {
         'init',
         [
             Package::container()->get(\Automattic\WooCommerce\Blocks\BlockPatterns::class),
-            'register_block_patterns'
+            'register_block_patterns',
         ]
     );
 }

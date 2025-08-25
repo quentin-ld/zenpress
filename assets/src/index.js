@@ -1,0 +1,201 @@
+// Import necessary modules from WordPress libraries
+import domReady from '@wordpress/dom-ready';
+import { createRoot } from '@wordpress/element';
+import { __ } from '@wordpress/i18n';
+import { ToggleControl } from '@wordpress/components';
+import { Button } from '@wordpress/components';
+import { Panel, PanelBody, PanelRow } from '@wordpress/components';
+import { useState } from '@wordpress/element';
+import apiFetch from '@wordpress/api-fetch';
+import { useEffect } from '@wordpress/element';
+import { useDispatch, useSelect } from '@wordpress/data';
+import { store as noticesStore } from '@wordpress/notices';
+import { NoticeList } from '@wordpress/components';
+import './index.scss';
+
+/**
+ * Custom hook to manage ZenPress settings state.
+ *
+ * @returns {object} Settings state and actions.
+ * @property {object} snippets - Current snippets with metadata.
+ * @property {Function} setSnippets - Setter to update snippets state.
+ * @property {Function} saveSettings - Function to persist settings to REST API.
+ * @property {boolean} isSaving - Whether settings are currently being saved.
+ */
+const useSettings = () => {
+	const [snippets, setSnippets] = useState({});
+	const [isSaving, setIsSaving] = useState(false);
+	const { createSuccessNotice, createErrorNotice } = useDispatch(noticesStore);
+
+	useEffect(() => {
+		apiFetch({ path: '/wp/v2/settings' })
+			.then((settings) => {
+				const snippetsData = {};
+				Object.keys(settings).forEach((key) => {
+					if (key.startsWith('zenpress_')) {
+						const snippetName = key.replace('zenpress_', '');
+						const enable = settings[key]?.['enable-snippet'] || false;
+						const meta = window?.zenpressSnippetsMeta?.[snippetName] || {};
+						snippetsData[snippetName] = {
+							...meta,
+							'enable-snippet': enable,
+						};
+					}
+				});
+				setSnippets(snippetsData);
+			})
+			.catch(() => {
+				createErrorNotice(__('Failed to load settings.', 'zenpress'));
+			});
+	}, [createErrorNotice]);
+
+	/**
+	 * Save updated snippets to WordPress REST API.
+	 *
+	 * @returns {Promise<void>}
+	 */
+	const saveSettings = () => {
+		setIsSaving(true);
+		const data = {};
+
+		Object.keys(snippets).forEach((snippetName) => {
+			data[`zenpress_${snippetName}`] = {
+				'enable-snippet': snippets[snippetName]?.['enable-snippet'] || false,
+			};
+		});
+
+		return apiFetch({
+			path: '/wp/v2/settings',
+			method: 'POST',
+			data,
+		})
+			.then(() => {
+				createSuccessNotice(__('Settings saved.', 'zenpress'));
+			})
+			.catch(() => {
+				createErrorNotice(__('Failed to save settings.', 'zenpress'));
+			})
+			.finally(() => setIsSaving(false));
+	};
+
+	return { snippets, setSnippets, saveSettings, isSaving };
+};
+
+/**
+ * Toggle control for enabling/disabling a snippet.
+ *
+ * @param {object} props - Component props.
+ * @param {string} props.label - Label of the toggle.
+ * @param {boolean} props.value - Current state of the toggle.
+ * @param {Function} props.onChange - Change handler.
+ * @param {string} [props.help] - Optional description/help text.
+ * @returns {JSX.Element} The toggle control.
+ */
+const SnippetToggleControl = ({ label, value, onChange, help }) => (
+	<ToggleControl
+		label={label}
+		checked={value}
+		onChange={onChange}
+		help={help}
+		__nextHasNoMarginBottom
+	/>
+);
+
+/**
+ * Save button component.
+ *
+ * @param {object} props - Component props.
+ * @param {Function} props.onClick - Click handler for save action.
+ * @param {boolean} props.isBusy - Whether the button is in loading state.
+ * @returns {JSX.Element} The save button.
+ */
+const SaveButton = ({ onClick, isBusy }) => (
+	<Button
+		variant="primary"
+		onClick={onClick}
+		isBusy={isBusy}
+		__next40pxDefaultSize
+	>
+		{__('Save', 'zenpress')}
+	</Button>
+);
+
+/**
+ * Notices component to display success/error messages.
+ *
+ * @returns {JSX.Element|null} List of notices or null if none exist.
+ */
+const Notices = () => {
+	const { removeNotice } = useDispatch(noticesStore);
+	const notices = useSelect((select) => select(noticesStore).getNotices());
+
+	if (!notices?.length) return null;
+
+	return <NoticeList notices={notices} onRemove={removeNotice} />;
+};
+
+/**
+ * Main settings page component for ZenPress.
+ *
+ * @returns {JSX.Element} The settings page UI.
+ */
+const SettingsPage = () => {
+	const { snippets, setSnippets, saveSettings, isSaving } = useSettings();
+
+	/**
+	 * Handle toggle state change for a snippet.
+	 *
+	 * @param {string} snippetName - Name of the snippet to toggle.
+	 */
+	const handleToggleChange = (snippetName) => {
+		setSnippets((prev) => ({
+			...prev,
+			[snippetName]: {
+				...prev[snippetName],
+				'enable-snippet': !prev[snippetName]?.['enable-snippet'],
+			},
+		}));
+	};
+
+	// Group snippets by category
+	const groupedSnippets = {};
+	Object.keys(snippets).forEach((snippetName) => {
+		const snippet = snippets[snippetName];
+		const category = snippet?.category || __('Uncategorized', 'zenpress');
+		if (!groupedSnippets[category]) groupedSnippets[category] = [];
+		groupedSnippets[category].push({ name: snippetName, data: snippet });
+	});
+
+	return (
+		<>
+			{Object.keys(groupedSnippets).map((category) => (
+				<Panel key={category}>
+					<PanelBody title={category} initialOpen>
+						{groupedSnippets[category].map(({ name, data }) => (
+							<PanelRow key={name}>
+								<SnippetToggleControl
+									label={data.title || name}
+									value={data?.['enable-snippet'] || false}
+									onChange={() => handleToggleChange(name)}
+									help={data.description || ''}
+								/>
+							</PanelRow>
+						))}
+					</PanelBody>
+				</Panel>
+			))}
+			<SaveButton onClick={saveSettings} isBusy={isSaving} />
+			<Notices />
+		</>
+	);
+};
+
+/**
+ * Render the ZenPress settings page once the DOM is ready.
+ */
+domReady(() => {
+	const rootEl = document.getElementById('zenpress-settings');
+	if (!rootEl) return; // Prevent fatal error if DOM element is missing
+	const root = createRoot(rootEl);
+	root.render(<SettingsPage />);
+});

@@ -1,24 +1,28 @@
 <?php
-
 /**
- * Title :  Disable author archives and redirects to 404
- * Category : Security
- * Description : Disable author archive pages by redirecting them to a 404 page. This can help improve security by preventing attackers from trying to exploit author archive pages to gather information about authors and their posts.
+ * Disable author archives and redirect them to 404.
  *
- * @return void
+ * This snippet disables author archive pages by forcing them
+ * to return a 404 error. It prevents attackers from exploiting
+ * author archive pages to gather information about users.
+ *
  * @since 1.0.0
+ * @return void
  */
 
 if (!defined('ABSPATH')) {
-    die();
+    exit; // Prevent direct access.
 }
 
+// Override the canonical redirect to handle author archives.
 remove_filter('template_redirect', 'redirect_canonical');
+
 add_action('template_redirect', function () {
     if (is_author()) {
         global $wp_query;
         $wp_query->set_404();
         status_header(404);
+        nocache_headers();
     } else {
         redirect_canonical();
     }

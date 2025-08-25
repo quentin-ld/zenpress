@@ -1,11 +1,16 @@
 <?php
+/**
+ * Metadata for "Disable the Windows Live Writer (WLW) manifest link".
+ *
+ * @since 1.0.0
+ */
 
 if (!defined('ABSPATH')) {
-    die();
+    exit; // Prevent direct access.
 }
 
 return [
-    'title'       => __('Disable the Windows Live Writer (WLW) manifest link', 'zenpress'),
-    'description' => __('Removes the WLW manifest link from the `<head>` section of WordPress pages. The WLW manifest is used by the Windows Live Writer application to connect to WordPress, and removing it can help reduce unnecessary metadata in the HTML head.', 'zenpress'),
-    'category'    => __('Performance', 'zenpress'),
+    'title' => __('Disable the Windows Live Writer (WLW) manifest link', 'zenpress'),
+    'description' => __('Removes the WLW manifest link from the <head> section of WordPress pages, reducing unnecessary metadata output.', 'zenpress'),
+    'category' => __('Performance', 'zenpress'),
 ];

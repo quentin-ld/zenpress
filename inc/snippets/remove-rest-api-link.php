@@ -1,16 +1,17 @@
 <?php
-
 /**
-* Title : Remove REST API Links from the <head>
-* Category : Performance
-* Description : Removes the links to the REST API from the <head> section of the site. This is useful for improving performance and reducing unnecessary output in the HTML source, while still keeping the REST API functionality available for use.
-*
-* @return void
-* @since 1.0.4
-*/
+ * Remove REST API links from the <head>.
+ *
+ * Removes REST API discovery links from the <head> section of the site.
+ * Improves performance and reduces unnecessary HTML output,
+ * while keeping REST API functionality available for use.
+ *
+ * @since 1.0.4
+ * @return void
+ */
 
 if (!defined('ABSPATH')) {
-    die();
+    exit; // Prevent direct access.
 }
 
 remove_action('wp_head', 'rest_output_link_wp_head', 10);

@@ -1,11 +1,16 @@
 <?php
+/**
+ * Metadata for "Remove WooCommerce patterns".
+ *
+ * @since 1.0.4
+ */
 
 if (!defined('ABSPATH')) {
-    die();
+    exit; // Prevent direct access.
 }
 
 return [
-    'title'       => __('Remove WooCommerce remote patterns', 'zenpress'),
-    'description' => __('Remove all WooCommerce remote patterns', 'zenpress'),
-    'category'    => __('WooCommerce', 'zenpress'),
+    'title' => __('Remove WooCommerce patterns', 'zenpress'),
+    'description' => __('Removes all WooCommerce remote block patterns to prevent unnecessary editor patterns from being registered.', 'zenpress'),
+    'category' => __('WooCommerce', 'zenpress'),
 ];

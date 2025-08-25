@@ -40,10 +40,7 @@
 ****/
 // TODO: Disable comments URL
 // TODO: Disable author URL in generatepress theme
-// TODO: CHECK THE OPTIONS DATA AND CREATE MISSING ONES (PHP)
 // TODO: USE OBJECT CACHE OR TRANSIENTS (PHP)
-// TODO: CHECK IF EVERYTHING IS TRANSLATABLE (PHP, JS)
-// TODO: MERGE BUILD AND SRC IN ASSETS FOLDER
 // TODO: CHECK ALL THE TEXTS
 // TODO: EDIT THE README
 // TODO: UPDATE IMAGES
@@ -55,107 +52,136 @@ if (!defined('ABSPATH')) {
 }
 
 /**
- * Charger les traductions
+ * Load plugin textdomain for translations.
+ *
+ * @return void
  */
-add_action('plugins_loaded', function() {
-    load_plugin_textdomain('zenpress', false, dirname(plugin_basename(__FILE__)) . '/languages/');
+add_action('plugins_loaded', function (): void {
+    load_plugin_textdomain(
+        'zenpress',
+        false,
+        dirname(plugin_basename(__FILE__)) . '/languages/'
+    );
 });
 
 /**
- * Enqueue scripts and styles used by the plugin.
+ * Enqueue scripts and styles used by the plugin in admin area.
+ *
+ * @param string $admin_page Current admin page hook.
+ * @return void
  */
-add_action('admin_enqueue_scripts', 'zenpress_admin_enqueue_scripts');
-function zenpress_admin_enqueue_scripts($admin_page) {
-    // Check if the current admin page is not the ZenPress settings page
-    if ('settings_page_zenpress' !== $admin_page) { return; }
+function zenpress_admin_enqueue_scripts(string $admin_page): void {
+    if ($admin_page !== 'settings_page_zenpress') {
+        return;
+    }
 
-    // Define the path to the asset file
-    $asset_file = plugin_dir_path(__FILE__) . 'build/index.asset.php';
-    // Check if the asset file exists
-    if (!file_exists($asset_file)) { return; }
+    $asset_file = plugin_dir_path(__FILE__) . 'assets/build/index.asset.php';
+    if (!file_exists($asset_file)) {
+        return;
+    }
 
-    // Include the asset file to get dependencies and version information
+    /** @var array{dependencies: string[], version: string} $asset */
     $asset = include $asset_file;
 
-    // Enqueue the main JavaScript file for the plugin
+    if (!is_array($asset) || !isset($asset['dependencies'], $asset['version'])) {
+        return;
+    }
+
     wp_enqueue_script(
         'zenpress-scripts',
-        plugins_url('build/index.js', __FILE__),
-        $asset['dependencies'],
-        $asset['version'],
-        array('in_footer' => true)
+        plugins_url('assets/build/index.js', __FILE__),
+        array_map('sanitize_key', $asset['dependencies']),
+        sanitize_text_field($asset['version']),
+        ['in_footer' => true]
     );
 
-    // Enqueue the main CSS file for the plugin
     wp_enqueue_style(
         'zenpress-style',
-        plugins_url('build/index.css', __FILE__),
+        plugins_url('assets/build/index.css', __FILE__),
         array_filter(
-            $asset['dependencies'],
-            function ($style) {
-                return wp_style_is($style, 'registered');
-            }
+            array_map('sanitize_key', $asset['dependencies']),
+            fn($style) => wp_style_is($style, 'registered')
         ),
-        $asset['version'],
+        sanitize_text_field($asset['version'])
     );
 }
+add_action('admin_enqueue_scripts', 'zenpress_admin_enqueue_scripts');
 
 /**
- * Add a custom options page under the Settings menu.
+ * Register ZenPress options page under the Settings menu.
+ *
+ * @return void
  */
-add_action('admin_menu', 'zenpress_add_option_page');
-function zenpress_add_option_page() {
-    // Add a new submenu page under the Settings menu
+function zenpress_add_option_page(): void {
     add_options_page(
-        __('ZenPress options', 'zenpress'), // Page title
-        __('ZenPress', 'zenpress'),         // Menu title
-        'manage_options',                   // Capability required to access the page
-        'zenpress',                         // Menu slug
-        'zenpress_options_page'             // Function to display the page content
+        __('ZenPress options', 'zenpress'),
+        __('ZenPress', 'zenpress'),
+        'manage_options',
+        'zenpress',
+        'zenpress_options_page'
     );
 }
+add_action('admin_menu', 'zenpress_add_option_page');
 
 /**
- * Add a placeholder within the plugin's settings page.
+ * Render ZenPress options page content.
+ *
+ * @return void
  */
-function zenpress_options_page() {
-    // Output the HTML for the settings page
+function zenpress_options_page(): void {
     printf(
         '<div class="wrap">' .
-		'<div class="zenpress-dashboard-wrap">' .
-		'<h1>' . esc_html__('ZenPress settings', 'zenpress') . '</h1>' .
-        '<div id="zenpress-settings" class="zenpress-settings">%s</div></div></div>',
+            '<div class="zenpress-dashboard-wrap">' .
+                '<h1>%s</h1>' .
+                '<div id="zenpress-settings" class="zenpress-settings">%s</div>' .
+            '</div>' .
+        '</div>',
+        esc_html__('ZenPress settings', 'zenpress'),
         esc_html__('Loading settings…', 'zenpress')
     );
 }
 
 /**
- * Extract snippet metadata from the file content.
+ * Extract snippet metadata from corresponding meta file.
  *
- * @param string $file_path The path to the snippet file.
- * @return array An array containing the title, description, and category.
+ * @param string $snippet_name Base name of the snippet (without extension).
+ * @return array<string,string> Metadata array with keys: title, description, category.
  */
-function zenpress_extract_snippet_metadata($snippet_name) {
-    $metadata = ['title' => '', 'description' => '', 'category' => ''];
-    $meta_file = plugin_dir_path(__FILE__) . 'inc/meta/' . $snippet_name . '.meta.php';
+function zenpress_extract_snippet_metadata(string $snippet_name): array {
+    $metadata = [
+        'title'       => '',
+        'description' => '',
+        'category'    => '',
+    ];
 
-    if (file_exists($meta_file)) {
+    $meta_file = plugin_dir_path(__FILE__) . 'inc/meta/' . basename($snippet_name) . '.meta.php';
+
+    if (is_file($meta_file)) {
+        /** @var mixed $data */
         $data = include $meta_file;
         if (is_array($data)) {
-            $metadata = array_merge($metadata, array_intersect_key($data, $metadata));
+            $metadata = array_merge(
+                $metadata,
+                array_intersect_key($data, $metadata)
+            );
         }
     }
 
-    return $metadata;
+    return array_map('sanitize_text_field', $metadata);
 }
 
-
 /**
- * Register settings for each snippet.
+ * Register settings for all snippets found in /inc/snippets.
+ *
+ * @return void
  */
-function zenpress_register_snippet_settings() {
+function zenpress_register_snippet_settings(): void {
     $snippets_path = plugin_dir_path(__FILE__) . 'inc/snippets/';
-    foreach (glob($snippets_path . '*.php') as $file) {
+    if (!is_dir($snippets_path)) {
+        return;
+    }
+
+    foreach (glob($snippets_path . '*.php') ?: [] as $file) {
         $base_name = basename($file, '.php');
 
         register_setting(
@@ -179,20 +205,22 @@ function zenpress_register_snippet_settings() {
 add_action('init', 'zenpress_register_snippet_settings');
 
 /**
- * Load all ZenPress snippets and return loaded snippets.
+ * Load enabled snippets.
  *
- * @param string $zenpress_folder The folder where snippets are stored.
- * @return array An array of loaded snippet names.
+ * @param string $folder Relative folder where snippets are stored.
+ * @return array<int,string> List of loaded snippet base names.
  */
-function zenpress_load_snippets($folder = 'inc/snippets/') {
+function zenpress_load_snippets(string $folder = 'inc/snippets/'): array {
     $snippets_path = plugin_dir_path(__FILE__) . rtrim($folder, '/') . '/';
-    if (!is_dir($snippets_path)) return [];
+    if (!is_dir($snippets_path)) {
+        return [];
+    }
 
     $loaded = [];
-    foreach (glob($snippets_path . '*.php') as $file) {
+    foreach (glob($snippets_path . '*.php') ?: [] as $file) {
         $base_name     = basename($file, '.php');
         $option        = get_option('zenpress_' . $base_name, ['enable-snippet' => false]);
-        $is_enabled    = $option['enable-snippet'] ?? false;
+        $is_enabled    = is_array($option) ? ($option['enable-snippet'] ?? false) : false;
         $constant_name = 'ZENPRESS_' . strtoupper(str_replace(['-', '_'], '_', $base_name));
 
         if ($is_enabled && (!defined($constant_name) || constant($constant_name) !== false)) {
@@ -200,21 +228,29 @@ function zenpress_load_snippets($folder = 'inc/snippets/') {
             $loaded[] = $base_name;
         }
     }
+
     return $loaded;
 }
-add_action('init', function() {
-    zenpress_load_snippets();
-});
+add_action('init', fn() => zenpress_load_snippets());
 
 /**
- * Injection des métadonnées traduites en JS
+ * Localize translated snippet metadata for use in JavaScript.
+ *
+ * @param string $hook Current admin page hook.
+ * @return void
  */
-add_action('admin_enqueue_scripts', function($hook) {
-    if ($hook !== 'settings_page_zenpress') return;
+add_action('admin_enqueue_scripts', function (string $hook): void {
+    if ($hook !== 'settings_page_zenpress') {
+        return;
+    }
 
     $snippets = [];
     $snippets_path = plugin_dir_path(__FILE__) . 'inc/snippets/';
-    foreach (glob($snippets_path . '*.php') as $file) {
+    if (!is_dir($snippets_path)) {
+        return;
+    }
+
+    foreach (glob($snippets_path . '*.php') ?: [] as $file) {
         $base_name = basename($file, '.php');
         $snippets[$base_name] = zenpress_extract_snippet_metadata($base_name);
     }

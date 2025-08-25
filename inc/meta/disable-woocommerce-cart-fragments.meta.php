@@ -1,11 +1,16 @@
 <?php
+/**
+ * Metadata for "Disable WooCommerce cart fragments script".
+ *
+ * @since 1.0.0
+ */
 
 if (!defined('ABSPATH')) {
-    die();
+    exit; // Prevent direct access.
 }
 
 return [
-    'title'       => __('Disable WooCommerce cart fragments script', 'zenpress'),
-    'description' => __('Removes the WooCommerce cart fragments JavaScript, which is responsible for dynamically updating the cart contents on the page without reloading. Disabling this script can improve performance, especially for stores that do not require the dynamic cart updates on the frontend.', 'zenpress'),
-    'category'    => __('WooCommerce', 'zenpress'),
+    'title' => __('Disable WooCommerce cart fragments script', 'zenpress'),
+    'description' => __('Removes the WooCommerce cart fragments JavaScript responsible for dynamically updating cart contents, improving performance when live cart updates are unnecessary.', 'zenpress'),
+    'category' => __('WooCommerce', 'zenpress'),
 ];

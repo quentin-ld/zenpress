@@ -1,16 +1,18 @@
 <?php
-
 /**
-* Title : Disable WordPress shortlink generation
-* Category : Performance
-* Description : Removes the shortlink functionality in WordPress by disabling both the header and template redirect actions that output the shortlink. This can improve performance slightly by reducing unnecessary HTTP headers and meta tags.
-*
-* @return void
-* @since 1.0.0
-*/
+ * Disable WordPress shortlink generation.
+ *
+ * Removes shortlink functionality by disabling both the header
+ * and template redirect actions that output the shortlink.
+ * This can improve performance slightly by reducing unnecessary
+ * HTTP headers and meta tags.
+ *
+ * @since 1.0.0
+ * @return void
+ */
 
 if (!defined('ABSPATH')) {
-    die();
+    exit; // Prevent direct access.
 }
 
 remove_action('wp_head', 'wp_shortlink_wp_head');

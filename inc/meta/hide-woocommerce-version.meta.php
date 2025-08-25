@@ -1,11 +1,16 @@
 <?php
+/**
+ * Metadata for "Hide WooCommerce version from HTTP headers, scripts, and styles".
+ *
+ * @since 1.0.0
+ */
 
 if (!defined('ABSPATH')) {
-    die();
+    exit; // Prevent direct access.
 }
 
 return [
-    'title'       => __('Hide WooCommerce version from HTTP headers, scripts, and styles', 'zenpress'),
-    'description' => __('Removes the WooCommerce version number from the HTTP headers, and prevents the version from being exposed in the URLs of scripts and styles. This helps improve security by preventing attackers from easily identifying the version of WooCommerce you\'re using, which could be targeted for exploits.', 'zenpress'),
-    'category'    => __('WooCommerce', 'zenpress'),
+    'title' => __('Hide WooCommerce version from HTTP headers, scripts, and styles', 'zenpress'),
+    'description' => __('Removes the WooCommerce version number from HTTP headers and from script/style URLs, improving security by preventing version disclosure.', 'zenpress'),
+    'category' => __('WooCommerce', 'zenpress'),
 ];

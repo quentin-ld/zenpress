@@ -1,11 +1,16 @@
 <?php
+/**
+ * Metadata for "Disable unwanted default block patterns in Gutenberg editor".
+ *
+ * @since 1.0.0
+ */
 
 if (!defined('ABSPATH')) {
-    die();
+    exit; // Prevent direct access.
 }
 
 return [
-    'title'       => __('Disable unwanted default block patterns in gutenberg editor', 'zenpress'),
-    'description' => __('Disable the loading of remote block patterns and removes the core block patterns that WordPress includes by default. This can improve performance by preventing unnecessary block patterns from being loaded in the editor.', 'zenpress'),
-    'category'    => __('Performance', 'zenpress'),
+    'title' => __('Disable unwanted default block patterns in Gutenberg editor', 'zenpress'),
+    'description' => __('Disables the loading of remote block patterns and removes the default core block patterns in WordPress, improving performance by preventing unnecessary block patterns from being loaded.', 'zenpress'),
+    'category' => __('Performance', 'zenpress'),
 ];

@@ -1,11 +1,19 @@
 <?php
+/**
+ * Metadata for the "Disable author archives and redirect to 404" snippet.
+ *
+ * @since 1.0.0
+ */
 
 if (!defined('ABSPATH')) {
-    die();
+    exit; // Prevent direct access.
 }
 
 return [
-    'title'       => __('Disable author archives and redirects to 404', 'zenpress'),
-    'description' => __('Disable author archive pages by redirecting them to a 404 page. This can help improve security by preventing attackers from trying to exploit author archive pages to gather information about authors and their posts.', 'zenpress'),
-    'category'    => __('Security', 'zenpress'),
+    'title' => __('Disable author archives and redirect to 404', 'zenpress'),
+    'description' => __(
+        'Disable author archive pages by redirecting them to a 404 page. This helps improve security by preventing attackers from gathering information about authors and their posts.',
+        'zenpress'
+    ),
+    'category' => __('Security', 'zenpress'),
 ];

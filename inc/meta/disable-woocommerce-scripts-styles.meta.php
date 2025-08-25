@@ -1,11 +1,16 @@
 <?php
+/**
+ * Metadata for "Disable WooCommerce scripts and styles on non-WooCommerce pages".
+ *
+ * @since 1.0.0
+ */
 
 if (!defined('ABSPATH')) {
-    die();
+    exit; // Prevent direct access.
 }
 
 return [
-    'title'       => __('Disable WooCommerce scripts and styles on non-WooCommerce pages', 'zenpress'),
-    'description' => __('Dequeues the WooCommerce scripts and styles on pages where WooCommerce functionality is not required, such as the homepage, blog posts, or other custom pages. This helps improve site performance by preventing the unnecessary loading of WooCommerce assets.', 'zenpress'),
-    'category'    => __('WooCommerce', 'zenpress'),
+    'title' => __('Disable WooCommerce scripts and styles on non-WooCommerce pages', 'zenpress'),
+    'description' => __('Dequeues WooCommerce scripts and styles on non-WooCommerce pages such as the homepage, blog posts, and custom pages, improving performance by reducing unnecessary asset loading.', 'zenpress'),
+    'category' => __('WooCommerce', 'zenpress'),
 ];

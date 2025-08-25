@@ -1,16 +1,17 @@
 <?php
-
 /**
-* Title : Disable the Windows Live Writer (WLW) manifest link
-* Category : Performance
-* Description : Removes the WLW manifest link from the `<head>` section of WordPress pages. The WLW manifest is used by the Windows Live Writer application to connect to WordPress, and removing it can help reduce unnecessary metadata in the HTML head.
-*
-* @return void
-* @since 1.0.0
-*/
+ * Disable the Windows Live Writer (WLW) manifest link.
+ *
+ * Removes the WLW manifest link from the <head> section of WordPress pages.
+ * The WLW manifest is used by the Windows Live Writer application to connect
+ * to WordPress. Removing it reduces unnecessary metadata in the HTML head.
+ *
+ * @since 1.0.0
+ * @return void
+ */
 
 if (!defined('ABSPATH')) {
-    die();
+    exit; // Prevent direct access.
 }
 
 remove_action('wp_head', 'wlwmanifest_link');

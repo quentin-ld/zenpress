@@ -1,21 +1,21 @@
 <?php
-
 /**
-* Title : Disable WooCommerce widgets
-* Category : WooCommerce
-* Description : Disable various WooCommerce widgets that are typically registered by default. By unregistering these widgets, you can improve site performance by preventing the loading of unnecessary widgets on the frontend.
-*
-* @return void
-* @since 1.0.0
-*/
+ * Disable WooCommerce widgets.
+ *
+ * Unregisters default WooCommerce widgets. This can improve site performance
+ * by preventing unnecessary widgets from being available or loaded.
+ *
+ * @since 1.0.0
+ * @return void
+ */
 
 if (!defined('ABSPATH')) {
-    die();
+    exit; // Prevent direct access.
 }
 
-if (class_exists('woocommerce')) {
-
+if (class_exists('WooCommerce')) {
     add_action('widgets_init', 'zenpress_disable_woocommerce_widgets', 99);
+
     function zenpress_disable_woocommerce_widgets() {
         unregister_widget('WC_Widget_Products');
         unregister_widget('WC_Widget_Product_Categories');

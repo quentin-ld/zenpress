@@ -1,11 +1,16 @@
 <?php
+/**
+ * Metadata for "Remove REST API links from the <head>".
+ *
+ * @since 1.0.4
+ */
 
 if (!defined('ABSPATH')) {
-    die();
+    exit; // Prevent direct access.
 }
 
 return [
-    'title'       => __('Remove REST API Links from the <head>', 'zenpress'),
-    'description' => __('Removes the links to the REST API from the <head> section of the site. This is useful for improving performance and reducing unnecessary output in the HTML source, while still keeping the REST API functionality available for use.', 'zenpress'),
-    'category'    => __('Performance', 'zenpress'),
+    'title' => __('Remove REST API links from the <head>', 'zenpress'),
+    'description' => __('Removes REST API discovery links from the <head> section of the site, improving performance and reducing unnecessary HTML output while keeping the REST API available.', 'zenpress'),
+    'category' => __('Performance', 'zenpress'),
 ];

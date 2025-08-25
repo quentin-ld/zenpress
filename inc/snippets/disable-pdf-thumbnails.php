@@ -1,21 +1,19 @@
 <?php
-
 /**
-* Title : Disable PDF thumbnails
-* Category : Performance
-* Description : Disable the generation of PDF thumbnails by filtering out the fallback image sizes, which helps in improving performance by avoiding the creation of unnecessary image files for PDFs.
-*
-* @return void
-* @since 1.0.0
-*/
+ * Disable PDF thumbnails.
+ *
+ * Prevents WordPress from generating thumbnails for PDF files by filtering out
+ * the fallback image sizes. This improves performance by avoiding unnecessary
+ * image file creation.
+ *
+ * @since 1.0.0
+ * @return void
+ */
 
 if (!defined('ABSPATH')) {
-    die();
+    exit; // Prevent direct access.
 }
 
-add_filter(
-    'fallback_intermediate_image_sizes',
-    function () {
-        return [];
-    }
-);
+add_filter('fallback_intermediate_image_sizes', function () {
+    return [];
+});

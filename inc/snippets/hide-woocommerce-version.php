@@ -1,20 +1,22 @@
 <?php
-
 /**
-* Title : Hide WooCommerce version from HTTP headers, scripts, and styles
-* Category : WooCommerce
-* Description : Removes the WooCommerce version number from the HTTP headers, and prevents the version from being exposed in the URLs of scripts and styles. This helps improve security by preventing attackers from easily identifying the version of WooCommerce you're using, which could be targeted for exploits.
-*
-* @return void
-* @since 1.0.0
-*/
+ * Hide WooCommerce version from HTTP headers, scripts, and styles.
+ *
+ * Removes the WooCommerce version number from HTTP headers
+ * and prevents it from being exposed in the URLs of scripts and styles.
+ * Improves security by making it harder for attackers to identify
+ * which WooCommerce version is in use.
+ *
+ * @since 1.0.0
+ * @return void
+ */
 
 if (!defined('ABSPATH')) {
-    die();
+    exit; // Prevent direct access.
 }
 
-if (class_exists('woocommerce') && !is_admin()) {
-    // Hide WooCommerce version from HTTP headers
+if (class_exists('WooCommerce') && !is_admin()) {
+    // Remove WooCommerce version from HTTP headers
     add_filter('wp_headers', 'zenpress_remove_woocommerce_version');
     function zenpress_remove_woocommerce_version($headers) {
         if (isset($headers['X-WooCommerce-Version'])) {
@@ -24,11 +26,11 @@ if (class_exists('woocommerce') && !is_admin()) {
         return $headers;
     }
 
-    // Remove WooCommerce version from scripts and styles URLs
+    // Remove WooCommerce version from script and style URLs
     add_filter('style_loader_src', 'zenpress_remove_woocommerce_version_scripts_styles', 10);
     add_filter('script_loader_src', 'zenpress_remove_woocommerce_version_scripts_styles', 10);
     function zenpress_remove_woocommerce_version_scripts_styles($src) {
-        if (strpos($src, 'ver=') && strpos($src, 'woocommerce')) {
+        if (strpos($src, 'ver=') !== false && strpos($src, 'woocommerce') !== false) {
             $src = remove_query_arg('ver', $src);
         }
 

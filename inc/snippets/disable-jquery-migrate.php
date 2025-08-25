@@ -1,25 +1,24 @@
 <?php
-
 /**
-* Title : Disable jQuery Migrate on the frontend
-* Category : Performance
-* Description : Removes jQuery Migrate script from loading on the frontend of the website to improve performance while keeping it enabled in the admin area.
-*
-* @param WP_Scripts $scripts WP_Scripts object containing registered scripts
-* @return void
-* @since 1.0.0
-*/
+ * Disable jQuery Migrate on the frontend.
+ *
+ * Removes jQuery Migrate script from loading on the frontend
+ * to improve performance, while keeping it enabled in the admin area.
+ *
+ * @since 1.0.0
+ * @param WP_Scripts $scripts WP_Scripts object containing registered scripts.
+ * @return void
+ */
 
 if (!defined('ABSPATH')) {
-    die();
+    exit; // Prevent direct access.
 }
 
-add_action('wp_default_scripts', 'zenpress_disable_jquery_migrate');
-function zenpress_disable_jquery_migrate(&$scripts) {
+add_action('wp_default_scripts', function (&$scripts) {
     if (!is_admin() && isset($scripts->registered['jquery'])) {
         $script = $scripts->registered['jquery'];
-        if ($script->deps) {
+        if (!empty($script->deps)) {
             $script->deps = array_diff($script->deps, ['jquery-migrate']);
         }
     }
-}
+});

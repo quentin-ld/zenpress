@@ -1,11 +1,16 @@
 <?php
+/**
+ * Metadata for "Disable XML-RPC and remove the RSD link".
+ *
+ * @since 1.0.0
+ */
 
 if (!defined('ABSPATH')) {
-    die();
+    exit; // Prevent direct access.
 }
 
 return [
-    'title'       => __('Disable XML-RPC and removes the RSD (Really Simple Discovery) link', 'zenpress'),
-    'description' => __('Disable XML-RPC functionality, which is commonly targeted for attacks such as brute force login attempts or DDoS. It also removes the RSD link from the HTML head, which can provide unnecessary exposure of your WordPress setup to external services.', 'zenpress'),
-    'category'    => __('Performance', 'zenpress'),
+    'title' => __('Disable XML-RPC and remove the RSD link', 'zenpress'),
+    'description' => __('Disables XML-RPC functionality to reduce attack surface (brute force, DDoS) and removes the RSD link from the HTML head for better security and reduced exposure.', 'zenpress'),
+    'category' => __('Performance', 'zenpress'),
 ];

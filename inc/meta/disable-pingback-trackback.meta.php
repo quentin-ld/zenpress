@@ -1,11 +1,16 @@
 <?php
+/**
+ * Metadata for the "Disable pingback and trackback" snippet.
+ *
+ * @since 1.0.0
+ */
 
 if (!defined('ABSPATH')) {
-    die();
+    exit; // Prevent direct access.
 }
 
 return [
-    'title'       => __('Disable pingback and trackback', 'zenpress'),
-    'description' => __('Removes the X-Pingback header, disables pingbacks and trackbacks on new posts, and prevents self-pingbacks (where WordPress pings its own site). This can help improve security and performance by preventing unnecessary requests and reducing the risk of spam and DDoS attacks.', 'zenpress'),
-    'category'    => __('Security', 'zenpress'),
+    'title' => __('Disable pingback and trackback', 'zenpress'),
+    'description' => __('Removes the X-Pingback header, disables pingbacks and trackbacks on new posts, and prevents self-pingbacks. This improves security and performance by reducing unnecessary requests and mitigating spam or DDoS risks.', 'zenpress'),
+    'category' => __('Security', 'zenpress'),
 ];
