@@ -2,7 +2,7 @@
 
 /**
 * Title : Disable WooCommerce widgets
-* Category : woocommerce
+* Category : WooCommerce
 * Description : Disable various WooCommerce widgets that are typically registered by default. By unregistering these widgets, you can improve site performance by preventing the loading of unnecessary widgets on the frontend.
 *
 * @return void
@@ -12,6 +12,12 @@
 if (!defined('ABSPATH')) {
     die();
 }
+
+$snippet_metadata = [
+    'title' => __('Disable WooCommerce widgets', 'zenpress'),
+    'description' => __('Disable various WooCommerce widgets that are typically registered by default. By unregistering these widgets, you can improve site performance by preventing the loading of unnecessary widgets on the frontend.', 'zenpress'),
+    'category' => __('WooCommerce', 'zenpress')
+];
 
 if (class_exists('woocommerce')) {
 

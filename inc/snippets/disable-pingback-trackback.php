@@ -2,7 +2,7 @@
 
 /**
 * Title : Disable pingback and trackback
-* Category : security
+* Category : Security
 * Description : Removes the X-Pingback header, Disable pingbacks and trackbacks or new posts, and prevents self-pingbacks (where WordPress pings its own site). This can help improve security and performance by preventing unnecessary requests and reducing the risk of spam and DDoS attacks.
 *
 * @return void
@@ -12,6 +12,12 @@
 if (!defined('ABSPATH')) {
     die();
 }
+
+$snippet_metadata = [
+    'title' => __('Disable pingback and trackback', 'zenpress'),
+    'description' => __('Removes the X-Pingback header, Disable pingbacks and trackbacks or new posts, and prevents self-pingbacks (where WordPress pings its own site). This can help improve security and performance by preventing unnecessary requests and reducing the risk of spam and DDoS attacks.', 'zenpress'),
+    'category' => __('Security', 'zenpress')
+];
 
 // Remove X-Pingback headers
 add_filter('wp_headers', 'zenpress_remove_x_pingback');

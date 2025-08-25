@@ -139,21 +139,23 @@ function zenpress_extract_snippet_metadata($file_path) {
         return $metadata;
     }
 
-    $file_content = file_get_contents($file_path);
+    // Inclure le fichier pour accéder aux variables PHP
+    $snippet_metadata = [];
+    require_once $file_path;
 
-    // Extract title
-    if (preg_match('/\* Title\s*:\s*(.*?)\s*\*/', $file_content, $title_match)) {
-        $metadata['title'] = trim($title_match[1]);
-    }
-
-    // Extract description
-    if (preg_match('/\* Description\s*:\s*(.*?)\s*\*/', $file_content, $desc_match)) {
-        $metadata['description'] = trim($desc_match[1]);
-    }
-
-    // Extract category
-    if (preg_match('/\* Category\s*:\s*(.*?)\s*\*/', $file_content, $category_match)) {
-        $metadata['category'] = trim($category_match[1]);
+    // Vérifier si la variable $snippet_metadata existe et contient les données nécessaires
+    if (isset($snippet_metadata) && is_array($snippet_metadata)) {
+        if (isset($snippet_metadata['title'])) {
+            $metadata['title'] = $snippet_metadata['title'];
+        }
+        if (isset($snippet_metadata['description'])) {
+            $metadata['description'] = $snippet_metadata['description'];
+        }
+        if (isset($snippet_metadata['category'])) {
+            $metadata['category'] = $snippet_metadata['category'];
+        }
+    } else {
+        // error_log('Variable $snippet_metadata not found or not an array in file: ' . $file_path);
     }
 
     return $metadata;
@@ -168,7 +170,7 @@ function zenpress_register_snippet_settings() {
     $zenpress_path = plugin_dir_path(__FILE__) . 'inc/snippets/';
     // Get all PHP files in the snippets directory
     $zenpress_files = glob($zenpress_path . '*.php');
-    $available_snippets = array();
+    $available_snippets = [];
     // Check if there are any snippet files
     if ($zenpress_files !== false) {
         // Loop through each file to get the snippet names and metadata
@@ -230,30 +232,25 @@ add_action('init', 'zenpress_register_snippet_settings');
 function zenpress_load_snippets($zenpress_folder) {
     // Define the path to the snippets directory
     $zenpress_path = plugin_dir_path(__FILE__) . rtrim($zenpress_folder, '/') . '/';
-
     // Check if the directory exists
     if (!is_dir($zenpress_path)) {
-        return array();
+        return [];
     }
-
     // Get all PHP files in the snippets directory
     $zenpress_files = glob($zenpress_path . '*.php');
     if ($zenpress_files === false) {
-        return array();
+        return [];
     }
-
-    $loaded_snippets = array();
+    $loaded_snippets = [];
     foreach ($zenpress_files as $file) {
         if (file_exists($file)) {
             // Get the base name of the file without the .php extension
             $base_name = basename($file, '.php');
             // Create a constant name for the snippet
             $constant_name = 'ZENPRESS_' . strtoupper(str_replace(['-', '_'], '_', $base_name));
-
             // Check if the snippet is enabled in the options
             $snippet_option = get_option('zenpress_' . $base_name, array('enable-snippet' => false));
             $is_enabled = isset($snippet_option['enable-snippet']) ? $snippet_option['enable-snippet'] : false;
-
             // Load the snippet if it is enabled and not disabled by a constant
             if ($is_enabled && (!defined($constant_name) || constant($constant_name) !== false)) {
                 include_once $file;
@@ -265,5 +262,7 @@ function zenpress_load_snippets($zenpress_folder) {
 }
 
 // Load snippets from the specified directory
-zenpress_load_snippets('inc/snippets/');
+add_action('init', function() {
+    zenpress_load_snippets('inc/snippets/');
+});
 

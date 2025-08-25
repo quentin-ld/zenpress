@@ -2,7 +2,7 @@
 
 /**
 * Title : Remove WooCommerce patterns
-* Category : woocommerce
+* Category : WooCommerce
 * Description : Remove all WooCommerce remote patterns
 *
 * @return void
@@ -12,6 +12,12 @@
 if (!defined('ABSPATH')) {
     die();
 }
+
+$snippet_metadata = [
+    'title' => __('Remove WooCommerce remote patterns', 'zenpress'),
+    'description' => __('Remove all WooCommerce remote patterns', 'zenpress'),
+    'category' => __('WooCommerce', 'zenpress')
+];
 
 use Automattic\WooCommerce\Blocks\Package;
 
