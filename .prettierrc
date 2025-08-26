@@ -3,6 +3,5 @@
   "trailingComma": "all",
   "printWidth": 240,
   "endOfLine": "lf",
-  "insertFinalNewline": true,
   "semi": true
 }

@@ -116,7 +116,7 @@ const SaveButton = ({ onClick, isBusy }) => (
 		isBusy={isBusy}
 		__next40pxDefaultSize
 	>
-		{__('Save', 'zenpress')}
+		{__('Save settings', 'zenpress')}
 	</Button>
 );
 
@@ -158,6 +158,36 @@ const SettingsPage = () => {
 		}));
 	};
 
+	/**
+	 * Enable all snippets at once.
+	 *
+	 * @return {void}
+	 */
+	const enableAllSnippets = () => {
+		setSnippets((prev) => {
+			const updated = {};
+			Object.keys(prev).forEach((name) => {
+				updated[name] = { ...prev[name], 'enable-snippet': true };
+			});
+			return updated;
+		});
+	};
+
+	/**
+	 * Reset all snippets (disable everything).
+	 *
+	 * @return {void}
+	 */
+	const resetSettings = () => {
+		setSnippets((prev) => {
+			const updated = {};
+			Object.keys(prev).forEach((name) => {
+				updated[name] = { ...prev[name], 'enable-snippet': false };
+			});
+			return updated;
+		});
+	};
+
 	// Group snippets by category
 	const groupedSnippets = {};
 	Object.keys(snippets).forEach((snippetName) => {
@@ -190,10 +220,29 @@ const SettingsPage = () => {
 					</PanelBody>
 				</Panel>
 			))}
-			<div class="zenpress-actions">
+
+			<div className="zenpress-actions">
+				<div className="zenpress-actions-bulk">
+					<Button
+						variant="secondary"
+						onClick={enableAllSnippets}
+						__next40pxDefaultSize
+					>
+						{__('Enable all snippets', 'zenpress')}
+					</Button>
+
+					<Button
+						isDestructive="true"
+						onClick={resetSettings}
+						__next40pxDefaultSize
+					>
+						{__('Disable all snippets', 'zenpress')}
+					</Button>
+				</div>
 				<SaveButton onClick={saveSettings} isBusy={isSaving} />
 			</div>
-			<div class="zenpress-notices">
+
+			<div className="zenpress-notices">
 				<Notices />
 			</div>
 		</>
