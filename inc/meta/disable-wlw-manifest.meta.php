@@ -12,5 +12,5 @@ if (!defined('ABSPATH')) {
 return [
     'title' => __('Disable the Windows Live Writer (WLW) manifest link', 'zenpress'),
     'description' => __('Removes the WLW manifest link from the <head> section of WordPress pages, reducing unnecessary metadata output.', 'zenpress'),
-    'category' => __('Performance', 'zenpress'),
+    'category' => __('Performance 🚀', 'zenpress'),
 ];

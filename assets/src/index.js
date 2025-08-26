@@ -167,9 +167,14 @@ const SettingsPage = () => {
 		groupedSnippets[category].push({ name: snippetName, data: snippet });
 	});
 
+	// Sort categories alphabetically (case-insensitive)
+	const sortedCategories = Object.keys(groupedSnippets).sort((a, b) =>
+		a.localeCompare(b, undefined, { sensitivity: 'base' })
+	);
+
 	return (
 		<>
-			{Object.keys(groupedSnippets).map((category) => (
+			{sortedCategories.map((category) => (
 				<Panel key={category}>
 					<PanelBody title={category} initialOpen>
 						{groupedSnippets[category].map(({ name, data }) => (
@@ -185,8 +190,12 @@ const SettingsPage = () => {
 					</PanelBody>
 				</Panel>
 			))}
-			<SaveButton onClick={saveSettings} isBusy={isSaving} />
-			<Notices />
+			<div class="zenpress-actions">
+				<SaveButton onClick={saveSettings} isBusy={isSaving} />
+			</div>
+			<div class="zenpress-notices">
+				<Notices />
+			</div>
 		</>
 	);
 };

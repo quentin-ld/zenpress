@@ -15,5 +15,5 @@ return [
         'Removes redundant or unnecessary items from the WordPress Admin Bar, both in the backend and frontend. This streamlines the admin experience and improves usability.',
         'zenpress'
     ),
-    'category' => __('User interface', 'zenpress'),
+    'category' => __('User interface 💻️', 'zenpress'),
 ];

@@ -15,5 +15,5 @@ return [
         'Removes DNS prefetch resource hints from the wp_head, which can reduce unnecessary DNS lookups for some websites.',
         'zenpress'
     ),
-    'category' => __('Performance', 'zenpress'),
+    'category' => __('Performance 🚀', 'zenpress'),
 ];

@@ -40,12 +40,11 @@
 ****/
 // TODO: Disable comments URL
 // TODO: Disable author URL in generatepress theme
-// TODO: USE OBJECT CACHE OR TRANSIENTS (PHP)
+// TODO: Add a "weight" to each snippet and add a component to display the saved weight
 // TODO: CHECK ALL THE TEXTS
 // TODO: EDIT THE README
 // TODO: UPDATE IMAGES
 // TODO: CHECK THE DEPLOYMENT WORKING PROPERLY
-// TODO: ORDER CATEGORIES A-Z
 
 if (!defined('ABSPATH')) {
     die();
@@ -117,18 +116,37 @@ add_action('admin_menu', 'zenpress_add_option_page');
  */
 function zenpress_options_page(): void {
     ?>
-    <div class="wrap">
+    <div class="wrap zenpress-dashboard-wrap">
         <div class="zenpress-dashboard-header">
             <div class="zenpress-dashboard-header-title">
                 <h1>
-                    <?php echo esc_html__('ZenPress', 'zenpress'); ?>
+                    <?php echo esc_html__('ZenPress settings', 'zenpress'); ?>
                 </h1>
             </div>
-            <div class="zenpress-navigation">
-                <a href="https://buymeacoffee.com/quentinld" target="_blank" class="button button-primary">
-                    ☕ <?php echo esc_html__('Buy me a coffee', 'zenpress'); ?>
-                </a>
-            </div>
+			<div class="zenpress-navigation">
+				<a href="https://holdmywp.com/zenpress/"
+				target="_blank"
+				rel="noopener noreferrer"
+				aria-label="<?php echo esc_attr__('Read the ZenPress documentation (opens in a new tab)', 'zenpress'); ?>">
+					<span aria-hidden="true">📖</span> <?php echo esc_html__('Documentation', 'zenpress'); ?>
+				</a>
+
+				<a href="https://wordpress.org/plugins/zenpress/#reviews"
+				target="_blank"
+				rel="noopener noreferrer"
+				aria-label="<?php echo esc_attr__('Leave a review for ZenPress on WordPress.org (opens in a new tab)', 'zenpress'); ?>">
+					<span aria-hidden="true">⭐️</span> <?php echo esc_html__('Leave a review (helps a lot)', 'zenpress'); ?>
+				</a>
+
+				<a href="https://buymeacoffee.com/quentinld"
+				target="_blank"
+				rel="noopener noreferrer"
+				class="button button-primary"
+				aria-label="<?php echo esc_attr__('Support development: Buy me a coffee (opens in a new tab)', 'zenpress'); ?>">
+					<span aria-hidden="true">☕</span> <?php echo esc_html__('Buy me a coffee', 'zenpress'); ?>
+				</a>
+			</div>
+
         </div>
 
         <div id="zenpress-settings" class="zenpress-settings">

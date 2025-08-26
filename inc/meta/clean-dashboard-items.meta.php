@@ -15,5 +15,5 @@ return [
         'Removes various default and plugin-related widgets from the WordPress dashboard, including the Quick Draft widget, Incoming Links, and the Welcome Panel. This helps declutter the Dashboard, improving both performance and usability. The Dashboard should display important information about your website, not plugin advertising.',
         'zenpress'
     ),
-    'category' => __('User interface', 'zenpress'),
+    'category' => __('User interface 💻️', 'zenpress'),
 ];

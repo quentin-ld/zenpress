@@ -15,5 +15,5 @@ return [
         'Removes jQuery Migrate script from loading on the frontend of the website to improve performance while keeping it enabled in the admin area.',
         'zenpress'
     ),
-    'category' => __('Performance', 'zenpress'),
+    'category' => __('Performance 🚀', 'zenpress'),
 ];

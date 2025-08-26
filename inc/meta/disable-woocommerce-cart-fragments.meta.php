@@ -12,5 +12,5 @@ if (!defined('ABSPATH')) {
 return [
     'title' => __('Disable WooCommerce cart fragments script', 'zenpress'),
     'description' => __('Removes the WooCommerce cart fragments JavaScript responsible for dynamically updating cart contents, improving performance when live cart updates are unnecessary.', 'zenpress'),
-    'category' => __('WooCommerce', 'zenpress'),
+    'category' => __('WooCommerce 🛒', 'zenpress'),
 ];

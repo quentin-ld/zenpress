@@ -15,5 +15,5 @@ return [
         'Prevents WordPress from loading the Dashicons CSS for visitors who are not logged in, which can improve frontend performance.',
         'zenpress'
     ),
-    'category' => __('Performance', 'zenpress'),
+    'category' => __('Performance 🚀', 'zenpress'),
 ];

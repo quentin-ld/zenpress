@@ -12,5 +12,5 @@ if (!defined('ABSPATH')) {
 return [
     'title' => __('Remove WooCommerce patterns', 'zenpress'),
     'description' => __('Removes all WooCommerce remote block patterns to prevent unnecessary editor patterns from being registered.', 'zenpress'),
-    'category' => __('WooCommerce', 'zenpress'),
+    'category' => __('WooCommerce 🛒', 'zenpress'),
 ];

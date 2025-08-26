@@ -15,5 +15,5 @@ return [
         'Disable author archive pages by redirecting them to a 404 page. This helps improve security by preventing attackers from gathering information about authors and their posts.',
         'zenpress'
     ),
-    'category' => __('Security', 'zenpress'),
+    'category' => __('Security 🔒️', 'zenpress'),
 ];

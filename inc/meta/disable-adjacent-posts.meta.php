@@ -15,5 +15,5 @@ return [
         'Removes the rel="prev" and rel="next" link tags from the wp_head output, which can improve performance by reducing unnecessary HTML in the header.',
         'zenpress'
     ),
-    'category' => __('Performance', 'zenpress'),
+    'category' => __('Performance 🚀', 'zenpress'),
 ];

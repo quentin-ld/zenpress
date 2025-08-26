@@ -15,5 +15,5 @@ return [
         'Removes all emoji-related scripts, styles, and filters from both frontend and admin areas to improve performance.',
         'zenpress'
     ),
-    'category' => __('Performance', 'zenpress'),
+    'category' => __('Performance 🚀', 'zenpress'),
 ];

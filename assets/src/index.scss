@@ -1,53 +1,51 @@
 .zenpress {
-	// &-settings {
-	// 	align-items: flex-start;
-	// 	display: flex;
-	// 	flex-direction: column;
-	// 	gap: 20px;
-	// 	justify-content: flex-start;
-	// }
+	&-actions,
+	&-notices {
+		margin: 0 auto 20px auto;
+		max-width: 920px;
+	}
 
-	&-dashboard-header {
-		align-items: center;
-		background: #fff;
-		border-bottom: 1px solid #e2e4e7;
+	&-navigation {
 		display: flex;
+		flex-wrap: wrap;
+		gap: 20px;
 		justify-content: space-between;
-		overflow-x: auto;
-		padding: 15px 20px;
+		align-items: center;
 
-		&-title {
-			align-items: center;
-			background: #fff;
-			border-bottom: 1px solid #e2e4e7;
-			display: flex;
-			justify-content: space-between;
-			overflow-x: auto;
-			padding: 15px 20px;
+		a:not(.button) {
+			&[target='_blank'] {
+				position: relative;
 
-			h1 {
-				display: flex;
-				align-items: center;
-				gap: 10px;
-				margin: 0;
-			}
-
-			.button {
-				font-size: 14px;
-				padding: 6px 12px;
+				&::after {
+					content: ' ↗';
+				}
 			}
 		}
 	}
 
-	&-dashboard-wrap {
-		max-width: 920px;
+	&-dashboard-header {
+		align-items: center;
+		background: #fff;
+  		border: 1px solid #e0e0e0;
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: space-between;
+		overflow-x: auto;
+		padding: 16px;
+		margin: 0 0 20px 0;
+		gap: 40px;
 
 		h1 {
-			margin-bottom: calc(0.5em + 20px);
+			margin: 0;
+			padding: 0;
 		}
+	}
 
+	&-dashboard-wrap {
 		.components-panel {
 			width: 100%;
+			margin: 0 auto 20px auto;
+			max-width: 920px;
 
 			&__body {
 				&-title {
@@ -70,6 +68,7 @@
 		.components-notice-list {
 			width: 100%;
 		}
+
 	}
 }
 

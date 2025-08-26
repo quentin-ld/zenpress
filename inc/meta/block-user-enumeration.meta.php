@@ -15,5 +15,5 @@ return [
         'Prevents attackers from enumerating users via query-string and permalink-style author URLs.',
         'zenpress'
     ),
-    'category' => __('Security', 'zenpress'),
+    'category' => __('Security 🔒️', 'zenpress'),
 ];

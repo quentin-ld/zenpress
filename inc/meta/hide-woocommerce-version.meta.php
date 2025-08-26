@@ -12,5 +12,5 @@ if (!defined('ABSPATH')) {
 return [
     'title' => __('Hide WooCommerce version from HTTP headers, scripts, and styles', 'zenpress'),
     'description' => __('Removes the WooCommerce version number from HTTP headers and from script/style URLs, improving security by preventing version disclosure.', 'zenpress'),
-    'category' => __('WooCommerce', 'zenpress'),
+    'category' => __('WooCommerce 🛒', 'zenpress'),
 ];

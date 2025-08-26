@@ -12,5 +12,5 @@ if (!defined('ABSPATH')) {
 return [
     'title' => __('Disable all WordPress feeds', 'zenpress'),
     'description' => __('Disables all WordPress feeds (RDF, RSS, RSS2, Atom, and comment feeds), removes feed links from <head>, and redirects any feed request to the homepage.', 'zenpress'),
-    'category' => __('Performance', 'zenpress'),
+    'category' => __('Performance 🚀', 'zenpress'),
 ];
