@@ -30,18 +30,21 @@ const useSettings = () => {
 	useEffect(() => {
 		apiFetch({ path: '/wp/v2/settings' })
 			.then((settings) => {
+				const active = Array.isArray(settings?.zenpress_active_snippets)
+					? settings.zenpress_active_snippets
+					: [];
+
 				const snippetsData = {};
-				Object.keys(settings).forEach((key) => {
-					if (key.startsWith('zenpress_')) {
-						const snippetName = key.replace('zenpress_', '');
-						const enable = settings[key]?.['enable-snippet'] || false;
-						const meta = window?.zenpressSnippetsMeta?.[snippetName] || {};
-						snippetsData[snippetName] = {
-							...meta,
-							'enable-snippet': enable,
-						};
-					}
+				const meta = window?.zenpressSnippetsMeta || {};
+
+				Object.keys(meta).forEach((snippetName) => {
+					const m = meta[snippetName] || {};
+					snippetsData[snippetName] = {
+						...m,
+						'enable-snippet': active.includes(snippetName),
+					};
 				});
+
 				setSnippets(snippetsData);
 			})
 			.catch(() => {
@@ -56,18 +59,15 @@ const useSettings = () => {
 	 */
 	const saveSettings = () => {
 		setIsSaving(true);
-		const data = {};
 
-		Object.keys(snippets).forEach((snippetName) => {
-			data[`zenpress_${snippetName}`] = {
-				'enable-snippet': snippets[snippetName]?.['enable-snippet'] || false,
-			};
-		});
+		const active = Object.keys(snippets).filter(
+			(snippetName) => snippets[snippetName]?.['enable-snippet'] || false
+		);
 
 		return apiFetch({
 			path: '/wp/v2/settings',
 			method: 'POST',
-			data,
+			data: { zenpress_active_snippets: active },
 		})
 			.then(() => {
 				createSuccessNotice(__('Settings saved.', 'zenpress'));
@@ -146,6 +146,7 @@ const SettingsPage = () => {
 	 * Handle toggle state change for a snippet.
 	 *
 	 * @param {string} snippetName - Name of the snippet to toggle.
+	 * @return {void}
 	 */
 	const handleToggleChange = (snippetName) => {
 		setSnippets((prev) => ({
@@ -192,6 +193,8 @@ const SettingsPage = () => {
 
 /**
  * Render the ZenPress settings page once the DOM is ready.
+ *
+ * @return {void}
  */
 domReady(() => {
 	const rootEl = document.getElementById('zenpress-settings');

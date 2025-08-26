@@ -116,16 +116,26 @@ add_action('admin_menu', 'zenpress_add_option_page');
  * @return void
  */
 function zenpress_options_page(): void {
-    printf(
-        '<div class="wrap">' .
-            '<div class="zenpress-dashboard-wrap">' .
-                '<h1>%s</h1>' .
-                '<div id="zenpress-settings" class="zenpress-settings">%s</div>' .
-            '</div>' .
-        '</div>',
-        esc_html__('ZenPress settings', 'zenpress'),
-        esc_html__('Loading settings…', 'zenpress')
-    );
+    ?>
+    <div class="wrap">
+        <div class="zenpress-dashboard-header">
+            <div class="zenpress-dashboard-header-title">
+                <h1>
+                    <?php echo esc_html__('ZenPress', 'zenpress'); ?>
+                </h1>
+            </div>
+            <div class="zenpress-navigation">
+                <a href="https://buymeacoffee.com/quentinld" target="_blank" class="button button-primary">
+                    ☕ <?php echo esc_html__('Buy me a coffee', 'zenpress'); ?>
+                </a>
+            </div>
+        </div>
+
+        <div id="zenpress-settings" class="zenpress-settings">
+            <?php echo esc_html__('Loading settings…', 'zenpress'); ?>
+        </div>
+    </div>
+    <?php
 }
 
 /**
@@ -158,36 +168,25 @@ function zenpress_extract_snippet_metadata(string $snippet_name): array {
 }
 
 /**
- * Register settings for all snippets found in /inc/snippets.
+ * Register a single option to store all active snippets.
  *
  * @return void
  */
 function zenpress_register_snippet_settings(): void {
-    $snippets_path = plugin_dir_path(__FILE__) . 'inc/snippets/';
-    if (!is_dir($snippets_path)) {
-        return;
-    }
-
-    foreach (glob($snippets_path . '*.php') ?: [] as $file) {
-        $base_name = basename($file, '.php');
-
-        register_setting(
-            'options',
-            'zenpress_' . $base_name,
-            [
-                'type'         => 'object',
-                'default'      => ['enable-snippet' => false],
-                'show_in_rest' => [
-                    'schema' => [
-                        'type'       => 'object',
-                        'properties' => [
-                            'enable-snippet' => ['type' => 'boolean'],
-                        ],
-                    ],
+    register_setting(
+        'options',
+        'zenpress_active_snippets',
+        [
+            'type'         => 'array',
+            'default'      => [],
+            'show_in_rest' => [
+                'schema' => [
+                    'type'  => 'array',
+                    'items' => [ 'type' => 'string' ],
                 ],
-            ]
-        );
-    }
+            ],
+        ]
+    );
 }
 add_action('init', 'zenpress_register_snippet_settings');
 
@@ -203,14 +202,17 @@ function zenpress_load_snippets(string $folder = 'inc/snippets/'): array {
         return [];
     }
 
+    $active_snippets = get_option('zenpress_active_snippets', []);
+    if (!is_array($active_snippets)) {
+        $active_snippets = [];
+    }
+
     $loaded = [];
-    foreach (glob($snippets_path . '*.php') ?: [] as $file) {
-        $base_name     = basename($file, '.php');
-        $option        = get_option('zenpress_' . $base_name, ['enable-snippet' => false]);
-        $is_enabled    = is_array($option) ? ($option['enable-snippet'] ?? false) : false;
+    foreach ($active_snippets as $base_name) {
+        $file = $snippets_path . $base_name . '.php';
         $constant_name = 'ZENPRESS_' . strtoupper(str_replace(['-', '_'], '_', $base_name));
 
-        if ($is_enabled && (!defined($constant_name) || constant($constant_name) !== false)) {
+        if (is_file($file) && (!defined($constant_name) || constant($constant_name) !== false)) {
             include_once $file;
             $loaded[] = $base_name;
         }
