@@ -66,7 +66,6 @@ function zenpress_add_settings_link($links) {
         esc_html__('Settings', 'zenpress')
     );
 
-    // Met en premier le lien "Settings"
     array_unshift($links, $settings_link);
 
     return $links;
