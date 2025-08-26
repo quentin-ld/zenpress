@@ -47,7 +47,7 @@
 // TODO: CHECK THE DEPLOYMENT WORKING PROPERLY
 
 if (!defined('ABSPATH')) {
-    die();
+    exit;
 }
 
 /**
@@ -62,33 +62,36 @@ function zenpress_admin_enqueue_scripts(string $admin_page): void {
     }
 
     $asset_file = plugin_dir_path(__FILE__) . 'assets/build/index.asset.php';
-    if (!file_exists($asset_file)) {
+    if (!is_file($asset_file)) {
         return;
     }
 
-    /** @var array{dependencies: string[], version: string} $asset */
+    /** @var mixed $asset */
     $asset = include $asset_file;
 
-    if (!is_array($asset) || !isset($asset['dependencies'], $asset['version'])) {
+    if (!is_array($asset) || empty($asset['dependencies']) || empty($asset['version'])) {
         return;
     }
+
+    $dependencies = array_map('sanitize_key', (array) $asset['dependencies']);
+    $version      = sanitize_text_field((string) $asset['version']);
 
     wp_enqueue_script(
         'zenpress-scripts',
         plugins_url('assets/build/index.js', __FILE__),
-        array_map('sanitize_key', $asset['dependencies']),
-        sanitize_text_field($asset['version']),
-        ['in_footer' => true]
+        $dependencies,
+        $version,
+        true
     );
 
     wp_enqueue_style(
         'zenpress-style',
         plugins_url('assets/build/index.css', __FILE__),
         array_filter(
-            array_map('sanitize_key', $asset['dependencies']),
-            fn($style) => wp_style_is($style, 'registered')
+            $dependencies,
+            static fn($style) => is_string($style) && wp_style_is($style, 'registered')
         ),
-        sanitize_text_field($asset['version'])
+        $version
     );
 }
 add_action('admin_enqueue_scripts', 'zenpress_admin_enqueue_scripts');
@@ -115,42 +118,84 @@ add_action('admin_menu', 'zenpress_add_option_page');
  * @return void
  */
 function zenpress_options_page(): void {
+	$plugin_data = get_file_data(__FILE__, ['Version' => 'Version'], 'plugin');
+    $plugin_version = isset($plugin_data['Version']) ? $plugin_data['Version'] : '';
     ?>
     <div class="wrap zenpress-dashboard-wrap">
         <div class="zenpress-dashboard-header">
             <div class="zenpress-dashboard-header-title">
                 <h1>
-                    <?php echo esc_html__('ZenPress settings', 'zenpress'); ?>
+                    <?php echo esc_html__('ZenPress', 'zenpress'); ?>
                 </h1>
+				<?php if ($plugin_version) : ?>
+					<p class="zenpress-plugin-version">
+						<?php echo esc_html__('Version', 'zenpress') . ' ' . esc_html($plugin_version) . ' - '; ?>
+						<a href="https://wordpress.org/plugins/zenpress/#developers"
+						target="_blank"
+						rel="noopener noreferrer"
+						aria-label="<?php echo esc_attr__('View ZenPress changelog on WordPress.org (opens in a new tab)', 'zenpress'); ?>">
+							<?php echo esc_html__('What\'s new ?', 'zenpress'); ?>
+						</a>
+					</p>
+				<?php endif; ?>
             </div>
 			<div class="zenpress-navigation">
 				<a href="https://holdmywp.com/zenpress/"
-				target="_blank"
-				rel="noopener noreferrer"
-				aria-label="<?php echo esc_attr__('Read the ZenPress documentation (opens in a new tab)', 'zenpress'); ?>">
+				   target="_blank"
+				   rel="noopener noreferrer"
+				   aria-label="<?php echo esc_attr__('Read the ZenPress documentation (opens in a new tab)', 'zenpress'); ?>">
 					<span aria-hidden="true">📖</span> <?php echo esc_html__('Documentation', 'zenpress'); ?>
 				</a>
 
 				<a href="https://wordpress.org/plugins/zenpress/#reviews"
-				target="_blank"
-				rel="noopener noreferrer"
-				aria-label="<?php echo esc_attr__('Leave a review for ZenPress on WordPress.org (opens in a new tab)', 'zenpress'); ?>">
+				   target="_blank"
+				   rel="noopener noreferrer"
+				   aria-label="<?php echo esc_attr__('Leave a review for ZenPress on WordPress.org (opens in a new tab)', 'zenpress'); ?>">
 					<span aria-hidden="true">⭐️</span> <?php echo esc_html__('Leave a review (helps a lot)', 'zenpress'); ?>
 				</a>
 
 				<a href="https://buymeacoffee.com/quentinld"
-				target="_blank"
-				rel="noopener noreferrer"
-				class="button button-primary"
-				aria-label="<?php echo esc_attr__('Support development: Buy me a coffee (opens in a new tab)', 'zenpress'); ?>">
+				   target="_blank"
+				   rel="noopener noreferrer"
+				   class="button button-primary"
+				   aria-label="<?php echo esc_attr__('Support development: Buy me a coffee (opens in a new tab)', 'zenpress'); ?>">
 					<span aria-hidden="true">☕</span> <?php echo esc_html__('Buy me a coffee', 'zenpress'); ?>
 				</a>
 			</div>
-
         </div>
 
         <div id="zenpress-settings" class="zenpress-settings">
-            <?php echo esc_html__('Loading settings…', 'zenpress'); ?>
+			<div class="zenpress-loading card">
+				<div class="zenpress-loading-body">
+					<p class="zenpress-loading-text">
+						<?php echo esc_html__('Loading settings…', 'zenpress'); ?>
+					</p>
+				</div>
+			</div>
+        </div>
+
+		<div class="zenpress-dashboard-footer">
+			<div class="zenpress-dashboard-footer-title">
+                <p>
+					<?php echo esc_html__('Made ', 'zenpress'); ?>
+					<span aria-hidden="true"> x ❤️ </span>
+					<?php echo esc_html__(' by Quentin Le Duff - You\'re WordPress Partner', 'zenpress'); ?>
+				</p>
+            </div>
+			<div class="zenpress-footer-navigation">
+				<a href="https://holdmywp.com/"
+				   target="_blank"
+				   rel="noopener noreferrer"
+				   aria-label="<?php echo esc_attr__('Visite the developper website', 'zenpress'); ?>">
+					<?php echo esc_html__('My place', 'zenpress'); ?>
+				</a>
+				<a href="https://github.com/quentin-ld/zenpress"
+				   target="_blank"
+				   rel="noopener noreferrer"
+				   aria-label="<?php echo esc_attr__('Review the code on Github', 'zenpress'); ?>">
+					<?php echo esc_html__('ZenPress repository', 'zenpress'); ?>
+				</a>
+			</div>
         </div>
     </div>
     <?php
@@ -169,7 +214,8 @@ function zenpress_extract_snippet_metadata(string $snippet_name): array {
         'category'    => '',
     ];
 
-    $meta_file = plugin_dir_path(__FILE__) . 'inc/meta/' . basename($snippet_name) . '.meta.php';
+    $safe_name = sanitize_file_name($snippet_name);
+    $meta_file = plugin_dir_path(__FILE__) . 'inc/meta/' . $safe_name . '.meta.php';
 
     if (is_file($meta_file)) {
         /** @var mixed $data */
@@ -195,8 +241,13 @@ function zenpress_register_snippet_settings(): void {
         'options',
         'zenpress_active_snippets',
         [
-            'type'         => 'array',
-            'default'      => [],
+            'type'              => 'array',
+            'default'           => [],
+            'sanitize_callback' => static function ($value): array {
+                return array_values(array_filter(
+                    array_map('sanitize_file_name', (array) $value)
+                ));
+            },
             'show_in_rest' => [
                 'schema' => [
                     'type'  => 'array',
@@ -227,18 +278,19 @@ function zenpress_load_snippets(string $folder = 'inc/snippets/'): array {
 
     $loaded = [];
     foreach ($active_snippets as $base_name) {
-        $file = $snippets_path . $base_name . '.php';
-        $constant_name = 'ZENPRESS_' . strtoupper(str_replace(['-', '_'], '_', $base_name));
+        $safe_name     = sanitize_file_name($base_name);
+        $file          = $snippets_path . $safe_name . '.php';
+        $constant_name = 'ZENPRESS_' . strtoupper(str_replace(['-', '_'], '_', $safe_name));
 
         if (is_file($file) && (!defined($constant_name) || constant($constant_name) !== false)) {
             include_once $file;
-            $loaded[] = $base_name;
+            $loaded[] = $safe_name;
         }
     }
 
     return $loaded;
 }
-add_action('init', fn() => zenpress_load_snippets());
+add_action('init', static fn() => zenpress_load_snippets());
 
 /**
  * Localize translated snippet metadata for use in JavaScript.
@@ -246,7 +298,7 @@ add_action('init', fn() => zenpress_load_snippets());
  * @param string $hook Current admin page hook.
  * @return void
  */
-add_action('admin_enqueue_scripts', function (string $hook): void {
+add_action('admin_enqueue_scripts', static function (string $hook): void {
     if ($hook !== 'settings_page_zenpress') {
         return;
     }

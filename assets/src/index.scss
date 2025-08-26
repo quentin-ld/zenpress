@@ -1,16 +1,40 @@
 .zenpress {
+
 	&-actions,
-	&-notices {
+	&-notices,
+	&-loading {
 		margin: 0 auto 20px auto;
 		max-width: 920px;
 	}
 
-	&-navigation {
+	&-navigation,
+	&-footer-navigation {
 		display: flex;
 		flex-wrap: wrap;
 		gap: 20px;
 		justify-content: space-between;
 		align-items: center;
+	}
+
+	&-dashboard-header,
+	&-dashboard-footer {
+		align-items: center;
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: space-between;
+		overflow-x: auto;
+		padding: 16px;
+		margin: 0 0 20px 0;
+		gap: 40px;
+
+		h1 {
+			margin: 0;
+			padding: 0;
+		}
+
+		p {
+			margin: 0;
+		}
 
 		a:not(.button) {
 			&[target='_blank'] {
@@ -24,21 +48,13 @@
 	}
 
 	&-dashboard-header {
-		align-items: center;
 		background: #fff;
-  		border: 1px solid #e0e0e0;
-		display: flex;
-		flex-wrap: wrap;
-		justify-content: space-between;
-		overflow-x: auto;
-		padding: 16px;
-		margin: 0 0 20px 0;
-		gap: 40px;
+		border: 1px solid #e0e0e0;
+	}
 
-		h1 {
-			margin: 0;
-			padding: 0;
-		}
+	&-dashboard-footer {
+		border-top: 1px solid #e0e0e0;
+		padding-top: 32px;
 	}
 
 	&-dashboard-wrap {
