@@ -51,12 +51,12 @@ if (!defined('ABSPATH')) {
 }
 
 /**
- * Add settings link on plugin page (next to Activate/Deactivate).
+ * Add settings link on the plugins list page (next to Activate/Deactivate).
  *
- * @param array $links Existing links.
- * @return array Modified links with Settings link.
+ * @param array $links Existing plugin action links.
+ * @return array Modified links with Settings link appended at the end.
  */
-function zenpress_add_settings_link($links) {
+function zenpress_add_settings_link(array $links): array {
     $settings_url = admin_url('options-general.php?page=zenpress');
 
     $settings_link = sprintf(
@@ -66,7 +66,8 @@ function zenpress_add_settings_link($links) {
         esc_html__('Settings', 'zenpress')
     );
 
-    array_unshift($links, $settings_link);
+    // Add "Settings" link at the end instead of first
+    $links[] = $settings_link;
 
     return $links;
 }
