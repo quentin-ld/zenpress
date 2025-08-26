@@ -14,7 +14,7 @@
  * Version: 2.0
  * Plugin URI: https://wordpress.org/plugins/zenpress/
  * Author: Quentin Le Duff
- * Author URI: https://holdmywp.com/zenpress/
+ * Author URI: https://profiles.wordpress.org/quentinldd/
  * Text Domain: zenpress
  * Domain Path: /languages/
  * Requires at least: 6.0
@@ -49,6 +49,54 @@
 if (!defined('ABSPATH')) {
     exit;
 }
+
+/**
+ * Add settings link on plugin page (next to Activate/Deactivate).
+ *
+ * @param array $links Existing links.
+ * @return array Modified links with Settings link.
+ */
+function zenpress_add_settings_link($links) {
+    $settings_url = admin_url('options-general.php?page=zenpress');
+
+    $settings_link = sprintf(
+        '<a href="%s" aria-label="%s">%s</a>',
+        esc_url($settings_url),
+        esc_attr__('Go to ZenPress settings page', 'zenpress'),
+        esc_html__('Settings', 'zenpress')
+    );
+
+    // Met en premier le lien "Settings"
+    array_unshift($links, $settings_link);
+
+    return $links;
+}
+add_filter('plugin_action_links_' . plugin_basename(__FILE__), 'zenpress_add_settings_link');
+
+
+/**
+ * Add extra links under the plugin description on the plugins page.
+ *
+ * @param array  $links Existing links.
+ * @param string $file  Current plugin file.
+ * @return array Modified links.
+ */
+function zenpress_plugin_row_meta($links, $file) {
+    if ($file === plugin_basename(__FILE__)) {
+        $extra_links = array(
+            '<a href="' . esc_url('https://wordpress.org/plugins/zenpress/#developers') . '" target="_blank" rel="noopener noreferrer" aria-label="' . esc_attr__('View ZenPress changelog on WordPress.org (opens in a new tab)', 'zenpress') . '">' . esc_html__('Changelog', 'zenpress') . '</a>',
+			'<a href="' . esc_url('https://holdmywp.com/zenpress/') . '" target="_blank" rel="noopener noreferrer" aria-label="' . esc_attr__('Read ZenPress documentation (opens in a new tab)', 'zenpress') . '">' . esc_html__('Docs', 'zenpress') . '</a>',
+            '<a href="' . esc_url('https://buymeacoffee.com/quentinld') . '" target="_blank" rel="noopener noreferrer" aria-label="' . esc_attr__('Support ZenPress by buying a coffee (opens in a new tab)', 'zenpress') . '">' . esc_html__('Support ☕', 'zenpress') . '</a>',
+        );
+
+        $links = array_merge($links, $extra_links);
+    }
+
+    return $links;
+}
+add_filter('plugin_row_meta', 'zenpress_plugin_row_meta', 10, 2);
+
+
 
 /**
  * Enqueue scripts and styles used by the plugin in admin area.
@@ -193,7 +241,7 @@ function zenpress_options_page(): void {
 				   target="_blank"
 				   rel="noopener noreferrer"
 				   aria-label="<?php echo esc_attr__('Review the code on Github', 'zenpress'); ?>">
-					<?php echo esc_html__('ZenPress repository', 'zenpress'); ?>
+					<?php echo esc_html__('ZenPress code repository', 'zenpress'); ?>
 				</a>
 			</div>
         </div>
