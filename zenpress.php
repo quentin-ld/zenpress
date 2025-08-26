@@ -168,7 +168,7 @@ function zenpress_options_page(): void {
 			<div class="zenpress-loading card">
 				<div class="zenpress-loading-body">
 					<p class="zenpress-loading-text">
-						<?php echo esc_html__('Loading settings…', 'zenpress'); ?>
+						<?php echo esc_html__('Loading you\'re ZenPress settings…', 'zenpress'); ?>
 					</p>
 				</div>
 			</div>

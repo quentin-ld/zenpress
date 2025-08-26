@@ -92,7 +92,7 @@ Yes, it's actively tested and working up to PHP 8.4.
 
 = Do you accept donations? =
 
-I am accepting donations on my buymeacoffee page : https://buymeacoffee.com/quentinld. If you work at an agency that develops with WordPress, ask your company to provide sponsorship in order to invest in its supply chain. The tools that I maintain probably save your company time and money, and GitHub sponsorship can now be done at the organisation level.
+I am accepting donations on my buymeacoffee page : https://buymeacoffee.com/quentinld. If you work at an agency that develops with WordPress, ask your company to provide sponsorship in order to invest in its supply chain. The tools that I maintain probably save your company time and money, and Buy me a coffee support can now be done at the organisation level.
 
 In addition, if you like the plugin then I'd love for you to leave a review. Tell all your friends about it too!
 
