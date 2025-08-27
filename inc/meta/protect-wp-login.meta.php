@@ -13,4 +13,6 @@ return [
     'title' => __('Protect the wp-login form from brute force attacks', 'zenpress'),
     'description' => __('Adds brute force protection to the WordPress login form by hiding detailed error messages, limiting failed login attempts per IP, and temporarily blocking further attempts after repeated failures.', 'zenpress'),
     'category' => __('Security 🔒️', 'zenpress'),
+    'weight' => 0,
+    'preset' => ['showcase-website', 'blog', 'ecommerce'],
 ];

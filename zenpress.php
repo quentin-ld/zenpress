@@ -253,13 +253,15 @@ function zenpress_options_page(): void {
  * Extract snippet metadata from corresponding meta file.
  *
  * @param string $snippet_name Base name of the snippet (without extension).
- * @return array<string,string> Metadata array with keys: title, description, category.
+ * @return array<string,mixed> Metadata array with keys: title, description, category, weight, preset.
  */
 function zenpress_extract_snippet_metadata(string $snippet_name): array {
     $metadata = [
         'title'       => '',
         'description' => '',
         'category'    => '',
+        'weight'      => 0,
+        'preset'      => [],
     ];
 
     $safe_name = sanitize_file_name($snippet_name);
@@ -269,15 +271,20 @@ function zenpress_extract_snippet_metadata(string $snippet_name): array {
         /** @var mixed $data */
         $data = include $meta_file;
         if (is_array($data)) {
-            $metadata = array_merge(
-                $metadata,
-                array_intersect_key($data, $metadata)
-            );
+            $metadata = array_merge($metadata, array_intersect_key($data, $metadata));
         }
     }
 
-    return array_map('sanitize_text_field', $metadata);
+    // Sanitize values securely
+    $metadata['title']       = sanitize_text_field($metadata['title']);
+    $metadata['description'] = sanitize_text_field($metadata['description']);
+    $metadata['category']    = sanitize_text_field($metadata['category']);
+    $metadata['weight']      = intval($metadata['weight']);
+    $metadata['preset']      = array_map('sanitize_text_field', (array) $metadata['preset']);
+
+    return $metadata;
 }
+
 
 /**
  * Register a single option to store all active snippets.

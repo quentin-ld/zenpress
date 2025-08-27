@@ -188,6 +188,31 @@ const SettingsPage = () => {
 		});
 	};
 
+	/**
+	 * Enable snippets by preset.
+	 *
+	 * All snippets not in the preset will be disabled.
+	 *
+	 * @param {string} preset - Preset key to enable.
+	 * @return {void}
+	 */
+	const enableByPreset = (preset) => {
+		setSnippets((prev) => {
+			const updated = {};
+			Object.entries(prev).forEach(([name, data]) => {
+				const presets = Array.isArray(data?.preset) ? data.preset : [];
+				const isEnabled = presets.includes(preset);
+				updated[name] = {
+					...data,
+					'enable-snippet': isEnabled,
+				};
+			});
+			return updated;
+		});
+	};
+
+
+
 	// Group snippets by category
 	const groupedSnippets = {};
 	Object.keys(snippets).forEach((snippetName) => {
@@ -204,6 +229,40 @@ const SettingsPage = () => {
 
 	return (
 		<>
+			<div className="zenpress-presets">
+				<div className="zenpress-presets-description">
+					<h2>{__('Presets', 'zenpress')}</h2>
+					<p>
+						{__(
+							'Presets are predefined sets of snippets optimized for a type of website. Choosing one will enable only the relevant snippets for you\'re use case and disable the others.',
+							'zenpress'
+						)}
+					</p>
+				</div>
+
+				<Button
+					variant="secondary"
+					onClick={() => enableByPreset('showcase-website')}
+					__next40pxDefaultSize
+				>
+					{__('Showcase website', 'zenpress')}
+				</Button>
+				<Button
+					variant="secondary"
+					onClick={() => enableByPreset('blog')}
+					__next40pxDefaultSize
+				>
+					{__('Blog', 'zenpress')}
+				</Button>
+				<Button
+					variant="secondary"
+					onClick={() => enableByPreset('ecommerce')}
+					__next40pxDefaultSize
+				>
+					{__('E-commerce', 'zenpress')}
+				</Button>
+			</div>
+
 			{sortedCategories.map((category) => (
 				<Panel key={category}>
 					<PanelBody title={category} initialOpen>

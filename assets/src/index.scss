@@ -1,7 +1,8 @@
 .zenpress {
 	&-actions,
 	&-notices,
-	&-loading {
+	&-loading,
+	&-presets {
 		margin: 0 auto 20px auto;
 		max-width: 920px;
 	}
@@ -14,6 +15,34 @@
 		gap: 20px;
 		justify-content: space-between;
 		align-items: center;
+	}
+
+	&-actions-bulk {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 10px;
+		justify-content: flex-start;
+		align-items: center;
+	}
+
+
+	&-presets {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 10px;
+		justify-content: flex-start;
+		align-items: center;
+		margin-bottom: 20px;
+
+		&-description {
+			flex: 100%;
+			width: 100%;
+			max-width: 100%;
+
+			h2 {
+				margin: 0;
+			}
+		}
 	}
 
 	&-dashboard-header,

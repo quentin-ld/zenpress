@@ -16,4 +16,6 @@ return [
         'zenpress'
     ),
     'category' => __('User interface 💻️', 'zenpress'),
+    'weight' => 0,
+    'preset' => ['showcase-website', 'blog', 'ecommerce'],
 ];

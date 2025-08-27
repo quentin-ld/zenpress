@@ -1,1 +1,91 @@
-.zenpress-actions,.zenpress-loading,.zenpress-notices{margin:0 auto 20px;max-width:920px}.zenpress-actions,.zenpress-footer-navigation,.zenpress-navigation{align-items:center;display:flex;flex-wrap:wrap;gap:20px;justify-content:space-between}.zenpress-dashboard-footer,.zenpress-dashboard-header{align-items:center;display:flex;flex-wrap:wrap;gap:40px;justify-content:space-between;margin:0 0 20px;overflow-x:auto;padding:16px}.zenpress-dashboard-footer h1,.zenpress-dashboard-header h1{margin:0;padding:0}.zenpress-dashboard-footer p,.zenpress-dashboard-header p{margin:0}.zenpress-dashboard-footer a:not(.button)[target=_blank],.zenpress-dashboard-header a:not(.button)[target=_blank]{position:relative}.zenpress-dashboard-footer a:not(.button)[target=_blank]:after,.zenpress-dashboard-header a:not(.button)[target=_blank]:after{content:" ↗"}.zenpress-dashboard-header{background:#fff;border:1px solid #e0e0e0}.zenpress-dashboard-footer{border-top:1px solid #e0e0e0;padding-top:32px}.zenpress-dashboard-wrap .components-panel{margin:0 auto 20px;max-width:920px;width:100%}.zenpress-dashboard-wrap .components-panel__body-title{text-transform:capitalize}.zenpress-dashboard-wrap .components-panel__body-toggle{border-bottom:1px solid #d6e2ed;text-transform:capitalize}.zenpress-dashboard-wrap .components-toggle-control__help{font-size:1.1em}.zenpress-dashboard-wrap .components-notice-list{width:100%}
+/*!**********************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./assets/src/index.scss ***!
+  \**********************************************************************************************************************************************************************************************************************************************/
+@charset "UTF-8";
+.zenpress-actions, .zenpress-notices, .zenpress-loading, .zenpress-presets {
+  margin: 0 auto 20px auto;
+  max-width: 920px;
+}
+.zenpress-navigation, .zenpress-footer-navigation, .zenpress-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: space-between;
+  align-items: center;
+}
+.zenpress-actions-bulk {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: flex-start;
+  align-items: center;
+}
+.zenpress-presets {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: flex-start;
+  align-items: center;
+  margin-bottom: 20px;
+}
+.zenpress-presets-description {
+  flex: 100%;
+  width: 100%;
+  max-width: 100%;
+}
+.zenpress-presets-description h2 {
+  margin: 0;
+}
+.zenpress-dashboard-header, .zenpress-dashboard-footer {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  overflow-x: auto;
+  padding: 16px;
+  margin: 0 0 20px 0;
+  gap: 40px;
+}
+.zenpress-dashboard-header h1, .zenpress-dashboard-footer h1 {
+  margin: 0;
+  padding: 0;
+}
+.zenpress-dashboard-header p, .zenpress-dashboard-footer p {
+  margin: 0;
+}
+.zenpress-dashboard-header a:not(.button)[target=_blank], .zenpress-dashboard-footer a:not(.button)[target=_blank] {
+  position: relative;
+}
+.zenpress-dashboard-header a:not(.button)[target=_blank]::after, .zenpress-dashboard-footer a:not(.button)[target=_blank]::after {
+  content: " ↗";
+}
+.zenpress-dashboard-header {
+  background: #fff;
+  border: 1px solid #e0e0e0;
+}
+.zenpress-dashboard-footer {
+  border-top: 1px solid #e0e0e0;
+  padding-top: 32px;
+}
+.zenpress-dashboard-wrap .components-panel {
+  width: 100%;
+  margin: 0 auto 20px auto;
+  max-width: 920px;
+}
+.zenpress-dashboard-wrap .components-panel__body-title {
+  text-transform: capitalize;
+}
+.zenpress-dashboard-wrap .components-panel__body-toggle {
+  border-bottom: 1px solid #d6e2ed;
+  text-transform: capitalize;
+}
+.zenpress-dashboard-wrap .components-toggle-control__help {
+  font-size: 1.1em;
+}
+.zenpress-dashboard-wrap .components-notice-list {
+  width: 100%;
+}
+
+
+
+/*# sourceMappingURL=index.css.map*/

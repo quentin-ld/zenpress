@@ -16,4 +16,6 @@ return [
         'zenpress'
     ),
     'category' => __('Performance 🚀', 'zenpress'),
+    'weight' => 0,
+    'preset' => ['showcase-website', 'ecommerce'],
 ];

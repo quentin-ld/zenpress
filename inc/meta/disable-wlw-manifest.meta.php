@@ -13,4 +13,6 @@ return [
     'title' => __('Disable the Windows Live Writer (WLW) manifest link', 'zenpress'),
     'description' => __('Removes the WLW manifest link from the <head> section of WordPress pages, reducing unnecessary metadata output.', 'zenpress'),
     'category' => __('Performance 🚀', 'zenpress'),
+    'weight' => 0,
+    'preset' => ['showcase-website', 'blog', 'ecommerce'],
 ];

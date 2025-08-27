@@ -13,4 +13,6 @@ return [
     'title' => __('Disable the Login Language Selector', 'zenpress'),
     'description' => __('Disables the language selector on the WordPress login page.', 'zenpress'),
     'category' => __('User interface 💻️', 'zenpress'),
+    'weight' => 0,
+    'preset' => ['showcase-website', 'blog', 'ecommerce'],
 ];
