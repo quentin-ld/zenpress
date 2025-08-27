@@ -229,80 +229,101 @@ const SettingsPage = () => {
 
 	return (
 		<>
-			<div className="zenpress-presets">
-				<div className="zenpress-presets-description">
-					<h2>{__('Presets', 'zenpress')}</h2>
-					<p>
-						{__(
-							'Presets are predefined sets of snippets optimized for a type of website. Choosing one will enable only the relevant snippets for you\'re use case and disable the others.',
-							'zenpress'
-						)}
-					</p>
+			<div className="zenpress-row">
+				<div className="zenpress-col">
+					<div className="zenpress-presets">
+						<div className="zenpress-presets-description">
+							<p>
+								{__(
+									'ZenPress is designed to preserve the vanilla WordPress experience, so you can enable all features without risk. If you don\'t know which ones to choose, just select your site\'s type and it will set the right features for you.',
+									'zenpress'
+								)}
+							</p>
+							<h2>{__('You can choose you\'re website type', 'zenpress')}</h2>
+						</div>
+
+						<Button
+							variant="secondary"
+							onClick={() => enableByPreset('showcase-website')}
+							__next40pxDefaultSize
+						>
+							{__('Showcase website', 'zenpress')}
+						</Button>
+						<Button
+							variant="secondary"
+							onClick={() => enableByPreset('blog')}
+							__next40pxDefaultSize
+						>
+							{__('Blog', 'zenpress')}
+						</Button>
+						<Button
+							variant="secondary"
+							onClick={() => enableByPreset('ecommerce')}
+							__next40pxDefaultSize
+						>
+							{__('E-commerce', 'zenpress')}
+						</Button>
+						<div className="zenpress-presets-description">
+							<h2>{__('Or just pick what you need', 'zenpress')}</h2>
+						</div>
+						<div className="zenpress-actions-bulk">
+							<Button
+								variant="secondary"
+								onClick={enableAllSnippets}
+								__next40pxDefaultSize
+							>
+								{__('Enable all actions', 'zenpress')}
+							</Button>
+
+							<Button
+								isDestructive="true"
+								onClick={resetSettings}
+								__next40pxDefaultSize
+							>
+								{__('Disable all actions', 'zenpress')}
+							</Button>
+						</div>
+					</div>
+					{sortedCategories.map((category) => (
+						<Panel key={category}>
+							<PanelBody title={category} initialOpen={false}>
+								{groupedSnippets[category].map(({ name, data }) => (
+									<PanelRow key={name}>
+										<SnippetToggleControl
+											label={data.title || name}
+											value={data?.['enable-snippet'] || false}
+											onChange={() => handleToggleChange(name)}
+											help={data.description || ''}
+										/>
+									</PanelRow>
+								))}
+							</PanelBody>
+						</Panel>
+					))}
+					<div className="zenpress-actions">
+						<div className="zenpress-actions-bulk">
+							<Button
+								variant="secondary"
+								onClick={enableAllSnippets}
+								__next40pxDefaultSize
+							>
+								{__('Enable all actions', 'zenpress')}
+							</Button>
+
+							<Button
+								isDestructive="true"
+								onClick={resetSettings}
+								__next40pxDefaultSize
+							>
+								{__('Disable all actions', 'zenpress')}
+							</Button>
+						</div>
+						<SaveButton onClick={saveSettings} isBusy={isSaving} />
+					</div>
+					<div className="zenpress-notices">
+						<Notices />
+					</div>
 				</div>
-
-				<Button
-					variant="secondary"
-					onClick={() => enableByPreset('showcase-website')}
-					__next40pxDefaultSize
-				>
-					{__('Showcase website', 'zenpress')}
-				</Button>
-				<Button
-					variant="secondary"
-					onClick={() => enableByPreset('blog')}
-					__next40pxDefaultSize
-				>
-					{__('Blog', 'zenpress')}
-				</Button>
-				<Button
-					variant="secondary"
-					onClick={() => enableByPreset('ecommerce')}
-					__next40pxDefaultSize
-				>
-					{__('E-commerce', 'zenpress')}
-				</Button>
-			</div>
-
-			{sortedCategories.map((category) => (
-				<Panel key={category}>
-					<PanelBody title={category} initialOpen>
-						{groupedSnippets[category].map(({ name, data }) => (
-							<PanelRow key={name}>
-								<SnippetToggleControl
-									label={data.title || name}
-									value={data?.['enable-snippet'] || false}
-									onChange={() => handleToggleChange(name)}
-									help={data.description || ''}
-								/>
-							</PanelRow>
-						))}
-					</PanelBody>
-				</Panel>
-			))}
-
-			<div className="zenpress-actions">
-				<div className="zenpress-actions-bulk">
-					<Button
-						variant="secondary"
-						onClick={enableAllSnippets}
-						__next40pxDefaultSize
-					>
-						{__('Enable all snippets', 'zenpress')}
-					</Button>
-
-					<Button
-						isDestructive="true"
-						onClick={resetSettings}
-						__next40pxDefaultSize
-					>
-						{__('Disable all snippets', 'zenpress')}
-					</Button>
-				</div>
-				<SaveButton onClick={saveSettings} isBusy={isSaving} />
-			</div>
-
-			<div className="zenpress-notices">
-				<Notices />
 			</div>
 		</>
 	);

@@ -170,8 +170,8 @@ function zenpress_options_page(): void {
     $plugin_version = isset($plugin_data['Version']) ? $plugin_data['Version'] : '';
     ?>
     <div class="wrap zenpress-dashboard-wrap">
-        <div class="zenpress-dashboard-header">
-            <div class="zenpress-dashboard-header-title">
+        <div class="zenpress-header">
+            <div class="zenpress-header-title">
                 <h1>
                     <?php echo esc_html__('ZenPress', 'zenpress'); ?>
                 </h1>
@@ -187,27 +187,27 @@ function zenpress_options_page(): void {
 					</p>
 				<?php endif; ?>
             </div>
-			<div class="zenpress-navigation">
+			<div class="zenpress-header-navigation">
 				<a href="https://holdmywp.com/zenpress/"
 				   target="_blank"
 				   rel="noopener noreferrer"
 				   aria-label="<?php echo esc_attr__('Read the ZenPress documentation (opens in a new tab)', 'zenpress'); ?>">
-					<span aria-hidden="true">📖</span> <?php echo esc_html__('Documentation', 'zenpress'); ?>
+					<?php echo esc_html__('Documentation', 'zenpress'); ?>
 				</a>
 
 				<a href="https://wordpress.org/plugins/zenpress/#reviews"
 				   target="_blank"
 				   rel="noopener noreferrer"
 				   aria-label="<?php echo esc_attr__('Leave a review for ZenPress on WordPress.org (opens in a new tab)', 'zenpress'); ?>">
-					<span aria-hidden="true">⭐️</span> <?php echo esc_html__('Leave a review (helps a lot)', 'zenpress'); ?>
+					<?php echo esc_html__('Leave a review (helps a lot)', 'zenpress'); ?>
 				</a>
 
 				<a href="https://buymeacoffee.com/quentinld"
 				   target="_blank"
 				   rel="noopener noreferrer"
-				   class="button button-primary"
+				   class="components-button is-next-40px-default-size is-tertiary"
 				   aria-label="<?php echo esc_attr__('Support development: Buy me a coffee (opens in a new tab)', 'zenpress'); ?>">
-					<span aria-hidden="true">☕</span> <?php echo esc_html__('Buy me a coffee', 'zenpress'); ?>
+					<?php echo esc_html__('Buy me a coffee', 'zenpress'); ?> <span aria-hidden="true">☕</span>
 				</a>
 			</div>
         </div>
@@ -222,8 +222,8 @@ function zenpress_options_page(): void {
 			</div>
         </div>
 
-		<div class="zenpress-dashboard-footer">
-			<div class="zenpress-dashboard-footer-title">
+		<div class="zenpress-footer">
+			<div class="zenpress-footer-title">
                 <p>
 					<?php echo esc_html__('Made ', 'zenpress'); ?>
 					<span aria-hidden="true"> x ❤️ </span>

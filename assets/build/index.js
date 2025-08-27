@@ -429,71 +429,95 @@ const SettingsPage = () => {
   const sortedCategories = Object.keys(groupedSnippets).sort((a, b) => a.localeCompare(b, undefined, {
     sensitivity: 'base'
   }));
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.Fragment, {
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)("div", {
-      className: "zenpress-presets",
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)("div", {
-        className: "zenpress-presets-description",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("h2", {
-          children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Presets', 'zenpress')
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("p", {
-          children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Presets are predefined sets of snippets optimized for a type of website. Choosing one will enable only the relevant snippets for you\'re use case and disable the others.', 'zenpress')
-        })]
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.Button, {
-        variant: "secondary",
-        onClick: () => enableByPreset('showcase-website'),
-        __next40pxDefaultSize: true,
-        children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Showcase website', 'zenpress')
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.Button, {
-        variant: "secondary",
-        onClick: () => enableByPreset('blog'),
-        __next40pxDefaultSize: true,
-        children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Blog', 'zenpress')
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.Button, {
-        variant: "secondary",
-        onClick: () => enableByPreset('ecommerce'),
-        __next40pxDefaultSize: true,
-        children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('E-commerce', 'zenpress')
-      })]
-    }), sortedCategories.map(category => /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.Panel, {
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelBody, {
-        title: category,
-        initialOpen: true,
-        children: groupedSnippets[category].map(({
-          name,
-          data
-        }) => /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelRow, {
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(SnippetToggleControl, {
-            label: data.title || name,
-            value: data?.['enable-snippet'] || false,
-            onChange: () => handleToggleChange(name),
-            help: data.description || ''
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.Fragment, {
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("div", {
+      className: "zenpress-row",
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)("div", {
+        className: "zenpress-col",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)("div", {
+          className: "zenpress-presets",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)("div", {
+            className: "zenpress-presets-description",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("p", {
+              children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('ZenPress is designed to preserve the vanilla WordPress experience, so you can enable all features without risk. If you don\'t know which ones to choose, just select your site\'s type and it will set the right features for you.', 'zenpress')
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("h2", {
+              children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('You can choose you\'re website type', 'zenpress')
+            })]
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.Button, {
+            variant: "secondary",
+            onClick: () => enableByPreset('showcase-website'),
+            __next40pxDefaultSize: true,
+            children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Showcase website', 'zenpress')
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.Button, {
+            variant: "secondary",
+            onClick: () => enableByPreset('blog'),
+            __next40pxDefaultSize: true,
+            children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Blog', 'zenpress')
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.Button, {
+            variant: "secondary",
+            onClick: () => enableByPreset('ecommerce'),
+            __next40pxDefaultSize: true,
+            children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('E-commerce', 'zenpress')
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("div", {
+            className: "zenpress-presets-description",
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("h2", {
+              children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Or just pick what you need', 'zenpress')
+            })
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)("div", {
+            className: "zenpress-actions-bulk",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.Button, {
+              variant: "secondary",
+              onClick: enableAllSnippets,
+              __next40pxDefaultSize: true,
+              children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Enable all actions', 'zenpress')
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.Button, {
+              isDestructive: "true",
+              onClick: resetSettings,
+              __next40pxDefaultSize: true,
+              children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Disable all actions', 'zenpress')
+            })]
+          })]
+        }), sortedCategories.map(category => /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.Panel, {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelBody, {
+            title: category,
+            initialOpen: false,
+            children: groupedSnippets[category].map(({
+              name,
+              data
+            }) => /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelRow, {
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(SnippetToggleControl, {
+                label: data.title || name,
+                value: data?.['enable-snippet'] || false,
+                onChange: () => handleToggleChange(name),
+                help: data.description || ''
+              })
+            }, name))
           })
-        }, name))
-      })
-    }, category)), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)("div", {
-      className: "zenpress-actions",
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)("div", {
-        className: "zenpress-actions-bulk",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.Button, {
-          variant: "secondary",
-          onClick: enableAllSnippets,
-          __next40pxDefaultSize: true,
-          children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Enable all snippets', 'zenpress')
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.Button, {
-          isDestructive: "true",
-          onClick: resetSettings,
-          __next40pxDefaultSize: true,
-          children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Disable all snippets', 'zenpress')
+        }, category)), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)("div", {
+          className: "zenpress-actions",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)("div", {
+            className: "zenpress-actions-bulk",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.Button, {
+              variant: "secondary",
+              onClick: enableAllSnippets,
+              __next40pxDefaultSize: true,
+              children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Enable all actions', 'zenpress')
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.Button, {
+              isDestructive: "true",
+              onClick: resetSettings,
+              __next40pxDefaultSize: true,
+              children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Disable all actions', 'zenpress')
+            })]
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(SaveButton, {
+            onClick: saveSettings,
+            isBusy: isSaving
+          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("div", {
+          className: "zenpress-notices",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(Notices, {})
         })]
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(SaveButton, {
-        onClick: saveSettings,
-        isBusy: isSaving
-      })]
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("div", {
-      className: "zenpress-notices",
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(Notices, {})
-    })]
+      })
+    })
   });
 };
 

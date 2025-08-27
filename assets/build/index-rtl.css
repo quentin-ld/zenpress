@@ -2,16 +2,58 @@
   !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./assets/src/index.scss ***!
   \**********************************************************************************************************************************************************************************************************************************************/
 @charset "UTF-8";
-.zenpress-actions, .zenpress-notices, .zenpress-loading, .zenpress-presets {
-  margin: 0 auto 20px auto;
-  max-width: 920px;
+.zenpress-loading {
+  width: 100%;
+  max-width: 900px;
+  margin: 20px auto;
 }
-.zenpress-navigation, .zenpress-footer-navigation, .zenpress-actions {
+.zenpress-dashboard-wrap a:not(.components-button) {
+  color: var(--wp-components-color-accent, var(--wp-admin-theme-color, #3858e9));
+}
+.zenpress-dashboard-wrap a:not(.components-button)[target=_blank] {
+  position: relative;
+  gap: 4px;
+}
+.zenpress-dashboard-wrap a:not(.components-button)[target=_blank]::after {
+  content: " ↗";
+}
+.zenpress-dashboard-wrap .components-button {
+  gap: 4px;
+}
+.zenpress-dashboard-wrap .components-panel {
+  width: 100%;
+  margin: 0 auto 20px auto;
+  max-width: 100%;
+}
+.zenpress-dashboard-wrap .components-panel__body-title {
+  text-transform: capitalize;
+}
+.zenpress-dashboard-wrap .components-panel__body-toggle {
+  border-bottom: 1px solid #d6e2ed;
+  text-transform: capitalize;
+}
+.zenpress-dashboard-wrap .components-toggle-control__help {
+  font-size: 1.1em;
+}
+.zenpress-dashboard-wrap .components-notice-list {
+  width: 100%;
+  margin-bottom: 20px;
+}
+.zenpress-row {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 40px;
+  width: 100%;
+  max-width: 920px;
+  margin: 0 auto;
+}
+.zenpress-actions {
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
   justify-content: space-between;
   align-items: center;
+  margin-bottom: 20px;
 }
 .zenpress-actions-bulk {
   display: flex;
@@ -33,10 +75,7 @@
   width: 100%;
   max-width: 100%;
 }
-.zenpress-presets-description h2 {
-  margin: 0;
-}
-.zenpress-dashboard-header, .zenpress-dashboard-footer {
+.zenpress-header {
   align-items: center;
   display: flex;
   flex-wrap: wrap;
@@ -45,45 +84,43 @@
   padding: 16px;
   margin: 0 0 20px 0;
   gap: 40px;
-}
-.zenpress-dashboard-header h1, .zenpress-dashboard-footer h1 {
-  margin: 0;
-  padding: 0;
-}
-.zenpress-dashboard-header p, .zenpress-dashboard-footer p {
-  margin: 0;
-}
-.zenpress-dashboard-header a:not(.button)[target=_blank], .zenpress-dashboard-footer a:not(.button)[target=_blank] {
-  position: relative;
-}
-.zenpress-dashboard-header a:not(.button)[target=_blank]::after, .zenpress-dashboard-footer a:not(.button)[target=_blank]::after {
-  content: " ↗";
-}
-.zenpress-dashboard-header {
   background: #fff;
   border: 1px solid #e0e0e0;
 }
-.zenpress-dashboard-footer {
+.zenpress-header-navigation {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: space-between;
+  align-items: center;
+}
+.zenpress-header h1,
+.zenpress-header p {
+  margin: 0;
+  padding: 0;
+}
+.zenpress-footer {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  overflow-x: auto;
+  padding: 16px;
+  margin: 0 0 20px 0;
+  gap: 40px;
   border-top: 1px solid #e0e0e0;
   padding-top: 32px;
 }
-.zenpress-dashboard-wrap .components-panel {
-  width: 100%;
-  margin: 0 auto 20px auto;
-  max-width: 920px;
+.zenpress-footer-navigation {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: space-between;
+  align-items: center;
 }
-.zenpress-dashboard-wrap .components-panel__body-title {
-  text-transform: capitalize;
-}
-.zenpress-dashboard-wrap .components-panel__body-toggle {
-  border-bottom: 1px solid #d6e2ed;
-  text-transform: capitalize;
-}
-.zenpress-dashboard-wrap .components-toggle-control__help {
-  font-size: 1.1em;
-}
-.zenpress-dashboard-wrap .components-notice-list {
-  width: 100%;
+.zenpress-footer p {
+  margin: 0;
+  padding: 0;
 }
 
 
