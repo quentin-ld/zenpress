@@ -9,8 +9,8 @@
  * @copyright 2024-2025 Quentin Le Duff
  * @license   GPL v2 or later
  *
- * Plugin Name: ZenPress - Unbloat, Performance & Security
- * Description: The zeniest unbloat, performance and security lightweight plugin for WordPress and WooCommerce. Install, activate, and done!
+ * Plugin Name: ZenPress
+ * Description: Easily speed up and strengthen your WordPress site by cleaning out unnecessary features and protecting weak points.
  * Version: 2.0
  * Plugin URI: https://wordpress.org/plugins/zenpress/
  * Author: Quentin Le Duff
@@ -39,8 +39,6 @@
  * TODOLIST ▓▒░(°◡°)░▒▓
 ****/
 // TODO: Disable comments URL
-// TODO: EDIT THE README
-// TODO: UPDATE IMAGES
 // TODO: CHECK THE DEPLOYMENT WORKING PROPERLY
 
 if (!defined('ABSPATH')) {
