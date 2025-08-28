@@ -10,6 +10,7 @@
 .gitignore
 .gitlab-ci.yml
 .php-cs-fixer.php
+.prettierrc
 .travis.yml
 .vscode
 .wordpress-org
@@ -29,6 +30,7 @@ phpcs.ruleset.xml
 phpstan.neon
 phpunit.xml
 phpunit.xml.dist
+postcss.config.sort.js
 README.md
 tests
 Thumbs.db

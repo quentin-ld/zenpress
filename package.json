@@ -1,0 +1,24 @@
+{
+  "name": "zenpress",
+  "description": "The zeniest unbloat, performance and security lightweight plugin for WordPress and WooCommerce",
+  "type": "wordpress-plugin",
+  "main": "assets/build/index.js",
+  "scripts": {
+    "start": "wp-scripts start assets/src/index.js --output-path=assets/build",
+    "build": "wp-scripts build assets/src/index.js --output-path=assets/build",
+    "scss:sort": "postcss assets/src/**/*.scss --config postcss.config.sort.js --replace",
+    "scss:format": "prettier --write \"assets/src/**/*.scss\"",
+    "lint:scss": "npm run scss:sort && npm run scss:format"
+  },
+  "author": "Quentin Le Duff",
+  "license": "GPL-2.0-or-later",
+  "devDependencies": {
+    "@wordpress/scripts": "^30.22.0",
+    "autoprefixer": "^10.4.20",
+    "css-declaration-sorter": "^7.2.0",
+    "postcss": "^8.5.6",
+    "postcss-cli": "^11.0.1",
+    "postcss-scss": "^4.0.6",
+    "prettier": "^3.3.3"
+  }
+}

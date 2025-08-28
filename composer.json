@@ -22,8 +22,8 @@
 	},
 	"scripts": {
 		"lint:php": [
-			"vendor/bin/php-cs-fixer fix -v --show-progress=dots --using-cache=no --config=.php-cs-fixer.php zenpress.php inc",
-			"vendor/bin/phpstan analyse --memory-limit=2048M zenpress.php inc"
+			"vendor/bin/php-cs-fixer fix -v --show-progress=dots --using-cache=no --config=.php-cs-fixer.php index.php inc",
+			"vendor/bin/phpstan analyse --memory-limit=2048M index.php inc"
 		]
 	}
 }

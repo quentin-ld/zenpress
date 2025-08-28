@@ -1,36 +1,64 @@
 # Zenpress Plugin
 
-Zenpress is a lightweight WordPress and WooCommerce plugin focused on performance, security, and minimalism.
+ZenPress is a lightweight WordPress and WooCommerce plugin focused on performance, security, and minimalism.
+This document describes the development workflow to keep code quality, consistency, and easy deployment.
 
-## Getting Started
+## 🚀 Getting Started
 
 ### Prerequisites
 
-- PHP 7.4 or higher
+- PHP **7.4 or higher** (tested up to PHP 8.4)
 - Composer
+- Node.js & npm (for WordPress Scripts)
+- WordPress >= **6.0**
 
 ### Installation
 
-Install the dependencies using Composer:
-   ```bash
-   composer install
-   ```
+Clone the repository and install dependencies:
+```bash
+composer install
+npm install
+```
 
-## PHP Linting
+## 🧹 Code Quality
 
-To ensure code quality and consistency, Zenpress uses PHP linting tools. You can run the PHP linter using Composer scripts.
+ZenPress enforces strict coding standards and static analysis to avoid bugs and maintain clean code.
 
-### Running PHP Lint
+### PHP Linting
 
-To start the PHP linting process, execute the following command:
-
+Run PHP linting with:
 ```bash
 composer run lint:php
 ```
 
-This command will:
-- Use PHP CS Fixer to fix code style issues.
-- Use PHPStan for static analysis to find potential bugs.
+This will:
+
+- Use **PHP CS Fixer** to automatically fix code style issues.
+
+- Use **PHPStan** for static analysis and bug detection.
+
+## 🛠️ Development Workflow
+
+- Each snippet is stored in `/inc/` with its own `.php` file.
+- Metadata for snippets is stored in `/inc/meta/` for scalability and translations.
+- Follow the **ZenPress coding conventions**:
+  - Use `exit;` instead of `die();`
+  - Prefix all functions with `zenpress_`
+  - Add **DocBlocks** with `@since` and `@return`
+- All new code must pass linting.
+
+### ✅ Example DocBlock format
+
+```php
+<?php
+/**
+ * Title: Disable DNS prefetch
+ * Category: Performance
+ * Description: Removes DNS prefetch resource hints from the wp_head, reducing unnecessary DNS lookups.
+ *
+ * @return void
+ * @since 1.0.0
+ */
 
 ## License
 
