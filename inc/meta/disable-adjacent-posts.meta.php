@@ -1,18 +1,18 @@
 <?php
 /**
- * Metadata for the "Disable adjacent posts link tags in the header" snippet.
+ * Metadata for disable-adjacent-posts.php
  *
  * @since 1.0.0
  */
 
 if (!defined('ABSPATH')) {
-    exit; // Prevent direct access.
+    exit;
 }
 
 return [
-    'title' => __('Disable adjacent posts link tags in the header', 'zenpress'),
+    'title' => __('Disable adjacent posts link tags', 'zenpress'),
     'description' => __(
-        'Removes the rel="prev" and rel="next" link tags from the wp_head output, which can improve performance by reducing unnecessary HTML in the header.',
+        'Removes rel="prev" and rel="next" tags from wp_head. Reduces unnecessary HTML output and slightly improves performance.',
         'zenpress'
     ),
     'category' => __('Performance 🚀', 'zenpress'),

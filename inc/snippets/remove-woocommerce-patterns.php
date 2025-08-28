@@ -1,16 +1,7 @@
 <?php
-/**
- * Remove WooCommerce patterns.
- *
- * Removes all WooCommerce remote block patterns to avoid
- * unnecessary pattern registration in the editor.
- *
- * @since 1.0.4
- * @return void
- */
 
 if (!defined('ABSPATH')) {
-    exit; // Prevent direct access.
+    exit;
 }
 
 use Automattic\WooCommerce\Blocks\Package;

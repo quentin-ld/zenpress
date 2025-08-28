@@ -1,17 +1,17 @@
 <?php
 /**
- * Metadata for the "Disable oEmbed" snippet.
+ * Metadata for disable-oembed.php
  *
  * @since 1.0.0
  */
 
 if (!defined('ABSPATH')) {
-    exit; // Prevent direct access.
+    exit;
 }
 
 return [
     'title' => __('Disable oEmbed', 'zenpress'),
-    'description' => __('Removes all features related to oEmbed, including auto-discovery, embedding of external content, and the wp-embed script, to improve site performance by eliminating unnecessary API calls and scripts.', 'zenpress'),
+    'description' => __('Removes WordPress oEmbed features such as auto-discovery, REST API routes, TinyMCE integration, and the wp-embed script. Reduces API calls, improves performance, and limits unnecessary external requests.', 'zenpress'),
     'category' => __('Performance 🚀', 'zenpress'),
     'weight' => 0,
     'preset' => ['showcase-website', 'blog', 'ecommerce'],

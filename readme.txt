@@ -21,44 +21,44 @@ No database clutter, no ads, no pro version. Just install, activate, and forget 
 
 Following features are included :
 
-= Performance =
+= Performance 🚀=
 
-* Disable adjacent posts link tags in the WordPress header
-* Disable Dashicons for non-logged-in users
+* Disable adjacent posts link tags
+* Disable Dashicons
 * Disable DNS prefetch
 * Disable WordPress emoji scripts and styles
-* Disable jQuery Migrate on the frontend
+* Disable jQuery Migrate
 * Disable oEmbed
 * Disable PDF thumbnails
-* Disable RSS feeds except main one and remove links from the site head
-* Disable WordPress shortlink generation
-* Disable the Windows Live Writer (WLW) manifest link
-* Remove unwanted default block patterns in gutenberg editor
-* Remove REST API link from the site head
-* Enables separate loading of core block styles
+* Disable all WordPress feeds (RDF, RSS, RSS2, Atom, and comments)
+* Disable WordPress shortlink
+* Disable the Windows Live Writer link
+* Remove WordPress default remote block patterns
+* Remove REST API links
+* Separate loading of core block styles
 
-= Security =
+= Security 🔒️=
 
-* Blocks user enumeration via author query string
-* Disable author archives and redirects to 404
+* Block user enumeration
+* Disable author archives
 * Disable pingback and trackback
-* Disable XML-RPC and removes the RSD (Really Simple Discovery) link
-* Hide WooCommerce version from HTTP headers, scripts, and styles
-* Hide WordPress version from HTTP headers, scripts, and styles
+* Disable XML-RPC and remove the RSD link
+* Hide WordPress version
 * Protect the wp-login form from brute force attacks
 
-= User interface =
+= User interface 💻️=
 
-* Cleans up the WordPress admin Bar
-* Cleans up the WordPress dashboard items
-* Disable the disable the language selector on the WordPress login page
+* Clean up the WordPress Admin Bar
+* Clean up the WordPress Dashboard
+* Disable the Login Language Selector
 
-= WooCommerce =
+= WooCommerce 🛒=
 * Disable WooCommerce cart fragments script
 * Disable WooCommerce scripts and styles on non-WooCommerce pages
 * Disable unnecessary Stripe scripts on WooCommerce pages
 * Disable WooCommerce widgets
-* Remove WooCommerce patterns
+* Hide WooCommerce version
+* Remove WooCommerce default remote block patterns
 
 == Screenshots ==
 

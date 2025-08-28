@@ -1,18 +1,18 @@
 <?php
 /**
- * Metadata for the "Remove redundant items from the WordPress Dashboard" snippet.
+ * Metadata for clean-dashboard-items.php
  *
  * @since 1.0.0
  */
 
 if (!defined('ABSPATH')) {
-    exit; // Prevent direct access.
+    exit;
 }
 
 return [
-    'title' => __('Remove redundant items from the WordPress Dashboard', 'zenpress'),
+    'title' => __('Clean up the WordPress Dashboard', 'zenpress'),
     'description' => __(
-        'Removes various default and plugin-related widgets from the WordPress dashboard, including the Quick Draft widget, Incoming Links, and the Welcome Panel. This helps declutter the Dashboard, improving both performance and usability. The Dashboard should display important information about your website, not plugin advertising.',
+        'Removes default and plugin ads widgets from the Dashboard, including Quick Draft, site Health and Welcome Panel. Declutters the admin area and improves usability.',
         'zenpress'
     ),
     'category' => __('User interface 💻️', 'zenpress'),

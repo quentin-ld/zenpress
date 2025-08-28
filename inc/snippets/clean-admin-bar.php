@@ -1,17 +1,7 @@
 <?php
-/**
- * Clean up the WordPress Admin Bar.
- *
- * Removes redundant or unnecessary items from the WordPress Admin Bar,
- * both in the backend and frontend. This streamlines the admin experience
- * and can slightly improve performance.
- *
- * @since 1.0.0
- * @return void
- */
 
 if (!defined('ABSPATH')) {
-    exit; // Prevent direct access.
+    exit;
 }
 
 add_action(

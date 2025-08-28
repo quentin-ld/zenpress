@@ -1,18 +1,18 @@
 <?php
 /**
- * Metadata for "Disable XML-RPC and remove the RSD link".
+ * Metadata for disable-xmlrpc-rsdlink.php
  *
  * @since 1.0.0
  */
 
 if (!defined('ABSPATH')) {
-    exit; // Prevent direct access.
+    exit;
 }
 
 return [
     'title' => __('Disable XML-RPC and remove the RSD link', 'zenpress'),
-    'description' => __('Disables XML-RPC functionality to reduce attack surface (brute force, DDoS) and removes the RSD link from the HTML head for better security and reduced exposure.', 'zenpress'),
-    'category' => __('Performance 🚀', 'zenpress'),
+    'description' => __('Disables XML-RPC (often targeted by brute force or DDoS attacks) and removes the RSD link from the HTML head to reduce exposure.', 'zenpress'),
+    'category' => __('Security 🔒️', 'zenpress'),
     'weight' => 0,
     'preset' => ['showcase-website', 'blog', 'ecommerce'],
 ];

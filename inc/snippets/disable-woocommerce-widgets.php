@@ -1,16 +1,7 @@
 <?php
-/**
- * Disable WooCommerce widgets.
- *
- * Unregisters default WooCommerce widgets. This can improve site performance
- * by preventing unnecessary widgets from being available or loaded.
- *
- * @since 1.0.0
- * @return void
- */
 
 if (!defined('ABSPATH')) {
-    exit; // Prevent direct access.
+    exit;
 }
 
 if (class_exists('WooCommerce')) {

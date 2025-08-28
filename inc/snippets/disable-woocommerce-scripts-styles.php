@@ -1,18 +1,4 @@
 <?php
-/**
- * Disable WooCommerce scripts and styles on non-WooCommerce pages.
- *
- * Dequeues WooCommerce assets on pages where WooCommerce functionality
- * is not required, such as homepage, blog posts, or custom pages.
- * Helps improve performance by preventing unnecessary asset loading.
- *
- * @since 1.0.0
- * @return void
- */
-
-if (!defined('ABSPATH')) {
-    exit; // Prevent direct access.
-}
 
 add_action('wp_enqueue_scripts', 'zenpress_disable_woocommerce_scripts_styles', 11);
 

@@ -1,17 +1,7 @@
 <?php
-/**
- * Disable jQuery Migrate on the frontend.
- *
- * Removes jQuery Migrate script from loading on the frontend
- * to improve performance, while keeping it enabled in the admin area.
- *
- * @since 1.0.0
- * @param WP_Scripts $scripts WP_Scripts object containing registered scripts.
- * @return void
- */
 
 if (!defined('ABSPATH')) {
-    exit; // Prevent direct access.
+    exit;
 }
 
 add_action('wp_default_scripts', function (&$scripts) {

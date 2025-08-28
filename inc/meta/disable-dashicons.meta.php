@@ -1,18 +1,18 @@
 <?php
 /**
- * Metadata for the "Disable Dashicons for non-logged-in users" snippet.
+ * Metadata for the disable-dashicons.php
  *
  * @since 1.0.0
  */
 
 if (!defined('ABSPATH')) {
-    exit; // Prevent direct access.
+    exit;
 }
 
 return [
-    'title' => __('Disable Dashicons for non-logged-in users', 'zenpress'),
+    'title' => __('Disable Dashicons', 'zenpress'),
     'description' => __(
-        'Prevents WordPress from loading the Dashicons CSS for visitors who are not logged in, which can improve frontend performance.',
+        'Prevents WordPress from loading the Dashicons CSS for visitors who are not logged in. Improves frontend performance by reducing unnecessary styles.',
         'zenpress'
     ),
     'category' => __('Performance 🚀', 'zenpress'),

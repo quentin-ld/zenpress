@@ -1,17 +1,7 @@
 <?php
-/**
- * Remove redundant items from the WordPress Dashboard.
- *
- * Removes various default and plugin-related widgets from the WordPress dashboard,
- * including Quick Draft, Site Health, and the Welcome Panel.
- * This helps declutter the Dashboard, improving both performance and usability.
- *
- * @since 1.0.0
- * @return void
- */
 
 if (!defined('ABSPATH')) {
-    exit; // Prevent direct access.
+    exit;
 }
 
 add_action(

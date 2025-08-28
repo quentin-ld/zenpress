@@ -1,18 +1,18 @@
 <?php
 /**
- * Metadata for the "Disable jQuery Migrate on the frontend" snippet.
+ * Metadata for disable-jquery-migrate.php
  *
  * @since 1.0.0
  */
 
 if (!defined('ABSPATH')) {
-    exit; // Prevent direct access.
+    exit;
 }
 
 return [
-    'title' => __('Disable jQuery Migrate on the frontend', 'zenpress'),
+    'title' => __('Disable jQuery Migrate', 'zenpress'),
     'description' => __(
-        'Removes jQuery Migrate script from loading on the frontend of the website to improve performance while keeping it enabled in the admin area.',
+        'Removes jQuery Migrate from loading on the frontend while keeping it enabled in the admin. Improves frontend performance and reduces legacy overhead.',
         'zenpress'
     ),
     'category' => __('Performance 🚀', 'zenpress'),

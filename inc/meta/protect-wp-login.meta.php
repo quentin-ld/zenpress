@@ -1,17 +1,17 @@
 <?php
 /**
- * Metadata for "Protect the wp-login form from brute force attacks".
+ * Metadata for protect-wp-login.php
  *
  * @since 1.0.0
  */
 
 if (!defined('ABSPATH')) {
-    exit; // Prevent direct access.
+    exit;
 }
 
 return [
     'title' => __('Protect the wp-login form from brute force attacks', 'zenpress'),
-    'description' => __('Adds brute force protection to the WordPress login form by hiding detailed error messages, limiting failed login attempts per IP, and temporarily blocking further attempts after repeated failures.', 'zenpress'),
+    'description' => __('Removes detailed login error messages and limits failed login attempts per IP address. Blocks further attempts for a set duration after too many failures. Improves security by mitigating brute force attacks.', 'zenpress'),
     'category' => __('Security 🔒️', 'zenpress'),
     'weight' => 0,
     'preset' => ['showcase-website', 'blog', 'ecommerce'],

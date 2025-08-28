@@ -1,18 +1,7 @@
 <?php
-/**
- * Hide WooCommerce version from HTTP headers, scripts, and styles.
- *
- * Removes the WooCommerce version number from HTTP headers
- * and prevents it from being exposed in the URLs of scripts and styles.
- * Improves security by making it harder for attackers to identify
- * which WooCommerce version is in use.
- *
- * @since 1.0.0
- * @return void
- */
 
 if (!defined('ABSPATH')) {
-    exit; // Prevent direct access.
+    exit;
 }
 
 if (class_exists('WooCommerce') && !is_admin()) {

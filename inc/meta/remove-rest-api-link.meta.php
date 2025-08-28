@@ -1,17 +1,17 @@
 <?php
 /**
- * Metadata for "Remove REST API links from the <head>".
+ * Metadata for remove-rest-api-link.php
  *
  * @since 1.0.4
  */
 
 if (!defined('ABSPATH')) {
-    exit; // Prevent direct access.
+    exit;
 }
 
 return [
-    'title' => __('Remove REST API links from the <head>', 'zenpress'),
-    'description' => __('Removes REST API discovery links from the <head> section of the site, improving performance and reducing unnecessary HTML output while keeping the REST API available.', 'zenpress'),
+    'title' => __('Remove REST API links', 'zenpress'),
+    'description' => __('Prevents WordPress from adding REST API discovery links to the head section of the site. reduces unnecessary HTML output and slightly improves performance while keeping REST API functionality available.', 'zenpress'),
     'category' => __('Performance 🚀', 'zenpress'),
     'weight' => 0,
     'preset' => ['showcase-website', 'blog', 'ecommerce'],

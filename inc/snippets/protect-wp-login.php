@@ -1,18 +1,7 @@
 <?php
-/**
- * Protect the wp-login form from brute force attacks.
- *
- * Adds protection to the WordPress login form by:
- * - Removing detailed login error messages.
- * - Limiting login attempts per IP address.
- * - Blocking further attempts for a set duration after too many failures.
- *
- * @since 1.0.0
- * @return void
- */
 
 if (!defined('ABSPATH')) {
-    exit; // Prevent direct access.
+    exit;
 }
 
 // Remove detailed login errors

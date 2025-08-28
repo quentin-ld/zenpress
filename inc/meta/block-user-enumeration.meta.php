@@ -1,18 +1,18 @@
 <?php
 /**
- * Metadata for the "Block user enumeration" snippet.
+ * Metadata for block-user-enumeration.php
  *
  * @since 1.0.0
  */
 
 if (!defined('ABSPATH')) {
-    exit; // Prevent direct access.
+    exit;
 }
 
 return [
     'title' => __('Block user enumeration', 'zenpress'),
     'description' => __(
-        'Prevents attackers from enumerating users via query-string and permalink-style author URLs.',
+        'Prevents attackers from guessing WordPress usernames by blocking requests with the `author` parameter in query strings or permalinks. Reduces exposure to brute-force and user-targeted attacks.',
         'zenpress'
     ),
     'category' => __('Security 🔒️', 'zenpress'),

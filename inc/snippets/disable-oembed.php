@@ -1,17 +1,7 @@
 <?php
-/**
- * Disable oEmbed.
- *
- * Removes all features related to oEmbed, including auto-discovery, embedding of
- * external content, and the wp-embed script, to improve site performance by
- * eliminating unnecessary API calls and scripts.
- *
- * @since 1.0.0
- * @return void
- */
 
 if (!defined('ABSPATH')) {
-    exit; // Prevent direct access.
+    exit;
 }
 
 add_action('init', 'zenpress_disable_oembed');

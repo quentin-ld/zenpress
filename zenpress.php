@@ -39,9 +39,6 @@
  * TODOLIST ▓▒░(°◡°)░▒▓
 ****/
 // TODO: Disable comments URL
-// TODO: Disable author URL in generatepress theme
-// TODO: Add a "weight" to each snippet and add a component to display the saved weight
-// TODO: CHECK ALL THE TEXTS
 // TODO: EDIT THE README
 // TODO: UPDATE IMAGES
 // TODO: CHECK THE DEPLOYMENT WORKING PROPERLY
@@ -167,7 +164,7 @@ add_action('admin_menu', 'zenpress_add_option_page');
  */
 function zenpress_options_page(): void {
 	$plugin_data = get_file_data(__FILE__, ['Version' => 'Version'], 'plugin');
-    $plugin_version = isset($plugin_data['Version']) ? $plugin_data['Version'] : '';
+	$plugin_version = $plugin_data['Version'] ?? '';
     ?>
     <div class="wrap zenpress-dashboard-wrap">
         <div class="zenpress-header">
@@ -345,7 +342,9 @@ function zenpress_load_snippets(string $folder = 'inc/snippets/'): array {
 
     return $loaded;
 }
-add_action('init', static fn() => zenpress_load_snippets());
+add_action('init', function () {
+    return zenpress_load_snippets();
+});
 
 /**
  * Localize translated snippet metadata for use in JavaScript.

@@ -1,18 +1,18 @@
 <?php
 /**
- * Metadata for the "Disable DNS prefetch" snippet.
+ * Metadata for disable-dns-prefetch.php
  *
  * @since 1.0.0
  */
 
 if (!defined('ABSPATH')) {
-    exit; // Prevent direct access.
+    exit;
 }
 
 return [
     'title' => __('Disable DNS prefetch', 'zenpress'),
     'description' => __(
-        'Removes DNS prefetch resource hints from the wp_head, which can reduce unnecessary DNS lookups for some websites.',
+        'Removes DNS prefetch resource hints from wp_head avoids unnecessary DNS lookups and slightly improve performance on some sites.',
         'zenpress'
     ),
     'category' => __('Performance 🚀', 'zenpress'),

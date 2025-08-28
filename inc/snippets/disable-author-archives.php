@@ -1,17 +1,7 @@
 <?php
-/**
- * Disable author archives and redirect them to 404.
- *
- * This snippet disables author archive pages by forcing them
- * to return a 404 error. It prevents attackers from exploiting
- * author archive pages to gather information about users.
- *
- * @since 1.0.0
- * @return void
- */
 
 if (!defined('ABSPATH')) {
-    exit; // Prevent direct access.
+    exit;
 }
 
 // Override the canonical redirect to handle author archives.

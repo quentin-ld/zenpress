@@ -1,16 +1,7 @@
 <?php
-/**
- * Disable WordPress emoji scripts and styles.
- *
- * Removes all emoji-related scripts, styles, and filters
- * from both frontend and admin areas to improve performance.
- *
- * @since 1.0.0
- * @return void
- */
 
 if (!defined('ABSPATH')) {
-    exit; // Prevent direct access.
+    exit;
 }
 
 // Remove emoji detection script.

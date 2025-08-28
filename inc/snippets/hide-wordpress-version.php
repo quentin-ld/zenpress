@@ -1,18 +1,7 @@
 <?php
-/**
- * Hide WordPress version from HTTP headers, scripts, and styles.
- *
- * Removes the WordPress version number from the HTML head (via the
- * wp_generator meta tag), the the_generator filter, and from the URLs
- * of scripts and styles. This improves security by preventing attackers
- * from easily identifying the WordPress version in use.
- *
- * @since 1.0.0
- * @return void
- */
 
 if (!defined('ABSPATH')) {
-    exit; // Prevent direct access.
+    exit;
 }
 
 // Remove WordPress version from head

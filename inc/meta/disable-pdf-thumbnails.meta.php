@@ -1,17 +1,17 @@
 <?php
 /**
- * Metadata for the "Disable PDF thumbnails" snippet.
+ * Metadata for disable-pdf-thumbnails.php
  *
  * @since 1.0.0
  */
 
 if (!defined('ABSPATH')) {
-    exit; // Prevent direct access.
+    exit;
 }
 
 return [
     'title' => __('Disable PDF thumbnails', 'zenpress'),
-    'description' => __('Disable the generation of PDF thumbnails by filtering out the fallback image sizes, which helps improve performance by avoiding the creation of unnecessary image files for PDFs.', 'zenpress'),
+    'description' => __('Prevents WordPress from generating thumbnails for uploaded PDF files by removing fallback image sizes. saves storage space and improves performance by avoiding unnecessary image generation.', 'zenpress'),
     'category' => __('Performance 🚀', 'zenpress'),
     'weight' => 0,
     'preset' => ['showcase-website', 'blog', 'ecommerce'],

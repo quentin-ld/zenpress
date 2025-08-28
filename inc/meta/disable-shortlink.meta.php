@@ -1,17 +1,17 @@
 <?php
 /**
- * Metadata for "Disable WordPress shortlink generation".
+ * Metadata for disable-shortlink.php
  *
  * @since 1.0.0
  */
 
 if (!defined('ABSPATH')) {
-    exit; // Prevent direct access.
+    exit;
 }
 
 return [
-    'title' => __('Disable WordPress shortlink generation', 'zenpress'),
-    'description' => __('Removes shortlink functionality by disabling the header and template redirect actions, preventing WordPress from outputting shortlink tags and headers.', 'zenpress'),
+    'title' => __('Disable WordPress shortlink', 'zenpress'),
+    'description' => __('Removes shortlink functionality from both the HTML head and HTTP headers. Reduces unnecessary output, improves performance and SEO clarity.', 'zenpress'),
     'category' => __('Performance 🚀', 'zenpress'),
     'weight' => 0,
     'preset' => ['showcase-website', 'blog', 'ecommerce'],

@@ -235,7 +235,7 @@ const SettingsPage = () => {
 						<div className="zenpress-presets-description">
 							<p>
 								{__(
-									'ZenPress is designed to preserve the vanilla WordPress experience, so you can enable all features without risk. If you don\'t know which ones to choose, just select your site\'s type and it will set the right features for you.',
+									'Select the features that suit your needs. If you don\'t know which ones to choose, just select your site\'s type and it will set the right features for you.',
 									'zenpress'
 								)}
 							</p>
@@ -301,23 +301,6 @@ const SettingsPage = () => {
 						</Panel>
 					))}
 					<div className="zenpress-actions">
-						<div className="zenpress-actions-bulk">
-							<Button
-								variant="secondary"
-								onClick={enableAllSnippets}
-								__next40pxDefaultSize
-							>
-								{__('Enable all actions', 'zenpress')}
-							</Button>
-
-							<Button
-								isDestructive="true"
-								onClick={resetSettings}
-								__next40pxDefaultSize
-							>
-								{__('Disable all actions', 'zenpress')}
-							</Button>
-						</div>
 						<SaveButton onClick={saveSettings} isBusy={isSaving} />
 					</div>
 					<div className="zenpress-notices">
