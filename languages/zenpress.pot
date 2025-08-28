@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-08-28T14:08:26+00:00\n"
+"POT-Creation-Date: 2025-08-28T14:18:21+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: zenpress\n"
@@ -57,7 +57,7 @@ msgid "Security 🔒️"
 msgstr ""
 
 #: inc/meta/clean-admin-bar.meta.php:13
-msgid "Clean up the WordPress Admin Bar"
+msgid "Clean up the WordPress admin bar"
 msgstr ""
 
 #: inc/meta/clean-admin-bar.meta.php:14
@@ -111,7 +111,7 @@ msgid "Forces author archive pages to return a 404 error. Prevents user enumerat
 msgstr ""
 
 #: inc/meta/disable-dashicons.meta.php:13
-msgid "Disable Dashicons"
+msgid "Disable dashicons"
 msgstr ""
 
 #: inc/meta/disable-dashicons.meta.php:14
@@ -135,7 +135,7 @@ msgid "Removes emoji scripts, styles, and filters from frontend, backend, feeds,
 msgstr ""
 
 #: inc/meta/disable-jquery-migrate.meta.php:13
-msgid "Disable jQuery Migrate"
+msgid "Disable jQuery migrate"
 msgstr ""
 
 #: inc/meta/disable-jquery-migrate.meta.php:14
@@ -143,7 +143,7 @@ msgid "Removes jQuery Migrate from loading on the frontend while keeping it enab
 msgstr ""
 
 #: inc/meta/disable-login-language-selector.meta.php:13
-msgid "Disable the Login Language Selector"
+msgid "Disable the login language selector"
 msgstr ""
 
 #: inc/meta/disable-login-language-selector.meta.php:14
@@ -191,7 +191,7 @@ msgid "Removes shortlink functionality from both the HTML head and HTTP headers.
 msgstr ""
 
 #: inc/meta/disable-wlw-manifest.meta.php:13
-msgid "Disable the Windows Live Writer link"
+msgid "Disable WLW link"
 msgstr ""
 
 #: inc/meta/disable-wlw-manifest.meta.php:14
@@ -240,7 +240,7 @@ msgid "Unregisters default WooCommerce widgets to reduce bloat in the widget scr
 msgstr ""
 
 #: inc/meta/disable-xmlrpc-rsdlink.meta.php:13
-msgid "Disable XML-RPC and remove the RSD link"
+msgid "Disable XML-RPC and remove RSD link"
 msgstr ""
 
 #: inc/meta/disable-xmlrpc-rsdlink.meta.php:14
@@ -440,46 +440,48 @@ msgid "Failed to save settings."
 msgstr ""
 
 #: assets/build/index.js:1
-#: assets/src/index.js:220
+#: assets/src/index.js:178
+#: assets/src/index.js:217
+#: assets/src/index.js:229
 msgid "Uncategorized"
 msgstr ""
 
 #: assets/build/index.js:1
-#: assets/src/index.js:237
+#: assets/src/index.js:246
 msgid "Select the features that suit your needs. If you don't know which ones to choose, just select your site's type and it will set the right features for you."
 msgstr ""
 
 #: assets/build/index.js:1
-#: assets/src/index.js:242
+#: assets/src/index.js:251
 msgid "You can choose you're website type"
 msgstr ""
 
 #: assets/build/index.js:1
-#: assets/src/index.js:250
+#: assets/src/index.js:259
 msgid "Showcase website"
 msgstr ""
 
 #: assets/build/index.js:1
-#: assets/src/index.js:257
+#: assets/src/index.js:266
 msgid "Blog"
 msgstr ""
 
 #: assets/build/index.js:1
-#: assets/src/index.js:264
+#: assets/src/index.js:273
 msgid "E-commerce"
 msgstr ""
 
 #: assets/build/index.js:1
-#: assets/src/index.js:267
+#: assets/src/index.js:276
 msgid "Or just pick what you need"
 msgstr ""
 
 #: assets/build/index.js:1
-#: assets/src/index.js:275
+#: assets/src/index.js:284
 msgid "Enable all actions"
 msgstr ""
 
 #: assets/build/index.js:1
-#: assets/src/index.js:283
+#: assets/src/index.js:292
 msgid "Disable all actions"
 msgstr ""

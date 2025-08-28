@@ -142,6 +142,9 @@ const Notices = () => {
 const SettingsPage = () => {
 	const { snippets, setSnippets, saveSettings, isSaving } = useSettings();
 
+	// Track which categories should remain open
+	const [openCategories, setOpenCategories] = useState(new Set());
+
 	/**
 	 * Handle toggle state change for a snippet.
 	 *
@@ -171,6 +174,8 @@ const SettingsPage = () => {
 			});
 			return updated;
 		});
+		// Open all categories
+		setOpenCategories(new Set(Object.values(snippets).map((s) => s.category || __('Uncategorized', 'zenpress'))));
 	};
 
 	/**
@@ -186,6 +191,7 @@ const SettingsPage = () => {
 			});
 			return updated;
 		});
+		// Keep categories open (do not clear)
 	};
 
 	/**
@@ -199,6 +205,7 @@ const SettingsPage = () => {
 	const enableByPreset = (preset) => {
 		setSnippets((prev) => {
 			const updated = {};
+			const newOpen = new Set(openCategories);
 			Object.entries(prev).forEach(([name, data]) => {
 				const presets = Array.isArray(data?.preset) ? data.preset : [];
 				const isEnabled = presets.includes(preset);
@@ -206,12 +213,14 @@ const SettingsPage = () => {
 					...data,
 					'enable-snippet': isEnabled,
 				};
+				if (isEnabled) {
+					newOpen.add(data.category || __('Uncategorized', 'zenpress'));
+				}
 			});
+			setOpenCategories(newOpen);
 			return updated;
 		});
 	};
-
-
 
 	// Group snippets by category
 	const groupedSnippets = {};
@@ -286,7 +295,16 @@ const SettingsPage = () => {
 					</div>
 					{sortedCategories.map((category) => (
 						<Panel key={category}>
-							<PanelBody title={category} initialOpen={false}>
+							<PanelBody
+								title={category}
+								// Keep open if already marked or if a snippet is enabled
+								initialOpen={
+									openCategories.has(category) ||
+									groupedSnippets[category].some(
+										({ data }) => data?.['enable-snippet']
+									)
+								}
+							>
 								{groupedSnippets[category].map(({ name, data }) => (
 									<PanelRow key={name}>
 										<SnippetToggleControl

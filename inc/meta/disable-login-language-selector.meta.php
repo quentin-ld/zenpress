@@ -10,7 +10,7 @@ if (!defined('ABSPATH')) {
 }
 
 return [
-    'title' => __('Disable the Login Language Selector', 'zenpress'),
+    'title' => __('Disable the login language selector', 'zenpress'),
     'description' => __('Removes the language dropdown from the WordPress login page. Simplifies login screen and reduces distractions.', 'zenpress'),
     'category' => __('User interface 💻️', 'zenpress'),
     'weight' => 0,

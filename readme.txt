@@ -24,15 +24,15 @@ Following features are included :
 = Performance 🚀=
 
 * Disable adjacent posts link tags
-* Disable Dashicons
+* Disable dashicons
 * Disable DNS prefetch
 * Disable WordPress emoji scripts and styles
-* Disable jQuery Migrate
+* Disable jQuery migrate
 * Disable oEmbed
 * Disable PDF thumbnails
 * Disable all WordPress feeds (RDF, RSS, RSS2, Atom, and comments)
 * Disable WordPress shortlink
-* Disable the Windows Live Writer link
+* Disable WLW link
 * Remove WordPress default remote block patterns
 * Remove REST API links
 * Separate loading of core block styles
@@ -42,15 +42,15 @@ Following features are included :
 * Block user enumeration
 * Disable author archives
 * Disable pingback and trackback
-* Disable XML-RPC and remove the RSD link
+* Disable XML-RPC and remove RSD link
 * Hide WordPress version
 * Protect the wp-login form from brute force attacks
 
 = User interface 💻️=
 
-* Clean up the WordPress Admin Bar
+* Clean up the WordPress admin bar
 * Clean up the WordPress Dashboard
-* Disable the Login Language Selector
+* Disable the login language selector
 
 = WooCommerce 🛒=
 * Disable WooCommerce cart fragments script

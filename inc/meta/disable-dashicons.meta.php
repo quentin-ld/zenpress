@@ -10,7 +10,7 @@ if (!defined('ABSPATH')) {
 }
 
 return [
-    'title' => __('Disable Dashicons', 'zenpress'),
+    'title' => __('Disable dashicons', 'zenpress'),
     'description' => __(
         'Prevents WordPress from loading the Dashicons CSS for visitors who are not logged in. Improves frontend performance by reducing unnecessary styles.',
         'zenpress'
