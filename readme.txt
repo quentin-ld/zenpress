@@ -4,7 +4,7 @@ Donate link: https://github.com/sponsors/quentin-ld/
 Tags: optimization, performance, security, bloat, woocommerce
 Requires at least: 6.0
 Tested up to: 6.8
-Stable tag: 2.0
+Stable tag: 2.0.1
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html/
@@ -29,12 +29,12 @@ No database clutter, no ads, no pro version. Just install, activate, select what
 
 Following features are included :
 
-= Settings subpage 🧰=
+= Settings subpage 🧰 =
 * Find presets to help you configure your ZenPress.
 * Every action is documented so that you understand what you are doing and the benefits.
 * Native WordPress interface, benefits from Gutenberg's new features and the site editor.
 
-= Performance 🚀=
+= Performance 🚀 =
 
 * Disable adjacent posts link tags
 * Disable dashicons
@@ -50,7 +50,7 @@ Following features are included :
 * Remove REST API links
 * Separate loading of core block styles
 
-= Security 🔒️=
+= Security 🔒️ =
 
 * Block user enumeration
 * Disable author archives
@@ -59,13 +59,13 @@ Following features are included :
 * Hide WordPress version
 * Protect the wp-login form from brute force attacks
 
-= User interface 💻️=
+= User interface 💻️ =
 
 * Clean up the WordPress admin bar
 * Clean up the WordPress Dashboard
 * Disable the login language selector
 
-= WooCommerce 🛒=
+= WooCommerce 🛒 =
 * Disable WooCommerce cart fragments script
 * Disable WooCommerce scripts and styles on non-WooCommerce pages
 * Disable unnecessary Stripe scripts on WooCommerce pages
@@ -113,6 +113,10 @@ Nice ! If you can't find anything in the roadmap, feel free to submit your sugge
 Yes, it 's been tested actively and works from PHP 7.4 to PHP 8.4.
 
 == Changelog ==
+
+= 2.0.1 =
+
+- Global: Fix typo
 
 = 2.0 =
 

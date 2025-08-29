@@ -11,7 +11,7 @@
  *
  * Plugin Name: ZenPress
  * Description: Easily speed up and strengthen your WordPress site by cleaning out unnecessary features and protecting weak points.
- * Version: 2.0
+ * Version: 2.0.1
  * Plugin URI: https://wordpress.org/plugins/zenpress/
  * Author: Quentin Le Duff
  * Author URI: https://profiles.wordpress.org/quentinldd/
