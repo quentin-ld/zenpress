@@ -14,7 +14,7 @@ Easily speed up and strengthen your WordPress site by cleaning out unnecessary f
 == Description ==
 
 ZenPress is a lightweight, super-fast plugin that boosts your WordPress & WooCommerce website through a wide range of solid actions. This is a simple solution for improving your WordPress website's performance and security while enjoying a simpler and lighter UI.
-No database clutter, no ads, no pro version. Just install, activate, select what you need or pick up you're settings preset and you're ready to go !
+No database clutter, no ads, no pro version. Just install, activate, select what you need or pick up your settings preset and you are ready to go !
 
 = Why choose ZenPress? =
 * Curated settings presets included to help you.

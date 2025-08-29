@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-08-28T16:34:51+00:00\n"
+"POT-Creation-Date: 2025-08-29T07:34:31+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: zenpress\n"
@@ -77,7 +77,7 @@ msgid "Clean up the WordPress Dashboard"
 msgstr ""
 
 #: inc/meta/clean-dashboard-items.meta.php:14
-msgid "Removes default and plugin ads widgets from the Dashboard, including Quick Draft, site Health and Welcome Panel. Declutters the admin area and improves usability."
+msgid "Removes unnecessary widgets and ads widgets from the dashboard. Declutters the admin area and improves usability."
 msgstr ""
 
 #: inc/meta/disable-adjacent-posts.meta.php:13
@@ -389,7 +389,7 @@ msgid "Buy me a coffee"
 msgstr ""
 
 #: zenpress.php:214
-msgid "Loading you're ZenPress settings…"
+msgid "Loading your ZenPress settings…"
 msgstr ""
 
 #: zenpress.php:223
@@ -397,7 +397,7 @@ msgid "Made "
 msgstr ""
 
 #: zenpress.php:225
-msgid " by Quentin Le Duff - You're WordPress Partner"
+msgid " by Quentin Le Duff - Your WordPress Partner"
 msgstr ""
 
 #: zenpress.php:232
@@ -450,7 +450,7 @@ msgstr ""
 
 #: assets/build/index.js:1
 #: assets/src/index.js:251
-msgid "You can choose you're website type"
+msgid "Pick a preset"
 msgstr ""
 
 #: assets/build/index.js:1
@@ -470,7 +470,7 @@ msgstr ""
 
 #: assets/build/index.js:1
 #: assets/src/index.js:276
-msgid "Or just pick what you need"
+msgid "Or just enable what you need"
 msgstr ""
 
 #: assets/build/index.js:1

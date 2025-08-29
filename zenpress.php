@@ -211,7 +211,7 @@ function zenpress_options_page(): void {
 			<div class="zenpress-loading card">
 				<div class="zenpress-loading-body">
 					<p class="zenpress-loading-text">
-						<?php echo esc_html__('Loading you\'re ZenPress settings…', 'zenpress'); ?>
+						<?php echo esc_html__('Loading your ZenPress settings…', 'zenpress'); ?>
 					</p>
 				</div>
 			</div>
@@ -222,7 +222,7 @@ function zenpress_options_page(): void {
                 <p>
 					<?php echo esc_html__('Made ', 'zenpress'); ?>
 					<span aria-hidden="true"> x ❤️ </span>
-					<?php echo esc_html__(' by Quentin Le Duff - You\'re WordPress Partner', 'zenpress'); ?>
+					<?php echo esc_html__(' by Quentin Le Duff - Your WordPress Partner', 'zenpress'); ?>
 				</p>
             </div>
 			<div class="zenpress-footer-navigation">

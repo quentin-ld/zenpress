@@ -248,7 +248,7 @@ const SettingsPage = () => {
 									'zenpress'
 								)}
 							</p>
-							<h2>{__('You can choose you\'re website type', 'zenpress')}</h2>
+							<h2>{__('Pick a preset', 'zenpress')}</h2>
 						</div>
 
 						<Button
@@ -273,7 +273,7 @@ const SettingsPage = () => {
 							{__('E-commerce', 'zenpress')}
 						</Button>
 						<div className="zenpress-presets-description">
-							<h2>{__('Or just pick what you need', 'zenpress')}</h2>
+							<h2>{__('Or just enable what you need', 'zenpress')}</h2>
 						</div>
 						<div className="zenpress-actions-bulk">
 							<Button
