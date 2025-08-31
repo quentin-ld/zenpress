@@ -5,9 +5,7 @@ if (!defined('ABSPATH')) {
 }
 
 if (class_exists('WooCommerce')) {
-    add_action('widgets_init', 'zenpress_disable_woocommerce_widgets', 99);
-
-    function zenpress_disable_woocommerce_widgets() {
+    add_action('widgets_init', static function() {
         unregister_widget('WC_Widget_Products');
         unregister_widget('WC_Widget_Product_Categories');
         unregister_widget('WC_Widget_Product_Tag_Cloud');
@@ -20,5 +18,5 @@ if (class_exists('WooCommerce')) {
         unregister_widget('WC_Widget_Recent_Reviews');
         unregister_widget('WC_Widget_Top_Rated_Products');
         unregister_widget('WC_Widget_Rating_Filter');
-    }
+    }, 99);
 }

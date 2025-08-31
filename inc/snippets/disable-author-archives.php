@@ -7,7 +7,7 @@ if (!defined('ABSPATH')) {
 // Override the canonical redirect to handle author archives.
 remove_filter('template_redirect', 'redirect_canonical');
 
-add_action('template_redirect', function () {
+add_action('template_redirect', static function () {
     if (is_author()) {
         global $wp_query;
         $wp_query->set_404();

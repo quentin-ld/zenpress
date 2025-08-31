@@ -4,7 +4,7 @@ Donate link: https://github.com/sponsors/quentin-ld/
 Tags: optimization, performance, security, bloat, woocommerce
 Requires at least: 6.0
 Tested up to: 6.8
-Stable tag: 2.0.1
+Stable tag: 2.0.2
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html/
@@ -76,15 +76,15 @@ Following features are included :
 == Screenshots ==
 
 1. ZenPress admin interface.
-1. Dashboard without ZenPress.
-2. Dashboard with ZenPress.
-3. Site editor without ZenPress.
-4. Site editor with ZenPress.
-5. Login page without ZenPress login protection.
-6. Login page with ZenPress login protection.
-7. Login page with ZenPress login protection after trying to brute force it.
-8. Website head without ZenPress.
-9. Website head with ZenPress.
+2. Dashboard without ZenPress.
+3. Dashboard with ZenPress.
+4. Site editor without ZenPress.
+5. Site editor with ZenPress.
+6. Login page without ZenPress login protection.
+7. Login page with ZenPress login protection.
+8. Login page with ZenPress login protection after trying to brute force it.
+9. Website head without ZenPress.
+10. Website head with ZenPress.
 
 == Privacy Statement ==
 
@@ -100,9 +100,9 @@ ZenPress aims to be fully accessible to all of its users.
 
 Yes, there is no pro version for this plugin and there never will be.
 
-However, I am accepting donations on my buymeacoffee page : https://buymeacoffee.com/quentinld. If you work at an agency that develops with WordPress, ask your company to provide sponsorship in order to invest in its supply chain. The tools that I maintain probably save your company time and money, and Buy me a coffee support can now be done at the organisation level.
+However, [I am accepting sponsorships via the GitHub Sponsors program](https://github.com/sponsors/quentin-ld/dashboard). If you work at an agency that develops with WordPress, ask your company to provide sponsorship in order to invest in its supply chain. The tools that I maintain probably save your company time and money, and GitHub sponsorship can now be done at the organisation level.
 
-In addition, if you like the plugin then I'd love for you to leave a review. Tell all your friends about it too!
+In addition, if you like the plugin then I'd love for you to [leave a review](https://wordpress.org/support/plugin/zenpress/reviews/). Tell all your friends about it too!
 
 = I have a suggestion =
 
@@ -113,6 +113,8 @@ Nice ! If you can't find anything in the roadmap, feel free to submit your sugge
 Yes, it 's been tested actively and works from PHP 7.4 to PHP 8.4.
 
 == Changelog ==
+
+= 2.0.2 =
 
 = 2.0.1 =
 
