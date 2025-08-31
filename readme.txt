@@ -73,6 +73,53 @@ Following features are included :
 * Hide WooCommerce version
 * Remove WooCommerce default remote block patterns
 
+== Roadmap ==
+
+= Security =
+* Disable Application Passwords
+* Manage Heartbeat API (frontend + backend + admin whitelist)
+* Disable REST API
+
+= Performance =
+* Disable capital_P_dangit filter
+* Disable autosave
+* Disable post revision
+* Disable native lazy loading
+* Disable Password Strength Meter
+
+= UI =
+* Remove "howdy" from admin bar
+* Remove WordPress logo
+* Remove "Help button"
+* Remove "Thanks for using WordPress" in footer
+* Remove "site health" page
+* Remove "Privacy tools"
+
+= WooCommerce =
+* Force disable tracking
+* Disable marketing hub
+* Disable dashboard setup widget
+* Disable new product editor
+* Disable WooCommerce blocks
+* Disable WooCommerce promo emails
+
+= Plugins =
+* Disable CF7 CSS & JS
+* Disable Elementor bloat
+* Disable WP Bakery bloat
+* Disable Divi bloat
+* Disable Yoast SEO bloat
+* Disable Jetpack bloat
+* Disable Updraft bloat
+
+== Privacy Statement ==
+
+ZenPress is private by default and always will be. It does not store any data. It does not send data to any third party, nor does it include any third party resources.
+
+== Accessibility Statement ==
+
+ZenPress aims to be fully accessible to all of its users.
+
 == Screenshots ==
 
 1. ZenPress admin interface.
@@ -85,14 +132,6 @@ Following features are included :
 8. Login page with ZenPress login protection after trying to brute force it.
 9. Website head without ZenPress.
 10. Website head with ZenPress.
-
-== Privacy Statement ==
-
-ZenPress is private by default and always will be. It does not store any data. It does not send data to any third party, nor does it include any third party resources.
-
-== Accessibility Statement ==
-
-ZenPress aims to be fully accessible to all of its users.
 
 == Frequently Asked Questions ==
 
