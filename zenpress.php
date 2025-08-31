@@ -349,7 +349,6 @@ function zenpress_load_snippets(string $folder = 'inc/snippets/'): array {
 /**
  * Boot ZenPress snippets.
  */
-add_action('init', 'zenpress_boot_snippets');
-function zenpress_boot_snippets(): void {
-    zenpress_load_snippets();
-}
+add_action('init', function() : void {
+	zenpress_load_snippets();
+});
