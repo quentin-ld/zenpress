@@ -1,4 +1,4 @@
-=== ZenPress ===
+=== ZenPress — Cleaner, Lighter, Faster WP ===
 Contributors: @quentinldd
 Donate link: https://github.com/sponsors/quentin-ld/
 Tags: optimization, performance, security, bloat, woocommerce
@@ -13,7 +13,8 @@ Easily speed up and strengthen your WordPress site by cleaning out unnecessary f
 
 == Description ==
 
-ZenPress is a lightweight, super-fast plugin that boosts your WordPress & WooCommerce website through a wide range of solid actions. This is a simple solution for improving your WordPress website's performance and security while enjoying a simpler and lighter UI.
+ZenPress is a lightweight, super-fast plugin that boosts your WordPress & WooCommerce website through a wide range of solid actions.
+This is a simple solution for improving your WordPress website's performance and security while enjoying a simpler and lighter UI.
 No database clutter, no ads, no pro version. Just install, activate, select what you need or pick up your settings preset and you are ready to go !
 
 = Why choose ZenPress? =
@@ -75,6 +76,9 @@ Following features are included :
 
 == Roadmap ==
 
+= Global =
+* New presets
+
 = Security =
 * Disable Application Passwords
 * Manage Heartbeat API (frontend + backend + admin whitelist)
@@ -86,6 +90,7 @@ Following features are included :
 * Disable post revision
 * Disable native lazy loading
 * Disable Password Strength Meter
+* Disable WordPress default lazy loading
 
 = UI =
 * Remove "howdy" from admin bar
@@ -96,7 +101,7 @@ Following features are included :
 * Remove "Privacy tools"
 
 = WooCommerce =
-* Force disable tracking
+* Disable WooCommerce tracking
 * Disable marketing hub
 * Disable dashboard setup widget
 * Disable new product editor
@@ -154,6 +159,9 @@ Yes, it 's been tested actively and works from PHP 7.4 to PHP 8.4.
 == Changelog ==
 
 = 2.0.2 =
+
+- Global : Codebase and snippets optimization
+- Global : Fixed a bug in the automatic opening and closing function of the panels on the settings page.
 
 = 2.0.1 =
 
