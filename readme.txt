@@ -1,10 +1,10 @@
-=== ZenPress ===
+=== ZenPress — Cleaner, Lighter, Faster WP ===
 Contributors: @quentinldd
 Donate link: https://github.com/sponsors/quentin-ld/
 Tags: optimization, performance, security, bloat, woocommerce
 Requires at least: 6.0
 Tested up to: 6.8
-Stable tag: 2.0.1
+Stable tag: 2.0.2
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html/
@@ -13,7 +13,8 @@ Easily speed up and strengthen your WordPress site by cleaning out unnecessary f
 
 == Description ==
 
-ZenPress is a lightweight, super-fast plugin that boosts your WordPress & WooCommerce website through a wide range of solid actions. This is a simple solution for improving your WordPress website's performance and security while enjoying a simpler and lighter UI.
+ZenPress is a lightweight, super-fast plugin that boosts your WordPress & WooCommerce website through a wide range of solid actions.
+This is a simple solution for improving your WordPress website's performance and security while enjoying a simpler and lighter UI.
 No database clutter, no ads, no pro version. Just install, activate, select what you need or pick up your settings preset and you are ready to go !
 
 = Why choose ZenPress? =
@@ -73,18 +74,48 @@ Following features are included :
 * Hide WooCommerce version
 * Remove WooCommerce default remote block patterns
 
-== Screenshots ==
+== Roadmap ==
 
-1. ZenPress admin interface.
-1. Dashboard without ZenPress.
-2. Dashboard with ZenPress.
-3. Site editor without ZenPress.
-4. Site editor with ZenPress.
-5. Login page without ZenPress login protection.
-6. Login page with ZenPress login protection.
-7. Login page with ZenPress login protection after trying to brute force it.
-8. Website head without ZenPress.
-9. Website head with ZenPress.
+= Global =
+* New presets
+
+= Security =
+* Disable Application Passwords
+* Manage Heartbeat API (frontend + backend + admin whitelist)
+* Disable REST API
+
+= Performance =
+* Disable capital_P_dangit filter
+* Disable autosave
+* Disable post revision
+* Disable native lazy loading
+* Disable Password Strength Meter
+* Disable WordPress default lazy loading
+
+= UI =
+* Remove "howdy" from admin bar
+* Remove WordPress logo
+* Remove "Help button"
+* Remove "Thanks for using WordPress" in footer
+* Remove "site health" page
+* Remove "Privacy tools"
+
+= WooCommerce =
+* Disable WooCommerce tracking
+* Disable marketing hub
+* Disable dashboard setup widget
+* Disable new product editor
+* Disable WooCommerce blocks
+* Disable WooCommerce promo emails
+
+= Plugins =
+* Disable CF7 CSS & JS
+* Disable Elementor bloat
+* Disable WP Bakery bloat
+* Disable Divi bloat
+* Disable Yoast SEO bloat
+* Disable Jetpack bloat
+* Disable Updraft bloat
 
 == Privacy Statement ==
 
@@ -94,15 +125,28 @@ ZenPress is private by default and always will be. It does not store any data. I
 
 ZenPress aims to be fully accessible to all of its users.
 
+== Screenshots ==
+
+1. ZenPress admin interface.
+2. Dashboard without ZenPress.
+3. Dashboard with ZenPress.
+4. Site editor without ZenPress.
+5. Site editor with ZenPress.
+6. Login page without ZenPress login protection.
+7. Login page with ZenPress login protection.
+8. Login page with ZenPress login protection after trying to brute force it.
+9. Website head without ZenPress.
+10. Website head with ZenPress.
+
 == Frequently Asked Questions ==
 
 = No pro version? Really? =
 
 Yes, there is no pro version for this plugin and there never will be.
 
-However, I am accepting donations on my buymeacoffee page : https://buymeacoffee.com/quentinld. If you work at an agency that develops with WordPress, ask your company to provide sponsorship in order to invest in its supply chain. The tools that I maintain probably save your company time and money, and Buy me a coffee support can now be done at the organisation level.
+However, [I am accepting sponsorships via the GitHub Sponsors program](https://github.com/sponsors/quentin-ld/dashboard). If you work at an agency that develops with WordPress, ask your company to provide sponsorship in order to invest in its supply chain. The tools that I maintain probably save your company time and money, and GitHub sponsorship can now be done at the organisation level.
 
-In addition, if you like the plugin then I'd love for you to leave a review. Tell all your friends about it too!
+In addition, if you like the plugin then I'd love for you to [leave a review](https://wordpress.org/support/plugin/zenpress/reviews/). Tell all your friends about it too!
 
 = I have a suggestion =
 
@@ -113,6 +157,11 @@ Nice ! If you can't find anything in the roadmap, feel free to submit your sugge
 Yes, it 's been tested actively and works from PHP 7.4 to PHP 8.4.
 
 == Changelog ==
+
+= 2.0.2 =
+
+- Global : Codebase and snippets optimization
+- Global : Fixed a bug in the automatic opening and closing function of the panels on the settings page.
 
 = 2.0.1 =
 

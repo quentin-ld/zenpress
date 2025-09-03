@@ -175,7 +175,7 @@ const SettingsPage = () => {
 			return updated;
 		});
 		// Open all categories
-		setOpenCategories(new Set(Object.values(snippets).map((s) => s.category || __('Uncategorized', 'zenpress'))));
+		setOpenCategories(new Set(sortedCategories));
 	};
 
 	/**
@@ -191,13 +191,10 @@ const SettingsPage = () => {
 			});
 			return updated;
 		});
-		// Keep categories open (do not clear)
 	};
 
 	/**
 	 * Enable snippets by preset.
-	 *
-	 * All snippets not in the preset will be disabled.
 	 *
 	 * @param {string} preset - Preset key to enable.
 	 * @return {void}
@@ -205,7 +202,6 @@ const SettingsPage = () => {
 	const enableByPreset = (preset) => {
 		setSnippets((prev) => {
 			const updated = {};
-			const newOpen = new Set(openCategories);
 			Object.entries(prev).forEach(([name, data]) => {
 				const presets = Array.isArray(data?.preset) ? data.preset : [];
 				const isEnabled = presets.includes(preset);
@@ -213,13 +209,11 @@ const SettingsPage = () => {
 					...data,
 					'enable-snippet': isEnabled,
 				};
-				if (isEnabled) {
-					newOpen.add(data.category || __('Uncategorized', 'zenpress'));
-				}
 			});
-			setOpenCategories(newOpen);
 			return updated;
 		});
+		// Open all categories
+		setOpenCategories(new Set(sortedCategories));
 	};
 
 	// Group snippets by category
@@ -297,13 +291,7 @@ const SettingsPage = () => {
 						<Panel key={category}>
 							<PanelBody
 								title={category}
-								// Keep open if already marked or if a snippet is enabled
-								initialOpen={
-									openCategories.has(category) ||
-									groupedSnippets[category].some(
-										({ data }) => data?.['enable-snippet']
-									)
-								}
+								initialOpen={openCategories.has(category)}
 							>
 								{groupedSnippets[category].map(({ name, data }) => (
 									<PanelRow key={name}>

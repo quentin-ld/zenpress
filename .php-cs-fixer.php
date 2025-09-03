@@ -71,13 +71,16 @@ $rules = [
     'no_closing_tag' => true,
     'no_empty_phpdoc' => true,
     'no_empty_statement' => true,
-    'no_extra_blank_lines' => [
-        'tokens' => [
-            'extra',
-            'throw',
-            'use',
-        ]
-    ],
+	'no_extra_blank_lines' => [
+		'tokens' => [
+			'curly_brace_block',
+			'extra',
+			'parenthesis_brace_block',
+			'square_brace_block',
+			'throw',
+			'use',
+		],
+	],
     'no_mixed_echo_print' => [
         'use' => 'echo'
     ],

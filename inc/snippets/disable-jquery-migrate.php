@@ -4,7 +4,7 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-add_action('wp_default_scripts', function (&$scripts) {
+add_action('wp_default_scripts', static function (&$scripts) {
     if (!is_admin() && isset($scripts->registered['jquery'])) {
         $script = $scripts->registered['jquery'];
         if (!empty($script->deps)) {

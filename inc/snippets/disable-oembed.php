@@ -4,8 +4,7 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-add_action('init', 'zenpress_disable_oembed');
-function zenpress_disable_oembed() {
+add_action('init', static function () {
     // Remove oEmbed from query vars.
     global $wp;
     $wp->public_query_vars = array_diff($wp->public_query_vars, ['embed']);
@@ -44,4 +43,4 @@ function zenpress_disable_oembed() {
     if (!is_admin()) {
         wp_deregister_script('wp-embed');
     }
-}
+});

@@ -5,13 +5,12 @@ if (!defined('ABSPATH')) {
 }
 
 // Remove detailed login errors
-add_filter('login_errors', function () {
+add_filter('login_errors', static function () {
     return __('Login error.', 'zenpress');
 });
 
 // Limit login attempts
-add_filter('authenticate', 'zenpress_login_protection', 30, 3);
-function zenpress_login_protection(mixed $user, string $username, string $password): mixed {
+add_filter('authenticate', static function (mixed $user, string $username, string $password): mixed {
     $MAX_LOGIN_ATTEMPTS = 5;
     $BLOCK_DURATION = 300; // 5 minutes
 
@@ -54,4 +53,4 @@ function zenpress_login_protection(mixed $user, string $username, string $passwo
     set_transient($attemptKey, ['count' => $attempts], $BLOCK_DURATION);
 
     return $user;
-}
+}, 30, 3);
