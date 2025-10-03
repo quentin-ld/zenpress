@@ -4,21 +4,22 @@
   "type": "wordpress-plugin",
   "main": "assets/build/index.js",
   "scripts": {
+    "lint": "eslint assets/src/**/*.js",
+    "format": "prettier --write assets/src/**/*.js",
     "start": "wp-scripts start assets/src/index.js --output-path=assets/build",
-    "build": "wp-scripts build assets/src/index.js --output-path=assets/build",
-    "scss:sort": "postcss assets/src/**/*.scss --config postcss.config.sort.js --replace",
-    "scss:format": "prettier --write \"assets/src/**/*.scss\"",
-    "lint:scss": "npm run scss:sort && npm run scss:format"
+    "build": "wp-scripts build assets/src/index.js --output-path=assets/build"
   },
   "author": "Quentin Le Duff",
   "license": "GPL-2.0-or-later",
   "devDependencies": {
+    "@wordpress/eslint-plugin": "^22.0.0",
     "@wordpress/scripts": "^30.22.0",
-    "autoprefixer": "^10.4.20",
-    "css-declaration-sorter": "^7.2.0",
-    "postcss": "^8.5.6",
-    "postcss-cli": "^11.0.1",
-    "postcss-scss": "^4.0.6",
-    "prettier": "^3.3.3"
+    "eslint": "^8.57.1",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-import": "^2.32.0",
+    "eslint-plugin-jsx-a11y": "^6.10.2",
+    "eslint-plugin-prettier": "^5.5.4",
+    "eslint-plugin-react": "^7.37.5",
+    "prettier": "^3.6.2"
   }
 }

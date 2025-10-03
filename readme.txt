@@ -4,7 +4,7 @@ Donate link: https://github.com/sponsors/quentin-ld/
 Tags: optimization, performance, security, bloat, woocommerce
 Requires at least: 6.0
 Tested up to: 6.8
-Stable tag: 2.0.2
+Stable tag: 2.0.3
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html/
@@ -54,6 +54,7 @@ Following features are included :
 = Security 🔒️ =
 
 * Block user enumeration
+* Disable application passwords
 * Disable author archives
 * Disable pingback and trackback
 * Disable XML-RPC and remove RSD link
@@ -80,7 +81,6 @@ Following features are included :
 * New presets
 
 = Security =
-* Disable Application Passwords
 * Manage Heartbeat API (frontend + backend + admin whitelist)
 * Disable REST API
 
@@ -88,7 +88,6 @@ Following features are included :
 * Disable capital_P_dangit filter
 * Disable autosave
 * Disable post revision
-* Disable native lazy loading
 * Disable Password Strength Meter
 * Disable WordPress default lazy loading
 
@@ -158,6 +157,11 @@ Yes, it 's been tested actively and works from PHP 7.4 to PHP 8.4.
 
 == Changelog ==
 
+= 2.0.3 =
+- Global: Codebase and snippets optimization
+- Global: Fix typo
+- New actionable function: Disable application passwords
+
 = 2.0.2 =
 
 - Global : Codebase and snippets optimization
@@ -177,24 +181,24 @@ Yes, it 's been tested actively and works from PHP 7.4 to PHP 8.4.
 
 = 1.0.9.1 =
 
-- Compatibility : Plugin tested up to PHP 8.4
+- Compatibility: Plugin tested up to PHP 8.4
 
 = 1.0.9 =
 
-- Compatibility : Plugin tested up to PHP 8.4
-- UI : Disable login language selector
+- Compatibility: Plugin tested up to PHP 8.4
+- New actionable function: Disable login language selector
 - Fix constant naming in readme.txt
 
 = 1.0.8 =
 
-- UI : Remove smash baloon ads meta box
+- UI: Remove smash baloon ads meta box
 - Global : Files naming and call for scalability
 
 = 1.0.7 =
 
 - ZenPress tested for WordPress 6.8.1
-- UI : Remove site health meta box
-- UI : Remove WooCommerce admin dashboard setup metabox
+- UI: Remove site health meta box
+- UI: Remove WooCommerce admin dashboard setup metabox
 
 = 1.0.6 =
 
@@ -209,20 +213,20 @@ Yes, it 's been tested actively and works from PHP 7.4 to PHP 8.4.
 = 1.0.4 =
 
 - Fix ABSPATH on woocommerce patterns snippets.
-- Performance : Disable RSS feeds except main one.
-- Performance : Remove RSS feeds links in head except main one.
-- Performance : Remove Rest API link in head.
-- Performance : Remove WP Mail SMTP ads widget.
+- New actionable function: Disable RSS feeds except main one.
+- New actionable function: Remove RSS feeds links in head except main one.
+- New actionable function: Remove Rest API link in head.
+- New actionable function: Remove WP Mail SMTP ads widget.
 
 = 1.0.3 =
 
 - ZenPress tested for WordPress 6.8.
-- UI : Disable AARVE plugin bloat widget.
+- UI: Disable AARVE plugin bloat widget.
 
 = 1.0.2 =
 
 - Remove load_plugin_textdomain, not needed since WordPress 4.6.
-- Protect wp login : Add zenpress_ prefix to transients.
+- Protect wp login: Add zenpress_ prefix to transients.
 - Remove woocommerce patterns : Add zenpress_ prefix to function.
 - Lint and fix PHP code with phpstan.
 

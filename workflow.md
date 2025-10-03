@@ -34,31 +34,27 @@ composer run lint:php
 This will:
 
 - Use **PHP CS Fixer** to automatically fix code style issues.
-
 - Use **PHPStan** for static analysis and bug detection.
+
+### JavaScript / React Linting
+
+Run JavaScript/React linting with:
+```bash
+npm run lint
+```
+- ESLint checks for code quality, JSDoc alignment, and best practices.
+- Prettier enforces consistent formatting.
+
+To automatically fix fixable issues:
+```bash
+npm run lint -- --fix
+```
 
 ## 🛠️ Development Workflow
 
-- Each snippet is stored in `/inc/` with its own `.php` file.
-- Metadata for snippets is stored in `/inc/meta/` for scalability and translations.
-- Follow the **ZenPress coding conventions**:
-  - Use `exit;` instead of `die();`
-  - Prefix all functions with `zenpress_`
-  - Add **DocBlocks** with `@since` and `@return`
+- Each snippet is stored in `/inc/snippets/functions/` with its own `.php` file.
+- Metadata for snippets is stored in `/inc/snippets/meta/` for scalability and translations.
 - All new code must pass linting.
-
-### ✅ Example DocBlock format
-
-```php
-<?php
-/**
- * Title: Disable DNS prefetch
- * Category: Performance
- * Description: Removes DNS prefetch resource hints from the wp_head, reducing unnecessary DNS lookups.
- *
- * @return void
- * @since 1.0.0
- */
 
 ## License
 

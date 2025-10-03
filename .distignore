@@ -4,6 +4,7 @@
 .distignore
 .DS_Store
 .editorconfig
+.eslintrc.js
 .git
 .gitattributes
 .github
@@ -11,6 +12,7 @@
 .gitlab-ci.yml
 .php-cs-fixer.php
 .prettierrc
+.sublime
 .travis.yml
 .vscode
 .wordpress-org
@@ -27,6 +29,7 @@ package-lock.json
 package.json
 php-cs-fixer.php
 phpcs.ruleset.xml
+phpstan-bootstrap.php
 phpstan.neon
 phpunit.xml
 phpunit.xml.dist
