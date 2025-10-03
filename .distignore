@@ -4,6 +4,7 @@
 .distignore
 .DS_Store
 .editorconfig
+.eslintrc
 .eslintrc.js
 .git
 .gitattributes
@@ -12,12 +13,15 @@
 .gitlab-ci.yml
 .php-cs-fixer.php
 .prettierrc
+.prettierrc.js
 .sublime
 .travis.yml
 .vscode
 .wordpress-org
 behat.yml
 bin
+eslintrc
+eslintrc.js
 circle.yml
 composer.json
 composer.lock
@@ -34,6 +38,8 @@ phpstan.neon
 phpunit.xml
 phpunit.xml.dist
 postcss.config.sort.js
+prettierrc
+prettierrc.js
 README.md
 tests
 Thumbs.db

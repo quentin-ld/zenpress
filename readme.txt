@@ -4,7 +4,7 @@ Donate link: https://github.com/sponsors/quentin-ld/
 Tags: optimization, performance, security, bloat, woocommerce
 Requires at least: 6.0
 Tested up to: 6.8
-Stable tag: 2.0.3
+Stable tag: 2.0.3.1
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html/
@@ -156,6 +156,9 @@ Nice ! If you can't find anything in the roadmap, feel free to submit your sugge
 Yes, it 's been tested actively and works from PHP 7.4 to PHP 8.4.
 
 == Changelog ==
+
+= 2.0.3.1 =
+- Remove dev files
 
 = 2.0.3 =
 - Global: Codebase and snippets optimization
