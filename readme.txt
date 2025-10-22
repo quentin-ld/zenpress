@@ -1,10 +1,10 @@
-=== ZenPress — Cleaner, Lighter, Faster WP ===
+=== ZenPress - Cleaner, Lighter, Faster WP ===
 Contributors: @quentinldd
 Donate link: https://github.com/sponsors/quentin-ld/
 Tags: optimization, performance, security, bloat, woocommerce
 Requires at least: 6.0
 Tested up to: 6.8
-Stable tag: 2.0.3.1
+Stable tag: 2.0.4
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html/
@@ -14,17 +14,19 @@ Easily speed up and strengthen your WordPress site by cleaning out unnecessary f
 == Description ==
 
 ZenPress is a lightweight, super-fast plugin that boosts your WordPress & WooCommerce website through a wide range of solid actions.
-This is a simple solution for improving your WordPress website's performance and security while enjoying a simpler and lighter UI.
+[Combined with Cache Enabler](https://wordpress.org/plugins/cache-enabler/), [Autoptimize](https://wordpress.org/plugins/autoptimize/) and [SQLite Object Cache](https://wordpress.org/plugins/sqlite-object-cache/), ZenPress is a free lightweight solution to major premium performance plugins.
+This is a simple solution for improving your WordPress website's performance and security while enjoying a simpler and lighter UI without breaking the bank.
 No database clutter, no ads, no pro version. Just install, activate, select what you need or pick up your settings preset and you are ready to go !
 
 = Why choose ZenPress? =
 * Curated settings presets included to help you.
 * Deep integration with the native WordPress interface: no bloat, no extra options page, no weird custom dashboard : only what you need.
-* Future proof.
-* Ultra lightweight.
+* Free alternative to major premium performance plugin for everyone.
 * Make your WordPress website fast & clean by disabling unwanted features.
 * Improve security by turning off features you don’t use and hardening weak spots.
 * Eliminate third-party plugin bloat (actually hunting them down).
+* Ultra lightweight.
+* Future proof.
 
 == Features ==
 
@@ -57,6 +59,7 @@ Following features are included :
 * Disable application passwords
 * Disable author archives
 * Disable pingback and trackback
+* Disable REST API for visitors not logged into WordPress.
 * Disable XML-RPC and remove RSD link
 * Hide WordPress version
 * Protect the wp-login form from brute force attacks
@@ -79,10 +82,11 @@ Following features are included :
 
 = Global =
 * New presets
+* Documentation pages
+* More context in plugin UI for actionable function
 
 = Security =
 * Manage Heartbeat API (frontend + backend + admin whitelist)
-* Disable REST API
 
 = Performance =
 * Disable capital_P_dangit filter
@@ -157,8 +161,11 @@ Yes, it 's been tested actively and works from PHP 7.4 to PHP 8.4.
 
 == Changelog ==
 
+= 2.0.4 =
+- New actionable function: Disable the WP REST API for visitors not logged into WordPress.
+
 = 2.0.3.1 =
-- Remove dev files
+- New actionable function: Disable application passwords
 
 = 2.0.3 =
 - Global: Codebase and snippets optimization
