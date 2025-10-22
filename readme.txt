@@ -4,7 +4,7 @@ Donate link: https://github.com/sponsors/quentin-ld/
 Tags: optimization, performance, security, bloat, woocommerce
 Requires at least: 6.0
 Tested up to: 6.8
-Stable tag: 2.0.4
+Stable tag: 2.0.4.1
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html/
@@ -39,86 +39,86 @@ Following features are included :
 
 = Performance 🚀 =
 
-* Disable adjacent posts link tags
-* Disable dashicons
-* Disable DNS prefetch
-* Disable WordPress emoji scripts and styles
-* Disable jQuery migrate
-* Disable oEmbed
-* Disable PDF thumbnails
-* Disable all WordPress feeds (RDF, RSS, RSS2, Atom, and comments)
-* Disable WordPress shortlink
-* Disable WLW link
-* Remove WordPress default remote block patterns
-* Remove REST API links
-* Separate loading of core block styles
+* Disable adjacent posts link tags.
+* Disable dashicons.
+* Disable DNS prefetch.
+* Disable WordPress emoji scripts and styles.
+* Disable jQuery migrate.
+* Disable oEmbed.
+* Disable PDF thumbnails.
+* Disable all WordPress feeds (RDF, RSS, RSS2, Atom, and comments).
+* Disable WordPress shortlink.
+* Disable WLW link.
+* Remove WordPress default remote block patterns.
+* Remove REST API links.
+* Separate loading of core block styles.
 
 = Security 🔒️ =
 
-* Block user enumeration
-* Disable application passwords
-* Disable author archives
-* Disable pingback and trackback
+* Block user enumeration.
+* Disable application passwords.
+* Disable author archives.
+* Disable pingback and trackback.
 * Disable REST API for visitors not logged into WordPress.
-* Disable XML-RPC and remove RSD link
-* Hide WordPress version
-* Protect the wp-login form from brute force attacks
+* Disable XML-RPC and remove RSD link.
+* Hide WordPress version.
+* Protect the wp-login form from brute force attacks.
 
 = User interface 💻️ =
 
-* Clean up the WordPress admin bar
-* Clean up the WordPress Dashboard
-* Disable the login language selector
+* Clean up the WordPress admin bar.
+* Clean up the WordPress Dashboard.
+* Disable the login language selector.
 
 = WooCommerce 🛒 =
-* Disable WooCommerce cart fragments script
-* Disable WooCommerce scripts and styles on non-WooCommerce pages
-* Disable unnecessary Stripe scripts on WooCommerce pages
-* Disable WooCommerce widgets
-* Hide WooCommerce version
-* Remove WooCommerce default remote block patterns
+* Disable WooCommerce cart fragments script.
+* Disable WooCommerce scripts and styles on non-WooCommerce pages.
+* Disable unnecessary Stripe scripts on WooCommerce pages.
+* Disable WooCommerce widgets.
+* Hide WooCommerce version.
+* Remove WooCommerce default remote block patterns.
 
 == Roadmap ==
 
 = Global =
-* New presets
-* Documentation pages
-* More context in plugin UI for actionable function
+* New presets.
+* Documentation pages.
+* More context in plugin UI for actionable function.
 
 = Security =
-* Manage Heartbeat API (frontend + backend + admin whitelist)
+* Manage Heartbeat API (frontend + backend + admin whitelist).
 
 = Performance =
-* Disable capital_P_dangit filter
-* Disable autosave
-* Disable post revision
-* Disable Password Strength Meter
-* Disable WordPress default lazy loading
+* Disable capital_P_dangit filter.
+* Disable autosave.
+* Disable post revision.
+* Disable Password Strength Meter.
+* Disable WordPress default lazy loading.
 
 = UI =
-* Remove "howdy" from admin bar
-* Remove WordPress logo
-* Remove "Help button"
-* Remove "Thanks for using WordPress" in footer
-* Remove "site health" page
-* Remove "Privacy tools"
+* Remove "howdy" from admin bar.
+* Remove WordPress logo.
+* Remove "Help button".
+* Remove "Thanks for using WordPress" in footer.
+* Remove "site health" page.
+* Remove "Privacy tools".
 
 = WooCommerce =
-* Disable WooCommerce tracking
-* Disable marketing hub
-* Disable dashboard setup widget
-* Disable new product editor
-* Disable WooCommerce blocks
-* Disable WooCommerce promo emails
+* Disable WooCommerce tracking.
+* Disable marketing hub.
+* Disable dashboard setup widget.
+* Disable new product editor.
+* Disable WooCommerce blocks.
+* Disable WooCommerce promo emails.
 
 = Plugins =
-* Disable CF7 CSS & JS
-* Disable Elementor bloat
-* Disable WP Bakery bloat
-* Disable Divi bloat
-* Disable Yoast SEO bloat
-* Disable Jetpack bloat
-* Disable Updraft bloat
+* Disable CF7 CSS & JS.
+* Disable Elementor bloat.
+* Disable WP Bakery bloat.
+* Disable Divi bloat.
+* Disable Yoast SEO bloat.
+* Disable Jetpack bloat.
+* Disable Updraft bloat.
 
 == Privacy Statement ==
 
@@ -161,54 +161,58 @@ Yes, it 's been tested actively and works from PHP 7.4 to PHP 8.4.
 
 == Changelog ==
 
+= 2.0.4.1 =
+- Global: Fix plugin png icon.
+- Global: Fix typo.
+
 = 2.0.4 =
 - New actionable function: Disable the WP REST API for visitors not logged into WordPress.
 
 = 2.0.3.1 =
-- New actionable function: Disable application passwords
+- New actionable function: Disable application passwords.
 
 = 2.0.3 =
-- Global: Codebase and snippets optimization
-- Global: Fix typo
-- New actionable function: Disable application passwords
+- Global: Codebase and snippets optimization.
+- Global: Fix typo.
+- New actionable function: Disable application passwords.
 
 = 2.0.2 =
 
-- Global : Codebase and snippets optimization
+- Global : Codebase and snippets optimization.
 - Global : Fixed a bug in the automatic opening and closing function of the panels on the settings page.
 
 = 2.0.1 =
 
-- Global: Fix typo
+- Global: Fix typo.
 
 = 2.0 =
 
 - Settings subpage: new ZenPress settings page, where you can choose your features or select a preset.
 - Global: code reinforcement to prevent vulnerabilities, prepare plugin scaling and easy addition of new features.
-- Global: new banners and icons
-- Global: addition of translation strings and metadata
-- Compatibility: improved compatibility from PHP 7.4 to PHP 8.4
+- Global: new banners and icons.
+- Global: addition of translation strings and metadata.
+- Compatibility: improved compatibility from PHP 7.4 to PHP 8.4.
 
 = 1.0.9.1 =
 
-- Compatibility: Plugin tested up to PHP 8.4
+- Compatibility: Plugin tested up to PHP 8.4.
 
 = 1.0.9 =
 
-- Compatibility: Plugin tested up to PHP 8.4
-- New actionable function: Disable login language selector
-- Fix constant naming in readme.txt
+- Compatibility: Plugin tested up to PHP 8.4.
+- New actionable function: Disable login language selector.
+- Fix constant naming in readme.txt.
 
 = 1.0.8 =
 
-- UI: Remove smash baloon ads meta box
-- Global : Files naming and call for scalability
+- UI: Remove smash baloon ads meta box.
+- Global : Files naming and call for scalability.
 
 = 1.0.7 =
 
-- ZenPress tested for WordPress 6.8.1
-- UI: Remove site health meta box
-- UI: Remove WooCommerce admin dashboard setup metabox
+- ZenPress tested for WordPress 6.8.1.
+- UI: Remove site health meta box.
+- UI: Remove WooCommerce admin dashboard setup metabox.
 
 = 1.0.6 =
 
@@ -242,7 +246,7 @@ Yes, it 's been tested actively and works from PHP 7.4 to PHP 8.4.
 
 = 1.0.1 =
 
-- Fix script loading error on WC home admin page
+- Fix script loading error on WC home admin page.
 
 = 1.0.0.2 =
 
@@ -252,7 +256,7 @@ Yes, it 's been tested actively and works from PHP 7.4 to PHP 8.4.
 
 = 1.0.0.1 =
 
-- Small fixes for WordPress Directory Submission
+- Small fixes for WordPress Directory Submission.
 
 = 1.0 =
 
