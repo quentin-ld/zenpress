@@ -4,7 +4,7 @@ Donate link: https://github.com/sponsors/quentin-ld/
 Tags: optimization, performance, security, bloat, woocommerce
 Requires at least: 6.0
 Tested up to: 6.8
-Stable tag: 2.0.4.1
+Stable tag: 2.0.5
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html/
@@ -14,7 +14,7 @@ Easily speed up and strengthen your WordPress site by cleaning out unnecessary f
 == Description ==
 
 ZenPress is a lightweight, super-fast plugin that boosts your WordPress & WooCommerce website through a wide range of solid actions.
-[Combined with Cache Enabler](https://wordpress.org/plugins/cache-enabler/), [Autoptimize](https://wordpress.org/plugins/autoptimize/) and [SQLite Object Cache](https://wordpress.org/plugins/sqlite-object-cache/), ZenPress is a free lightweight solution to major premium performance plugins.
+Combined with [Cache Enabler](https://wordpress.org/plugins/cache-enabler/), [Autoptimize](https://wordpress.org/plugins/autoptimize/) and [SQLite Object Cache](https://wordpress.org/plugins/sqlite-object-cache/), ZenPress is a free alternative to major premium performance plugins.
 This is a simple solution for improving your WordPress website's performance and security while enjoying a simpler and lighter UI without breaking the bank.
 No database clutter, no ads, no pro version. Just install, activate, select what you need or pick up your settings preset and you are ready to go !
 
@@ -160,6 +160,9 @@ Nice ! If you can't find anything in the roadmap, feel free to submit your sugge
 Yes, it 's been tested actively and works from PHP 7.4 to PHP 8.4.
 
 == Changelog ==
+
+= 2.0.5 =
+- Global: Compatibility check.
 
 = 2.0.4.1 =
 - Global: Fix plugin png icon.
