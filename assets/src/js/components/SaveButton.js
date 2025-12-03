@@ -9,7 +9,6 @@ import { __ } from '@wordpress/i18n';
  * @param {boolean}  props.isBusy  - Whether the button is in loading state.
  * @return {JSX.Element} The save button.
  */
-
 export const SaveButton = ({ onClick, isBusy }) => {
     return (
         <Button variant="primary" onClick={onClick} isBusy={isBusy} __next40pxDefaultSize>
