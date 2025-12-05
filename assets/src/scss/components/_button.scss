@@ -1,0 +1,5 @@
+@use '../abstracts/variables' as *;
+
+.components-button {
+    gap: $gap-xs;
+}

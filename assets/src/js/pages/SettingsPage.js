@@ -64,7 +64,6 @@ export const SettingsPage = () => {
         return category.charAt(0).toUpperCase() + category.slice(1).toLowerCase();
     };
 
-
     // Category order: Core, Gutenberg, WooCommerce, ads-blocker, Tools
     // Using English lowercase values for comparison since categories are stored in lowercase
     const categoryOrder = ['core', 'gutenberg', 'woocommerce', 'ads-blocker', 'tools'];
@@ -89,7 +88,7 @@ export const SettingsPage = () => {
     const sortedCategories = Object.keys(groupedSnippets).sort((a, b) => {
         const indexA = categoryOrder.indexOf(a.toLowerCase());
         const indexB = categoryOrder.indexOf(b.toLowerCase());
-        
+
         // If both are in the order array, sort by their position
         if (indexA !== -1 && indexB !== -1) {
             return indexA - indexB;
@@ -132,9 +131,9 @@ export const SettingsPage = () => {
                             {sortedCategories.map((category) => {
                                 const categoryClass = `zenpress-tabs__tab--category-${category.toLowerCase().replace(/\s+/g, '-')}`;
                                 return (
-                                    <Tabs.Tab 
-                                        key={category} 
-                                        tabId={category} 
+                                    <Tabs.Tab
+                                        key={category}
+                                        tabId={category}
                                         title={capitalizeCategory(category)}
                                         className={categoryClass}
                                     >
@@ -149,7 +148,10 @@ export const SettingsPage = () => {
                                 <Tabs.TabPanel key={category} tabId={category}>
                                     <h2>{capitalizeCategory(category)}</h2>
                                     {subcategories.map((subcategory) => (
-                                        <div key={subcategory} className={`zenpress-subcategory zenpress-subcategory-${subcategory.toLowerCase().replace(/\s+/g, '-')}`}>
+                                        <div
+                                            key={subcategory}
+                                            className={`zenpress-subcategory zenpress-subcategory-${subcategory.toLowerCase().replace(/\s+/g, '-')}`}
+                                        >
                                             <hr />
                                             <h3>{capitalizeCategory(subcategory)}</h3>
                                             {groupedSnippets[category][subcategory].map(({ name, data }) => (
@@ -201,20 +203,12 @@ export const SettingsPage = () => {
                         </Button>
                         <h3>{__('Blog preset', 'zenpress')}</h3>
                         <p></p>
-                        <Button
-                            variant="secondary"
-                            onClick={() => enableByPreset('blog')}
-                            __next40pxDefaultSize
-                        >
+                        <Button variant="secondary" onClick={() => enableByPreset('blog')} __next40pxDefaultSize>
                             {__('Enable', 'zenpress')}
                         </Button>
                         <h3>{__('E-commerce preset', 'zenpress')}</h3>
                         <p></p>
-                        <Button
-                            variant="secondary"
-                            onClick={() => enableByPreset('ecommerce')}
-                            __next40pxDefaultSize
-                        >
+                        <Button variant="secondary" onClick={() => enableByPreset('ecommerce')} __next40pxDefaultSize>
                             {__('Enable', 'zenpress')}
                         </Button>
                     </div>

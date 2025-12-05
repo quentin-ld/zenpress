@@ -1,11 +1,17 @@
+@use '../abstracts/variables' as *;
+
 .zenpress {
 	&-tabs {
 		display: grid;
 		width: 100%;
-		gap: 0px;
+		gap: $gap-none;
 
 		&--vertical {
-			grid-template-columns: 200px 1fr;
+			grid-template-columns: $tab-list-width 1fr;
+
+			@media screen and (max-width: 768px) {
+				grid-template-columns: 1fr;
+			}
 		}
 
 		&__list {
@@ -15,7 +21,7 @@
 
 			&--vertical {
 				flex-direction: column;
-				border-right: 1px solid #d6e2ed;
+				border-right: $border-width solid $color-border-light;
 				padding-right: 0;
 			}
 		}
@@ -23,48 +29,48 @@
 		&__tab {
 			display: flex;
 			align-items: center;
-			padding: 16px;
-			min-height: 40px;
+			padding: $spacing-md;
+			min-height: $tab-min-height;
 			margin: 0;
 			background: transparent;
 			border: none;
-			border-radius: 0;
+			border-radius: $border-radius-none;
 			cursor: pointer;
-			line-height: 1.2;
-			font-weight: 400;
-			font-size: 13px;
-			color: var(--wp-components-color-foreground, #1e1e1e);
+			line-height: $line-height-base;
+			font-weight: $font-weight-normal;
+			font-size: $font-size-base;
+			color: $wp-color-foreground;
 			text-align: left;
-			transition: all 0.1s ease;
+			transition: $transition-base;
 			position: relative;
-			gap: 8px;
+			gap: $gap-sm;
 
 			&::before {
 				font-family: dashicons;
-				font-size: 20px;
-				line-height: 1;
+				font-size: $font-size-icon;
+				line-height: $line-height-icon;
 				display: inline-block;
-				width: 20px;
-				height: 20px;
+				width: $icon-size;
+				height: $icon-size;
 				text-align: center;
 			}
 
 			&:hover {
-				color: #1e1e1e;
-				background: #f0f0f1;
+				color: $color-foreground;
+				background: $color-background-hover;
 			}
 
 			&:focus {
 				outline: 2px solid transparent;
-				box-shadow: inset 0 0 0 1px #2271b1, inset 0 0 0 2px #fff;
+				box-shadow: inset 0 0 0 $border-width $color-accent-hover, inset 0 0 0 2px $color-background;
 			}
 
 			&--is-active {
-				color: var(--wp-components-color-accent, var(--wp-admin-theme-color, #3858e9));
+				color: $wp-color-accent;
 				fill: currentcolor;
 				background: transparent;
-				font-weight: 400;
-				background-color: color-mix( in srgb, var(--wp-components-color-accent, var(--wp-admin-theme-color, #3858e9)), transparent 96% );
+				font-weight: $font-weight-normal;
+				background-color: $color-accent-active-bg;
 
 				&::after {
 					content: '';
@@ -72,8 +78,8 @@
 					right: 0;
 					top: 0;
 					bottom: 0;
-					width: 3px;
-					background: var(--wp-components-color-accent, var(--wp-admin-theme-color, #3858e9));
+					width: $border-width-thick;
+					background: $wp-color-accent;
 				}
 			}
 
@@ -108,11 +114,21 @@
 			flex: 1;
 			padding: 0;
 			min-width: 0;
-			height: 65vh;
-			max-height: 65vh;
+			height: $tab-panel-height;
+			max-height: $tab-panel-height;
 			position: relative;
 			overflow: auto;
-			padding: 16px 16px 0 16px;
+			padding: $spacing-md $spacing-md 0 $spacing-md;
+
+			@media screen and (max-width: 1281px) {
+				height: 600px;
+				max-height: 600px;
+			}
+
+			@media screen and (max-width: 960px) {
+				height: unset;
+				max-height: unset;
+			}
 
 			&[hidden] {
 				display: none;
