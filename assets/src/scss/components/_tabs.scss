@@ -58,11 +58,13 @@
 			&:hover {
 				color: $color-foreground;
 				background: $color-background-hover;
+				outline: 2px solid transparent;
+				box-shadow: inset 0 0 0 2px $color-foreground !important;
 			}
 
 			&:focus {
 				outline: 2px solid transparent;
-				box-shadow: inset 0 0 0 $border-width $color-accent-hover, inset 0 0 0 2px $color-background;
+				box-shadow: inset 0 0 0 2px $color-foreground !important;
 			}
 
 			&--is-active {
@@ -128,6 +130,11 @@
 			@media screen and (max-width: 960px) {
 				height: unset;
 				max-height: unset;
+			}
+
+			&:focus {
+				outline: 2px solid transparent;
+				box-shadow: inset 0 0 0 2px $color-foreground !important;
 			}
 
 			&[hidden] {

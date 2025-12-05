@@ -145,6 +145,10 @@
 		gap: $gap-md;
 		align-items: stretch;
 		justify-content: flex-start;
+
+		hr {
+			margin-top: 2em;
+		}
 	}
 
 	&-presets {
@@ -191,6 +195,69 @@
 			h3::before {
 				content: '💻️';
 			}
+		}
+	}
+}
+
+.zenpress-tabs__panel {
+	h2 {
+		position: relative;
+		padding-left: 36px;
+		font-size: 1.5em;
+
+		&::before {
+			content: '';
+			font-family: dashicons;
+			font-size: 28px;
+			line-height: 28px;
+			display: inline-block;
+			width: 28px;
+			height: 28px;
+			position: absolute;
+			left: 0;
+			top: 50%;
+			transform: translateY(-50%);
+			text-align: center;
+		}
+	}
+}
+
+#zenpress-tab-panel-core {
+	h2 {
+		&::before {
+			content: '\f226'; // dashicons-dashboard
+		}
+	}
+}
+
+#zenpress-tab-panel-gutenberg {
+	h2 {
+		&::before {
+			content: '\f12b'; // dashicons-block-default
+		}
+	}
+}
+
+#zenpress-tab-panel-woocommerce {
+	h2 {
+		&::before {
+			content: '\f174'; // dashicons-cart
+		}
+	}
+}
+
+#zenpress-tab-panel-tools {
+	h2 {
+		&::before {
+			content: '\f107'; // dashicons-admin-tools
+		}
+	}
+}
+
+#zenpress-tab-panel-ads-blocker {
+	h2 {
+		&::before {
+			content: '\f332'; // dashicons-superhero
 		}
 	}
 }

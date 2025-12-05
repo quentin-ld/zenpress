@@ -2,14 +2,14 @@
 # This file is distributed under the GPL v2 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: ZenPress - Cleaner, Lighter, Faster WP 2.0.4.1\n"
+"Project-Id-Version: ZenPress - Cleaner, Lighter, Faster WP 2.0.5\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/zenpress\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-10-22T14:03:43+00:00\n"
+"POT-Creation-Date: 2025-12-05T11:42:15+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: zenpress\n"
@@ -168,13 +168,33 @@ msgid "Prevents attackers from guessing WordPress usernames by blocking requests
 msgstr ""
 
 #: inc/snippets/meta/block-user-enumeration.meta.php:18
+#: inc/snippets/meta/clean-admin-bar.meta.php:18
+#: inc/snippets/meta/disable-adjacent-posts.meta.php:18
 #: inc/snippets/meta/disable-application-passwords.meta.php:18
 #: inc/snippets/meta/disable-author-archives.meta.php:18
+#: inc/snippets/meta/disable-dns-prefetch.meta.php:18
+#: inc/snippets/meta/disable-login-language-selector.meta.php:15
+#: inc/snippets/meta/disable-oembed.meta.php:15
 #: inc/snippets/meta/disable-pingback-trackback.meta.php:15
 #: inc/snippets/meta/disable-rest-api.meta.php:19
+#: inc/snippets/meta/disable-rss.meta.php:15
+#: inc/snippets/meta/disable-shortlink.meta.php:15
+#: inc/snippets/meta/disable-wlw-manifest.meta.php:15
 #: inc/snippets/meta/disable-xmlrpc-rsdlink.meta.php:15
 #: inc/snippets/meta/hide-wordpress-version.meta.php:15
-#: inc/snippets/meta/protect-wp-login.meta.php:15
+#: inc/snippets/meta/remove-rest-api-link.meta.php:15
+msgid "core"
+msgstr ""
+
+#: inc/snippets/meta/block-user-enumeration.meta.php:19
+#: inc/snippets/meta/disable-application-passwords.meta.php:19
+#: inc/snippets/meta/disable-author-archives.meta.php:19
+#: inc/snippets/meta/disable-pingback-trackback.meta.php:16
+#: inc/snippets/meta/disable-rest-api.meta.php:20
+#: inc/snippets/meta/disable-xmlrpc-rsdlink.meta.php:16
+#: inc/snippets/meta/hide-woocommerce-version.meta.php:16
+#: inc/snippets/meta/hide-wordpress-version.meta.php:16
+#: inc/snippets/meta/protect-wp-login.meta.php:16
 msgid "security"
 msgstr ""
 
@@ -186,9 +206,9 @@ msgstr ""
 msgid "Removes unnecessary items from the admin bar in both backend and frontend. Reduces clutter and simplifies the interface."
 msgstr ""
 
-#: inc/snippets/meta/clean-admin-bar.meta.php:18
-#: inc/snippets/meta/clean-dashboard-items.meta.php:18
-#: inc/snippets/meta/disable-login-language-selector.meta.php:15
+#: inc/snippets/meta/clean-admin-bar.meta.php:19
+#: inc/snippets/meta/clean-dashboard-items.meta.php:19
+#: inc/snippets/meta/disable-login-language-selector.meta.php:16
 msgid "user-interface"
 msgstr ""
 
@@ -200,6 +220,10 @@ msgstr ""
 msgid "Removes unnecessary widgets and ads widgets from the dashboard. Declutters the admin area and improves usability."
 msgstr ""
 
+#: inc/snippets/meta/clean-dashboard-items.meta.php:18
+msgid "ads-blocker"
+msgstr ""
+
 #: inc/snippets/meta/disable-adjacent-posts.meta.php:13
 msgid "Disable adjacent posts link tags"
 msgstr ""
@@ -208,20 +232,25 @@ msgstr ""
 msgid "Removes rel=\"prev\" and rel=\"next\" tags from wp_head. Reduces unnecessary HTML output and slightly improves performance."
 msgstr ""
 
-#: inc/snippets/meta/disable-adjacent-posts.meta.php:18
-#: inc/snippets/meta/disable-dashicons.meta.php:18
-#: inc/snippets/meta/disable-dns-prefetch.meta.php:18
-#: inc/snippets/meta/disable-emoji-scripts.meta.php:18
-#: inc/snippets/meta/disable-jquery-migrate.meta.php:18
-#: inc/snippets/meta/disable-oembed.meta.php:15
-#: inc/snippets/meta/disable-pdf-thumbnails.meta.php:15
-#: inc/snippets/meta/disable-rss.meta.php:15
-#: inc/snippets/meta/disable-shortlink.meta.php:15
-#: inc/snippets/meta/disable-wlw-manifest.meta.php:15
-#: inc/snippets/meta/remove-gutenberg-unwanted-block-patterns.meta.php:15
-#: inc/snippets/meta/remove-rest-api-link.meta.php:15
-#: inc/snippets/meta/separate-gutenberg-core-block-styles.meta.php:15
-msgid " performance"
+#: inc/snippets/meta/disable-adjacent-posts.meta.php:19
+#: inc/snippets/meta/disable-dashicons.meta.php:19
+#: inc/snippets/meta/disable-dns-prefetch.meta.php:19
+#: inc/snippets/meta/disable-emoji-scripts.meta.php:19
+#: inc/snippets/meta/disable-jquery-migrate.meta.php:19
+#: inc/snippets/meta/disable-oembed.meta.php:16
+#: inc/snippets/meta/disable-pdf-thumbnails.meta.php:16
+#: inc/snippets/meta/disable-rss.meta.php:16
+#: inc/snippets/meta/disable-shortlink.meta.php:16
+#: inc/snippets/meta/disable-wlw-manifest.meta.php:16
+#: inc/snippets/meta/disable-woocommerce-cart-fragments.meta.php:16
+#: inc/snippets/meta/disable-woocommerce-scripts-styles.meta.php:16
+#: inc/snippets/meta/disable-woocommerce-stripe-scripts.meta.php:16
+#: inc/snippets/meta/disable-woocommerce-widgets.meta.php:16
+#: inc/snippets/meta/remove-gutenberg-unwanted-block-patterns.meta.php:16
+#: inc/snippets/meta/remove-rest-api-link.meta.php:16
+#: inc/snippets/meta/remove-woocommerce-patterns.meta.php:16
+#: inc/snippets/meta/separate-gutenberg-core-block-styles.meta.php:16
+msgid "performance"
 msgstr ""
 
 #: inc/snippets/meta/disable-application-passwords.meta.php:13
@@ -246,6 +275,13 @@ msgstr ""
 
 #: inc/snippets/meta/disable-dashicons.meta.php:14
 msgid "Prevents WordPress from loading the Dashicons CSS for visitors who are not logged in. Improves frontend performance by reducing unnecessary styles."
+msgstr ""
+
+#: inc/snippets/meta/disable-dashicons.meta.php:18
+#: inc/snippets/meta/disable-emoji-scripts.meta.php:18
+#: inc/snippets/meta/disable-jquery-migrate.meta.php:18
+#: inc/snippets/meta/disable-pdf-thumbnails.meta.php:15
+msgid " core"
 msgstr ""
 
 #: inc/snippets/meta/disable-dns-prefetch.meta.php:13
@@ -409,12 +445,20 @@ msgstr ""
 msgid "Removes detailed login error messages and limits failed login attempts per IP address. Blocks further attempts for a set duration after too many failures. Improves security by mitigating brute force attacks."
 msgstr ""
 
+#: inc/snippets/meta/protect-wp-login.meta.php:15
+msgid "tools"
+msgstr ""
+
 #: inc/snippets/meta/remove-gutenberg-unwanted-block-patterns.meta.php:13
 msgid "Remove WordPress default remote block patterns"
 msgstr ""
 
 #: inc/snippets/meta/remove-gutenberg-unwanted-block-patterns.meta.php:14
 msgid "Prevents WordPress from loading remote block patterns and removes the built-in core block patterns. Reduces editor clutter and improves performance by avoiding unnecessary data loading."
+msgstr ""
+
+#: inc/snippets/meta/remove-gutenberg-unwanted-block-patterns.meta.php:15
+msgid " gutenberg"
 msgstr ""
 
 #: inc/snippets/meta/remove-rest-api-link.meta.php:13
@@ -441,67 +485,93 @@ msgstr ""
 msgid "Forces WordPress to load core block styles separately, improving performance by only loading the styles required for the blocks used on a page."
 msgstr ""
 
+#: inc/snippets/meta/separate-gutenberg-core-block-styles.meta.php:15
+msgid "gutenberg"
+msgstr ""
+
 #: assets/build/index.js:1
-#: assets/src/components/SaveButton.js:16
+#: assets/src/js/components/SaveButton.js:15
 msgid "Save settings"
 msgstr ""
 
 #: assets/build/index.js:1
-#: assets/src/hooks/useSettings.js:41
+#: assets/src/js/hooks/useSettings.js:41
 msgid "Failed to load settings."
 msgstr ""
 
 #: assets/build/index.js:1
-#: assets/src/hooks/useSettings.js:56
+#: assets/src/js/hooks/useSettings.js:56
 msgid "Settings saved."
 msgstr ""
 
 #: assets/build/index.js:1
-#: assets/src/hooks/useSettings.js:58
+#: assets/src/js/hooks/useSettings.js:58
 msgid "Failed to save settings."
 msgstr ""
 
 #: assets/build/index.js:1
-#: assets/src/pages/SettingsPage.js:66
+#: assets/src/js/pages/SettingsPage.js:75
 msgid "Uncategorized"
 msgstr ""
 
 #: assets/build/index.js:1
-#: assets/src/pages/SettingsPage.js:83
-msgid "Select the features that suit your needs. If you don't know which ones to choose, just select your site's type and it will set the right features for you."
+#: assets/src/js/pages/SettingsPage.js:76
+msgid "uncategorized"
 msgstr ""
 
 #: assets/build/index.js:1
-#: assets/src/pages/SettingsPage.js:88
-msgid "Pick a preset"
-msgstr ""
-
-#: assets/build/index.js:1
-#: assets/src/pages/SettingsPage.js:96
-msgid "Corporate website / Portfolio"
-msgstr ""
-
-#: assets/build/index.js:1
-#: assets/src/pages/SettingsPage.js:99
-msgid "Blog"
-msgstr ""
-
-#: assets/build/index.js:1
-#: assets/src/pages/SettingsPage.js:102
-msgid "E-commerce"
-msgstr ""
-
-#: assets/build/index.js:1
-#: assets/src/pages/SettingsPage.js:106
-msgid "Or just enable what you need"
-msgstr ""
-
-#: assets/build/index.js:1
-#: assets/src/pages/SettingsPage.js:111
+#: assets/src/js/pages/SettingsPage.js:193
 msgid "Enable all actions"
 msgstr ""
 
 #: assets/build/index.js:1
-#: assets/src/pages/SettingsPage.js:115
+#: assets/src/js/pages/SettingsPage.js:196
 msgid "Disable all actions"
+msgstr ""
+
+#: assets/build/index.js:1
+#: assets/src/js/pages/SettingsPage.js:206
+msgid "Pick configuration preset"
+msgstr ""
+
+#: assets/build/index.js:1
+#: assets/src/js/pages/SettingsPage.js:208
+msgid "Don't know which features to enable? Quickly configure ZenPress by selecting a preset that matches your site type. Each preset enables optimized features for your specific use case."
+msgstr ""
+
+#: assets/build/index.js:1
+#: assets/src/js/pages/SettingsPage.js:214
+msgid "Corporate website"
+msgstr ""
+
+#: assets/build/index.js:1
+#: assets/src/js/pages/SettingsPage.js:216
+msgid "Optimized for business sites and portfolios. Focuses on security, performance, and removing unnecessary features like RSS feeds and author archives."
+msgstr ""
+
+#: assets/build/index.js:1
+#: assets/src/js/pages/SettingsPage.js:226
+#: assets/src/js/pages/SettingsPage.js:237
+#: assets/src/js/pages/SettingsPage.js:248
+msgid "Enable"
+msgstr ""
+
+#: assets/build/index.js:1
+#: assets/src/js/pages/SettingsPage.js:229
+msgid "Blog"
+msgstr ""
+
+#: assets/build/index.js:1
+#: assets/src/js/pages/SettingsPage.js:231
+msgid "Tailored for content-focused blogs. Includes performance and security optimizations while preserving essential blog features like RSS feeds."
+msgstr ""
+
+#: assets/build/index.js:1
+#: assets/src/js/pages/SettingsPage.js:240
+msgid "E-commerce"
+msgstr ""
+
+#: assets/build/index.js:1
+#: assets/src/js/pages/SettingsPage.js:242
+msgid "Designed for WooCommerce stores. Includes all performance and security features plus WooCommerce-specific optimizations for faster checkout."
 msgstr ""

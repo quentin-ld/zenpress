@@ -1,4 +1,4 @@
-import { useState, useEffect } from '@wordpress/element';
+import { useState, useEffect, useRef } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
 import { Button } from '@wordpress/components';
 import { useSettings } from '../hooks/useSettings';
@@ -112,6 +112,24 @@ export const SettingsPage = () => {
         setSelectedTabId(tabName);
     };
 
+    // Add keyboard shortcuts and ensure toggles are keyboard accessible
+    useEffect(() => {
+        const handleKeyDown = (e) => {
+            // Ctrl+S or Cmd+S to save
+            if ((e.ctrlKey || e.metaKey) && e.key === 's') {
+                e.preventDefault();
+                if (!isSaving) {
+                    saveSettings();
+                }
+            }
+        };
+
+        document.addEventListener('keydown', handleKeyDown);
+        return () => {
+            document.removeEventListener('keydown', handleKeyDown);
+        };
+    }, [saveSettings, isSaving]);
+
     return (
         <article className="zenpress-row">
             <section className="zenpress-main">
@@ -185,15 +203,21 @@ export const SettingsPage = () => {
             <aside className="zenpress-sidebar">
                 <div className="zenpress-presets">
                     <div className="zenpress-presets-description">
-                        <h2>{__('Pick a preset', 'zenpress')}</h2>
+                        <h2>{__('Pick configuration preset', 'zenpress')}</h2>
                         <p>
                             {__(
-                                "Select the features that suit your needs. If you don't know which ones to choose, just select your site's type and it will set the right features for you.",
+                                "Don't know which features to enable? Quickly configure ZenPress by selecting a preset that matches your site type. Each preset enables optimized features for your specific use case.",
                                 'zenpress'
                             )}
                         </p>
-                        <h3>{__('Corporate website / Portfolio preset', 'zenpress')}</h3>
-                        <p></p>
+                        <hr />
+                        <h3>🖼️ {__('Corporate website', 'zenpress')}</h3>
+                        <p>
+                            {__(
+                                'Optimized for business sites and portfolios. Focuses on security, performance, and removing unnecessary features like RSS feeds and author archives.',
+                                'zenpress'
+                            )}
+                        </p>
                         <Button
                             variant="secondary"
                             onClick={() => enableByPreset('corporate-website')}
@@ -201,13 +225,25 @@ export const SettingsPage = () => {
                         >
                             {__('Enable', 'zenpress')}
                         </Button>
-                        <h3>{__('Blog preset', 'zenpress')}</h3>
-                        <p></p>
+                        <hr />
+                        <h3> 📰 {__('Blog', 'zenpress')}</h3>
+                        <p>
+                            {__(
+                                'Tailored for content-focused blogs. Includes performance and security optimizations while preserving essential blog features like RSS feeds.',
+                                'zenpress'
+                            )}
+                        </p>
                         <Button variant="secondary" onClick={() => enableByPreset('blog')} __next40pxDefaultSize>
                             {__('Enable', 'zenpress')}
                         </Button>
-                        <h3>{__('E-commerce preset', 'zenpress')}</h3>
-                        <p></p>
+                        <hr />
+                        <h3>🛒 {__('E-commerce', 'zenpress')}</h3>
+                        <p>
+                            {__(
+                                'Designed for WooCommerce stores. Includes all performance and security features plus WooCommerce-specific optimizations for faster checkout.',
+                                'zenpress'
+                            )}
+                        </p>
                         <Button variant="secondary" onClick={() => enableByPreset('ecommerce')} __next40pxDefaultSize>
                             {__('Enable', 'zenpress')}
                         </Button>
