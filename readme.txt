@@ -3,8 +3,8 @@ Contributors: @quentinldd
 Donate link: https://github.com/sponsors/quentin-ld/
 Tags: optimization, performance, security, bloat, woocommerce
 Requires at least: 6.0
-Tested up to: 6.8
-Stable tag: 2.0.5
+Tested up to: 6.9
+Stable tag: 2.1.0
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html/
@@ -33,11 +33,14 @@ No database clutter, no ads, no pro version. Just install, activate, select what
 Following features are included :
 
 = Settings subpage 🧰 =
-* Find presets to help you configure your ZenPress.
-* Every action is documented so that you understand what you are doing and the benefits.
+* Organized interface with vertical tabs for easy navigation between categories (Core, Gutenberg, WooCommerce, Tools).
+* Features grouped by subcategories (Performance, Security, User Interface) with visual icons for quick identification.
+* Three ready-to-use presets: Corporate website, Blog, and E-commerce - each optimized for specific site types.
+* Every action is documented with descriptions so that you understand what you are doing and the benefits.
+* Fully accessible interface with ARIA-compliant tabs and complete keyboard navigation support.
 * Native WordPress interface, benefits from Gutenberg's new features and the site editor.
 
-=  performance =
+= Core - Performance =
 
 * Disable adjacent posts link tags.
 * Disable dashicons.
@@ -53,7 +56,7 @@ Following features are included :
 * Remove REST API links.
 * Separate loading of core block styles.
 
-= security =
+= Core - Security =
 
 * Block user enumeration.
 * Disable application passwords.
@@ -64,26 +67,46 @@ Following features are included :
 * Hide WordPress version.
 * Protect the wp-login form from brute force attacks.
 
-= user-interface=
+= Core - User Interface =
 
 * Clean up the WordPress admin bar.
 * Clean up the WordPress Dashboard.
 * Disable the login language selector.
 
-= woocommerce =
+= WooCommerce - Performance =
 * Disable WooCommerce cart fragments script.
 * Disable WooCommerce scripts and styles on non-WooCommerce pages.
 * Disable unnecessary Stripe scripts on WooCommerce pages.
 * Disable WooCommerce widgets.
+* Remove WooCommerce default block patterns.
+
+= WooCommerce - Security =
 * Hide WooCommerce version.
-* Remove WooCommerce default remote block patterns.
+
+= Gutenberg - Performance =
+* Remove WordPress default remote block patterns.
+* Separate loading of core block styles.
+
+= Gutenberg - User Interface =
+* Disable default pattern categories in site editor.
+
+= Presets =
+* Corporate website / Portfolio: Optimized for business sites and portfolios. Focuses on security, performance, and removing unnecessary features like RSS feeds and author archives.
+* Blog: Tailored for content-focused blogs. Includes performance and security optimizations while preserving essential blog features like RSS feeds.
+* E-commerce: Designed for WooCommerce stores. Includes all performance and security features plus WooCommerce-specific optimizations for faster checkout.
+
+= Accessibility =
+* Fully ARIA-compliant tab interface following W3C ARIA Authoring Practices Guide.
+* Complete keyboard navigation: Arrow keys, Home, End, Space, Enter, and Tab keys fully supported.
+* Automatic tab activation on focus for improved user experience.
+* Proper focus management with visible focus indicators.
+* Screen reader friendly with proper ARIA labels and roles.
 
 == Roadmap ==
 
 = Global =
-* New presets.
-* Documentation pages.
-* More context in plugin UI for actionable function.
+* Additional presets for specific use cases.
+* Documentation pages with detailed guides.
 
 = Security =
 * Manage Heartbeat API (frontend + backend + admin whitelist).
@@ -95,7 +118,7 @@ Following features are included :
 * Disable Password Strength Meter.
 * Disable WordPress default lazy loading.
 
-= UI =
+= User Interface =
 * Remove "howdy" from admin bar.
 * Remove WordPress logo.
 * Remove "Help button".
@@ -160,6 +183,21 @@ Nice ! If you can't find anything in the roadmap, feel free to submit your sugge
 Yes, it 's been tested actively and works from PHP 7.4 to PHP 8.4.
 
 == Changelog ==
+
+= 2.1.0 =
+- Global: Tested with WordPress 6.9.
+- Interface: Complete redesign with vertical tabbed interface for better organization.
+- Interface: Features now organized by categories (Core, Gutenberg, WooCommerce, Tools) and subcategories (Performance, Security, User Interface).
+- Interface: Visual icons added to categories and subcategories for quick identification.
+- Presets: Three ready-to-use presets with detailed descriptions (Corporate website, Blog, E-commerce).
+- Accessibility: Fully ARIA-compliant tab interface following W3C ARIA Authoring Practices Guide.
+- Accessibility: Complete keyboard navigation support (Arrow keys, Home, End, Space, Enter, Tab).
+- Accessibility: Automatic tab activation on focus for improved user experience.
+- Accessibility: Proper focus management with visible focus indicators.
+- Accessibility: Screen reader friendly with proper ARIA labels and roles.
+- Keyboard: Toggle controls now fully keyboard accessible with Enter key support.
+- Keyboard: Added Ctrl+S / Cmd+S shortcut to save settings.
+- Gutenberg: New actionable function: Disable default pattern categories in site editor.
 
 = 2.0.5 =
 - Global: Compatibility check.

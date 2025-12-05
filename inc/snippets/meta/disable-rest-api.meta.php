@@ -11,7 +11,7 @@ if (!defined('ABSPATH')) {
 }
 
 return [
-    'title' => __('Disable REST API', 'zenpress'),
+    'title' => __('Disable REST API for visitors not logged into WordPress', 'zenpress'),
     'description' => __(
         'Disable the WP REST API for visitors not logged into WordPress.',
         'zenpress'

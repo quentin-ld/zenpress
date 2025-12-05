@@ -2,14 +2,14 @@
 # This file is distributed under the GPL v2 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: ZenPress - Cleaner, Lighter, Faster WP 2.0.5\n"
+"Project-Id-Version: ZenPress - Cleaner, Lighter, Faster WP 2.1.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/zenpress\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-12-05T11:42:15+00:00\n"
+"POT-Creation-Date: 2025-12-05T12:40:39+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: zenpress\n"
@@ -208,6 +208,7 @@ msgstr ""
 
 #: inc/snippets/meta/clean-admin-bar.meta.php:19
 #: inc/snippets/meta/clean-dashboard-items.meta.php:19
+#: inc/snippets/meta/disable-default-pattern-categories.meta.php:16
 #: inc/snippets/meta/disable-login-language-selector.meta.php:16
 msgid "user-interface"
 msgstr ""
@@ -284,6 +285,19 @@ msgstr ""
 msgid " core"
 msgstr ""
 
+#: inc/snippets/meta/disable-default-pattern-categories.meta.php:13
+msgid "Disable default pattern categories in site editor"
+msgstr ""
+
+#: inc/snippets/meta/disable-default-pattern-categories.meta.php:14
+msgid "Removes default pattern categories from the block pattern inserter in the site editor. Disables default categories: featured, about, audio, banner, buttons, call-to-action, columns, contact, footer, gallery, header, media, portfolio, posts, query, services, team, testimonials, text, videos, and any custom categories. This simplifies the interface by hiding category navigation while patterns remain accessible."
+msgstr ""
+
+#: inc/snippets/meta/disable-default-pattern-categories.meta.php:15
+#: inc/snippets/meta/separate-gutenberg-core-block-styles.meta.php:15
+msgid "gutenberg"
+msgstr ""
+
 #: inc/snippets/meta/disable-dns-prefetch.meta.php:13
 msgid "Disable DNS prefetch"
 msgstr ""
@@ -341,7 +355,7 @@ msgid "Removes the X-Pingback header, disables pingbacks and trackbacks on new p
 msgstr ""
 
 #: inc/snippets/meta/disable-rest-api.meta.php:14
-msgid "Disable REST API"
+msgid "Disable REST API for visitors not logged into WordPress"
 msgstr ""
 
 #: inc/snippets/meta/disable-rest-api.meta.php:15
@@ -470,11 +484,11 @@ msgid "Prevents WordPress from adding REST API discovery links to the head secti
 msgstr ""
 
 #: inc/snippets/meta/remove-woocommerce-patterns.meta.php:13
-msgid "Remove WooCommerce default remote block patterns"
+msgid "Remove WooCommerce default block patterns"
 msgstr ""
 
 #: inc/snippets/meta/remove-woocommerce-patterns.meta.php:14
-msgid "Removes all WooCommerce remote block patterns to avoid unnecessary pattern registration in the editor."
+msgid "Removes all WooCommerce block patterns to avoid unnecessary pattern registration in the editor."
 msgstr ""
 
 #: inc/snippets/meta/separate-gutenberg-core-block-styles.meta.php:13
@@ -483,10 +497,6 @@ msgstr ""
 
 #: inc/snippets/meta/separate-gutenberg-core-block-styles.meta.php:14
 msgid "Forces WordPress to load core block styles separately, improving performance by only loading the styles required for the blocks used on a page."
-msgstr ""
-
-#: inc/snippets/meta/separate-gutenberg-core-block-styles.meta.php:15
-msgid "gutenberg"
 msgstr ""
 
 #: assets/build/index.js:1
