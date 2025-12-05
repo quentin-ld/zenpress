@@ -15,5 +15,5 @@ return [
     'category' => __('gutenberg', 'zenpress'),
     'subcategory' => __('performance', 'zenpress'),
     'weight' => 0,
-    'preset' => ['showcase-website', 'blog', 'ecommerce'],
+    'preset' => ['corporate-website', 'blog', 'ecommerce'],
 ];

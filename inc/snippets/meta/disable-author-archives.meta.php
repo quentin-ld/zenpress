@@ -18,5 +18,5 @@ return [
     'category' => __('core', 'zenpress'),
     'subcategory' => __('security', 'zenpress'),
     'weight' => 0,
-    'preset' => ['showcase-website', 'ecommerce'],
+    'preset' => ['corporate-website', 'ecommerce'],
 ];

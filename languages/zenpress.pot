@@ -478,7 +478,7 @@ msgstr ""
 
 #: assets/build/index.js:1
 #: assets/src/pages/SettingsPage.js:96
-msgid "Showcase website"
+msgid "Corporate website / Portfolio"
 msgstr ""
 
 #: assets/build/index.js:1

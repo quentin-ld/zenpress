@@ -192,11 +192,11 @@ export const SettingsPage = () => {
                                 'zenpress'
                             )}
                         </p>
-                        <h3>{__('Showcase website preset', 'zenpress')}</h3>
+                        <h3>{__('Corporate website / Portfolio preset', 'zenpress')}</h3>
                         <p></p>
                         <Button
                             variant="secondary"
-                            onClick={() => enableByPreset('showcase-website')}
+                            onClick={() => enableByPreset('corporate-website')}
                             __next40pxDefaultSize
                         >
                             {__('Enable', 'zenpress')}
