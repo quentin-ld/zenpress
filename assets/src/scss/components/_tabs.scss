@@ -37,6 +37,17 @@
 			text-align: left;
 			transition: all 0.1s ease;
 			position: relative;
+			gap: 8px;
+
+			&::before {
+				font-family: dashicons;
+				font-size: 20px;
+				line-height: 1;
+				display: inline-block;
+				width: 20px;
+				height: 20px;
+				text-align: center;
+			}
 
 			&:hover {
 				color: #1e1e1e;
@@ -66,6 +77,27 @@
 				}
 			}
 
+			// Category-specific dashicons
+			&--category-core::before {
+				content: '\f226'; // dashicons-dashboard
+			}
+
+			&--category-gutenberg::before {
+				content: '\f12b'; // dashicons-block-default
+			}
+
+			&--category-woocommerce::before {
+				content: '\f174'; // dashicons-cart
+			}
+
+			&--category-tools::before {
+				content: '\f107'; // dashicons-admin-tools
+			}
+
+			&--category-ads-blocker::before {
+				content: '\f332'; // dashicons-superhero
+			}
+
 			.zenpress-tabs__list--vertical & {
 				width: 100%;
 				justify-content: flex-start;
@@ -76,8 +108,8 @@
 			flex: 1;
 			padding: 0;
 			min-width: 0;
-			height: 70vh;
-			max-height: 70vh;
+			height: 65vh;
+			max-height: 65vh;
 			position: relative;
 			overflow: auto;
 			padding: 16px 16px 0 16px;

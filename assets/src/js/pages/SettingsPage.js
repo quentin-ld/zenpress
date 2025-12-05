@@ -58,20 +58,49 @@ export const SettingsPage = () => {
         });
     };
 
-    // Group snippets by category
+    // Helper function to capitalize category name
+    const capitalizeCategory = (category) => {
+        if (!category) return category;
+        return category.charAt(0).toUpperCase() + category.slice(1).toLowerCase();
+    };
+
+
+    // Category order: Core, Gutenberg, WooCommerce, ads-blocker, Tools
+    // Using English lowercase values for comparison since categories are stored in lowercase
+    const categoryOrder = ['core', 'gutenberg', 'woocommerce', 'ads-blocker', 'tools'];
+
+    // Group snippets by category, then by subcategory
     const groupedSnippets = {};
     Object.keys(snippets).forEach((snippetName) => {
         const snippet = snippets[snippetName];
-        const category = snippet?.category || __('Uncategorized', 'zenpress');
+        const category = (snippet?.category || __('Uncategorized', 'zenpress')).toLowerCase();
+        const subcategory = (snippet?.subcategory || __('uncategorized', 'zenpress')).toLowerCase();
+
         if (!groupedSnippets[category]) {
-            groupedSnippets[category] = [];
+            groupedSnippets[category] = {};
         }
-        groupedSnippets[category].push({ name: snippetName, data: snippet });
+        if (!groupedSnippets[category][subcategory]) {
+            groupedSnippets[category][subcategory] = [];
+        }
+        groupedSnippets[category][subcategory].push({ name: snippetName, data: snippet });
     });
 
-    const sortedCategories = Object.keys(groupedSnippets).sort((a, b) =>
-        a.localeCompare(b, undefined, { sensitivity: 'base' })
-    );
+    // Sort categories according to the specified order
+    const sortedCategories = Object.keys(groupedSnippets).sort((a, b) => {
+        const indexA = categoryOrder.indexOf(a.toLowerCase());
+        const indexB = categoryOrder.indexOf(b.toLowerCase());
+        
+        // If both are in the order array, sort by their position
+        if (indexA !== -1 && indexB !== -1) {
+            return indexA - indexB;
+        }
+        // If only A is in the order array, A comes first
+        if (indexA !== -1) return -1;
+        // If only B is in the order array, B comes first
+        if (indexB !== -1) return 1;
+        // If neither is in the order array, sort alphabetically
+        return a.localeCompare(b, undefined, { sensitivity: 'base' });
+    });
 
     // Set initial selected tab if none is selected
     useEffect(() => {
@@ -100,25 +129,43 @@ export const SettingsPage = () => {
                         }}
                     >
                         <Tabs.TabList>
-                            {sortedCategories.map((category) => (
-                                <Tabs.Tab key={category} tabId={category} title={category}>
-                                    {category}
-                                </Tabs.Tab>
-                            ))}
+                            {sortedCategories.map((category) => {
+                                const categoryClass = `zenpress-tabs__tab--category-${category.toLowerCase().replace(/\s+/g, '-')}`;
+                                return (
+                                    <Tabs.Tab 
+                                        key={category} 
+                                        tabId={category} 
+                                        title={capitalizeCategory(category)}
+                                        className={categoryClass}
+                                    >
+                                        {capitalizeCategory(category)}
+                                    </Tabs.Tab>
+                                );
+                            })}
                         </Tabs.TabList>
-                        {sortedCategories.map((category) => (
-                            <Tabs.TabPanel key={category} tabId={category}>
-                                {groupedSnippets[category].map(({ name, data }) => (
-                                    <SnippetToggleControl
-                                        key={name}
-                                        label={data.title || name}
-                                        value={data?.['enable-snippet'] || false}
-                                        onChange={() => handleToggleChange(name)}
-                                        help={data.description || ''}
-                                    />
-                                ))}
-                            </Tabs.TabPanel>
-                        ))}
+                        {sortedCategories.map((category) => {
+                            const subcategories = Object.keys(groupedSnippets[category]).sort();
+                            return (
+                                <Tabs.TabPanel key={category} tabId={category}>
+                                    <h2>{capitalizeCategory(category)}</h2>
+                                    {subcategories.map((subcategory) => (
+                                        <div key={subcategory} className={`zenpress-subcategory zenpress-subcategory-${subcategory.toLowerCase().replace(/\s+/g, '-')}`}>
+                                            <hr />
+                                            <h3>{capitalizeCategory(subcategory)}</h3>
+                                            {groupedSnippets[category][subcategory].map(({ name, data }) => (
+                                                <SnippetToggleControl
+                                                    key={name}
+                                                    label={data.title || name}
+                                                    value={data?.['enable-snippet'] || false}
+                                                    onChange={() => handleToggleChange(name)}
+                                                    help={data.description || ''}
+                                                />
+                                            ))}
+                                        </div>
+                                    ))}
+                                </Tabs.TabPanel>
+                            );
+                        })}
                     </Tabs>
                     <div className="zenpress-actions">
                         <div className="zenpress-actions-bulk">

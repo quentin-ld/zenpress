@@ -16,6 +16,7 @@ return [
         'zenpress'
     ),
     'category' => __('ads-blocker', 'zenpress'),
+    'subcategory' => __('user-interface', 'zenpress'),
     'weight' => 0,
     'preset' => ['showcase-website', 'blog', 'ecommerce'],
 ];

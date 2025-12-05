@@ -53,15 +53,16 @@ export const TabList = ({ children }) => {
  * @param {Object}   props          - Component props.
  * @param {string}   props.tabId    - Unique identifier for the tab.
  * @param {string}   props.title    - Tab title (optional, uses children if not provided).
+ * @param {string}   props.className - Additional CSS class name.
  * @param {Object}   props.children - Tab content.
  * @return {JSX.Element} The tab button.
  */
-export const Tab = ({ tabId, title, children }) => {
+export const Tab = ({ tabId, title, className = '', children }) => {
     const { selectedTabId, onSelect } = useContext(TabsContext);
     const isSelected = selectedTabId === tabId;
     return (
         <button
-            className={`zenpress-tabs__tab ${isSelected ? 'zenpress-tabs__tab--is-active' : ''}`}
+            className={`zenpress-tabs__tab ${isSelected ? 'zenpress-tabs__tab--is-active' : ''} ${className}`.trim()}
             role="tab"
             aria-selected={isSelected}
             aria-controls={`zenpress-tab-panel-${tabId}`}
