@@ -15,7 +15,8 @@ return [
         'Removes unnecessary items from the admin bar in both backend and frontend. Reduces clutter and simplifies the interface.',
         'zenpress'
     ),
-    'category' => __('User interface 💻️', 'zenpress'),
+    'category' => __('core', 'zenpress'),
+    'subcategory' => __('user-interface', 'zenpress'),
     'weight' => 0,
     'preset' => ['showcase-website', 'blog', 'ecommerce'],
 ];

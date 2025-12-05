@@ -15,7 +15,8 @@ return [
         'Prevents attackers from guessing WordPress usernames by blocking requests with the `author` parameter in query strings or permalinks. Reduces exposure to brute-force and user-targeted attacks.',
         'zenpress'
     ),
-    'category' => __('Security 🔒️', 'zenpress'),
+    'category' => __('core', 'zenpress'),
+    'subcategory' => __('security', 'zenpress'),
     'weight' => 0,
     'preset' => ['showcase-website', 'blog', 'ecommerce'],
 ];

@@ -37,7 +37,7 @@ Following features are included :
 * Every action is documented so that you understand what you are doing and the benefits.
 * Native WordPress interface, benefits from Gutenberg's new features and the site editor.
 
-= Performance 🚀 =
+=  performance =
 
 * Disable adjacent posts link tags.
 * Disable dashicons.
@@ -53,7 +53,7 @@ Following features are included :
 * Remove REST API links.
 * Separate loading of core block styles.
 
-= Security 🔒️ =
+= security =
 
 * Block user enumeration.
 * Disable application passwords.
@@ -64,13 +64,13 @@ Following features are included :
 * Hide WordPress version.
 * Protect the wp-login form from brute force attacks.
 
-= User interface 💻️ =
+= user-interface=
 
 * Clean up the WordPress admin bar.
 * Clean up the WordPress Dashboard.
 * Disable the login language selector.
 
-= WooCommerce 🛒 =
+= woocommerce =
 * Disable WooCommerce cart fragments script.
 * Disable WooCommerce scripts and styles on non-WooCommerce pages.
 * Disable unnecessary Stripe scripts on WooCommerce pages.

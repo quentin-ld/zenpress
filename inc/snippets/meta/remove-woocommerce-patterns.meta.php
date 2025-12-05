@@ -12,7 +12,8 @@ if (!defined('ABSPATH')) {
 return [
     'title' => __('Remove WooCommerce default remote block patterns', 'zenpress'),
     'description' => __('Removes all WooCommerce remote block patterns to avoid unnecessary pattern registration in the editor.', 'zenpress'),
-    'category' => __('WooCommerce 🛒', 'zenpress'),
+    'category' => __('woocommerce', 'zenpress'),
+    'subcategory' => __('performance', 'zenpress'),
     'weight' => 0,
     'preset' => ['ecommerce'],
 ];

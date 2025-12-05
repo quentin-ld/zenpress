@@ -175,7 +175,7 @@ msgstr ""
 #: inc/snippets/meta/disable-xmlrpc-rsdlink.meta.php:15
 #: inc/snippets/meta/hide-wordpress-version.meta.php:15
 #: inc/snippets/meta/protect-wp-login.meta.php:15
-msgid "Security 🔒️"
+msgid "security"
 msgstr ""
 
 #: inc/snippets/meta/clean-admin-bar.meta.php:13
@@ -189,7 +189,7 @@ msgstr ""
 #: inc/snippets/meta/clean-admin-bar.meta.php:18
 #: inc/snippets/meta/clean-dashboard-items.meta.php:18
 #: inc/snippets/meta/disable-login-language-selector.meta.php:15
-msgid "User interface 💻️"
+msgid "user-interface"
 msgstr ""
 
 #: inc/snippets/meta/clean-dashboard-items.meta.php:13
@@ -221,7 +221,7 @@ msgstr ""
 #: inc/snippets/meta/remove-gutenberg-unwanted-block-patterns.meta.php:15
 #: inc/snippets/meta/remove-rest-api-link.meta.php:15
 #: inc/snippets/meta/separate-gutenberg-core-block-styles.meta.php:15
-msgid "Performance 🚀"
+msgid " performance"
 msgstr ""
 
 #: inc/snippets/meta/disable-application-passwords.meta.php:13
@@ -350,7 +350,7 @@ msgstr ""
 #: inc/snippets/meta/disable-woocommerce-widgets.meta.php:15
 #: inc/snippets/meta/hide-woocommerce-version.meta.php:15
 #: inc/snippets/meta/remove-woocommerce-patterns.meta.php:15
-msgid "WooCommerce 🛒"
+msgid "woocommerce"
 msgstr ""
 
 #: inc/snippets/meta/disable-woocommerce-scripts-styles.meta.php:13

@@ -16,7 +16,8 @@ return [
         'Disable the WP REST API for visitors not logged into WordPress.',
         'zenpress'
     ),
-    'category' => __('Security 🔒️', 'zenpress'),
+    'category' => __('core', 'zenpress'),
+    'subcategory' => __('security', 'zenpress'),
     'weight' => 0,
     'preset' => [],
 ];

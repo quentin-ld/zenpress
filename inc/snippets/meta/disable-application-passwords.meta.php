@@ -15,7 +15,8 @@ return [
         'Disables WordPress application passwords for all users, improving security. Only disable if API access is not needed.',
         'zenpress'
     ),
-    'category' => __('Security 🔒️', 'zenpress'),
+    'category' => __('core', 'zenpress'),
+    'subcategory' => __('security', 'zenpress'),
     'weight' => 0,
     'preset' => [''],
 ];

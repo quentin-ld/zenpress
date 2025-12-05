@@ -12,7 +12,7 @@ if (!defined('ABSPATH')) {
 return [
     'title' => __('Disable WooCommerce widgets', 'zenpress'),
     'description' => __('Unregisters default WooCommerce widgets to reduce bloat in the widget screen and improve performance by removing unused features.', 'zenpress'),
-    'category' => __('WooCommerce 🛒', 'zenpress'),
+    'category' => __('woocommerce', 'zenpress'),
     'weight' => 0,
     'preset' => ['ecommerce'],
 ];

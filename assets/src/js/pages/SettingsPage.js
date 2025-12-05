@@ -85,8 +85,8 @@ export const SettingsPage = () => {
     };
 
     return (
-        <div className="zenpress-row">
-            <div className="zenpress-main">
+        <article className="zenpress-row">
+            <section className="zenpress-main">
                 <div className="zenpress-notices">
                     <Notices />
                 </div>
@@ -132,7 +132,7 @@ export const SettingsPage = () => {
                         <SaveButton onClick={saveSettings} isBusy={isSaving} />
                     </div>
                 </div>
-            </div>
+            </section>
             <aside className="zenpress-sidebar">
                 <div className="zenpress-presets">
                     <div className="zenpress-presets-description">
@@ -143,24 +143,36 @@ export const SettingsPage = () => {
                                 'zenpress'
                             )}
                         </p>
-                    </div>
-                    <div className="zenpress-presets-buttons">
+                        <h3>{__('Showcase website preset', 'zenpress')}</h3>
+                        <p></p>
                         <Button
                             variant="secondary"
                             onClick={() => enableByPreset('showcase-website')}
                             __next40pxDefaultSize
                         >
-                            {__('Showcase website', 'zenpress')}
+                            {__('Enable', 'zenpress')}
                         </Button>
-                        <Button variant="secondary" onClick={() => enableByPreset('blog')} __next40pxDefaultSize>
-                            {__('Blog', 'zenpress')}
+                        <h3>{__('Blog preset', 'zenpress')}</h3>
+                        <p></p>
+                        <Button
+                            variant="secondary"
+                            onClick={() => enableByPreset('blog')}
+                            __next40pxDefaultSize
+                        >
+                            {__('Enable', 'zenpress')}
                         </Button>
-                        <Button variant="secondary" onClick={() => enableByPreset('ecommerce')} __next40pxDefaultSize>
-                            {__('E-commerce', 'zenpress')}
+                        <h3>{__('E-commerce preset', 'zenpress')}</h3>
+                        <p></p>
+                        <Button
+                            variant="secondary"
+                            onClick={() => enableByPreset('ecommerce')}
+                            __next40pxDefaultSize
+                        >
+                            {__('Enable', 'zenpress')}
                         </Button>
                     </div>
                 </div>
             </aside>
-        </div>
+        </article>
     );
 };

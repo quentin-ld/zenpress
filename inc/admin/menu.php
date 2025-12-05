@@ -30,7 +30,7 @@ function zenpress_options_page(): void {
     $plugin_version = $plugin_data['Version'] ?? '';
     ?>
     <div class="wrap zenpress-dashboard-wrap">
-        <div class="zenpress-header">
+        <header class="zenpress-header">
             <div class="zenpress-header-title">
                 <h1><?php echo esc_html__('ZenPress', 'zenpress'); ?></h1>
                 <?php if ($plugin_version) { ?>
@@ -66,8 +66,8 @@ function zenpress_options_page(): void {
                     <?php echo esc_html__('Buy me a coffee', 'zenpress'); ?> <span aria-hidden="true">☕</span>
                 </a>
             </div>
-        </div>
-        <div id="zenpress-settings" class="zenpress-settings">
+        </header>
+        <main id="zenpress-settings" class="zenpress-settings">
             <div class="zenpress-loading card">
                 <div class="zenpress-loading-body">
                     <p class="zenpress-loading-text">
@@ -75,8 +75,8 @@ function zenpress_options_page(): void {
                     </p>
                 </div>
             </div>
-        </div>
-        <div class="zenpress-footer">
+        </main>
+        <footer class="zenpress-footer">
             <div class="zenpress-footer-title">
                 <p>
                     <?php echo esc_html__('Made ', 'zenpress'); ?>
@@ -98,7 +98,7 @@ function zenpress_options_page(): void {
                     <?php echo esc_html__('ZenPress code repository', 'zenpress'); ?>
                 </a>
             </div>
-        </div>
+        </footer>
     </div>
     <?php
 }
