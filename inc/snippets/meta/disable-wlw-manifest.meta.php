@@ -12,7 +12,8 @@ if (!defined('ABSPATH')) {
 return [
     'title' => __('Disable WLW link', 'zenpress'),
     'description' => __('Removes the WLW manifest link from the head, which was only used by the deprecated Windows Live Writer app. Reduces unnecessary metadata and improves performance.', 'zenpress'),
-    'category' => __('Performance 🚀', 'zenpress'),
+    'category' => __('core', 'zenpress'),
+    'subcategory' => __('performance', 'zenpress'),
     'weight' => 0,
-    'preset' => ['showcase-website', 'blog', 'ecommerce'],
+    'preset' => ['corporate-website', 'blog', 'ecommerce'],
 ];

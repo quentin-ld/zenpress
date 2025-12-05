@@ -15,7 +15,8 @@ return [
         'Removes jQuery Migrate from loading on the frontend while keeping it enabled in the admin. Improves frontend performance and reduces legacy overhead.',
         'zenpress'
     ),
-    'category' => __('Performance 🚀', 'zenpress'),
+    'category' => __(' core', 'zenpress'),
+    'subcategory' => __('performance', 'zenpress'),
     'weight' => 0,
-    'preset' => ['showcase-website', 'blog', 'ecommerce'],
+    'preset' => ['corporate-website', 'blog', 'ecommerce'],
 ];

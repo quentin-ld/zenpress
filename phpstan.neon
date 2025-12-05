@@ -17,6 +17,3 @@ parameters:
         - '#Function is_product_category not found#'
         - '#Function is_shop not found#'
         - '#Function is_checkout not found#'
-        # Ignore errors related to WooCommerce Blocks
-        - '#Call to static method container\(\) on an unknown class Automattic\\WooCommerce\\Blocks\\Package#'
-        - '#Class Automattic\\WooCommerce\\Blocks\\BlockPatterns not found#'

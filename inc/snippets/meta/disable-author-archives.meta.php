@@ -15,7 +15,8 @@ return [
         'Forces author archive pages to return a 404 error. Prevents user enumeration and hides unnecessary author pages.',
         'zenpress'
     ),
-    'category' => __('Security 🔒️', 'zenpress'),
+    'category' => __('core', 'zenpress'),
+    'subcategory' => __('security', 'zenpress'),
     'weight' => 0,
-    'preset' => ['showcase-website', 'ecommerce'],
+    'preset' => ['corporate-website', 'ecommerce'],
 ];

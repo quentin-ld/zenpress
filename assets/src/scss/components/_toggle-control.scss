@@ -1,0 +1,9 @@
+@use '../abstracts/variables' as *;
+
+.components-toggle-control {
+    margin: 1em 0;
+
+    &__help {
+        font-size: $font-size-help;
+    }
+}

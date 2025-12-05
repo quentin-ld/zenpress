@@ -1,0 +1,263 @@
+@use '../abstracts/variables' as *;
+
+.zenpress {
+	&-dashboard-wrap {
+		* {
+			box-sizing: border-box;
+		}
+
+		a:not(.components-button) {
+			color: $wp-color-accent;
+
+			&[target='_blank'] {
+				position: relative;
+				gap: $gap-xs;
+
+				&::after {
+					content: ' ↗';
+				}
+			}
+		}
+	}
+
+	&-header,
+	&-footer,
+	&-settings,
+	&-loading,
+	&-row {
+		width: 100%;
+		max-width: $max-width-container;
+		margin: 0 auto;
+	}
+
+	&-header {
+		align-items: center;
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: space-between;
+		overflow-x: auto;
+		padding: $spacing-md;
+		gap: $gap-xl;
+		background: $color-background;
+		border: $border-width solid $color-border;
+		border-radius: $border-radius;
+
+		&-navigation {
+			display: flex;
+			flex-wrap: wrap;
+			gap: $gap-md;
+			justify-content: space-between;
+			align-items: center;
+		}
+
+		h1,
+		p {
+			margin: 0;
+			padding: 0;
+		}
+	}
+
+	&-footer {
+		align-items: center;
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: space-between;
+		overflow-x: auto;
+		padding: $spacing-md;
+		gap: $gap-lg;
+		border-top: $border-width solid $color-border;
+		padding-top: $gap-lg;
+
+		&-navigation {
+			display: flex;
+			flex-wrap: wrap;
+			gap: $gap-md;
+			justify-content: space-between;
+			align-items: center;
+		}
+
+		p {
+			margin: 0;
+			padding: 0;
+		}
+	}
+
+	&-settings {
+		margin-top: $gap-lg;
+		margin-bottom: $gap-lg;
+		border-radius: $border-radius;
+
+		@media screen and (max-width: 1281px) {
+			margin-top: $gap-md;
+			margin-bottom: $gap-md;
+		}
+	}
+
+	&-row {
+		display: grid;
+		grid-template-columns: $grid-columns-main-sidebar;
+		gap: $gap-lg;
+
+		@media screen and (max-width: 1281px) {
+			gap: $gap-md;
+		}
+
+		@media screen and (max-width: 960px) {
+			grid-template-columns: 1fr
+		}
+	}
+
+	&-panel {
+		border: $border-width solid $color-border;
+		border-radius: $border-radius;
+		width: 100%;
+		max-width: 100%;
+		background: $color-background;
+	}
+
+	&-main,
+	&-notices {
+		width: 100%;
+		max-width: 100%;
+	}
+
+	&-actions {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: space-between;
+		align-items: center;
+		padding: $spacing-md;
+		gap: $gap-md;
+		border-top: $border-width solid $color-border;
+
+		&-bulk {
+			display: flex;
+			flex-wrap: wrap;
+			gap: $gap-sm;
+			justify-content: flex-start;
+			align-items: center;
+		}
+	}
+
+	&-sidebar {
+		display: flex;
+		flex-direction: column;
+		gap: $gap-md;
+		align-items: stretch;
+		justify-content: flex-start;
+
+		hr {
+			margin-top: 2em;
+		}
+	}
+
+	&-presets {
+		border: $border-width solid $color-border;
+		border-radius: $border-radius;
+		width: 100%;
+		max-width: 100%;
+		background: $color-background;
+		padding: $spacing-md;
+	}
+
+	&-subcategory {
+		h3 {
+			position: relative;
+			padding-left: $spacing-lg;
+			margin-bottom: 1.5em;
+
+			&::before {
+				position: absolute;
+				left: 0;
+				top: 50%;
+				transform: translateY(-50%);
+				font-size: $font-size-icon;
+				line-height: $line-height-icon;
+				display: inline-block;
+				width: $icon-size;
+				height: $icon-size;
+			}
+		}
+
+		&-performance {
+			h3::before {
+				content: '🚀';
+			}
+		}
+
+		&-security {
+			h3::before {
+				content: '🛡️';
+			}
+		}
+
+		&-user-interface {
+			h3::before {
+				content: '💻️';
+			}
+		}
+	}
+}
+
+.zenpress-tabs__panel {
+	h2 {
+		position: relative;
+		padding-left: 36px;
+		font-size: 1.5em;
+
+		&::before {
+			content: '';
+			font-family: dashicons;
+			font-size: 28px;
+			line-height: 28px;
+			display: inline-block;
+			width: 28px;
+			height: 28px;
+			position: absolute;
+			left: 0;
+			top: 50%;
+			transform: translateY(-50%);
+			text-align: center;
+		}
+	}
+}
+
+#zenpress-tab-panel-core {
+	h2 {
+		&::before {
+			content: '\f226'; // dashicons-dashboard
+		}
+	}
+}
+
+#zenpress-tab-panel-gutenberg {
+	h2 {
+		&::before {
+			content: '\f12b'; // dashicons-block-default
+		}
+	}
+}
+
+#zenpress-tab-panel-woocommerce {
+	h2 {
+		&::before {
+			content: '\f174'; // dashicons-cart
+		}
+	}
+}
+
+#zenpress-tab-panel-tools {
+	h2 {
+		&::before {
+			content: '\f107'; // dashicons-admin-tools
+		}
+	}
+}
+
+#zenpress-tab-panel-ads-blocker {
+	h2 {
+		&::before {
+			content: '\f332'; // dashicons-superhero
+		}
+	}
+}

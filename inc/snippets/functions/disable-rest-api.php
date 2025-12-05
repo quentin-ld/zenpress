@@ -22,7 +22,7 @@ if (version_compare(get_bloginfo('version'), '4.7', '>=')) {
 
 function zenpress_disable_wp_rest_api($access) {
     if (!is_user_logged_in() && !zenpress_disable_wp_rest_api_allow_access()) {
-        $message = apply_filters('disable_wp_rest_api_error', __('REST API restricted to authenticated users.', 'zenpress'));
+        $message = apply_filters('zenpress_disable_wp_rest_api_error', __('REST API restricted to authenticated users.', 'zenpress'));
 
         return new WP_Error('rest_login_required', $message, ['status' => rest_authorization_required_code()]);
     }
@@ -31,17 +31,19 @@ function zenpress_disable_wp_rest_api($access) {
 }
 
 function zenpress_disable_wp_rest_api_allow_access() {
-    $post_var = apply_filters('disable_wp_rest_api_post_var', false);
-    $server_var = apply_filters('disable_wp_rest_api_server_var', false);
+    $post_var = apply_filters('zenpress_disable_wp_rest_api_post_var', false);
+    $server_var = apply_filters('zenpress_disable_wp_rest_api_server_var', false);
 
     if (!empty($post_var)) {
         if (is_array($post_var)) {
             foreach($post_var as $var) {
+                // phpcs:ignore WordPress.Security.NonceVerification.Missing -- Intentional: Allows bypass via specific POST vars for webhooks/third-party integrations
                 if (isset($_POST[$var]) && !empty($_POST[$var])) {
                     return true;
                 }
             }
         } else {
+            // phpcs:ignore WordPress.Security.NonceVerification.Missing -- Intentional: Allows bypass via specific POST vars for webhooks/third-party integrations
             if (isset($_POST[$post_var]) && !empty($_POST[$post_var])) {
                 return true;
             }

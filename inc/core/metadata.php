@@ -15,6 +15,7 @@ function zenpress_extract_snippet_metadata(string $snippet_name): array {
         'title' => '',
         'description' => '',
         'category' => '',
+        'subcategory' => '',
         'weight' => 0,
         'preset' => []
     ];
@@ -27,6 +28,7 @@ function zenpress_extract_snippet_metadata(string $snippet_name): array {
         'title' => sanitize_text_field($metadata['title']),
         'description' => sanitize_text_field($metadata['description']),
         'category' => sanitize_text_field($metadata['category']),
+        'subcategory' => sanitize_text_field($metadata['subcategory']),
         'weight' => (int) $metadata['weight'],
         'preset' => array_map('sanitize_text_field', (array) $metadata['preset'])
     ];

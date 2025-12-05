@@ -1,0 +1,145 @@
+@use '../abstracts/variables' as *;
+
+.zenpress {
+	&-tabs {
+		display: grid;
+		width: 100%;
+		gap: $gap-none;
+
+		&--vertical {
+			grid-template-columns: $tab-list-width 1fr;
+
+			@media screen and (max-width: 768px) {
+				grid-template-columns: 1fr;
+			}
+		}
+
+		&__list {
+			display: flex;
+			margin: 0;
+			list-style: none;
+
+			&--vertical {
+				flex-direction: column;
+				border-right: $border-width solid $color-border-light;
+				padding-right: 0;
+			}
+		}
+
+		&__tab {
+			display: flex;
+			align-items: center;
+			padding: $spacing-md;
+			min-height: $tab-min-height;
+			margin: 0;
+			background: transparent;
+			border: none;
+			border-radius: $border-radius-none;
+			cursor: pointer;
+			line-height: $line-height-base;
+			font-weight: $font-weight-normal;
+			font-size: $font-size-base;
+			color: $wp-color-foreground;
+			text-align: left;
+			transition: $transition-base;
+			position: relative;
+			gap: $gap-sm;
+
+			&::before {
+				font-family: dashicons;
+				font-size: $font-size-icon;
+				line-height: $line-height-icon;
+				display: inline-block;
+				width: $icon-size;
+				height: $icon-size;
+				text-align: center;
+			}
+
+			&:hover {
+				color: $color-foreground;
+				background: $color-background-hover;
+				outline: 2px solid transparent;
+				box-shadow: inset 0 0 0 2px $color-foreground !important;
+			}
+
+			&:focus {
+				outline: 2px solid transparent;
+				box-shadow: inset 0 0 0 2px $color-foreground !important;
+			}
+
+			&--is-active {
+				color: $wp-color-accent;
+				fill: currentcolor;
+				background: transparent;
+				font-weight: $font-weight-normal;
+				background-color: $color-accent-active-bg;
+
+				&::after {
+					content: '';
+					position: absolute;
+					right: 0;
+					top: 0;
+					bottom: 0;
+					width: $border-width-thick;
+					background: $wp-color-accent;
+				}
+			}
+
+			// Category-specific dashicons
+			&--category-core::before {
+				content: '\f226'; // dashicons-dashboard
+			}
+
+			&--category-gutenberg::before {
+				content: '\f12b'; // dashicons-block-default
+			}
+
+			&--category-woocommerce::before {
+				content: '\f174'; // dashicons-cart
+			}
+
+			&--category-tools::before {
+				content: '\f107'; // dashicons-admin-tools
+			}
+
+			&--category-ads-blocker::before {
+				content: '\f332'; // dashicons-superhero
+			}
+
+			.zenpress-tabs__list--vertical & {
+				width: 100%;
+				justify-content: flex-start;
+			}
+		}
+
+		&__panel {
+			flex: 1;
+			padding: 0;
+			min-width: 0;
+			height: $tab-panel-height;
+			max-height: $tab-panel-height;
+			position: relative;
+			overflow: auto;
+			padding: $spacing-md $spacing-md 0 $spacing-md;
+
+			@media screen and (max-width: 1281px) {
+				height: 600px;
+				max-height: 600px;
+			}
+
+			@media screen and (max-width: 960px) {
+				height: unset;
+				max-height: unset;
+			}
+
+			&:focus {
+				outline: 2px solid transparent;
+				box-shadow: inset 0 0 0 2px $color-foreground !important;
+			}
+
+			&[hidden] {
+				display: none;
+			}
+		}
+	}
+}

@@ -11,12 +11,13 @@ if (!defined('ABSPATH')) {
 }
 
 return [
-    'title' => __('Disable REST API', 'zenpress'),
+    'title' => __('Disable REST API for visitors not logged into WordPress', 'zenpress'),
     'description' => __(
         'Disable the WP REST API for visitors not logged into WordPress.',
         'zenpress'
     ),
-    'category' => __('Security 🔒️', 'zenpress'),
+    'category' => __('core', 'zenpress'),
+    'subcategory' => __('security', 'zenpress'),
     'weight' => 0,
     'preset' => [],
 ];

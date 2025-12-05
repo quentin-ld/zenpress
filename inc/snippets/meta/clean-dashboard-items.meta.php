@@ -15,7 +15,8 @@ return [
         'Removes unnecessary widgets and ads widgets from the dashboard. Declutters the admin area and improves usability.',
         'zenpress'
     ),
-    'category' => __('User interface 💻️', 'zenpress'),
+    'category' => __('ads-blocker', 'zenpress'),
+    'subcategory' => __('user-interface', 'zenpress'),
     'weight' => 0,
-    'preset' => ['showcase-website', 'blog', 'ecommerce'],
+    'preset' => ['corporate-website', 'blog', 'ecommerce'],
 ];

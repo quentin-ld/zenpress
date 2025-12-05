@@ -15,7 +15,8 @@ return [
         'Removes emoji scripts, styles, and filters from frontend, backend, feeds, emails, and TinyMCE. Reduces unnecessary assets and improves performance.',
         'zenpress'
     ),
-    'category' => __('Performance 🚀', 'zenpress'),
+    'category' => __(' core', 'zenpress'),
+    'subcategory' => __('performance', 'zenpress'),
     'weight' => 0,
-    'preset' => ['showcase-website', 'blog', 'ecommerce'],
+    'preset' => ['corporate-website', 'blog', 'ecommerce'],
 ];
