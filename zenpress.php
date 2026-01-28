@@ -11,7 +11,7 @@
  *
  * Plugin Name: ZenPress - Cleaner, Lighter, Faster WP
  * Description: Easily speed up and strengthen your WordPress site by cleaning out unnecessary features and protecting weak points.
- * Version: 2.1.0
+ * Version: 2.2.0
  * Plugin URI: https://wordpress.org/plugins/zenpress/
  * Author: Quentin Le Duff
  * Author URI: https://profiles.wordpress.org/quentinldd/
@@ -19,7 +19,7 @@
  * Domain Path: /languages/
  * Requires at least: 6.0
  * Tested up to: 6.9
- * Requires PHP: 7.4
+ * Requires PHP: 8.3
  * License URI: https://www.gnu.org/licenses/old-licenses/gpl-2.0.html/
  * License: GPL v2 or later
  *

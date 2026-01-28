@@ -5,7 +5,7 @@ if (!defined('ABSPATH')) {
 }
 
 // Remove detailed login errors
-add_filter('login_errors', static function () {
+add_filter('login_errors', static function (): string {
     return __('Login error.', 'zenpress');
 });
 
@@ -14,9 +14,10 @@ add_filter('authenticate', static function (mixed $user, string $username, strin
     $MAX_LOGIN_ATTEMPTS = 5;
     $BLOCK_DURATION = 300; // 5 minutes
 
-    $ipAddress = isset($_SERVER['REMOTE_ADDR'])
-        ? filter_var(wp_unslash($_SERVER['REMOTE_ADDR']), FILTER_VALIDATE_IP)
-        : 'unknown';
+    $ipAddress = filter_var(
+        wp_unslash($_SERVER['REMOTE_ADDR'] ?? ''),
+        FILTER_VALIDATE_IP
+    ) ?: 'unknown';
 
     $blockKey = 'zenpress_login_block_' . $ipAddress;
     $attemptKey = 'zenpress_login_attempts_' . $ipAddress;
@@ -33,7 +34,8 @@ add_filter('authenticate', static function (mixed $user, string $username, strin
     if (get_transient($blockKey)) {
         wp_die(
             esc_html__('Too many failed login attempts. Try again later.', 'zenpress'),
-            403
+            '',
+            ['response' => 403]
         );
     }
 
@@ -46,7 +48,8 @@ add_filter('authenticate', static function (mixed $user, string $username, strin
         set_transient($blockKey, true, $BLOCK_DURATION);
         wp_die(
             esc_html__('Too many failed login attempts. Try again later.', 'zenpress'),
-            403
+            '',
+            ['response' => 403]
         );
     }
 

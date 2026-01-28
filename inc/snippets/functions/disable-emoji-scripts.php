@@ -21,6 +21,6 @@ remove_filter('wp_mail', 'wp_staticize_emoji_for_email');
 add_filter('emoji_svg_url', '__return_false');
 
 // Remove emoji support from TinyMCE editor.
-add_filter('tiny_mce_plugins', static function ($plugins) {
+add_filter('tiny_mce_plugins', static function (array $plugins): array {
     return array_diff($plugins, ['wpemoji']);
 });

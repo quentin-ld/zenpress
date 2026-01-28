@@ -11,6 +11,11 @@ if (!defined('ABSPATH')) {
  * @return array<string> Loaded snippet base names.
  */
 function zenpress_load_snippets(string $folder = 'inc/snippets/functions/'): array {
+    // Prevent path traversal if $folder is ever passed from external input.
+    if (str_contains($folder, '..')) {
+        return [];
+    }
+
     $path = ZENPRESS_PLUGIN_DIR . rtrim($folder, '/') . '/';
 
     if (!is_dir($path)) {
@@ -35,6 +40,6 @@ function zenpress_load_snippets(string $folder = 'inc/snippets/functions/'): arr
 /**************************************
  *  BOOT ZENPRESS PLUGIN
  **************************************/
-add_action('init', function() : void {
+add_action('init', static function (): void {
     zenpress_load_snippets();
 });

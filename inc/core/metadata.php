@@ -17,7 +17,7 @@ function zenpress_extract_snippet_metadata(string $snippet_name): array {
         'category' => '',
         'subcategory' => '',
         'weight' => 0,
-        'preset' => []
+        'preset' => [],
     ];
 
     $file = ZENPRESS_PLUGIN_DIR . 'inc/snippets/meta/' . sanitize_file_name($snippet_name) . '.meta.php';
@@ -30,6 +30,6 @@ function zenpress_extract_snippet_metadata(string $snippet_name): array {
         'category' => sanitize_text_field($metadata['category']),
         'subcategory' => sanitize_text_field($metadata['subcategory']),
         'weight' => (int) $metadata['weight'],
-        'preset' => array_map('sanitize_text_field', (array) $metadata['preset'])
+        'preset' => array_map('sanitize_text_field', (array) $metadata['preset']),
     ];
 }

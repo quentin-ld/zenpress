@@ -6,7 +6,7 @@ if (!defined('ABSPATH')) {
 
 add_action(
     'wp_dashboard_setup',
-    static function () {
+    static function (): void {
         /**
          * Core widgets.
          */

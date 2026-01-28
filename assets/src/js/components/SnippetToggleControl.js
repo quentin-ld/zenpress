@@ -6,27 +6,36 @@ import { useRef, useEffect } from '@wordpress/element';
  * TODO: Remove this when WordPress ToggleControl properly handles Enter key.
  *
  * @param {HTMLElement} container - Container element to attach listener to.
- * @param {Function} onChange - Change handler to call when Enter is pressed.
+ * @param {Function}    onChange  - Change handler to call when Enter is pressed.
  */
 const addEnterKeySupport = (container, onChange) => {
-    if (!container) return;
+	if (!container) {
+		return;
+	}
 
-    const handleKeyDown = (e) => {
-        // Handle Enter key on the toggle control
-        if (e.key === 'Enter') {
-            const toggleInput = container.querySelector('input[type="checkbox"]');
-            if (toggleInput && (document.activeElement === toggleInput || container.contains(document.activeElement))) {
-                e.preventDefault();
-                e.stopPropagation();
-                onChange();
-            }
-        }
-    };
+	const handleKeyDown = (e) => {
+		// Handle Enter key on the toggle control
+		if (e.key === 'Enter') {
+			const toggleInput = container.querySelector(
+				'input[type="checkbox"]'
+			);
+			const ownerDocument = container.ownerDocument || document;
+			if (
+				toggleInput &&
+				(ownerDocument.activeElement === toggleInput ||
+					container.contains(ownerDocument.activeElement))
+			) {
+				e.preventDefault();
+				e.stopPropagation();
+				onChange();
+			}
+		}
+	};
 
-    container.addEventListener('keydown', handleKeyDown);
-    return () => {
-        container.removeEventListener('keydown', handleKeyDown);
-    };
+	container.addEventListener('keydown', handleKeyDown);
+	return () => {
+		container.removeEventListener('keydown', handleKeyDown);
+	};
 };
 
 /**
@@ -43,16 +52,22 @@ const addEnterKeySupport = (container, onChange) => {
  * @return {JSX.Element} The toggle control.
  */
 export const SnippetToggleControl = ({ label, value, onChange, help }) => {
-    const containerRef = useRef(null);
+	const containerRef = useRef(null);
 
-    // Temporary support for Enter key handling
-    useEffect(() => {
-        return addEnterKeySupport(containerRef.current, onChange);
-    }, [onChange]);
+	// Temporary support for Enter key handling
+	useEffect(() => {
+		return addEnterKeySupport(containerRef.current, onChange);
+	}, [onChange]);
 
-    return (
-        <div ref={containerRef}>
-            <ToggleControl label={label} checked={value} onChange={onChange} help={help} __nextHasNoMarginBottom />
-        </div>
-    );
+	return (
+		<div ref={containerRef}>
+			<ToggleControl
+				label={label}
+				checked={value}
+				onChange={onChange}
+				help={help}
+				__nextHasNoMarginBottom
+			/>
+		</div>
+	);
 };

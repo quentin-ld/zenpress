@@ -4,7 +4,7 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-add_action('init', static function () {
+add_action('init', static function (): void {
     // Remove oEmbed from query vars.
     global $wp;
     $wp->public_query_vars = array_diff($wp->public_query_vars, ['embed']);
@@ -24,14 +24,14 @@ add_action('init', static function () {
     remove_filter('pre_oembed_result', 'wp_filter_pre_oembed_result', 10);
 
     // Remove the wpembed TinyMCE plugin.
-    add_filter('tiny_mce_plugins', function ($plugins) {
+    add_filter('tiny_mce_plugins', static function (array $plugins): array {
         return array_diff($plugins, ['wpembed']);
     });
 
     // Remove embed-related rewrite rules.
-    add_filter('rewrite_rules_array', function ($rules) {
+    add_filter('rewrite_rules_array', static function (array $rules): array {
         foreach ($rules as $rule => $rewrite) {
-            if (strpos($rewrite, 'embed=true') !== false) {
+            if (str_contains($rewrite, 'embed=true')) {
                 unset($rules[$rule]);
             }
         }

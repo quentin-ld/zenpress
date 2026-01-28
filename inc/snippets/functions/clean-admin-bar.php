@@ -6,11 +6,7 @@ if (!defined('ABSPATH')) {
 
 add_action(
     'admin_bar_menu',
-    static function ($wp_admin_bar) {
-        if (!($wp_admin_bar instanceof WP_Admin_Bar)) {
-            return;
-        }
-
+    static function (WP_Admin_Bar $wp_admin_bar): void {
         /**
          * Backend clean-up.
          */

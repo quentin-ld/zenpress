@@ -4,8 +4,8 @@ Donate link: https://github.com/sponsors/quentin-ld/
 Tags: optimization, performance, security, bloat, woocommerce
 Requires at least: 6.0
 Tested up to: 6.9
-Stable tag: 2.1.0
-Requires PHP: 7.4
+Stable tag: 2.2.0
+Requires PHP: 8.3
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html/
 
@@ -33,7 +33,7 @@ No database clutter, no ads, no pro version. Just install, activate, select what
 Following features are included :
 
 = Settings subpage 🧰 =
-* Organized interface with vertical tabs for easy navigation between categories (Core, Gutenberg, WooCommerce, Tools).
+* Organized interface with vertical tabs for easy navigation between categories (Core, Gutenberg, WooCommerce, Ads-blocker, Tools).
 * Features grouped by subcategories (Performance, Security, User Interface) with visual icons for quick identification.
 * Three ready-to-use presets: Corporate website, Blog, and E-commerce - each optimized for specific site types.
 * Every action is documented with descriptions so that you understand what you are doing and the benefits.
@@ -52,9 +52,12 @@ Following features are included :
 * Disable all WordPress feeds (RDF, RSS, RSS2, Atom, and comments).
 * Disable WordPress shortlink.
 * Disable WLW link.
-* Remove WordPress default remote block patterns.
 * Remove REST API links.
-* Separate loading of core block styles.
+* Disable capital_P_dangit filter.
+* Disable autosave.
+* Limit post revision to 10.
+* Disable Password Strength Meter.
+* Disable WordPress default lazy loading.
 
 = Core - Security =
 
@@ -65,13 +68,14 @@ Following features are included :
 * Disable REST API for visitors not logged into WordPress.
 * Disable XML-RPC and remove RSD link.
 * Hide WordPress version.
-* Protect the wp-login form from brute force attacks.
 
 = Core - User Interface =
 
 * Clean up the WordPress admin bar.
-* Clean up the WordPress Dashboard.
 * Disable the login language selector.
+* Remove WordPress logo.
+* Remove "Help" button.
+* Remove "Thanks for using WordPress" in footer.
 
 = WooCommerce - Performance =
 * Disable WooCommerce cart fragments script.
@@ -89,6 +93,12 @@ Following features are included :
 
 = Gutenberg - User Interface =
 * Disable default pattern categories in site editor.
+
+= Ads-blocker - User Interface =
+* Clean up the WordPress Dashboard.
+
+= Tools - Security =
+* Protect the wp-login form from brute force attacks.
 
 = Presets =
 * Corporate website / Portfolio: Optimized for business sites and portfolios. Focuses on security, performance, and removing unnecessary features like RSS feeds and author archives.
@@ -111,18 +121,7 @@ Following features are included :
 = Security =
 * Manage Heartbeat API (frontend + backend + admin whitelist).
 
-= Performance =
-* Disable capital_P_dangit filter.
-* Disable autosave.
-* Disable post revision.
-* Disable Password Strength Meter.
-* Disable WordPress default lazy loading.
-
 = User Interface =
-* Remove "howdy" from admin bar.
-* Remove WordPress logo.
-* Remove "Help button".
-* Remove "Thanks for using WordPress" in footer.
 * Remove "site health" page.
 * Remove "Privacy tools".
 
@@ -174,15 +173,53 @@ However, [I am accepting sponsorships via the GitHub Sponsors program](https://g
 
 In addition, if you like the plugin then I'd love for you to [leave a review](https://wordpress.org/support/plugin/zenpress/reviews/). Tell all your friends about it too!
 
+= Does ZenPress work with my existing caching / optimization plugins? =
+
+Yes. ZenPress focuses on disabling unnecessary core features and plugin bloat; it does not handle page caching, minification, or image optimization. It is designed to work alongside plugins like Cache Enabler, Autoptimize, and most object-cache solutions. If a performance feature overlaps, simply disable it in one of the tools.
+
+= Can ZenPress break my theme or plugins? =
+
+Potentially, yes—especially if your theme or plugins rely on features you disable (RSS feeds, oEmbed, REST API, emojis, WooCommerce assets, etc.). That’s why each snippet includes clear descriptions and categories (performance, security, UI). Always test changes on a staging site first and enable snippets gradually.
+
+= How do I know which snippets are safe to enable? =
+
+If you are unsure, start with a preset (Corporate, Blog, E‑commerce) and then adjust. For manual tuning, prefer UI and performance snippets first (dashicons, emojis, dashboard/admin-bar cleanup) before more invasive ones (REST API, XML‑RPC, RSS). After each change, check: frontend pages, login, editor, and (if used) WooCommerce flows.
+
+= What happens if I disable the REST API? =
+
+Unauthenticated REST requests will be blocked except for any explicit bypasses configured via the filters documented in the snippet (`zenpress_disable_wp_rest_api_post_var`, `zenpress_disable_wp_rest_api_server_var`). Core features and plugins that depend on public REST endpoints (some blocks, headless/front-end apps, third-party integrations) may stop working until you whitelist the required routes.
+
+**Important**: If you don't know how to configure bypass filters or whitelist specific routes, don't activate this snippet. It can break functionality that relies on public REST API access.
+
+= Does ZenPress store any personal data or phone home? =
+
+No. ZenPress does not collect, store, or transmit any personal data. It does not contact external services or include third‑party trackers. All settings are stored in standard WordPress options and remain on your site only.
+
+= Is ZenPress multisite compatible? =
+
+ZenPress can be network‑activated or activated per site. Settings are stored per site, so each site in a network can have different snippets enabled. As with any optimization/security plugin, test network‑wide changes carefully, especially REST API and XML‑RPC related snippets.
+
 = I have a suggestion =
 
 Nice ! If you can't find anything in the roadmap, feel free to submit your suggestion on the support page! If you know how to code, you can even contribute on GitHub.
 
-= Does this plugin work with PHP 8 =
-
-Yes, it 's been tested actively and works from PHP 7.4 to PHP 8.4.
-
 == Changelog ==
+
+= 2.2.0 =
+- Global: Dropped PHP 7.4 support and aligned minimum PHP requirement with the currently recommended WordPress version.
+- Global: Replaced strpos() with str_contains() and str_starts_with() throughout all snippets.
+- Snippets: Converted snippets to use direct execution pattern where applicable for better performance.
+- Security: Protect wp-login: fix wp_die() so blocked login responses return HTTP 403 instead of 200.
+- Security: Loader: guard against path traversal in zenpress_load_snippets() when the folder argument contains '..'.
+- Security: Disable REST API: document in-code that bypass filters (zenpress_disable_wp_rest_api_post_var, zenpress_disable_wp_rest_api_server_var) should use non-guessable values only.
+- New actionable function: Disable autosave.
+- New actionable function: Disable capital_P_dangit filter.
+- New actionable function: Disable Password Strength Meter.
+- New actionable function: Disable WordPress default lazy loading.
+- New actionable function: Limit post revision to 10.
+- New actionable function: Remove "Help" button.
+- New actionable function: Remove "Thanks for using WordPress" in footer.
+- New actionable function: Remove WordPress logo.
 
 = 2.1.0 =
 - Global: Tested with WordPress 6.9.
@@ -294,6 +331,10 @@ Yes, it 's been tested actively and works from PHP 7.4 to PHP 8.4.
 - First release of ZenPress, yaaaaayyy!
 
 == Upgrade Notice ==
+
+= 2.2.0 =
+- Breaking: PHP 8.3 is now required (PHP 7.4 support dropped). Major code modernization with improved type safety and performance.
+- Security: HTTP 403 on login block, path traversal guard in snippet loader, and in-code docs for REST API bypass filters.
 
 = 1.0.0.1 =
 

@@ -12,7 +12,7 @@ if (!defined('ABSPATH')) {
 return [
     'title' => __('Clean up the WordPress Dashboard', 'zenpress'),
     'description' => __(
-        'Removes unnecessary widgets and ads widgets from the dashboard. Declutters the admin area and improves usability.',
+        'Removes unnecessary and ad widgets from the dashboard. Declutters the admin area and improves usability.',
         'zenpress'
     ),
     'category' => __('ads-blocker', 'zenpress'),

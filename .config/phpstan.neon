@@ -1,13 +1,15 @@
 includes:
-    - vendor/szepeviktor/phpstan-wordpress/extension.neon
+    - ../vendor/szepeviktor/phpstan-wordpress/extension.neon
 
 parameters:
     bootstrapFiles:
         - phpstan-bootstrap.php
     level: 5
     excludePaths:
-        - .php-cs-fixer.php
-        - vendor/*
+        analyseAndScan:
+            - .config/*
+            - vendor/*
+            - node_modules/*
     ignoreErrors:
         # Ignore all errors about WooCommerce functions not found
         - '#Function is_woocommerce not found#'

@@ -10,7 +10,7 @@ if (!defined('ABSPATH')) {
  * This prevents pattern categories from appearing in the block pattern inserter,
  * simplifying the interface and reducing clutter.
  */
-add_action('init', static function() {
+add_action('init', static function (): void {
     if (!class_exists('WP_Block_Pattern_Categories_Registry')) {
         return;
     }

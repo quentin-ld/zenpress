@@ -5,7 +5,7 @@ if (!defined('ABSPATH')) {
 }
 
 if (class_exists('WooCommerce')) {
-    add_action('wp_enqueue_scripts', static function () {
+    add_action('wp_enqueue_scripts', static function (): void {
         if (!is_woocommerce() && !is_cart() && !is_checkout() && !is_account_page() && !is_product() && !is_product_category() && !is_shop()) {
             // Dequeue WooCommerce Styles
             wp_dequeue_style('woocommerce-general');

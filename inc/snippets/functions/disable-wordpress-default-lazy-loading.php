@@ -1,0 +1,7 @@
+<?php
+
+if (!defined('ABSPATH')) {
+    exit;
+}
+
+add_filter('wp_lazy_loading_enabled', '__return_false');

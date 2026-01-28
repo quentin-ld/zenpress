@@ -4,8 +4,8 @@
   "type": "wordpress-plugin",
   "main": "assets/build/index.js",
   "scripts": {
-    "lint": "eslint assets/src/**/*.js",
-    "format": "prettier --write assets/src/**/*.js",
+    "lint": "eslint --config .config/.eslintrc.js assets/src/**/*.js",
+    "format": "prettier --config .config/.prettierrc.js --write assets/src/**/*.js",
     "start": "wp-scripts start assets/src/index.js --output-path=assets/build",
     "build": "wp-scripts build assets/src/index.js --output-path=assets/build"
   },

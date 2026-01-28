@@ -6,17 +6,15 @@ if (!defined('ABSPATH')) {
 
 if (!is_admin()) {
     // Block enumeration via query string (?author=1).
-    if (
-        isset($_SERVER['QUERY_STRING']) &&
-        preg_match('/author=([0-9]+)/i', sanitize_text_field(wp_unslash($_SERVER['QUERY_STRING'])))
-    ) {
+    $query_string = $_SERVER['QUERY_STRING'] ?? '';
+    if (preg_match('/author=([0-9]+)/i', sanitize_text_field(wp_unslash($query_string)))) {
         wp_die(esc_html__('Access denied.', 'zenpress'), '', ['response' => 403]);
     }
 
     // Block enumeration via permalink-style URLs.
     add_filter(
         'redirect_canonical',
-        static function ($redirect, $request) {
+        static function (string|false $redirect, string $request): string|false {
             if (preg_match('/\?author=([0-9]+)(\/*)/i', sanitize_text_field(wp_unslash($request)))) {
                 wp_die(esc_html__('Access denied.', 'zenpress'), '', ['response' => 403]);
             }

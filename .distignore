@@ -1,6 +1,7 @@
 *.sql
 *.tar.gz
 *.zip
+.config
 .distignore
 .DS_Store
 .editorconfig

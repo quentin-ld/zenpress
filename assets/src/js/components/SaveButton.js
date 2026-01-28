@@ -10,9 +10,14 @@ import { __ } from '@wordpress/i18n';
  * @return {JSX.Element} The save button.
  */
 export const SaveButton = ({ onClick, isBusy }) => {
-    return (
-        <Button variant="primary" onClick={onClick} isBusy={isBusy} __next40pxDefaultSize>
-            {__('Save settings', 'zenpress')}
-        </Button>
-    );
+	return (
+		<Button
+			variant="primary"
+			onClick={onClick}
+			isBusy={isBusy}
+			__next40pxDefaultSize
+		>
+			{__('Save settings', 'zenpress')}
+		</Button>
+	);
 };

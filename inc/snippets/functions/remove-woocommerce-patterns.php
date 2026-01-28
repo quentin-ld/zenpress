@@ -36,22 +36,15 @@ add_action('woocommerce_blocks_loaded', static function (): void {
     }
 });
 
-add_action('init', static function() {
+add_action('init', static function (): void {
     if (!class_exists('WP_Block_Patterns_Registry')) {
         return;
     }
 
     $all_patterns = WP_Block_Patterns_Registry::get_instance()->get_all_registered();
     foreach ($all_patterns as $pattern) {
-        if (isset($pattern['name'])) {
-            // Use str_starts_with() for PHP 8.0+, fallback to strpos() for older versions
-            $is_woocommerce_pattern = function_exists('str_starts_with')
-                ? str_starts_with($pattern['name'], 'woocommerce-blocks')
-                : strpos($pattern['name'], 'woocommerce-blocks') === 0;
-
-            if ($is_woocommerce_pattern) {
-                unregister_block_pattern($pattern['name']);
-            }
+        if (isset($pattern['name']) && str_starts_with($pattern['name'], 'woocommerce-blocks')) {
+            unregister_block_pattern($pattern['name']);
         }
     }
 }, 20);
@@ -62,12 +55,7 @@ add_action('init', static function() {
  * This feature is a flag for advanced block patterns functionality, which can
  * sometimes be tied to large transients/caching issues.
  */
-add_filter('woocommerce_admin_features', static function($features) {
-    // Ensure $features is an array
-    if (!is_array($features)) {
-        return $features;
-    }
-
+add_filter('woocommerce_admin_features', static function (array $features): array {
     $feature_to_disable = 'pattern-toolkit-full-composability';
 
     // Find the feature's identifier in the array and remove it.

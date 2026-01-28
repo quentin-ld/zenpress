@@ -11,7 +11,7 @@
 	],
 	"minimum-stability": "stable",
 	"require": {
-		"php": ">=7.4"
+		"php": ">=8.3"
 	},
 	"require-dev": {
 		"friendsofphp/php-cs-fixer": "v3.64.0",
@@ -22,8 +22,8 @@
 	},
 	"scripts": {
 		"lint:php": [
-			"vendor/bin/php-cs-fixer fix -v --show-progress=dots --using-cache=no --config=.php-cs-fixer.php index.php inc",
-			"vendor/bin/phpstan analyse --memory-limit=2048M index.php inc"
+			"vendor/bin/php-cs-fixer fix -v --show-progress=dots --using-cache=no --config=.config/.php-cs-fixer.php index.php inc",
+			"vendor/bin/phpstan analyse --memory-limit=2048M --configuration=.config/phpstan.neon index.php inc"
 		]
 	}
 }

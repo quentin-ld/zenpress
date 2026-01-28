@@ -8,13 +8,13 @@ if (!defined('ABSPATH')) {
 remove_action('wp_head', 'wp_generator');
 
 // Remove WordPress version from generator
-add_filter('the_generator', static function () {
+add_filter('the_generator', static function (): string {
     return '';
 });
 
 // Remove WordPress version from script URLs
-add_filter('script_loader_src', static function ($src) {
-    if (strpos($src, 'ver=' . get_bloginfo('version')) !== false) {
+add_filter('script_loader_src', static function (string $src): string {
+    if (str_contains($src, 'ver=' . get_bloginfo('version'))) {
         $src = remove_query_arg('ver', $src);
     }
 
@@ -22,8 +22,8 @@ add_filter('script_loader_src', static function ($src) {
 });
 
 // Remove WordPress version from style URLs
-add_filter('style_loader_src', static function ($src) {
-    if (strpos($src, 'ver=' . get_bloginfo('version')) !== false) {
+add_filter('style_loader_src', static function (string $src): string {
+    if (str_contains($src, 'ver=' . get_bloginfo('version'))) {
         $src = remove_query_arg('ver', $src);
     }
 

@@ -22,10 +22,14 @@ function zenpress_admin_enqueue_scripts(string $admin_page): void {
     }
 
     $asset = include $asset_file;
+    if (!is_array($asset) || empty($asset['dependencies']) || empty($asset['version'])) {
+        return;
+    }
+
     wp_enqueue_script(
         'zenpress-scripts',
         plugins_url('assets/build/index.js', ZENPRESS_PLUGIN_FILE),
-        $asset['dependencies'],
+        (array) $asset['dependencies'],
         $asset['version'],
         true
     );
@@ -34,8 +38,8 @@ function zenpress_admin_enqueue_scripts(string $admin_page): void {
         'zenpress-style',
         plugins_url('assets/build/index.css', ZENPRESS_PLUGIN_FILE),
         array_filter(
-            $asset['dependencies'],
-            function ($style) {
+            (array) $asset['dependencies'],
+            static function (string $style): bool {
                 return wp_style_is($style, 'registered');
             }
         ),
@@ -61,7 +65,8 @@ function zenpress_localize_snippets_meta(string $admin_page): void {
         return;
     }
 
-    foreach (glob($snippets_path . '*.php') as $file) {
+    $files = glob($snippets_path . '*.php') ?: [];
+    foreach ($files as $file) {
         $basename = basename($file, '.php');
         $snippets[$basename] = zenpress_extract_snippet_metadata($basename);
     }

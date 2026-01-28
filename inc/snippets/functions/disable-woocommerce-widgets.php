@@ -5,7 +5,7 @@ if (!defined('ABSPATH')) {
 }
 
 if (class_exists('WooCommerce')) {
-    add_action('widgets_init', static function() {
+    add_action('widgets_init', static function (): void {
         unregister_widget('WC_Widget_Products');
         unregister_widget('WC_Widget_Product_Categories');
         unregister_widget('WC_Widget_Product_Tag_Cloud');

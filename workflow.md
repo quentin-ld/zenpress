@@ -7,7 +7,7 @@ This document describes the development workflow to keep code quality, consisten
 
 ### Prerequisites
 
-- PHP **7.4 or higher** (tested up to PHP 8.4)
+- PHP **8.3 or higher** (tested up to PHP 8.4)
 - Composer
 - Node.js & npm (for WordPress Scripts)
 - WordPress >= **6.0**
@@ -24,6 +24,13 @@ npm install
 
 ZenPress enforces strict coding standards and static analysis to avoid bugs and maintain clean code.
 
+All configuration files are stored in the `.config` folder:
+- `.config/.eslintrc.js` - ESLint configuration
+- `.config/.prettierrc.js` - Prettier configuration
+- `.config/.php-cs-fixer.php` - PHP CS Fixer configuration
+- `.config/phpstan.neon` - PHPStan configuration
+- `.config/phpstan-bootstrap.php` - PHPStan bootstrap file
+
 ### PHP Linting
 
 Run PHP linting with:
@@ -33,8 +40,8 @@ composer run lint:php
 
 This will:
 
-- Use **PHP CS Fixer** to automatically fix code style issues.
-- Use **PHPStan** for static analysis and bug detection.
+- Use **PHP CS Fixer** (configured in `.config/.php-cs-fixer.php`) to automatically fix code style issues.
+- Use **PHPStan** (configured in `.config/phpstan.neon`) for static analysis and bug detection.
 
 ### JavaScript / React Linting
 
@@ -42,19 +49,49 @@ Run JavaScript/React linting with:
 ```bash
 npm run lint
 ```
-- ESLint checks for code quality, JSDoc alignment, and best practices.
-- Prettier enforces consistent formatting.
+- ESLint (configured in `.config/.eslintrc.js`) checks for code quality, JSDoc alignment, and best practices.
+- Prettier (configured in `.config/.prettierrc.js`) enforces consistent formatting.
 
 To automatically fix fixable issues:
 ```bash
 npm run lint -- --fix
 ```
 
+### Code Formatting
+
+Format code with Prettier:
+```bash
+npm run format
+```
+
+This will format all JavaScript files according to the Prettier configuration.
+
 ## 🛠️ Development Workflow
+
+### Building Assets
+
+The plugin uses **@wordpress/scripts** for building JavaScript and SCSS assets:
+
+```bash
+# Development mode with watch (hot reload)
+npm start
+
+# Production build
+npm run build
+```
+
+The build process:
+- Compiles JavaScript/React code from `assets/src/index.js`
+- Compiles SCSS from `assets/src/index.scss` (imported in the JS file)
+- Outputs to `assets/build/` directory
+- Automatically generates RTL CSS files
+- Handles WordPress dependency extraction
+
+### Code Structure
 
 - Each snippet is stored in `/inc/snippets/functions/` with its own `.php` file.
 - Metadata for snippets is stored in `/inc/snippets/meta/` for scalability and translations.
-- All new code must pass linting.
+- All new code must pass linting before committing.
 
 ## License
 

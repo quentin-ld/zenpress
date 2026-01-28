@@ -126,7 +126,11 @@ $finder = Finder::create()
     ->name('*.php')
     ->notName('*.blade.php')
     ->ignoreDotFiles(true)
-    ->ignoreVCS(true);
+    ->ignoreVCS(true)
+    ->in(__DIR__ . '/../')
+    ->exclude('vendor')
+    ->exclude('node_modules')
+    ->exclude('.config');
 
 $config = new Config();
 
@@ -134,4 +138,3 @@ return $config->setFinder($finder)
     ->setRules($rules)
     ->setRiskyAllowed(true)
     ->setUsingCache(true);
-

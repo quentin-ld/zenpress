@@ -13,61 +13,54 @@ remove_action('template_redirect', 'rest_output_link_header', 11);
 remove_action('wp_head', 'rest_output_link_wp_head', 10);
 remove_action('xmlrpc_rsd_apis', 'rest_output_rsd');
 
-// Disable REST API
-if (version_compare(get_bloginfo('version'), '4.7', '>=')) {
-    add_filter('rest_authentication_errors', 'zenpress_disable_wp_rest_api');
-} else {
-    zenpress_disable_wp_rest_api_legacy();
-}
-
-function zenpress_disable_wp_rest_api($access) {
-    if (!is_user_logged_in() && !zenpress_disable_wp_rest_api_allow_access()) {
-        $message = apply_filters('zenpress_disable_wp_rest_api_error', __('REST API restricted to authenticated users.', 'zenpress'));
-
-        return new WP_Error('rest_login_required', $message, ['status' => rest_authorization_required_code()]);
-    }
-
-    return $access;
-}
-
-function zenpress_disable_wp_rest_api_allow_access() {
+/**
+ * Check whether to allow unauthenticated REST API access (bypass).
+ *
+ * Filters zenpress_disable_wp_rest_api_post_var and zenpress_disable_wp_rest_api_server_var
+ * let site owners allow specific POST keys or REQUEST_URI values for webhooks/third-party
+ * integrations. Security note: only use values that are secret or not guessable (e.g. a
+ * random token in POST, or a unique path). Using predictable values can re-enable public
+ * REST API access and weaken the protection provided by the "Disable REST API" snippet.
+ */
+$zenpress_disable_wp_rest_api_allow_access = static function (): bool {
     $post_var = apply_filters('zenpress_disable_wp_rest_api_post_var', false);
     $server_var = apply_filters('zenpress_disable_wp_rest_api_server_var', false);
 
     if (!empty($post_var)) {
-        if (is_array($post_var)) {
-            foreach($post_var as $var) {
-                // phpcs:ignore WordPress.Security.NonceVerification.Missing -- Intentional: Allows bypass via specific POST vars for webhooks/third-party integrations
-                if (isset($_POST[$var]) && !empty($_POST[$var])) {
-                    return true;
-                }
-            }
-        } else {
+        $post_vars = is_array($post_var) ? $post_var : [$post_var];
+        foreach ($post_vars as $var) {
             // phpcs:ignore WordPress.Security.NonceVerification.Missing -- Intentional: Allows bypass via specific POST vars for webhooks/third-party integrations
-            if (isset($_POST[$post_var]) && !empty($_POST[$post_var])) {
+            if (!empty($_POST[$var] ?? null)) {
                 return true;
             }
         }
     }
 
     if (!empty($server_var)) {
-        if (is_array($server_var)) {
-            foreach($server_var as $var) {
-                if (isset($_SERVER['REQUEST_URI']) && $_SERVER['REQUEST_URI'] === $var) {
-                    return true;
-                }
-            }
-        } else {
-            if (isset($_SERVER['REQUEST_URI']) && $_SERVER['REQUEST_URI'] === $server_var) {
+        $server_vars = is_array($server_var) ? $server_var : [$server_var];
+        $request_uri = $_SERVER['REQUEST_URI'] ?? '';
+        foreach ($server_vars as $var) {
+            if ($request_uri === $var) {
                 return true;
             }
         }
     }
 
     return false;
-}
+};
 
-function zenpress_disable_wp_rest_api_legacy() {
+// Disable REST API
+if (version_compare(get_bloginfo('version'), '4.7', '>=')) {
+    add_filter('rest_authentication_errors', static function (WP_Error|bool|null $access) use ($zenpress_disable_wp_rest_api_allow_access): WP_Error|bool|null {
+        if (!is_user_logged_in() && !$zenpress_disable_wp_rest_api_allow_access()) {
+            $message = apply_filters('zenpress_disable_wp_rest_api_error', __('REST API restricted to authenticated users.', 'zenpress'));
+
+            return new WP_Error('rest_login_required', $message, ['status' => rest_authorization_required_code()]);
+        }
+
+        return $access;
+    });
+} else {
     // REST API 1.x
     add_filter('json_enabled', '__return_false');
     add_filter('json_jsonp_enabled', '__return_false');

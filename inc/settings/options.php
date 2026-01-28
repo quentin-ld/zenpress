@@ -19,9 +19,9 @@ function zenpress_register_snippet_settings(): void {
             'show_in_rest' => [
                 'schema' => [
                     'type' => 'array',
-                    'items' => ['type' => 'string']
-                ]
-            ]
+                    'items' => ['type' => 'string'],
+                ],
+            ],
         ]
     );
 }

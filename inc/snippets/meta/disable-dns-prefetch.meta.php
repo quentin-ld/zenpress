@@ -12,7 +12,7 @@ if (!defined('ABSPATH')) {
 return [
     'title' => __('Disable DNS prefetch', 'zenpress'),
     'description' => __(
-        'Removes DNS prefetch resource hints from wp_head avoids unnecessary DNS lookups and slightly improve performance on some sites.',
+        'Removes DNS prefetch resource hints from wp_head. Avoids unnecessary DNS lookups and slightly improves performance on some sites.',
         'zenpress'
     ),
     'category' => __('core', 'zenpress'),
