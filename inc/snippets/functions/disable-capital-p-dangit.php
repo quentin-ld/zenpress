@@ -4,7 +4,7 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-$filters = [
+$zenpress_filters = [
     'the_content' => 11,
     'the_title' => 11,
     'wp_title' => 11,
@@ -13,6 +13,6 @@ $filters = [
     'widget_text_content' => 11,
 ];
 
-foreach ($filters as $filter => $priority) {
-    remove_filter($filter, 'capital_P_dangit', $priority);
+foreach ($zenpress_filters as $zenpress_filter => $zenpress_priority) {
+    remove_filter($zenpress_filter, 'capital_P_dangit', $zenpress_priority);
 }

@@ -38,7 +38,7 @@ $zenpress_disable_wp_rest_api_allow_access = static function (): bool {
 
     if (!empty($server_var)) {
         $server_vars = is_array($server_var) ? $server_var : [$server_var];
-        $request_uri = $_SERVER['REQUEST_URI'] ?? '';
+        $request_uri = isset($_SERVER['REQUEST_URI']) ? sanitize_text_field(wp_unslash($_SERVER['REQUEST_URI'])) : '';
         foreach ($server_vars as $var) {
             if ($request_uri === $var) {
                 return true;

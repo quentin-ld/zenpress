@@ -1,10 +1,10 @@
-=== ZenPress - Cleaner, Lighter, Faster WP ===
+=== ZenPress - Optimize & Secure ===
 Contributors: @quentinldd
 Donate link: https://github.com/sponsors/quentin-ld/
 Tags: optimization, performance, security, bloat, woocommerce
 Requires at least: 6.0
 Tested up to: 6.9
-Stable tag: 2.2.0
+Stable tag: 2.2.1
 Requires PHP: 8.3
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html/
@@ -205,6 +205,11 @@ Nice ! If you can't find anything in the roadmap, feel free to submit your sugge
 
 == Changelog ==
 
+= 2.2.1 =
+- Security: Fixed $_SERVER['REQUEST_URI'] and $_SERVER['QUERY_STRING'] sanitization issues in disable-rest-api.php and block-user-enumeration.php.
+- Global: Fixed global variable naming conventions to use zenpress_ prefix.
+- Global: Change tagline.
+
 = 2.2.0 =
 - Global: Dropped PHP 7.4 support and aligned minimum PHP requirement with the currently recommended WordPress version.
 - Global: Replaced strpos() with str_contains() and str_starts_with() throughout all snippets.
@@ -331,6 +336,9 @@ Nice ! If you can't find anything in the roadmap, feel free to submit your sugge
 - First release of ZenPress, yaaaaayyy!
 
 == Upgrade Notice ==
+
+= 2.2.1 =
+- Security and code quality improvements. Recommended update.
 
 = 2.2.0 =
 - Breaking: PHP 8.3 is now required (PHP 7.4 support dropped). Major code modernization with improved type safety and performance.

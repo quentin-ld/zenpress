@@ -2,21 +2,21 @@
 # This file is distributed under the GPL v2 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: ZenPress - Cleaner, Lighter, Faster WP 2.2.0\n"
+"Project-Id-Version: ZenPress - Optimize & Secure 2.2.1\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/zenpress\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-01-28T10:05:55+00:00\n"
+"POT-Creation-Date: 2026-01-28T10:44:12+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: zenpress\n"
 
 #. Plugin Name of the plugin
 #: zenpress.php
-msgid "ZenPress - Cleaner, Lighter, Faster WP"
+msgid "ZenPress - Optimize & Secure"
 msgstr ""
 
 #. Plugin URI of the plugin
@@ -574,88 +574,88 @@ msgid "Forces WordPress to load core block styles separately, improving performa
 msgstr ""
 
 #: assets/build/index.js:1
-#: assets/src/js/components/SaveButton.js:15
+#: assets/src/js/components/SaveButton.js:20
 msgid "Save settings"
 msgstr ""
 
 #: assets/build/index.js:1
-#: assets/src/js/hooks/useSettings.js:41
+#: assets/src/js/hooks/useSettings.js:42
 msgid "Failed to load settings."
 msgstr ""
 
 #: assets/build/index.js:1
-#: assets/src/js/hooks/useSettings.js:56
+#: assets/src/js/hooks/useSettings.js:59
 msgid "Settings saved."
 msgstr ""
 
 #: assets/build/index.js:1
-#: assets/src/js/hooks/useSettings.js:58
+#: assets/src/js/hooks/useSettings.js:61
 msgid "Failed to save settings."
 msgstr ""
 
 #: assets/build/index.js:1
-#: assets/src/js/pages/SettingsPage.js:75
+#: assets/src/js/pages/SettingsPage.js:86
 msgid "Uncategorized"
 msgstr ""
 
 #: assets/build/index.js:1
-#: assets/src/js/pages/SettingsPage.js:76
+#: assets/src/js/pages/SettingsPage.js:89
 msgid "uncategorized"
 msgstr ""
 
 #: assets/build/index.js:1
-#: assets/src/js/pages/SettingsPage.js:193
+#: assets/src/js/pages/SettingsPage.js:234
 msgid "Enable all actions"
 msgstr ""
 
 #: assets/build/index.js:1
-#: assets/src/js/pages/SettingsPage.js:196
+#: assets/src/js/pages/SettingsPage.js:241
 msgid "Disable all actions"
 msgstr ""
 
 #: assets/build/index.js:1
-#: assets/src/js/pages/SettingsPage.js:206
+#: assets/src/js/pages/SettingsPage.js:251
 msgid "Pick configuration preset"
 msgstr ""
 
 #: assets/build/index.js:1
-#: assets/src/js/pages/SettingsPage.js:208
+#: assets/src/js/pages/SettingsPage.js:253
 msgid "Don't know which features to enable? Quickly configure ZenPress by selecting a preset that matches your site type. Each preset enables optimized features for your specific use case."
 msgstr ""
 
 #: assets/build/index.js:1
-#: assets/src/js/pages/SettingsPage.js:214
+#: assets/src/js/pages/SettingsPage.js:259
 msgid "Corporate website"
 msgstr ""
 
 #: assets/build/index.js:1
-#: assets/src/js/pages/SettingsPage.js:216
+#: assets/src/js/pages/SettingsPage.js:261
 msgid "Optimized for business sites and portfolios. Focuses on security, performance, and removing unnecessary features like RSS feeds and author archives."
 msgstr ""
 
 #: assets/build/index.js:1
-#: assets/src/js/pages/SettingsPage.js:226
-#: assets/src/js/pages/SettingsPage.js:237
-#: assets/src/js/pages/SettingsPage.js:248
+#: assets/src/js/pages/SettingsPage.js:271
+#: assets/src/js/pages/SettingsPage.js:286
+#: assets/src/js/pages/SettingsPage.js:301
 msgid "Enable"
 msgstr ""
 
 #: assets/build/index.js:1
-#: assets/src/js/pages/SettingsPage.js:229
+#: assets/src/js/pages/SettingsPage.js:274
 msgid "Blog"
 msgstr ""
 
 #: assets/build/index.js:1
-#: assets/src/js/pages/SettingsPage.js:231
+#: assets/src/js/pages/SettingsPage.js:276
 msgid "Tailored for content-focused blogs. Includes performance and security optimizations while preserving essential blog features like RSS feeds."
 msgstr ""
 
 #: assets/build/index.js:1
-#: assets/src/js/pages/SettingsPage.js:240
+#: assets/src/js/pages/SettingsPage.js:289
 msgid "E-commerce"
 msgstr ""
 
 #: assets/build/index.js:1
-#: assets/src/js/pages/SettingsPage.js:242
+#: assets/src/js/pages/SettingsPage.js:291
 msgid "Designed for WooCommerce stores. Includes all performance and security features plus WooCommerce-specific optimizations for faster checkout."
 msgstr ""

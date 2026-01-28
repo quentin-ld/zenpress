@@ -9,8 +9,8 @@ if (!defined('ABSPATH')) {
 }
 
 if (!defined('ZENPRESS_PLUGIN_FILE')) {
-    $plugin_file = dirname(__DIR__, 2) . '/zenpress.php';
-    define('ZENPRESS_PLUGIN_FILE', is_file($plugin_file) ? $plugin_file : __FILE__);
+    $zenpress_plugin_file = dirname(__DIR__, 2) . '/zenpress.php';
+    define('ZENPRESS_PLUGIN_FILE', is_file($zenpress_plugin_file) ? $zenpress_plugin_file : __FILE__);
 }
 
 if (!defined('ZENPRESS_PLUGIN_DIR')) {
