@@ -8,13 +8,16 @@ import { __ } from '@wordpress/i18n';
  * Custom hook to manage ZenPress settings state.
  *
  * @return {Object} Settings state and actions.
- * @property {Object}   snippets     - Current snippets with metadata.
- * @property {Function} setSnippets  - Setter to update snippets state.
- * @property {Function} saveSettings - Function to persist settings to REST API.
- * @property {boolean}  isSaving     - Whether settings are currently being saved.
+ * @property {Object}   snippets           - Current snippets with metadata.
+ * @property {Function} setSnippets        - Setter to update snippets state.
+ * @property {boolean}  adminBarEnabled    - Whether the ZenPress admin bar is enabled.
+ * @property {Function} setAdminBarEnabled - Setter for admin bar enabled.
+ * @property {Function} saveSettings       - Function to persist settings to REST API.
+ * @property {boolean}  isSaving           - Whether settings are currently being saved.
  */
 export const useSettings = () => {
 	const [snippets, setSnippets] = useState({});
+	const [adminBarEnabled, setAdminBarEnabled] = useState(true);
 	const [isSaving, setIsSaving] = useState(false);
 	const { createSuccessNotice, createErrorNotice } =
 		useDispatch(noticesStore);
@@ -37,6 +40,9 @@ export const useSettings = () => {
 				});
 
 				setSnippets(snippetsData);
+				setAdminBarEnabled(
+					settings?.zenpress_admin_bar_enabled !== false
+				);
 			})
 			.catch(() => {
 				createErrorNotice(__('Failed to load settings.', 'zenpress'));
@@ -54,7 +60,10 @@ export const useSettings = () => {
 			await apiFetch({
 				path: '/wp/v2/settings',
 				method: 'POST',
-				data: { zenpress_active_snippets: active },
+				data: {
+					zenpress_active_snippets: active,
+					zenpress_admin_bar_enabled: adminBarEnabled,
+				},
 			});
 			createSuccessNotice(__('Settings saved.', 'zenpress'));
 		} catch {
@@ -64,5 +73,12 @@ export const useSettings = () => {
 		}
 	};
 
-	return { snippets, setSnippets, saveSettings, isSaving };
+	return {
+		snippets,
+		setSnippets,
+		adminBarEnabled,
+		setAdminBarEnabled,
+		saveSettings,
+		isSaving,
+	};
 };

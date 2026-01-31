@@ -1,6 +1,9 @@
 import { useState, useEffect } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
 import { Button } from '@wordpress/components';
+import { useDispatch } from '@wordpress/data';
+import { store as noticesStore } from '@wordpress/notices';
+import apiFetch from '@wordpress/api-fetch';
 import { useSettings } from '../hooks/useSettings';
 import { SnippetToggleControl } from '../components/SnippetToggleControl';
 import { SaveButton } from '../components/SaveButton';
@@ -13,8 +16,18 @@ import { Tabs } from '../components/Tabs';
  * @return {JSX.Element} The settings page UI.
  */
 export const SettingsPage = () => {
-	const { snippets, setSnippets, saveSettings, isSaving } = useSettings();
+	const {
+		snippets,
+		setSnippets,
+		adminBarEnabled,
+		setAdminBarEnabled,
+		saveSettings,
+		isSaving,
+	} = useSettings();
 	const [selectedTabId, setSelectedTabId] = useState();
+	const [autoconfigBusy, setAutoconfigBusy] = useState(null);
+	const { createSuccessNotice, createErrorNotice } =
+		useDispatch(noticesStore);
 
 	const handleToggleChange = (snippetName) => {
 		setSnippets((prev) => ({
@@ -133,6 +146,59 @@ export const SettingsPage = () => {
 		setSelectedTabId(tabName);
 	};
 
+	const runAutoconfig = async (
+		integrationKey,
+		path,
+		successMessage,
+		errorMessage
+	) => {
+		setAutoconfigBusy(integrationKey);
+		try {
+			const response = await apiFetch({
+				path,
+				method: 'POST',
+			});
+			createSuccessNotice(response?.message || successMessage);
+		} catch {
+			createErrorNotice(errorMessage);
+		} finally {
+			setAutoconfigBusy(null);
+		}
+	};
+
+	const handleAutoconfigAutoptimize = () =>
+		runAutoconfig(
+			'autoptimize',
+			'/zenpress/v1/autoconfig/autoptimize',
+			__('Autoptimize has been configured.', 'zenpress'),
+			__(
+				'Autoptimize autoconfig failed. Is Autoptimize installed and active?',
+				'zenpress'
+			)
+		);
+
+	const handleAutoconfigCacheEnabler = () =>
+		runAutoconfig(
+			'cache_enabler',
+			'/zenpress/v1/autoconfig/cache-enabler',
+			__('Cache Enabler has been configured.', 'zenpress'),
+			__(
+				'Cache Enabler autoconfig failed. Is Cache Enabler installed and active?',
+				'zenpress'
+			)
+		);
+
+	const handleAutoconfigSqliteObjectCache = () =>
+		runAutoconfig(
+			'sqlite_object_cache',
+			'/zenpress/v1/autoconfig/sqlite-object-cache',
+			__('SQLite Object Cache has been configured.', 'zenpress'),
+			__(
+				'SQLite Object Cache autoconfig failed. Is SQLite Object Cache installed and active?',
+				'zenpress'
+			)
+		);
+
 	// Add keyboard shortcuts and ensure toggles are keyboard accessible
 	useEffect(() => {
 		const handleKeyDown = (e) => {
@@ -220,6 +286,139 @@ export const SettingsPage = () => {
 											))}
 										</div>
 									))}
+									{category === 'tools' &&
+										Object.values(
+											window?.zenpressIntegrationsActive ||
+												{}
+										).some(Boolean) && (
+											<div className="zenpress-subcategory zenpress-subcategory-integrations">
+												<hr />
+												<h3>
+													{__(
+														'Integrations',
+														'zenpress'
+													)}
+												</h3>
+												<SnippetToggleControl
+													label={__(
+														'Show ZenPress admin bar button',
+														'zenpress'
+													)}
+													value={adminBarEnabled}
+													onChange={() =>
+														setAdminBarEnabled(
+															!adminBarEnabled
+														)
+													}
+													help={__(
+														'Show a "ZenPress" item in the admin bar with "Clear caches". When enabled, integration buttons (e.g. Autoptimize) are hidden.',
+														'zenpress'
+													)}
+												/>
+												{window
+													?.zenpressIntegrationsActive
+													?.autoptimize && (
+													<div className="zenpress-autoconfig-actions">
+														<Button
+															variant="secondary"
+															onClick={
+																handleAutoconfigAutoptimize
+															}
+															disabled={
+																autoconfigBusy !==
+																null
+															}
+															__next40pxDefaultSize
+														>
+															{autoconfigBusy ===
+															'autoptimize'
+																? __(
+																		'Applying…',
+																		'zenpress'
+																	)
+																: __(
+																		'One-click autoconfig Autoptimize',
+																		'zenpress'
+																	)}
+														</Button>
+														<p className="zenpress-autoconfig-help">
+															{__(
+																'Apply recommended Autoptimize settings (optimize JS/CSS, aggregate CSS, static files, 404 fallbacks; disable defer, HTML optimize, optimize for logged-in, per post/page). Only works if Autoptimize is active.',
+																'zenpress'
+															)}
+														</p>
+													</div>
+												)}
+												{window
+													?.zenpressIntegrationsActive
+													?.cache_enabler && (
+													<div className="zenpress-autoconfig-actions">
+														<Button
+															variant="secondary"
+															onClick={
+																handleAutoconfigCacheEnabler
+															}
+															disabled={
+																autoconfigBusy !==
+																null
+															}
+															__next40pxDefaultSize
+														>
+															{autoconfigBusy ===
+															'cache_enabler'
+																? __(
+																		'Applying…',
+																		'zenpress'
+																	)
+																: __(
+																		'One-click autoconfig Cache Enabler',
+																		'zenpress'
+																	)}
+														</Button>
+														<p className="zenpress-autoconfig-help">
+															{__(
+																'Apply recommended Cache Enabler settings. Only works if Cache Enabler is active.',
+																'zenpress'
+															)}
+														</p>
+													</div>
+												)}
+												{window
+													?.zenpressIntegrationsActive
+													?.sqlite_object_cache && (
+													<div className="zenpress-autoconfig-actions">
+														<Button
+															variant="secondary"
+															onClick={
+																handleAutoconfigSqliteObjectCache
+															}
+															disabled={
+																autoconfigBusy !==
+																null
+															}
+															__next40pxDefaultSize
+														>
+															{autoconfigBusy ===
+															'sqlite_object_cache'
+																? __(
+																		'Applying…',
+																		'zenpress'
+																	)
+																: __(
+																		'One-click autoconfig SQLite Object Cache',
+																		'zenpress'
+																	)}
+														</Button>
+														<p className="zenpress-autoconfig-help">
+															{__(
+																'Apply recommended SQLite Object Cache settings. Only works if SQLite Object Cache is active.',
+																'zenpress'
+															)}
+														</p>
+													</div>
+												)}
+											</div>
+										)}
 								</Tabs.TabPanel>
 							);
 						})}

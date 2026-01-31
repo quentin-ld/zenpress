@@ -5,9 +5,7 @@ if (!defined('ABSPATH')) {
 }
 
 /**
- * Register ZenPress options page under the Settings menu.
- *
- * @return void
+ * Adds ZenPress under Settings.
  */
 add_action('admin_menu', 'zenpress_add_option_page');
 function zenpress_add_option_page(): void {
@@ -21,9 +19,7 @@ function zenpress_add_option_page(): void {
 }
 
 /**
- * Render ZenPress options page content.
- *
- * @return void
+ * Outputs ZenPress settings page (shell; React app mounts in #zenpress-settings).
  */
 function zenpress_options_page(): void {
     $plugin_data = get_file_data(ZENPRESS_PLUGIN_FILE, ['Version' => 'Version'], 'plugin');

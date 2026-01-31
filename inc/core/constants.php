@@ -1,6 +1,7 @@
 <?php
 /**
- * ZenPress constants
+ * Plugin path constants.
+ *
  * @package zenpress
  */
 

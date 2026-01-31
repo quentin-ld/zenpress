@@ -5,9 +5,9 @@ if (!defined('ABSPATH')) {
 }
 
 /**
- * Load all active snippets.
+ * Includes active snippet files from the given folder. Skips path traversal and disabled-by-constant snippets.
  *
- * @param string $folder Relative folder path for snippets.
+ * @param string $folder Relative path under plugin dir (default: inc/snippets/functions/).
  * @return array<string> Loaded snippet base names.
  */
 function zenpress_load_snippets(string $folder = 'inc/snippets/functions/'): array {
@@ -29,8 +29,12 @@ function zenpress_load_snippets(string $folder = 'inc/snippets/functions/'): arr
         $file = $path . $name . '.php';
         $constant = 'ZENPRESS_' . strtoupper(str_replace(['-', '_'], '_', $name));
         if (is_file($file) && (!defined($constant) || constant($constant) !== false)) {
-            include_once $file;
-            $loaded[] = $name;
+            try {
+                include_once $file;
+                $loaded[] = $name;
+            } catch (\Throwable $e) {
+                continue;
+            }
         }
     }
 

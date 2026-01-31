@@ -9,16 +9,18 @@ add_filter('login_errors', static function (): string {
     return __('Login error.', 'zenpress');
 });
 
-// Limit login attempts
+// Limit login attempts (only when a valid IP is available to avoid site-wide lockout)
 add_filter('authenticate', static function (mixed $user, string $username, string $password): mixed {
-    $MAX_LOGIN_ATTEMPTS = 5;
-    $BLOCK_DURATION = 300; // 5 minutes
-
     $ipAddress = filter_var(
         wp_unslash($_SERVER['REMOTE_ADDR'] ?? ''),
         FILTER_VALIDATE_IP
-    ) ?: 'unknown';
+    );
+    if ($ipAddress === false) {
+        return $user;
+    }
 
+    $MAX_LOGIN_ATTEMPTS = 5;
+    $BLOCK_DURATION = 300; // 5 minutes
     $blockKey = 'zenpress_login_block_' . $ipAddress;
     $attemptKey = 'zenpress_login_attempts_' . $ipAddress;
 

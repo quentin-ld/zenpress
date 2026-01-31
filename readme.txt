@@ -4,8 +4,8 @@ Donate link: https://github.com/sponsors/quentin-ld/
 Tags: optimization, performance, security, bloat, woocommerce
 Requires at least: 6.0
 Tested up to: 6.9
-Stable tag: 2.2.1
-Requires PHP: 8.3
+Stable tag: 2.2.3
+Requires PHP: 8.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html/
 
@@ -40,7 +40,7 @@ Following features are included :
 * Fully accessible interface with ARIA-compliant tabs and complete keyboard navigation support.
 * Native WordPress interface, benefits from Gutenberg's new features and the site editor.
 
-= Core - Performance =
+= Core =
 
 * Disable adjacent posts link tags.
 * Disable dashicons.
@@ -58,9 +58,6 @@ Following features are included :
 * Limit post revision to 10.
 * Disable Password Strength Meter.
 * Disable WordPress default lazy loading.
-
-= Core - Security =
-
 * Block user enumeration.
 * Disable application passwords.
 * Disable author archives.
@@ -68,37 +65,40 @@ Following features are included :
 * Disable REST API for visitors not logged into WordPress.
 * Disable XML-RPC and remove RSD link.
 * Hide WordPress version.
-
-= Core - User Interface =
-
 * Clean up the WordPress admin bar.
 * Disable the login language selector.
 * Remove WordPress logo.
 * Remove "Help" button.
 * Remove "Thanks for using WordPress" in footer.
 
-= WooCommerce - Performance =
+= WooCommerce  =
 * Disable WooCommerce cart fragments script.
 * Disable WooCommerce scripts and styles on non-WooCommerce pages.
 * Disable unnecessary Stripe scripts on WooCommerce pages.
 * Disable WooCommerce widgets.
 * Remove WooCommerce default block patterns.
-
-= WooCommerce - Security =
 * Hide WooCommerce version.
 
-= Gutenberg - Performance =
+= Gutenberg  =
 * Remove WordPress default remote block patterns.
 * Separate loading of core block styles.
-
-= Gutenberg - User Interface =
 * Disable default pattern categories in site editor.
 
-= Ads-blocker - User Interface =
+= Ads-blocker =
 * Clean up the WordPress Dashboard.
 
-= Tools - Security =
+= Tools =
 * Protect the wp-login form from brute force attacks.
+* Toggle "Show ZenPress admin bar button" (clear caches from the admin bar when at least one integration is active).
+
+= Integrations =
+
+ZenPress integrates with Cache Enabler, Autoptimize, and SQLite Object Cache. When any of these plugins is active, the Tools tab shows integration status and one-click autoconfig actions.
+
+* Admin bar: One "Clear all caches" button (dashicon) in the admin bar, with sub-items to clear page cache (Cache Enabler), static assets (Autoptimize), or object cache (SQLite Object Cache) separately. The ZenPress button replaces the third-party cache buttons when the ZenPress admin bar is enabled. You can hide it via Settings > ZenPress > Tools.
+* Autoptimize: One-click autoconfig enables recommended options (JS/CSS/aggregate/nogzip/fallback on; defer/HTML/logged-in/meta off) and clears the Autoptimize cache.
+* Cache Enabler: One-click autoconfig enables clear site cache on post or plugin changes, WebP support, Gzip compression, and minify HTML (excluding inline CSS/JS), then clears the page cache.
+* SQLite Object Cache: One-click autoconfig enables the "Use APCu" option in the plugin settings when the APCu extension is available (no wp-config editing; the plugin may write its constant when its own settings are saved).
 
 = Presets =
 * Corporate website / Portfolio: Optimized for business sites and portfolios. Focuses on security, performance, and removing unnecessary features like RSS feeds and author archives.
@@ -114,26 +114,17 @@ Following features are included :
 
 == Roadmap ==
 
-= Global =
 * Additional presets for specific use cases.
 * Documentation pages with detailed guides.
-
-= Security =
 * Manage Heartbeat API (frontend + backend + admin whitelist).
-
-= User Interface =
 * Remove "site health" page.
 * Remove "Privacy tools".
-
-= WooCommerce =
 * Disable WooCommerce tracking.
 * Disable marketing hub.
 * Disable dashboard setup widget.
 * Disable new product editor.
 * Disable WooCommerce blocks.
 * Disable WooCommerce promo emails.
-
-= Plugins =
 * Disable CF7 CSS & JS.
 * Disable Elementor bloat.
 * Disable WP Bakery bloat.
@@ -203,7 +194,36 @@ ZenPress can be network‑activated or activated per site. Settings are stored p
 
 Nice ! If you can't find anything in the roadmap, feel free to submit your suggestion on the support page! If you know how to code, you can even contribute on GitHub.
 
+== Hooks & filters ==
+
+For developers: ZenPress exposes the following action and filters for extending or bypassing behavior.
+
+= Action =
+* `zenpress_caches_clear` – Fired when the user clears caches from the ZenPress admin bar. Integrations (e.g. Autoptimize) hook into this to clear their own caches. You can add custom cache clear logic with `add_action('zenpress_caches_clear', 'your_callback');`.
+
+= Filters (Disable REST API snippet) =
+* `zenpress_disable_wp_rest_api_post_var` – Allow unauthenticated REST access when a specific POST key is present (e.g. for webhooks). Return a string or array of key names. Use non-guessable values only.
+* `zenpress_disable_wp_rest_api_server_var` – Allow unauthenticated REST access when `REQUEST_URI` matches a specific value. Return a string or array. Use non-guessable values only.
+
 == Changelog ==
+
+= 2.2.3 =
+- Integrations: Cache Enabler one-click autoconfig (clear on post/plugin, WebP, Gzip, minify HTML excl. inline CSS/JS).
+- Integrations: SQLite Object Cache one-click autoconfig (enable "Use APCu" option when APCu available; no wp-config editing by ZenPress).
+- Integrations: Admin bar "Clear all caches" button now uses dashicons-trash icon.
+- Defensive: REST and AJAX handlers wrap integration calls in try/catch; failed autoconfig or cache clear returns 500 with message instead of fatal.
+- Defensive: get_active_integrations_for_ui() wraps ReflectionClass in try/catch so one missing integration does not break the settings UI.
+- Defensive: Cache Enabler autoconfig ensures option value is array before merge (corrupted option no longer triggers warning).
+- Defensive: Metadata and snippet loader wrap include in try/catch so a single bad meta file or snippet does not fatal the site.
+- Defensive: Protect wp-login skips rate limiting when REMOTE_ADDR is missing or invalid to avoid site-wide lockout (e.g. CLI or proxy).
+- Defensive: Autoptimize clear_cache and autoconfig check method_exists before calling third-party API.
+- Docblocks: Reviewed and tightened docblocks across inc/ (file headers, classes, methods) for coherence, readability, and conciseness; removed redundant @param/@return where type is obvious.
+- Lint: PHPStan and PHP CS Fixer fixes (autoptimize method_exists ignore, protect-wp-login strict comparison).
+
+= 2.2.2 =
+- Integrations: Admin bar and one-click autoconfig (e.g. Autoptimize) in Tools tab; visible only when at least one integration is active.
+- Documentation: Added Hooks & filters section in readme; Integrations section in workflow.md; config comments for PHPStan and PHP CS Fixer.
+- Version alignment: Stable tag and plugin header set to 2.2.2.
 
 = 2.2.1 =
 - Security: Fixed $_SERVER['REQUEST_URI'] and $_SERVER['QUERY_STRING'] sanitization issues in disable-rest-api.php and block-user-enumeration.php.
@@ -337,11 +357,17 @@ Nice ! If you can't find anything in the roadmap, feel free to submit your sugge
 
 == Upgrade Notice ==
 
+= 2.2.3 =
+- Integrations: Cache Enabler and SQLite Object Cache one-click autoconfig; admin bar trash icon; defensive fixes and docblock cleanup.
+
+= 2.2.2 =
+- Integrations: ZenPress admin bar and one-click autoconfig in Tools tab (Autoptimize). Documentation updates.
+
 = 2.2.1 =
 - Security and code quality improvements. Recommended update.
 
 = 2.2.0 =
-- Breaking: PHP 8.3 is now required (PHP 7.4 support dropped). Major code modernization with improved type safety and performance.
+- Breaking: PHP 8.1 is now required (PHP 7.4 support dropped). Major code modernization with improved type safety and performance.
 - Security: HTTP 403 on login block, path traversal guard in snippet loader, and in-code docs for REST API bypass filters.
 
 = 1.0.0.1 =

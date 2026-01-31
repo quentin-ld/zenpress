@@ -1,3 +1,4 @@
+# PHPStan configuration for ZenPress: static analysis of plugin and snippets.
 includes:
     - ../vendor/szepeviktor/phpstan-wordpress/extension.neon
 

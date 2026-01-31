@@ -5,10 +5,10 @@ if (!defined('ABSPATH')) {
 }
 
 /**
- * Extract snippet metadata from its meta file.
+ * Loads and sanitizes snippet metadata from inc/snippets/meta/{$snippet_name}.meta.php.
  *
- * @param string $snippet_name Snippet base name (without extension).
- * @return array<string,mixed> Sanitized metadata (title, description, category, weight, preset).
+ * @param string $snippet_name Snippet base name (no extension).
+ * @return array<string, mixed> title, description, category, subcategory, weight, preset.
  */
 function zenpress_extract_snippet_metadata(string $snippet_name): array {
     $defaults = [
@@ -21,7 +21,14 @@ function zenpress_extract_snippet_metadata(string $snippet_name): array {
     ];
 
     $file = ZENPRESS_PLUGIN_DIR . 'inc/snippets/meta/' . sanitize_file_name($snippet_name) . '.meta.php';
-    $data = is_file($file) ? include $file : [];
+    $data = [];
+    if (is_file($file)) {
+        try {
+            $data = include $file;
+        } catch (\Throwable $e) {
+            $data = [];
+        }
+    }
     $metadata = array_merge($defaults, is_array($data) ? $data : []);
 
     return [

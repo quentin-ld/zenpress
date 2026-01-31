@@ -5,7 +5,7 @@ if (!defined('ABSPATH')) {
 }
 
 /**
- * Register option to store active snippets.
+ * Registers zenpress_active_snippets and zenpress_admin_bar_enabled (REST + sanitize).
  */
 add_action('init', 'zenpress_register_snippet_settings');
 function zenpress_register_snippet_settings(): void {
@@ -24,4 +24,24 @@ function zenpress_register_snippet_settings(): void {
             ],
         ]
     );
+
+    register_setting(
+        'options',
+        'zenpress_admin_bar_enabled',
+        [
+            'type' => 'boolean',
+            'default' => true,
+            'sanitize_callback' => 'zenpress_sanitize_admin_bar_enabled',
+            'show_in_rest' => [
+                'schema' => ['type' => 'boolean'],
+            ],
+        ]
+    );
+}
+
+/**
+ * Sanitizes zenpress_admin_bar_enabled to bool.
+ */
+function zenpress_sanitize_admin_bar_enabled(mixed $value): bool {
+    return (bool) $value;
 }

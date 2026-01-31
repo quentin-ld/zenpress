@@ -11,7 +11,7 @@
  *
  * Plugin Name: ZenPress - Optimize & Secure
  * Description: Easily speed up and strengthen your WordPress site by cleaning out unnecessary features and protecting weak points.
- * Version: 2.2.1
+ * Version: 2.2.2
  * Plugin URI: https://wordpress.org/plugins/zenpress/
  * Author: Quentin Le Duff
  * Author URI: https://profiles.wordpress.org/quentinldd/
@@ -19,7 +19,7 @@
  * Domain Path: /languages/
  * Requires at least: 6.0
  * Tested up to: 6.9
- * Requires PHP: 8.3
+ * Requires PHP: 8.1
  * License URI: https://www.gnu.org/licenses/old-licenses/gpl-2.0.html/
  * License: GPL v2 or later
  *
@@ -45,6 +45,12 @@ define('ZENPRESS_PLUGIN_DIR', plugin_dir_path(__FILE__));
 require_once __DIR__ . '/inc/core/constants.php';
 require_once __DIR__ . '/inc/core/metadata.php';
 require_once __DIR__ . '/inc/core/sanitize.php';
+
+// Integrations (one file per plugin: handlers + autoconfig)
+require_once __DIR__ . '/inc/classes/autoptimize.php';
+require_once __DIR__ . '/inc/classes/cache-enabler.php';
+require_once __DIR__ . '/inc/classes/sqlite-object-cache.php';
+require_once __DIR__ . '/inc/classes/integrations.php';
 
 // Admin UI
 require_once __DIR__ . '/inc/admin/enqueue.php';

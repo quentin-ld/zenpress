@@ -5,10 +5,10 @@ if (!defined('ABSPATH')) {
 }
 
 /**
- * Sanitize the list of active snippets.
+ * Sanitizes zenpress_active_snippets option to an array of file-safe base names.
  *
- * @param mixed $value Option value.
- * @return array<string> Sanitized base names.
+ * @param mixed $value Raw option value.
+ * @return array<string>
  */
 function zenpress_sanitize_snippets_option(mixed $value): array {
     return array_values(

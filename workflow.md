@@ -7,7 +7,7 @@ This document describes the development workflow to keep code quality, consisten
 
 ### Prerequisites
 
-- PHP **8.3 or higher** (tested up to PHP 8.4)
+- PHP **8.1 or higher** (tested up to PHP 8.4)
 - Composer
 - Node.js & npm (for WordPress Scripts)
 - WordPress >= **6.0**
@@ -92,6 +92,12 @@ The build process:
 - Each snippet is stored in `/inc/snippets/functions/` with its own `.php` file.
 - Metadata for snippets is stored in `/inc/snippets/meta/` for scalability and translations.
 - All new code must pass linting before committing.
+
+### Integrations
+
+- Third-party integrations (Autoptimize, and later Cache Enabler, SQLite Object Cache, etc.) live in `/inc/classes/`: one file per plugin (e.g. `autoptimize.php`), plus `integrations.php` as the orchestrator.
+- The orchestrator adds a single "ZenPress" admin bar item (when enabled and at least one integration is active) with "Clear caches", and hides integration-specific admin bar buttons. Clear caches runs the `zenpress_caches_clear` action so each integration can clear its cache.
+- In the settings page (Tools tab), when at least one integration is active, an "Integrations" block appears with a toggle for the admin bar and one-click autoconfig buttons per active integration (e.g. "One-click autoconfig Autoptimize"). Autoconfig is triggered via the REST route `POST /zenpress/v1/autoconfig/autoptimize` (and equivalent for future integrations).
 
 ## License
 

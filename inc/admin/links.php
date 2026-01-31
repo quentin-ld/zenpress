@@ -5,10 +5,7 @@ if (!defined('ABSPATH')) {
 }
 
 /**
- * Add a settings link on the plugins list page.
- *
- * @param array $links Existing plugin action links.
- * @return array Modified plugin action links.
+ * Adds "Settings" to plugin action links on Plugins screen.
  */
 add_filter('plugin_action_links_' . plugin_basename(ZENPRESS_PLUGIN_FILE), 'zenpress_add_settings_link');
 function zenpress_add_settings_link(array $links): array {
@@ -24,11 +21,7 @@ function zenpress_add_settings_link(array $links): array {
 }
 
 /**
- * Add extra links under the plugin description on the plugins page.
- *
- * @param array  $links Existing row meta links.
- * @param string $file  Current plugin file.
- * @return array Modified row meta links.
+ * Adds Changelog, Docs, Support to plugin row meta for ZenPress.
  */
 add_filter('plugin_row_meta', 'zenpress_plugin_row_meta', 10, 2);
 function zenpress_plugin_row_meta(array $links, string $file): array {

@@ -1,5 +1,8 @@
 <?php
 
+/**
+ * PHP CS Fixer configuration for ZenPress: code style and formatting for PHP files.
+ */
 use PhpCsFixer\Config;
 use PhpCsFixer\Finder;
 

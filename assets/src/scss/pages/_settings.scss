@@ -196,6 +196,23 @@
 				content: '💻️';
 			}
 		}
+
+		&-integrations {
+			h3::before {
+				content: '🔌';
+			}
+		}
+	}
+
+	&-autoconfig-actions {
+		margin-top: 1em;
+	}
+
+	&-autoconfig-help {
+		margin-top: 0.5em;
+		margin-bottom: 0;
+		font-size: 0.9em;
+		opacity: 0.9;
 	}
 }
 

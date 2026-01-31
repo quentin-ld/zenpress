@@ -5,10 +5,7 @@ if (!defined('ABSPATH')) {
 }
 
 /**
- * Enqueue scripts and styles used by the plugin in admin area.
- *
- * @param string $admin_page Current admin page hook.
- * @return void
+ * Enqueues script and style on ZenPress settings page only.
  */
 add_action('admin_enqueue_scripts', 'zenpress_admin_enqueue_scripts');
 function zenpress_admin_enqueue_scripts(string $admin_page): void {
@@ -48,10 +45,7 @@ function zenpress_admin_enqueue_scripts(string $admin_page): void {
 }
 
 /**
- * Localize translated snippet metadata for use in JavaScript.
- *
- * @param string $admin_page Current admin page hook.
- * @return void
+ * Localizes zenpressSnippetsMeta and zenpressIntegrationsActive on ZenPress settings page.
  */
 add_action('admin_enqueue_scripts', 'zenpress_localize_snippets_meta');
 function zenpress_localize_snippets_meta(string $admin_page): void {
@@ -72,4 +66,5 @@ function zenpress_localize_snippets_meta(string $admin_page): void {
     }
 
     wp_localize_script('zenpress-scripts', 'zenpressSnippetsMeta', $snippets);
+    wp_localize_script('zenpress-scripts', 'zenpressIntegrationsActive', ZenPress_Integrations::get_active_integrations_for_ui());
 }
