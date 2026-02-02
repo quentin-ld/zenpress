@@ -12,7 +12,7 @@ if (!defined('ABSPATH')) {
 return [
     'title' => __('Remove "Thanks for using WordPress" in footer', 'zenpress'),
     'description' => __(
-        'Removes the "Thank you for creating with WordPress" message from the admin footer. Cleans up the interface.',
+        'Removes the "Thank you for creating with WordPress" message from the admin footer.',
         'zenpress'
     ),
     'category' => __('core', 'zenpress'),

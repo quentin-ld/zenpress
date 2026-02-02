@@ -29,7 +29,7 @@ final class ZenPress_Integrations {
      * Admin bar "Clear caches" button enabled.
      */
     public static function is_admin_bar_enabled(): bool {
-        return (bool) get_option('zenpress_admin_bar_enabled', true);
+        return (bool) get_option('zenpress_admin_bar_enabled', false);
     }
 
     /**

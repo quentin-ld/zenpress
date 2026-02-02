@@ -9,7 +9,7 @@ Requires PHP: 8.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html/
 
-Easily speed up and strengthen your WordPress site by cleaning out unnecessary features and protecting weak spots.
+Easily speed up and strengthen your website in one click: clean out unnecessary features, protect weak points, autoconfigure cache integrations.
 
 == Description ==
 
@@ -89,16 +89,16 @@ Following features are included :
 
 = Tools =
 * Protect the wp-login form from brute force attacks.
-* Toggle "Show ZenPress admin bar button" (clear caches from the admin bar when at least one integration is active).
+* Toggle "Show ZenPress admin bar button": ZenPress item in the admin bar with "Clear all caches" and sub-items per active integration (page cache, static assets, object cache). Visible only when at least one of Cache Enabler, AutOptimize, or SQLite Object Cache is active. When enabled, those plugins' own admin bar buttons are hidden. Toggle via Settings > ZenPress > Tools.
 
 = Integrations =
 
 ZenPress integrates with Cache Enabler, Autoptimize, and SQLite Object Cache. When any of these plugins is active, the Tools tab shows integration status and one-click autoconfig actions.
 
-* Admin bar: One "Clear all caches" button (dashicon) in the admin bar, with sub-items to clear page cache (Cache Enabler), static assets (Autoptimize), or object cache (SQLite Object Cache) separately. The ZenPress button replaces the third-party cache buttons when the ZenPress admin bar is enabled. You can hide it via Settings > ZenPress > Tools.
-* Autoptimize: One-click autoconfig enables recommended options (JS/CSS/aggregate/nogzip/fallback on; defer/HTML/logged-in/meta off) and clears the Autoptimize cache.
-* Cache Enabler: One-click autoconfig enables clear site cache on post or plugin changes, WebP support, Gzip compression, and minify HTML (excluding inline CSS/JS), then clears the page cache.
-* SQLite Object Cache: One-click autoconfig enables the "Use APCu" option in the plugin settings when the APCu extension is available (no wp-config editing; the plugin may write its constant when its own settings are saved).
+* Admin bar: One "Clear all caches" button (dashicon) in the admin bar, with sub-items to clear page cache (Cache Enabler), static assets (Autoptimize), or object cache (SQLite Object Cache) separately. When the ZenPress admin bar is enabled, the third-party cache buttons (Cache Enabler, AutOptimize, SQLite Object Cache) are hidden. You can hide the ZenPress admin bar via Settings > ZenPress > Tools.
+* Autoptimize: One-click autoconfig enables recommended options (JS/CSS/aggregate/nogzip/fallback on; defer/HTML/logged-in/meta off).
+* Cache Enabler: One-click autoconfig enables clear site cache on post or plugin changes, WebP support, Gzip or Brotli compression, and minify HTML (excluding inline CSS/JS).
+* SQLite Object Cache: One-click autoconfig enables the "Use APCu" option in the plugin settings when the APCu extension is available.
 
 = Presets =
 * Corporate website / Portfolio: Optimized for business sites and portfolios. Focuses on security, performance, and removing unnecessary features like RSS feeds and author archives.
@@ -208,22 +208,17 @@ For developers: ZenPress exposes the following action and filters for extending 
 == Changelog ==
 
 = 2.2.3 =
-- Integrations: Cache Enabler one-click autoconfig (clear on post/plugin, WebP, Gzip, minify HTML excl. inline CSS/JS).
-- Integrations: SQLite Object Cache one-click autoconfig (enable "Use APCu" option when APCu available; no wp-config editing by ZenPress).
-- Integrations: Admin bar "Clear all caches" button now uses dashicons-trash icon.
-- Defensive: REST and AJAX handlers wrap integration calls in try/catch; failed autoconfig or cache clear returns 500 with message instead of fatal.
-- Defensive: get_active_integrations_for_ui() wraps ReflectionClass in try/catch so one missing integration does not break the settings UI.
-- Defensive: Cache Enabler autoconfig ensures option value is array before merge (corrupted option no longer triggers warning).
-- Defensive: Metadata and snippet loader wrap include in try/catch so a single bad meta file or snippet does not fatal the site.
-- Defensive: Protect wp-login skips rate limiting when REMOTE_ADDR is missing or invalid to avoid site-wide lockout (e.g. CLI or proxy).
-- Defensive: Autoptimize clear_cache and autoconfig check method_exists before calling third-party API.
-- Docblocks: Reviewed and tightened docblocks across inc/ (file headers, classes, methods) for coherence, readability, and conciseness; removed redundant @param/@return where type is obvious.
-- Lint: PHPStan and PHP CS Fixer fixes (autoptimize method_exists ignore, protect-wp-login strict comparison).
+- Fix : Disable Cache enabler "clear page cache" button in admin bar when ZenPress admin bar button is active.
+- Fix : ZenPress admin bar button default option is now "off".
 
 = 2.2.2 =
-- Integrations: Admin bar and one-click autoconfig (e.g. Autoptimize) in Tools tab; visible only when at least one integration is active.
-- Documentation: Added Hooks & filters section in readme; Integrations section in workflow.md; config comments for PHPStan and PHP CS Fixer.
-- Version alignment: Stable tag and plugin header set to 2.2.2.
+- Integration : Cache enabler autoconfig in one click.
+- Integration : Autoptimize autoconfig in one click.
+- Integration : SQLite Object cache autoconfig in one click.
+- New actionable function: Enable Admin bar "Clear all caches" button, visible only when at least one integration is active; third-party cache buttons hidden when ZenPress admin bar is enabled.
+- Fix: REST and AJAX handlers wrap integration calls in try/catch; failed autoconfig or cache clear returns 500 with message instead of fatal.
+- Fix: get_active_integrations_for_ui() wraps ReflectionClass in try/catch so one missing integration does not break the settings UI.
+- Fix: Metadata and snippet loader wrap include in try/catch so a single bad meta file or snippet does not fatal the site.
 
 = 2.2.1 =
 - Security: Fixed $_SERVER['REQUEST_URI'] and $_SERVER['QUERY_STRING'] sanitization issues in disable-rest-api.php and block-user-enumeration.php.
@@ -356,12 +351,6 @@ For developers: ZenPress exposes the following action and filters for extending 
 - First release of ZenPress, yaaaaayyy!
 
 == Upgrade Notice ==
-
-= 2.2.3 =
-- Integrations: Cache Enabler and SQLite Object Cache one-click autoconfig; admin bar trash icon; defensive fixes and docblock cleanup.
-
-= 2.2.2 =
-- Integrations: ZenPress admin bar and one-click autoconfig in Tools tab (Autoptimize). Documentation updates.
 
 = 2.2.1 =
 - Security and code quality improvements. Recommended update.

@@ -2,14 +2,14 @@
 # This file is distributed under the GPL v2 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: ZenPress - Optimize & Secure 2.2.1\n"
+"Project-Id-Version: ZenPress - Optimize & Secure 2.2.3\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/zenpress\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-01-28T10:44:12+00:00\n"
+"POT-Creation-Date: 2026-02-02T09:51:42+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: zenpress\n"
@@ -26,7 +26,7 @@ msgstr ""
 
 #. Description of the plugin
 #: zenpress.php
-msgid "Easily speed up and strengthen your WordPress site by cleaning out unnecessary features and protecting weak points."
+msgid "Easily speed up and strengthen your WordPress site in one click: clean out unnecessary features, protect weak points, autoconfigure cache integrations."
 msgstr ""
 
 #. Author of the plugin
@@ -39,106 +39,190 @@ msgstr ""
 msgid "https://profiles.wordpress.org/quentinldd/"
 msgstr ""
 
-#: inc/admin/links.php:19
+#: inc/admin/links.php:16
 msgid "Go to ZenPress settings page"
 msgstr ""
 
-#: inc/admin/links.php:20
+#: inc/admin/links.php:17
 msgid "Settings"
 msgstr ""
 
-#: inc/admin/links.php:40
-#: inc/admin/menu.php:42
+#: inc/admin/links.php:33
+#: inc/admin/menu.php:38
 msgid "View ZenPress changelog on WordPress.org (opens in a new tab)"
 msgstr ""
 
-#: inc/admin/links.php:41
+#: inc/admin/links.php:34
 msgid "Changelog"
 msgstr ""
 
-#: inc/admin/links.php:46
+#: inc/admin/links.php:39
 msgid "Read ZenPress documentation (opens in a new tab)"
 msgstr ""
 
-#: inc/admin/links.php:47
+#: inc/admin/links.php:40
 msgid "Docs"
 msgstr ""
 
-#: inc/admin/links.php:52
+#: inc/admin/links.php:45
 msgid "Support ZenPress by buying a coffee (opens in a new tab)"
 msgstr ""
 
-#: inc/admin/links.php:53
+#: inc/admin/links.php:46
 msgid "Support ☕"
 msgstr ""
 
-#: inc/admin/menu.php:15
+#: inc/admin/menu.php:13
 msgid "ZenPress options"
 msgstr ""
 
-#: inc/admin/menu.php:16
-#: inc/admin/menu.php:35
+#: inc/admin/menu.php:14
+#: inc/admin/menu.php:31
 msgid "ZenPress"
 msgstr ""
 
-#: inc/admin/menu.php:38
+#: inc/admin/menu.php:34
 msgid "Version"
 msgstr ""
 
-#: inc/admin/menu.php:43
+#: inc/admin/menu.php:39
 msgid "What's new ?"
 msgstr ""
 
-#: inc/admin/menu.php:52
+#: inc/admin/menu.php:48
 msgid "Read the ZenPress documentation (opens in a new tab)"
 msgstr ""
 
-#: inc/admin/menu.php:53
+#: inc/admin/menu.php:49
 msgid "Documentation"
 msgstr ""
 
-#: inc/admin/menu.php:58
+#: inc/admin/menu.php:54
 msgid "Leave a review for ZenPress on WordPress.org (opens in a new tab)"
 msgstr ""
 
-#: inc/admin/menu.php:59
+#: inc/admin/menu.php:55
 msgid "Leave a review (helps a lot)"
 msgstr ""
 
-#: inc/admin/menu.php:65
+#: inc/admin/menu.php:61
 msgid "Support development: Buy me a coffee (opens in a new tab)"
 msgstr ""
 
-#: inc/admin/menu.php:66
+#: inc/admin/menu.php:62
 msgid "Buy me a coffee"
 msgstr ""
 
-#: inc/admin/menu.php:74
+#: inc/admin/menu.php:70
 msgid "Loading your ZenPress settings…"
 msgstr ""
 
-#: inc/admin/menu.php:82
+#: inc/admin/menu.php:78
 msgid "Made "
 msgstr ""
 
-#: inc/admin/menu.php:84
+#: inc/admin/menu.php:80
 msgid " by Quentin Le Duff - Your WordPress Partner"
 msgstr ""
 
-#: inc/admin/menu.php:91
+#: inc/admin/menu.php:87
 msgid "Visite the developper website"
 msgstr ""
 
-#: inc/admin/menu.php:92
+#: inc/admin/menu.php:88
 msgid "My place"
 msgstr ""
 
-#: inc/admin/menu.php:97
+#: inc/admin/menu.php:93
 msgid "Review the code on Github"
 msgstr ""
 
-#: inc/admin/menu.php:98
+#: inc/admin/menu.php:94
 msgid "ZenPress code repository"
+msgstr ""
+
+#: inc/classes/integrations.php:112
+msgid "Autoptimize configuration failed."
+msgstr ""
+
+#: inc/classes/integrations.php:118
+#: assets/build/index.js:1
+#: assets/src/js/pages/SettingsPage.js:173
+msgid "Autoptimize has been configured."
+msgstr ""
+
+#: inc/classes/integrations.php:131
+msgid "Cache Enabler configuration failed."
+msgstr ""
+
+#: inc/classes/integrations.php:137
+#: assets/build/index.js:1
+#: assets/src/js/pages/SettingsPage.js:184
+msgid "Cache Enabler has been configured."
+msgstr ""
+
+#: inc/classes/integrations.php:150
+msgid "SQLite Object Cache configuration failed."
+msgstr ""
+
+#: inc/classes/integrations.php:156
+#: assets/build/index.js:1
+#: assets/src/js/pages/SettingsPage.js:195
+msgid "SQLite Object Cache has been configured."
+msgstr ""
+
+#: inc/classes/integrations.php:200
+msgid "Clear all caches"
+msgstr ""
+
+#: inc/classes/integrations.php:203
+msgid "Clear all caches (page cache, static assets, object cache)."
+msgstr ""
+
+#: inc/classes/integrations.php:211
+msgid "Clear pages caches"
+msgstr ""
+
+#: inc/classes/integrations.php:214
+msgid "Clear Cache Enabler page cache."
+msgstr ""
+
+#: inc/classes/integrations.php:223
+msgid "Clear static assets caches (CSS/JS)"
+msgstr ""
+
+#: inc/classes/integrations.php:226
+msgid "Clear Autoptimize CSS/JS cache."
+msgstr ""
+
+#: inc/classes/integrations.php:235
+msgid "Clear object cache"
+msgstr ""
+
+#: inc/classes/integrations.php:238
+msgid "Clear SQLite Object Cache."
+msgstr ""
+
+#: inc/classes/integrations.php:260
+#: inc/classes/integrations.php:264
+msgid "Forbidden"
+msgstr ""
+
+#: inc/classes/integrations.php:272
+#: inc/classes/integrations.php:282
+msgid "Cache clear failed."
+msgstr ""
+
+#: inc/classes/integrations.php:274
+msgid "Caches cleared."
+msgstr ""
+
+#: inc/classes/integrations.php:284
+msgid "Cache cleared."
+msgstr ""
+
+#: inc/classes/integrations.php:286
+msgid "Invalid request."
 msgstr ""
 
 #: inc/snippets/functions/block-user-enumeration.php:11
@@ -154,8 +238,8 @@ msgstr ""
 msgid "Login error."
 msgstr ""
 
-#: inc/snippets/functions/protect-wp-login.php:36
-#: inc/snippets/functions/protect-wp-login.php:50
+#: inc/snippets/functions/protect-wp-login.php:38
+#: inc/snippets/functions/protect-wp-login.php:52
 msgid "Too many failed login attempts. Try again later."
 msgstr ""
 
@@ -546,7 +630,7 @@ msgid "Remove \"Thanks for using WordPress\" in footer"
 msgstr ""
 
 #: inc/snippets/meta/remove-thanks-for-using-wordpress-in-footer.meta.php:14
-msgid "Removes the \"Thank you for creating with WordPress\" message from the admin footer. Cleans up the interface."
+msgid "Removes the \"Thank you for creating with WordPress\" message from the admin footer."
 msgstr ""
 
 #: inc/snippets/meta/remove-woocommerce-patterns.meta.php:13
@@ -562,7 +646,7 @@ msgid "Remove WordPress logo"
 msgstr ""
 
 #: inc/snippets/meta/remove-wordpress-logo.meta.php:14
-msgid "Removes the WordPress logo and its dropdown from the admin bar. Cleans up the interface for a more neutral or branded look."
+msgid "Removes the WordPress logo and its dropdown from the admin bar."
 msgstr ""
 
 #: inc/snippets/meta/separate-gutenberg-core-block-styles.meta.php:13
@@ -579,83 +663,150 @@ msgid "Save settings"
 msgstr ""
 
 #: assets/build/index.js:1
-#: assets/src/js/hooks/useSettings.js:42
+#: assets/src/js/hooks/useSettings.js:48
 msgid "Failed to load settings."
 msgstr ""
 
 #: assets/build/index.js:1
-#: assets/src/js/hooks/useSettings.js:59
+#: assets/src/js/hooks/useSettings.js:68
 msgid "Settings saved."
 msgstr ""
 
 #: assets/build/index.js:1
-#: assets/src/js/hooks/useSettings.js:61
+#: assets/src/js/hooks/useSettings.js:70
 msgid "Failed to save settings."
 msgstr ""
 
 #: assets/build/index.js:1
-#: assets/src/js/pages/SettingsPage.js:86
+#: assets/src/js/pages/SettingsPage.js:99
 msgid "Uncategorized"
 msgstr ""
 
 #: assets/build/index.js:1
-#: assets/src/js/pages/SettingsPage.js:89
+#: assets/src/js/pages/SettingsPage.js:102
 msgid "uncategorized"
 msgstr ""
 
 #: assets/build/index.js:1
-#: assets/src/js/pages/SettingsPage.js:234
+#: assets/src/js/pages/SettingsPage.js:174
+msgid "Autoptimize autoconfig failed. Is Autoptimize installed and active?"
+msgstr ""
+
+#: assets/build/index.js:1
+#: assets/src/js/pages/SettingsPage.js:185
+msgid "Cache Enabler autoconfig failed. Is Cache Enabler installed and active?"
+msgstr ""
+
+#: assets/build/index.js:1
+#: assets/src/js/pages/SettingsPage.js:196
+msgid "SQLite Object Cache autoconfig failed. Is SQLite Object Cache installed and active?"
+msgstr ""
+
+#: assets/build/index.js:1
+#: assets/src/js/pages/SettingsPage.js:297
+msgid "Integrations"
+msgstr ""
+
+#: assets/build/index.js:1
+#: assets/src/js/pages/SettingsPage.js:303
+msgid "Show ZenPress admin bar button"
+msgstr ""
+
+#: assets/build/index.js:1
+#: assets/src/js/pages/SettingsPage.js:313
+msgid "Show a ZenPress item in the admin bar with \"Clear all caches\" and sub-items for each active integration (page cache, static assets, object cache). Visible only when at least one of Cache Enabler, AutOptimize, or SQLite Object Cache is active. When enabled, those plugins' own admin bar buttons are hidden."
+msgstr ""
+
+#: assets/build/index.js:1
+#: assets/src/js/pages/SettingsPage.js:335
+#: assets/src/js/pages/SettingsPage.js:369
+#: assets/src/js/pages/SettingsPage.js:403
+msgid "Applying…"
+msgstr ""
+
+#: assets/build/index.js:1
+#: assets/src/js/pages/SettingsPage.js:339
+msgid "One-click autoconfig Autoptimize"
+msgstr ""
+
+#: assets/build/index.js:1
+#: assets/src/js/pages/SettingsPage.js:345
+msgid "Apply recommended Autoptimize settings: Minify JS & CSS, aggregate CSS, static files, 404 fallbacks."
+msgstr ""
+
+#: assets/build/index.js:1
+#: assets/src/js/pages/SettingsPage.js:373
+msgid "One-click autoconfig Cache Enabler"
+msgstr ""
+
+#: assets/build/index.js:1
+#: assets/src/js/pages/SettingsPage.js:379
+msgid "Apply recommended Cache Enabler settings: Clear site cache on post or plugin changes, WebP support, Gzip or Brotli compression, and minify HTML (excluding inline CSS/JS)."
+msgstr ""
+
+#: assets/build/index.js:1
+#: assets/src/js/pages/SettingsPage.js:407
+msgid "One-click autoconfig SQLite Object Cache"
+msgstr ""
+
+#: assets/build/index.js:1
+#: assets/src/js/pages/SettingsPage.js:413
+msgid "Apply recommended SQLite Object Cache settings. Enable \"Use APCu\" if APCu is available."
+msgstr ""
+
+#: assets/build/index.js:1
+#: assets/src/js/pages/SettingsPage.js:433
 msgid "Enable all actions"
 msgstr ""
 
 #: assets/build/index.js:1
-#: assets/src/js/pages/SettingsPage.js:241
+#: assets/src/js/pages/SettingsPage.js:440
 msgid "Disable all actions"
 msgstr ""
 
 #: assets/build/index.js:1
-#: assets/src/js/pages/SettingsPage.js:251
+#: assets/src/js/pages/SettingsPage.js:450
 msgid "Pick configuration preset"
 msgstr ""
 
 #: assets/build/index.js:1
-#: assets/src/js/pages/SettingsPage.js:253
+#: assets/src/js/pages/SettingsPage.js:452
 msgid "Don't know which features to enable? Quickly configure ZenPress by selecting a preset that matches your site type. Each preset enables optimized features for your specific use case."
 msgstr ""
 
 #: assets/build/index.js:1
-#: assets/src/js/pages/SettingsPage.js:259
+#: assets/src/js/pages/SettingsPage.js:458
 msgid "Corporate website"
 msgstr ""
 
 #: assets/build/index.js:1
-#: assets/src/js/pages/SettingsPage.js:261
+#: assets/src/js/pages/SettingsPage.js:460
 msgid "Optimized for business sites and portfolios. Focuses on security, performance, and removing unnecessary features like RSS feeds and author archives."
 msgstr ""
 
 #: assets/build/index.js:1
-#: assets/src/js/pages/SettingsPage.js:271
-#: assets/src/js/pages/SettingsPage.js:286
-#: assets/src/js/pages/SettingsPage.js:301
+#: assets/src/js/pages/SettingsPage.js:470
+#: assets/src/js/pages/SettingsPage.js:485
+#: assets/src/js/pages/SettingsPage.js:500
 msgid "Enable"
 msgstr ""
 
 #: assets/build/index.js:1
-#: assets/src/js/pages/SettingsPage.js:274
+#: assets/src/js/pages/SettingsPage.js:473
 msgid "Blog"
 msgstr ""
 
 #: assets/build/index.js:1
-#: assets/src/js/pages/SettingsPage.js:276
+#: assets/src/js/pages/SettingsPage.js:475
 msgid "Tailored for content-focused blogs. Includes performance and security optimizations while preserving essential blog features like RSS feeds."
 msgstr ""
 
 #: assets/build/index.js:1
-#: assets/src/js/pages/SettingsPage.js:289
+#: assets/src/js/pages/SettingsPage.js:488
 msgid "E-commerce"
 msgstr ""
 
 #: assets/build/index.js:1
-#: assets/src/js/pages/SettingsPage.js:291
+#: assets/src/js/pages/SettingsPage.js:490
 msgid "Designed for WooCommerce stores. Includes all performance and security features plus WooCommerce-specific optimizations for faster checkout."
 msgstr ""

@@ -17,7 +17,7 @@ import { __ } from '@wordpress/i18n';
  */
 export const useSettings = () => {
 	const [snippets, setSnippets] = useState({});
-	const [adminBarEnabled, setAdminBarEnabled] = useState(true);
+	const [adminBarEnabled, setAdminBarEnabled] = useState(false);
 	const [isSaving, setIsSaving] = useState(false);
 	const { createSuccessNotice, createErrorNotice } =
 		useDispatch(noticesStore);
@@ -41,7 +41,7 @@ export const useSettings = () => {
 
 				setSnippets(snippetsData);
 				setAdminBarEnabled(
-					settings?.zenpress_admin_bar_enabled !== false
+					settings?.zenpress_admin_bar_enabled === true
 				);
 			})
 			.catch(() => {

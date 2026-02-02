@@ -311,7 +311,7 @@ export const SettingsPage = () => {
 														)
 													}
 													help={__(
-														'Show a "ZenPress" item in the admin bar with "Clear caches". When enabled, integration buttons (e.g. Autoptimize) are hidden.',
+														'Show a ZenPress item in the admin bar with "Clear all caches" and sub-items for each active integration (page cache, static assets, object cache). Visible only when at least one of Cache Enabler, AutOptimize, or SQLite Object Cache is active. When enabled, those plugins\' own admin bar buttons are hidden.',
 														'zenpress'
 													)}
 												/>
@@ -343,7 +343,7 @@ export const SettingsPage = () => {
 														</Button>
 														<p className="zenpress-autoconfig-help">
 															{__(
-																'Apply recommended Autoptimize settings (optimize JS/CSS, aggregate CSS, static files, 404 fallbacks; disable defer, HTML optimize, optimize for logged-in, per post/page). Only works if Autoptimize is active.',
+																'Apply recommended Autoptimize settings: Minify JS & CSS, aggregate CSS, static files, 404 fallbacks.',
 																'zenpress'
 															)}
 														</p>
@@ -377,7 +377,7 @@ export const SettingsPage = () => {
 														</Button>
 														<p className="zenpress-autoconfig-help">
 															{__(
-																'Apply recommended Cache Enabler settings. Only works if Cache Enabler is active.',
+																'Apply recommended Cache Enabler settings: Clear site cache on post or plugin changes, WebP support, Gzip or Brotli compression, and minify HTML (excluding inline CSS/JS).',
 																'zenpress'
 															)}
 														</p>
@@ -411,7 +411,7 @@ export const SettingsPage = () => {
 														</Button>
 														<p className="zenpress-autoconfig-help">
 															{__(
-																'Apply recommended SQLite Object Cache settings. Only works if SQLite Object Cache is active.',
+																'Apply recommended SQLite Object Cache settings. Enable "Use APCu" if APCu is available.',
 																'zenpress'
 															)}
 														</p>

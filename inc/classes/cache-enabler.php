@@ -14,8 +14,11 @@ if (!defined('ABSPATH')) {
  * Cache Enabler: detection, cache clear, admin bar hide, autoconfig.
  */
 final class ZenPress_Cache_Enabler {
-    /** Cache Enabler admin bar node ID. */
-    private const CACHE_ENABLER_ADMIN_BAR_ID = 'cache_enabler_clear_cache';
+    /** Cache Enabler admin bar node IDs (main + "clear page cache" sub-item). */
+    private const CACHE_ENABLER_ADMIN_BAR_IDS = [
+        'cache_enabler_clear_cache',
+        'cache_enabler_clear_page_cache',
+    ];
 
     /**
      * Cache Enabler active.
@@ -50,10 +53,12 @@ final class ZenPress_Cache_Enabler {
     }
 
     /**
-     * Removes Cache Enabler node from the admin bar.
+     * Removes Cache Enabler nodes from the admin bar (main item + "clear page cache" sub-item).
      */
     public static function remove_admin_bar_node(WP_Admin_Bar $wp_admin_bar): void {
-        $wp_admin_bar->remove_node(self::CACHE_ENABLER_ADMIN_BAR_ID);
+        foreach (self::CACHE_ENABLER_ADMIN_BAR_IDS as $node_id) {
+            $wp_admin_bar->remove_node($node_id);
+        }
     }
 
     /**

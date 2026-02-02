@@ -12,7 +12,7 @@ if (!defined('ABSPATH')) {
 return [
     'title' => __('Remove WordPress logo', 'zenpress'),
     'description' => __(
-        'Removes the WordPress logo and its dropdown from the admin bar. Cleans up the interface for a more neutral or branded look.',
+        'Removes the WordPress logo and its dropdown from the admin bar.',
         'zenpress'
     ),
     'category' => __('core', 'zenpress'),
