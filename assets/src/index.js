@@ -8,10 +8,9 @@ import { SettingsPage } from './js/pages/SettingsPage';
  */
 domReady(() => {
 	const rootEl = document.getElementById('zenpress-settings');
-	if (!rootEl) {
+	if (!rootEl || !(rootEl instanceof HTMLElement)) {
 		return;
 	}
-
 	const root = createRoot(rootEl);
 	root.render(<SettingsPage />);
 });

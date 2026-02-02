@@ -1,14 +1,12 @@
-import { useState, useEffect } from '@wordpress/element';
-import { __ } from '@wordpress/i18n';
-import { Button } from '@wordpress/components';
-import { useDispatch } from '@wordpress/data';
-import { store as noticesStore } from '@wordpress/notices';
-import apiFetch from '@wordpress/api-fetch';
+import { useState, useEffect, useMemo } from '@wordpress/element';
 import { useSettings } from '../hooks/useSettings';
-import { SnippetToggleControl } from '../components/SnippetToggleControl';
-import { SaveButton } from '../components/SaveButton';
+import { useAutoconfig } from '../hooks/useAutoconfig';
+import { groupAndSortSnippets, capitalizeCategory } from '../utils/snippets';
 import { Notices } from '../components/Notices';
 import { Tabs } from '../components/Tabs';
+import { BulkSnippetActions } from '../components/BulkSnippetActions';
+import { SnippetCategoryPanel } from '../components/SnippetCategoryPanel';
+import { PresetsSidebar } from '../components/PresetsSidebar';
 
 /**
  * Main settings page component for ZenPress.
@@ -24,10 +22,14 @@ export const SettingsPage = () => {
 		saveSettings,
 		isSaving,
 	} = useSettings();
+	const { autoconfigBusy, getHandler: getAutoconfigHandler } =
+		useAutoconfig();
 	const [selectedTabId, setSelectedTabId] = useState();
-	const [autoconfigBusy, setAutoconfigBusy] = useState(null);
-	const { createSuccessNotice, createErrorNotice } =
-		useDispatch(noticesStore);
+
+	const { grouped: groupedSnippets, sortedCategories } = useMemo(
+		() => groupAndSortSnippets(snippets),
+		[snippets]
+	);
 
 	const handleToggleChange = (snippetName) => {
 		setSnippets((prev) => ({
@@ -71,138 +73,14 @@ export const SettingsPage = () => {
 		});
 	};
 
-	// Helper function to capitalize category name
-	const capitalizeCategory = (category) => {
-		if (!category) {
-			return category;
-		}
-		return (
-			category.charAt(0).toUpperCase() + category.slice(1).toLowerCase()
-		);
-	};
-
-	// Category order: Core, Gutenberg, WooCommerce, ads-blocker, Tools
-	// Using English lowercase values for comparison since categories are stored in lowercase
-	const categoryOrder = [
-		'core',
-		'gutenberg',
-		'woocommerce',
-		'ads-blocker',
-		'tools',
-	];
-
-	// Group snippets by category, then by subcategory
-	const groupedSnippets = {};
-	Object.keys(snippets).forEach((snippetName) => {
-		const snippet = snippets[snippetName];
-		const category = (
-			snippet?.category || __('Uncategorized', 'zenpress')
-		).toLowerCase();
-		const subcategory = (
-			snippet?.subcategory || __('uncategorized', 'zenpress')
-		).toLowerCase();
-
-		if (!groupedSnippets[category]) {
-			groupedSnippets[category] = {};
-		}
-		if (!groupedSnippets[category][subcategory]) {
-			groupedSnippets[category][subcategory] = [];
-		}
-		groupedSnippets[category][subcategory].push({
-			name: snippetName,
-			data: snippet,
-		});
-	});
-
-	// Sort categories according to the specified order
-	const sortedCategories = Object.keys(groupedSnippets).sort((a, b) => {
-		const indexA = categoryOrder.indexOf(a.toLowerCase());
-		const indexB = categoryOrder.indexOf(b.toLowerCase());
-
-		// If both are in the order array, sort by their position
-		if (indexA !== -1 && indexB !== -1) {
-			return indexA - indexB;
-		}
-		// If only A is in the order array, A comes first
-		if (indexA !== -1) {
-			return -1;
-		}
-		// If only B is in the order array, B comes first
-		if (indexB !== -1) {
-			return 1;
-		}
-		// If neither is in the order array, sort alphabetically
-		return a.localeCompare(b, undefined, { sensitivity: 'base' });
-	});
-
-	// Set initial selected tab if none is selected
 	useEffect(() => {
 		if (!selectedTabId && sortedCategories.length > 0) {
 			setSelectedTabId(sortedCategories[0]);
 		}
 	}, [selectedTabId, sortedCategories]);
 
-	const onSelect = (tabName) => {
-		setSelectedTabId(tabName);
-	};
-
-	const runAutoconfig = async (
-		integrationKey,
-		path,
-		successMessage,
-		errorMessage
-	) => {
-		setAutoconfigBusy(integrationKey);
-		try {
-			const response = await apiFetch({
-				path,
-				method: 'POST',
-			});
-			createSuccessNotice(response?.message || successMessage);
-		} catch {
-			createErrorNotice(errorMessage);
-		} finally {
-			setAutoconfigBusy(null);
-		}
-	};
-
-	const handleAutoconfigAutoptimize = () =>
-		runAutoconfig(
-			'autoptimize',
-			'/zenpress/v1/autoconfig/autoptimize',
-			__('Autoptimize has been configured.', 'zenpress'),
-			__(
-				'Autoptimize autoconfig failed. Is Autoptimize installed and active?',
-				'zenpress'
-			)
-		);
-
-	const handleAutoconfigCacheEnabler = () =>
-		runAutoconfig(
-			'cache_enabler',
-			'/zenpress/v1/autoconfig/cache-enabler',
-			__('Cache Enabler has been configured.', 'zenpress'),
-			__(
-				'Cache Enabler autoconfig failed. Is Cache Enabler installed and active?',
-				'zenpress'
-			)
-		);
-
-	const handleAutoconfigSqliteObjectCache = () =>
-		runAutoconfig(
-			'sqlite_object_cache',
-			'/zenpress/v1/autoconfig/sqlite-object-cache',
-			__('SQLite Object Cache has been configured.', 'zenpress'),
-			__(
-				'SQLite Object Cache autoconfig failed. Is SQLite Object Cache installed and active?',
-				'zenpress'
-			)
-		);
-
-	// Add keyboard shortcuts and ensure toggles are keyboard accessible
 	useEffect(() => {
 		const handleKeyDown = (e) => {
-			// Ctrl+S or Cmd+S to save
 			if ((e.ctrlKey || e.metaKey) && e.key === 's') {
 				e.preventDefault();
 				if (!isSaving) {
@@ -210,11 +88,8 @@ export const SettingsPage = () => {
 				}
 			}
 		};
-
 		document.addEventListener('keydown', handleKeyDown);
-		return () => {
-			document.removeEventListener('keydown', handleKeyDown);
-		};
+		return () => document.removeEventListener('keydown', handleKeyDown);
 	}, [saveSettings, isSaving]);
 
 	return (
@@ -227,10 +102,7 @@ export const SettingsPage = () => {
 					<Tabs
 						orientation="vertical"
 						selectedTabId={selectedTabId}
-						onSelect={(selectedId) => {
-							setSelectedTabId(selectedId);
-							onSelect(selectedId);
-						}}
+						onSelect={setSelectedTabId}
 					>
 						<Tabs.TabList>
 							{sortedCategories.map((category) => {
@@ -247,260 +119,31 @@ export const SettingsPage = () => {
 								);
 							})}
 						</Tabs.TabList>
-						{sortedCategories.map((category) => {
-							const subcategories = Object.keys(
-								groupedSnippets[category]
-							).sort();
-							return (
-								<Tabs.TabPanel key={category} tabId={category}>
-									<h2>{capitalizeCategory(category)}</h2>
-									{subcategories.map((subcategory) => (
-										<div
-											key={subcategory}
-											className={`zenpress-subcategory zenpress-subcategory-${subcategory.toLowerCase().replace(/\s+/g, '-')}`}
-										>
-											<hr />
-											<h3>
-												{capitalizeCategory(
-													subcategory
-												)}
-											</h3>
-											{groupedSnippets[category][
-												subcategory
-											].map(({ name, data }) => (
-												<SnippetToggleControl
-													key={name}
-													label={data.title || name}
-													value={
-														data?.[
-															'enable-snippet'
-														] || false
-													}
-													onChange={() =>
-														handleToggleChange(name)
-													}
-													help={
-														data.description || ''
-													}
-												/>
-											))}
-										</div>
-									))}
-									{category === 'tools' &&
-										Object.values(
-											window?.zenpressIntegrationsActive ||
-												{}
-										).some(Boolean) && (
-											<div className="zenpress-subcategory zenpress-subcategory-integrations">
-												<hr />
-												<h3>
-													{__(
-														'Integrations',
-														'zenpress'
-													)}
-												</h3>
-												<SnippetToggleControl
-													label={__(
-														'Show ZenPress admin bar button',
-														'zenpress'
-													)}
-													value={adminBarEnabled}
-													onChange={() =>
-														setAdminBarEnabled(
-															!adminBarEnabled
-														)
-													}
-													help={__(
-														'Show a ZenPress item in the admin bar with "Clear all caches" and sub-items for each active integration (page cache, static assets, object cache). Visible only when at least one of Cache Enabler, AutOptimize, or SQLite Object Cache is active. When enabled, those plugins\' own admin bar buttons are hidden.',
-														'zenpress'
-													)}
-												/>
-												{window
-													?.zenpressIntegrationsActive
-													?.autoptimize && (
-													<div className="zenpress-autoconfig-actions">
-														<Button
-															variant="secondary"
-															onClick={
-																handleAutoconfigAutoptimize
-															}
-															disabled={
-																autoconfigBusy !==
-																null
-															}
-															__next40pxDefaultSize
-														>
-															{autoconfigBusy ===
-															'autoptimize'
-																? __(
-																		'Applying…',
-																		'zenpress'
-																	)
-																: __(
-																		'One-click autoconfig Autoptimize',
-																		'zenpress'
-																	)}
-														</Button>
-														<p className="zenpress-autoconfig-help">
-															{__(
-																'Apply recommended Autoptimize settings: Minify JS & CSS, aggregate CSS, static files, 404 fallbacks.',
-																'zenpress'
-															)}
-														</p>
-													</div>
-												)}
-												{window
-													?.zenpressIntegrationsActive
-													?.cache_enabler && (
-													<div className="zenpress-autoconfig-actions">
-														<Button
-															variant="secondary"
-															onClick={
-																handleAutoconfigCacheEnabler
-															}
-															disabled={
-																autoconfigBusy !==
-																null
-															}
-															__next40pxDefaultSize
-														>
-															{autoconfigBusy ===
-															'cache_enabler'
-																? __(
-																		'Applying…',
-																		'zenpress'
-																	)
-																: __(
-																		'One-click autoconfig Cache Enabler',
-																		'zenpress'
-																	)}
-														</Button>
-														<p className="zenpress-autoconfig-help">
-															{__(
-																'Apply recommended Cache Enabler settings: Clear site cache on post or plugin changes, WebP support, Gzip or Brotli compression, and minify HTML (excluding inline CSS/JS).',
-																'zenpress'
-															)}
-														</p>
-													</div>
-												)}
-												{window
-													?.zenpressIntegrationsActive
-													?.sqlite_object_cache && (
-													<div className="zenpress-autoconfig-actions">
-														<Button
-															variant="secondary"
-															onClick={
-																handleAutoconfigSqliteObjectCache
-															}
-															disabled={
-																autoconfigBusy !==
-																null
-															}
-															__next40pxDefaultSize
-														>
-															{autoconfigBusy ===
-															'sqlite_object_cache'
-																? __(
-																		'Applying…',
-																		'zenpress'
-																	)
-																: __(
-																		'One-click autoconfig SQLite Object Cache',
-																		'zenpress'
-																	)}
-														</Button>
-														<p className="zenpress-autoconfig-help">
-															{__(
-																'Apply recommended SQLite Object Cache settings. Enable "Use APCu" if APCu is available.',
-																'zenpress'
-															)}
-														</p>
-													</div>
-												)}
-											</div>
-										)}
-								</Tabs.TabPanel>
-							);
-						})}
+						{sortedCategories.map((category) => (
+							<Tabs.TabPanel key={category} tabId={category}>
+								<SnippetCategoryPanel
+									category={category}
+									groupedSnippets={groupedSnippets}
+									onToggle={handleToggleChange}
+									showIntegrations={category === 'tools'}
+									adminBarEnabled={adminBarEnabled}
+									setAdminBarEnabled={setAdminBarEnabled}
+									autoconfigBusy={autoconfigBusy}
+									getAutoconfigHandler={getAutoconfigHandler}
+								/>
+							</Tabs.TabPanel>
+						))}
 					</Tabs>
-					<div className="zenpress-actions">
-						<div className="zenpress-actions-bulk">
-							<Button
-								variant="tertiary"
-								onClick={enableAllSnippets}
-								__next40pxDefaultSize
-							>
-								{__('Enable all actions', 'zenpress')}
-							</Button>
-							<Button
-								isDestructive
-								onClick={resetSettings}
-								__next40pxDefaultSize
-							>
-								{__('Disable all actions', 'zenpress')}
-							</Button>
-						</div>
-						<SaveButton onClick={saveSettings} isBusy={isSaving} />
-					</div>
+					<BulkSnippetActions
+						onEnableAll={enableAllSnippets}
+						onDisableAll={resetSettings}
+						onSave={saveSettings}
+						isSaving={isSaving}
+					/>
 				</div>
 			</section>
 			<aside className="zenpress-sidebar">
-				<div className="zenpress-presets">
-					<div className="zenpress-presets-description">
-						<h2>{__('Pick configuration preset', 'zenpress')}</h2>
-						<p>
-							{__(
-								"Don't know which features to enable? Quickly configure ZenPress by selecting a preset that matches your site type. Each preset enables optimized features for your specific use case.",
-								'zenpress'
-							)}
-						</p>
-						<hr />
-						<h3>🖼️ {__('Corporate website', 'zenpress')}</h3>
-						<p>
-							{__(
-								'Optimized for business sites and portfolios. Focuses on security, performance, and removing unnecessary features like RSS feeds and author archives.',
-								'zenpress'
-							)}
-						</p>
-						<Button
-							variant="secondary"
-							onClick={() => enableByPreset('corporate-website')}
-							__next40pxDefaultSize
-						>
-							{__('Enable', 'zenpress')}
-						</Button>
-						<hr />
-						<h3> 📰 {__('Blog', 'zenpress')}</h3>
-						<p>
-							{__(
-								'Tailored for content-focused blogs. Includes performance and security optimizations while preserving essential blog features like RSS feeds.',
-								'zenpress'
-							)}
-						</p>
-						<Button
-							variant="secondary"
-							onClick={() => enableByPreset('blog')}
-							__next40pxDefaultSize
-						>
-							{__('Enable', 'zenpress')}
-						</Button>
-						<hr />
-						<h3>🛒 {__('E-commerce', 'zenpress')}</h3>
-						<p>
-							{__(
-								'Designed for WooCommerce stores. Includes all performance and security features plus WooCommerce-specific optimizations for faster checkout.',
-								'zenpress'
-							)}
-						</p>
-						<Button
-							variant="secondary"
-							onClick={() => enableByPreset('ecommerce')}
-							__next40pxDefaultSize
-						>
-							{__('Enable', 'zenpress')}
-						</Button>
-					</div>
-				</div>
+				<PresetsSidebar onEnablePreset={enableByPreset} />
 			</aside>
 		</article>
 	);

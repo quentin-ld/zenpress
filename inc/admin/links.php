@@ -4,10 +4,13 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
+add_filter('plugin_action_links_' . plugin_basename(ZENPRESS_PLUGIN_FILE), 'zenpress_add_settings_link');
 /**
  * Adds "Settings" to plugin action links on Plugins screen.
+ *
+ * @param array<int, string> $links Existing action links.
+ * @return array<int, string> Action links with Settings added.
  */
-add_filter('plugin_action_links_' . plugin_basename(ZENPRESS_PLUGIN_FILE), 'zenpress_add_settings_link');
 function zenpress_add_settings_link(array $links): array {
     $url = admin_url('options-general.php?page=zenpress');
     $links[] = sprintf(
@@ -20,10 +23,14 @@ function zenpress_add_settings_link(array $links): array {
     return $links;
 }
 
+add_filter('plugin_row_meta', 'zenpress_plugin_row_meta', 10, 2);
 /**
  * Adds Changelog, Docs, Support to plugin row meta for ZenPress.
+ *
+ * @param array<int, string> $links Existing row meta.
+ * @param string             $file  Plugin basename.
+ * @return array<int, string> Row meta.
  */
-add_filter('plugin_row_meta', 'zenpress_plugin_row_meta', 10, 2);
 function zenpress_plugin_row_meta(array $links, string $file): array {
     if ($file === plugin_basename(ZENPRESS_PLUGIN_FILE)) {
         $extra_links = [

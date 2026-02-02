@@ -41,22 +41,15 @@ if (!defined('ABSPATH')) {
 define('ZENPRESS_PLUGIN_FILE', __FILE__);
 define('ZENPRESS_PLUGIN_DIR', plugin_dir_path(__FILE__));
 
-// Core
 require_once __DIR__ . '/inc/core/constants.php';
 require_once __DIR__ . '/inc/core/metadata.php';
 require_once __DIR__ . '/inc/core/sanitize.php';
-
-// Integrations
 require_once __DIR__ . '/inc/classes/autoptimize.php';
 require_once __DIR__ . '/inc/classes/cache-enabler.php';
 require_once __DIR__ . '/inc/classes/sqlite-object-cache.php';
 require_once __DIR__ . '/inc/classes/integrations.php';
-
-// Admin UI
 require_once __DIR__ . '/inc/admin/enqueue.php';
 require_once __DIR__ . '/inc/admin/links.php';
 require_once __DIR__ . '/inc/admin/menu.php';
-
-// Settings logic
 require_once __DIR__ . '/inc/settings/options.php';
 require_once __DIR__ . '/inc/settings/loader.php';

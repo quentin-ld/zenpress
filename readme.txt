@@ -42,60 +42,58 @@ Following features are included :
 
 = Core =
 
-* Disable adjacent posts link tags.
-* Disable dashicons.
-* Disable DNS prefetch.
-* Disable WordPress emoji scripts and styles.
-* Disable jQuery migrate.
-* Disable oEmbed.
-* Disable PDF thumbnails.
-* Disable all WordPress feeds (RDF, RSS, RSS2, Atom, and comments).
-* Disable WordPress shortlink.
-* Disable WLW link.
-* Remove REST API links.
-* Disable capital_P_dangit filter.
-* Disable autosave.
-* Limit post revision to 10.
-* Disable Password Strength Meter.
-* Disable WordPress default lazy loading.
 * Block user enumeration.
+* Clean up the WordPress admin bar.
+* Disable adjacent posts link tags.
+* Disable all WordPress feeds (RDF, RSS, RSS2, Atom, and comments).
 * Disable application passwords.
 * Disable author archives.
+* Disable autosave.
+* Disable capital_P_dangit filter.
+* Disable dashicons.
+* Disable DNS prefetch.
+* Disable jQuery migrate.
+* Disable oEmbed.
+* Disable Password Strength Meter.
+* Disable PDF thumbnails.
 * Disable pingback and trackback.
 * Disable REST API for visitors not logged into WordPress.
+* Disable the login language selector.
+* Disable WLW link.
+* Disable WordPress default lazy loading.
+* Disable WordPress emoji scripts and styles.
+* Disable WordPress shortlink.
 * Disable XML-RPC and remove RSD link.
 * Hide WordPress version.
-* Clean up the WordPress admin bar.
-* Disable the login language selector.
-* Remove WordPress logo.
+* Limit post revision to 10.
 * Remove "Help" button.
-* Remove "Thanks for using WordPress" in footer.
+* Remove "Thanks for using WordPress" in footer.* Remove REST API links.
+* Remove WordPress logo.
 
 = WooCommerce  =
+* Disable unnecessary Stripe scripts on WooCommerce pages.
 * Disable WooCommerce cart fragments script.
 * Disable WooCommerce scripts and styles on non-WooCommerce pages.
-* Disable unnecessary Stripe scripts on WooCommerce pages.
 * Disable WooCommerce widgets.
-* Remove WooCommerce default block patterns.
-* Hide WooCommerce version.
+* Hide WooCommerce version.* Remove WooCommerce default block patterns.
 
 = Gutenberg  =
+* Disable default pattern categories in site editor.
 * Remove WordPress default remote block patterns.
 * Separate loading of core block styles.
-* Disable default pattern categories in site editor.
 
 = Ads-blocker =
 * Clean up the WordPress Dashboard.
 
 = Tools =
 * Protect the wp-login form from brute force attacks.
-* Toggle "Show ZenPress admin bar button": ZenPress item in the admin bar with "Clear all caches" and sub-items per active integration (page cache, static assets, object cache). Visible only when at least one of Cache Enabler, AutOptimize, or SQLite Object Cache is active. When enabled, those plugins' own admin bar buttons are hidden. Toggle via Settings > ZenPress > Tools.
+* Toggle "Show ZenPress admin bar button": ZenPress item in the admin bar with "Clear all caches" and sub-items per active integration (page cache, static assets, object cache). Visible only when at least one of Cache Enabler, Autoptimize, or SQLite Object Cache is active. When enabled, those plugins' own admin bar buttons are hidden. Toggle via Settings > ZenPress > Tools.
 
 = Integrations =
 
 ZenPress integrates with Cache Enabler, Autoptimize, and SQLite Object Cache. When any of these plugins is active, the Tools tab shows integration status and one-click autoconfig actions.
 
-* Admin bar: One "Clear all caches" button (dashicon) in the admin bar, with sub-items to clear page cache (Cache Enabler), static assets (Autoptimize), or object cache (SQLite Object Cache) separately. When the ZenPress admin bar is enabled, the third-party cache buttons (Cache Enabler, AutOptimize, SQLite Object Cache) are hidden. You can hide the ZenPress admin bar via Settings > ZenPress > Tools.
+* Admin bar: One "Clear all caches" button (dashicon) in the admin bar, with sub-items to clear page cache (Cache Enabler), static assets (Autoptimize), or object cache (SQLite Object Cache) separately. When the ZenPress admin bar is enabled, the third-party cache buttons (Cache Enabler, Autoptimize, SQLite Object Cache) are hidden. You can hide the ZenPress admin bar via Settings > ZenPress > Tools.
 * Autoptimize: One-click autoconfig enables recommended options (JS/CSS/aggregate/nogzip/fallback on; defer/HTML/logged-in/meta off).
 * Cache Enabler: One-click autoconfig enables clear site cache on post or plugin changes, WebP support, Gzip or Brotli compression, and minify HTML (excluding inline CSS/JS).
 * SQLite Object Cache: One-click autoconfig enables the "Use APCu" option in the plugin settings when the APCu extension is available.

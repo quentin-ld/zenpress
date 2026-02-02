@@ -62,14 +62,11 @@ final class ZenPress_Autoptimize {
             return;
         }
 
-        // --- SET (enable) ---
         autoptimizeOptionWrapper::update_option('autoptimize_js', 'on');
         autoptimizeOptionWrapper::update_option('autoptimize_css', 'on');
         autoptimizeOptionWrapper::update_option('autoptimize_css_aggregate', 'on');
         autoptimizeOptionWrapper::update_option('autoptimize_cache_nogzip', 'on');
         autoptimizeOptionWrapper::update_option('autoptimize_cache_fallback', 'on');
-
-        // --- UNSET (disable) ---
         autoptimizeOptionWrapper::update_option('autoptimize_js_defer_not_aggregate', '');
         autoptimizeOptionWrapper::update_option('autoptimize_html', '');
         autoptimizeOptionWrapper::update_option('autoptimize_optimize_logged', '');

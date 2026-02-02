@@ -23,30 +23,47 @@ export const useSettings = () => {
 		useDispatch(noticesStore);
 
 	useEffect(() => {
-		apiFetch({ path: '/wp/v2/settings' })
-			.then((settings) => {
+		let cancelled = false;
+
+		const load = async () => {
+			try {
+				const settings = await apiFetch({ path: '/wp/v2/settings' });
+				if (cancelled) {
+					return;
+				}
 				const active = Array.isArray(settings?.zenpress_active_snippets)
 					? settings.zenpress_active_snippets
 					: [];
-
-				const meta = window?.zenpressSnippetsMeta || {};
+				const rawMeta = window?.zenpressSnippetsMeta;
+				const meta =
+					rawMeta &&
+					typeof rawMeta === 'object' &&
+					!Array.isArray(rawMeta)
+						? rawMeta
+						: {};
 				const snippetsData = {};
-
 				Object.keys(meta).forEach((name) => {
 					snippetsData[name] = {
 						...meta[name],
 						'enable-snippet': active.includes(name),
 					};
 				});
-
 				setSnippets(snippetsData);
 				setAdminBarEnabled(
 					settings?.zenpress_admin_bar_enabled === true
 				);
-			})
-			.catch(() => {
-				createErrorNotice(__('Failed to load settings.', 'zenpress'));
-			});
+			} catch {
+				if (!cancelled) {
+					createErrorNotice(
+						__('Failed to load settings.', 'zenpress')
+					);
+				}
+			}
+		};
+		load();
+		return () => {
+			cancelled = true;
+		};
 	}, [createErrorNotice]);
 
 	const saveSettings = async () => {

@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-02-02T09:51:42+00:00\n"
+"POT-Creation-Date: 2026-02-02T18:34:00+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: zenpress\n"
@@ -39,36 +39,36 @@ msgstr ""
 msgid "https://profiles.wordpress.org/quentinldd/"
 msgstr ""
 
-#: inc/admin/links.php:16
+#: inc/admin/links.php:19
 msgid "Go to ZenPress settings page"
 msgstr ""
 
-#: inc/admin/links.php:17
+#: inc/admin/links.php:20
 msgid "Settings"
 msgstr ""
 
-#: inc/admin/links.php:33
+#: inc/admin/links.php:40
 #: inc/admin/menu.php:38
 msgid "View ZenPress changelog on WordPress.org (opens in a new tab)"
 msgstr ""
 
-#: inc/admin/links.php:34
+#: inc/admin/links.php:41
 msgid "Changelog"
 msgstr ""
 
-#: inc/admin/links.php:39
+#: inc/admin/links.php:46
 msgid "Read ZenPress documentation (opens in a new tab)"
 msgstr ""
 
-#: inc/admin/links.php:40
+#: inc/admin/links.php:47
 msgid "Docs"
 msgstr ""
 
-#: inc/admin/links.php:45
+#: inc/admin/links.php:52
 msgid "Support ZenPress by buying a coffee (opens in a new tab)"
 msgstr ""
 
-#: inc/admin/links.php:46
+#: inc/admin/links.php:53
 msgid "Support ☕"
 msgstr ""
 
@@ -141,87 +141,136 @@ msgstr ""
 msgid "ZenPress code repository"
 msgstr ""
 
-#: inc/classes/integrations.php:112
-msgid "Autoptimize configuration failed."
-msgstr ""
-
-#: inc/classes/integrations.php:118
+#: inc/classes/integrations.php:136
 #: assets/build/index.js:1
-#: assets/src/js/pages/SettingsPage.js:173
+#: assets/src/js/config/integrations.js:11
 msgid "Autoptimize has been configured."
 msgstr ""
 
-#: inc/classes/integrations.php:131
-msgid "Cache Enabler configuration failed."
+#: inc/classes/integrations.php:137
+msgid "Autoptimize configuration failed."
 msgstr ""
 
-#: inc/classes/integrations.php:137
+#: inc/classes/integrations.php:147
 #: assets/build/index.js:1
-#: assets/src/js/pages/SettingsPage.js:184
+#: assets/src/js/config/integrations.js:25
 msgid "Cache Enabler has been configured."
 msgstr ""
 
-#: inc/classes/integrations.php:150
-msgid "SQLite Object Cache configuration failed."
+#: inc/classes/integrations.php:148
+msgid "Cache Enabler configuration failed."
 msgstr ""
 
-#: inc/classes/integrations.php:156
+#: inc/classes/integrations.php:158
 #: assets/build/index.js:1
-#: assets/src/js/pages/SettingsPage.js:195
+#: assets/src/js/config/integrations.js:39
 msgid "SQLite Object Cache has been configured."
 msgstr ""
 
-#: inc/classes/integrations.php:200
-msgid "Clear all caches"
+#: inc/classes/integrations.php:159
+msgid "SQLite Object Cache configuration failed."
 msgstr ""
 
 #: inc/classes/integrations.php:203
+msgid "Clear all caches"
+msgstr ""
+
+#: inc/classes/integrations.php:206
 msgid "Clear all caches (page cache, static assets, object cache)."
 msgstr ""
 
-#: inc/classes/integrations.php:211
+#: inc/classes/integrations.php:214
 msgid "Clear pages caches"
 msgstr ""
 
-#: inc/classes/integrations.php:214
+#: inc/classes/integrations.php:217
 msgid "Clear Cache Enabler page cache."
 msgstr ""
 
-#: inc/classes/integrations.php:223
+#: inc/classes/integrations.php:226
 msgid "Clear static assets caches (CSS/JS)"
 msgstr ""
 
-#: inc/classes/integrations.php:226
+#: inc/classes/integrations.php:229
 msgid "Clear Autoptimize CSS/JS cache."
 msgstr ""
 
-#: inc/classes/integrations.php:235
+#: inc/classes/integrations.php:238
 msgid "Clear object cache"
 msgstr ""
 
-#: inc/classes/integrations.php:238
+#: inc/classes/integrations.php:241
 msgid "Clear SQLite Object Cache."
 msgstr ""
 
-#: inc/classes/integrations.php:260
-#: inc/classes/integrations.php:264
-msgid "Forbidden"
+#. translators: 1: cache type (e.g. Page cache), 2: plugin name (e.g. Cache Enabler)
+#: inc/classes/integrations.php:265
+#, php-format
+msgid "%1$s (Managed by %2$s) has been cleared successfully."
+msgstr ""
+
+#: inc/classes/integrations.php:268
+#: inc/classes/integrations.php:286
+msgid "Page cache"
+msgstr ""
+
+#: inc/classes/integrations.php:268
+msgid "Cache Enabler"
+msgstr ""
+
+#: inc/classes/integrations.php:270
+#: inc/classes/integrations.php:288
+msgid "Static assets cache"
+msgstr ""
+
+#: inc/classes/integrations.php:270
+msgid "Autoptimize"
 msgstr ""
 
 #: inc/classes/integrations.php:272
-#: inc/classes/integrations.php:282
-msgid "Cache clear failed."
+#: inc/classes/integrations.php:290
+msgid "Object cache"
+msgstr ""
+
+#: inc/classes/integrations.php:272
+msgid "SQLite Object Cache"
 msgstr ""
 
 #: inc/classes/integrations.php:274
-msgid "Caches cleared."
-msgstr ""
-
-#: inc/classes/integrations.php:284
 msgid "Cache cleared."
 msgstr ""
 
-#: inc/classes/integrations.php:286
+#: inc/classes/integrations.php:312
+msgid "Caches cleared."
+msgstr ""
+
+#. translators: %s: cache type (e.g. Page cache)
+#: inc/classes/integrations.php:317
+#, php-format
+msgid "%s has been cleared successfully."
+msgstr ""
+
+#: inc/classes/integrations.php:322
+msgid "and"
+msgstr ""
+
+#. translators: %s: comma-separated list of cache types
+#: inc/classes/integrations.php:326
+#, php-format
+msgid "%s have been cleared successfully."
+msgstr ""
+
+#: inc/classes/integrations.php:353
+#: inc/classes/integrations.php:357
+msgid "Forbidden"
+msgstr ""
+
+#: inc/classes/integrations.php:365
+#: inc/classes/integrations.php:375
+msgid "Cache clear failed."
+msgstr ""
+
+#: inc/classes/integrations.php:379
 msgid "Invalid request."
 msgstr ""
 
@@ -658,155 +707,151 @@ msgid "Forces WordPress to load core block styles separately, improving performa
 msgstr ""
 
 #: assets/build/index.js:1
+#: assets/src/js/config/integrations.js:12
+msgid "Autoptimize autoconfig failed. Is Autoptimize installed and active?"
+msgstr ""
+
+#: assets/build/index.js:1
+#: assets/src/js/config/integrations.js:16
+msgid "Setup Autoptimize"
+msgstr ""
+
+#: assets/build/index.js:1
+#: assets/src/js/config/integrations.js:17
+msgid "Apply recommended Autoptimize settings: Minify JS & CSS, aggregate CSS, static files, 404 fallbacks."
+msgstr ""
+
+#: assets/build/index.js:1
+#: assets/src/js/config/integrations.js:26
+msgid "Cache Enabler autoconfig failed. Is Cache Enabler installed and active?"
+msgstr ""
+
+#: assets/build/index.js:1
+#: assets/src/js/config/integrations.js:30
+msgid "Setup Cache Enabler"
+msgstr ""
+
+#: assets/build/index.js:1
+#: assets/src/js/config/integrations.js:31
+msgid "Apply recommended Cache Enabler settings: Clear site cache on post or plugin changes, WebP support, Gzip or Brotli compression, and minify HTML (excluding inline CSS/JS)."
+msgstr ""
+
+#: assets/build/index.js:1
+#: assets/src/js/config/integrations.js:43
+msgid "SQLite Object Cache autoconfig failed. Is SQLite Object Cache installed and active?"
+msgstr ""
+
+#: assets/build/index.js:1
+#: assets/src/js/config/integrations.js:47
+msgid "Setup SQLite Object Cache"
+msgstr ""
+
+#: assets/build/index.js:1
+#: assets/src/js/config/integrations.js:48
+msgid "Apply recommended SQLite Object Cache settings. Enable \"Use APCu\" if APCu is available."
+msgstr ""
+
+#: assets/build/index.js:1
 #: assets/src/js/components/SaveButton.js:20
 msgid "Save settings"
 msgstr ""
 
 #: assets/build/index.js:1
-#: assets/src/js/hooks/useSettings.js:48
-msgid "Failed to load settings."
-msgstr ""
-
-#: assets/build/index.js:1
-#: assets/src/js/hooks/useSettings.js:68
-msgid "Settings saved."
-msgstr ""
-
-#: assets/build/index.js:1
-#: assets/src/js/hooks/useSettings.js:70
-msgid "Failed to save settings."
-msgstr ""
-
-#: assets/build/index.js:1
-#: assets/src/js/pages/SettingsPage.js:99
-msgid "Uncategorized"
-msgstr ""
-
-#: assets/build/index.js:1
-#: assets/src/js/pages/SettingsPage.js:102
-msgid "uncategorized"
-msgstr ""
-
-#: assets/build/index.js:1
-#: assets/src/js/pages/SettingsPage.js:174
-msgid "Autoptimize autoconfig failed. Is Autoptimize installed and active?"
-msgstr ""
-
-#: assets/build/index.js:1
-#: assets/src/js/pages/SettingsPage.js:185
-msgid "Cache Enabler autoconfig failed. Is Cache Enabler installed and active?"
-msgstr ""
-
-#: assets/build/index.js:1
-#: assets/src/js/pages/SettingsPage.js:196
-msgid "SQLite Object Cache autoconfig failed. Is SQLite Object Cache installed and active?"
-msgstr ""
-
-#: assets/build/index.js:1
-#: assets/src/js/pages/SettingsPage.js:297
-msgid "Integrations"
-msgstr ""
-
-#: assets/build/index.js:1
-#: assets/src/js/pages/SettingsPage.js:303
-msgid "Show ZenPress admin bar button"
-msgstr ""
-
-#: assets/build/index.js:1
-#: assets/src/js/pages/SettingsPage.js:313
-msgid "Show a ZenPress item in the admin bar with \"Clear all caches\" and sub-items for each active integration (page cache, static assets, object cache). Visible only when at least one of Cache Enabler, AutOptimize, or SQLite Object Cache is active. When enabled, those plugins' own admin bar buttons are hidden."
-msgstr ""
-
-#: assets/build/index.js:1
-#: assets/src/js/pages/SettingsPage.js:335
-#: assets/src/js/pages/SettingsPage.js:369
-#: assets/src/js/pages/SettingsPage.js:403
-msgid "Applying…"
-msgstr ""
-
-#: assets/build/index.js:1
-#: assets/src/js/pages/SettingsPage.js:339
-msgid "One-click autoconfig Autoptimize"
-msgstr ""
-
-#: assets/build/index.js:1
-#: assets/src/js/pages/SettingsPage.js:345
-msgid "Apply recommended Autoptimize settings: Minify JS & CSS, aggregate CSS, static files, 404 fallbacks."
-msgstr ""
-
-#: assets/build/index.js:1
-#: assets/src/js/pages/SettingsPage.js:373
-msgid "One-click autoconfig Cache Enabler"
-msgstr ""
-
-#: assets/build/index.js:1
-#: assets/src/js/pages/SettingsPage.js:379
-msgid "Apply recommended Cache Enabler settings: Clear site cache on post or plugin changes, WebP support, Gzip or Brotli compression, and minify HTML (excluding inline CSS/JS)."
-msgstr ""
-
-#: assets/build/index.js:1
-#: assets/src/js/pages/SettingsPage.js:407
-msgid "One-click autoconfig SQLite Object Cache"
-msgstr ""
-
-#: assets/build/index.js:1
-#: assets/src/js/pages/SettingsPage.js:413
-msgid "Apply recommended SQLite Object Cache settings. Enable \"Use APCu\" if APCu is available."
-msgstr ""
-
-#: assets/build/index.js:1
-#: assets/src/js/pages/SettingsPage.js:433
+#: assets/src/js/components/BulkSnippetActions.js:29
 msgid "Enable all actions"
 msgstr ""
 
 #: assets/build/index.js:1
-#: assets/src/js/pages/SettingsPage.js:440
+#: assets/src/js/components/BulkSnippetActions.js:36
 msgid "Disable all actions"
 msgstr ""
 
 #: assets/build/index.js:1
-#: assets/src/js/pages/SettingsPage.js:450
-msgid "Pick configuration preset"
+#: assets/src/js/components/AutoconfigButton.js:32
+msgid "Applying…"
 msgstr ""
 
 #: assets/build/index.js:1
-#: assets/src/js/pages/SettingsPage.js:452
-msgid "Don't know which features to enable? Quickly configure ZenPress by selecting a preset that matches your site type. Each preset enables optimized features for your specific use case."
+#: assets/src/js/components/IntegrationsBlock.js:26
+msgid "Integrations"
 msgstr ""
 
 #: assets/build/index.js:1
-#: assets/src/js/pages/SettingsPage.js:458
-msgid "Corporate website"
+#: assets/src/js/components/IntegrationsBlock.js:28
+msgid "Show ZenPress admin bar button"
 msgstr ""
 
 #: assets/build/index.js:1
-#: assets/src/js/pages/SettingsPage.js:460
-msgid "Optimized for business sites and portfolios. Focuses on security, performance, and removing unnecessary features like RSS feeds and author archives."
+#: assets/src/js/components/IntegrationsBlock.js:31
+msgid "Show a ZenPress item in the admin bar with \"Clear all caches\" and sub-items for each active integration (page cache, static assets, object cache). Visible only when at least one of Cache Enabler, AutOptimize, or SQLite Object Cache is active. When enabled, those plugins' own admin bar buttons are hidden."
 msgstr ""
 
 #: assets/build/index.js:1
-#: assets/src/js/pages/SettingsPage.js:470
-#: assets/src/js/pages/SettingsPage.js:485
-#: assets/src/js/pages/SettingsPage.js:500
+#: assets/src/js/components/PresetCard.js:28
 msgid "Enable"
 msgstr ""
 
 #: assets/build/index.js:1
-#: assets/src/js/pages/SettingsPage.js:473
+#: assets/src/js/components/PresetsSidebar.js:8
+msgid "Corporate website"
+msgstr ""
+
+#: assets/build/index.js:1
+#: assets/src/js/components/PresetsSidebar.js:9
+msgid "Optimized for business sites and portfolios. Focuses on security, performance, and removing unnecessary features like RSS feeds and author archives."
+msgstr ""
+
+#: assets/build/index.js:1
+#: assets/src/js/components/PresetsSidebar.js:17
 msgid "Blog"
 msgstr ""
 
 #: assets/build/index.js:1
-#: assets/src/js/pages/SettingsPage.js:475
+#: assets/src/js/components/PresetsSidebar.js:18
 msgid "Tailored for content-focused blogs. Includes performance and security optimizations while preserving essential blog features like RSS feeds."
 msgstr ""
 
 #: assets/build/index.js:1
-#: assets/src/js/pages/SettingsPage.js:488
+#: assets/src/js/components/PresetsSidebar.js:26
 msgid "E-commerce"
 msgstr ""
 
 #: assets/build/index.js:1
-#: assets/src/js/pages/SettingsPage.js:490
+#: assets/src/js/components/PresetsSidebar.js:27
 msgid "Designed for WooCommerce stores. Includes all performance and security features plus WooCommerce-specific optimizations for faster checkout."
+msgstr ""
+
+#: assets/build/index.js:1
+#: assets/src/js/components/PresetsSidebar.js:45
+msgid "Pick configuration preset"
+msgstr ""
+
+#: assets/build/index.js:1
+#: assets/src/js/components/PresetsSidebar.js:47
+msgid "Don't know which features to enable? Quickly configure ZenPress by selecting a preset that matches your site type. Each preset enables optimized features for your specific use case."
+msgstr ""
+
+#: assets/build/index.js:1
+#: assets/src/js/hooks/useSettings.js:58
+msgid "Failed to load settings."
+msgstr ""
+
+#: assets/build/index.js:1
+#: assets/src/js/hooks/useSettings.js:85
+msgid "Settings saved."
+msgstr ""
+
+#: assets/build/index.js:1
+#: assets/src/js/hooks/useSettings.js:87
+msgid "Failed to save settings."
+msgstr ""
+
+#: assets/build/index.js:1
+#: assets/src/js/utils/snippets.js:43
+msgid "Uncategorized"
+msgstr ""
+
+#: assets/build/index.js:1
+#: assets/src/js/utils/snippets.js:46
+msgid "uncategorized"
 msgstr ""
