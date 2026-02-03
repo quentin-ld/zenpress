@@ -1,5 +1,5 @@
 import { ToggleControl } from '@wordpress/components';
-import { useRef, useEffect } from '@wordpress/element';
+import { useRef, useLayoutEffect } from '@wordpress/element';
 
 /**
  * Temporary support function to handle Enter key on toggle controls.
@@ -14,7 +14,6 @@ const addEnterKeySupport = (container, onChange) => {
 	}
 
 	const handleKeyDown = (e) => {
-		// Handle Enter key on the toggle control
 		if (e.key === 'Enter') {
 			const toggleInput = container.querySelector(
 				'input[type="checkbox"]'
@@ -54,8 +53,7 @@ const addEnterKeySupport = (container, onChange) => {
 export const SnippetToggleControl = ({ label, value, onChange, help }) => {
 	const containerRef = useRef(null);
 
-	// Temporary support for Enter key handling
-	useEffect(() => {
+	useLayoutEffect(() => {
 		return addEnterKeySupport(containerRef.current, onChange);
 	}, [onChange]);
 

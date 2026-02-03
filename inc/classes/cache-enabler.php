@@ -80,7 +80,7 @@ final class ZenPress_Cache_Enabler {
             'convert_image_urls_to_webp' => 1,
             'compress_cache' => 1,
             'minify_html' => 1,
-            'minify_inline_css_js' => 0, // Exclude inline CSS and JS from minification.
+            'minify_inline_css_js' => 0,
         ];
 
         update_option($option_name, array_merge($current, $autoconfig));

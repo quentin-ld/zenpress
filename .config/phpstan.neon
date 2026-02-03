@@ -5,7 +5,7 @@ includes:
 parameters:
     bootstrapFiles:
         - phpstan-bootstrap.php
-    level: 5
+    level: 6
     excludePaths:
         analyseAndScan:
             - .config/*

@@ -34,7 +34,6 @@ export const Tabs = ({
 		onSelect?.(id);
 	};
 
-	// Function to get ordered tab IDs from DOM
 	const getOrderedTabIds = () => {
 		if (!tabListRef.current) {
 			return [];
@@ -120,7 +119,6 @@ export const Tab = ({ tabId, title, className = '', children }) => {
 
 		let targetIndex = currentIndex;
 
-		// Handle arrow keys based on orientation
 		if (orientation === 'vertical') {
 			if (e.key === 'ArrowDown') {
 				e.preventDefault();
@@ -132,18 +130,15 @@ export const Tab = ({ tabId, title, className = '', children }) => {
 					currentIndex > 0 ? currentIndex - 1 : tabIds.length - 1;
 			}
 		} else if (e.key === 'ArrowRight') {
-			// Horizontal orientation
 			e.preventDefault();
 			targetIndex =
 				currentIndex < tabIds.length - 1 ? currentIndex + 1 : 0;
 		} else if (e.key === 'ArrowLeft') {
-			// Horizontal orientation
 			e.preventDefault();
 			targetIndex =
 				currentIndex > 0 ? currentIndex - 1 : tabIds.length - 1;
 		}
 
-		// Handle Home and End keys
 		if (e.key === 'Home') {
 			e.preventDefault();
 			targetIndex = 0;
@@ -152,14 +147,12 @@ export const Tab = ({ tabId, title, className = '', children }) => {
 			targetIndex = tabIds.length - 1;
 		}
 
-		// Handle Space and Enter for activation (if not auto-activated)
 		if (e.key === ' ' || e.key === 'Enter') {
 			e.preventDefault();
 			onSelect(tabId);
 			return;
 		}
 
-		// Move focus to target tab if index changed
 		if (
 			targetIndex !== currentIndex &&
 			targetIndex >= 0 &&
@@ -171,13 +164,11 @@ export const Tab = ({ tabId, title, className = '', children }) => {
 			);
 			if (targetTabElement) {
 				targetTabElement.focus();
-				// Auto-activate on focus (recommended by W3C for better UX)
 				onSelect(targetTabId);
 			}
 		}
 	};
 
-	// Auto-activate tab when it receives focus (recommended by W3C)
 	const handleFocus = () => {
 		if (!isSelected) {
 			onSelect(tabId);
@@ -215,14 +206,11 @@ export const TabPanel = ({ tabId, children }) => {
 	const panelRef = useRef(null);
 	const isSelected = selectedTabId === tabId;
 
-	// Check if panel contains focusable elements
 	useEffect(() => {
 		if (isSelected && panelRef.current) {
 			const focusableElements = panelRef.current.querySelectorAll(
 				'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"]), input:not([disabled]), select:not([disabled]), textarea:not([disabled])'
 			);
-
-			// If no focusable elements, make the panel itself focusable
 			if (focusableElements.length === 0) {
 				panelRef.current.setAttribute('tabindex', '0');
 			} else {

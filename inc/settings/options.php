@@ -30,7 +30,7 @@ function zenpress_register_snippet_settings(): void {
         'zenpress_admin_bar_enabled',
         [
             'type' => 'boolean',
-            'default' => true,
+            'default' => false,
             'sanitize_callback' => 'zenpress_sanitize_admin_bar_enabled',
             'show_in_rest' => [
                 'schema' => ['type' => 'boolean'],
