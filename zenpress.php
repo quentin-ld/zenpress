@@ -11,7 +11,7 @@
  *
  * Plugin Name: ZenPress - Optimize & Secure
  * Description: Easily speed up and strengthen your WordPress site in one click: clean out unnecessary features, protect weak points, autoconfigure cache integrations.
- * Version: 2.2.3
+ * Version: 2.2.4
  * Plugin URI: https://wordpress.org/plugins/zenpress/
  * Author: Quentin Le Duff
  * Author URI: https://profiles.wordpress.org/quentinldd/

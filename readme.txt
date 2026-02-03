@@ -4,7 +4,7 @@ Donate link: https://github.com/sponsors/quentin-ld/
 Tags: optimization, performance, security, bloat, woocommerce
 Requires at least: 6.0
 Tested up to: 6.9
-Stable tag: 2.2.3
+Stable tag: 2.2.4
 Requires PHP: 8.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html/
@@ -205,6 +205,11 @@ For developers: ZenPress exposes the following action and filters for extending 
 
 == Changelog ==
 
+= 2.2.4 =
+- Fix: Admin bar “Clear all caches” is now off by default; user turns it on if they want.
+- Code quality : Split Settings page into smaller, modular piece.
+- Interface : After clearing cache from the admin bar, show a WordPress success notice on the next admin load.
+
 = 2.2.3 =
 - Fix : Disable Cache enabler "clear page cache" button in admin bar when ZenPress admin bar button is active.
 - Fix : ZenPress admin bar button default option is now "off".
@@ -349,6 +354,9 @@ For developers: ZenPress exposes the following action and filters for extending 
 - First release of ZenPress, yaaaaayyy!
 
 == Upgrade Notice ==
+
+= 2.2.4 =
+- Recommended update, Fix Admin bar “Clear all caches” is now off by default; user turns it on if they want.
 
 = 2.2.1 =
 - Security and code quality improvements. Recommended update.
