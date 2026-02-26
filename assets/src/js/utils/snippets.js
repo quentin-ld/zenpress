@@ -43,7 +43,7 @@ export function groupAndSortSnippets(snippets) {
 			snippet?.category || __('Uncategorized', 'zenpress')
 		).toLowerCase();
 		const subcategory = (
-			snippet?.subcategory || __('uncategorized', 'zenpress')
+			snippet?.subcategory || __('Uncategorized', 'zenpress')
 		).toLowerCase();
 
 		if (!grouped[category]) {

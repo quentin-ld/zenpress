@@ -10,9 +10,9 @@ if (!defined('ABSPATH')) {
 }
 
 return [
-    'title' => __('Disable jQuery migrate', 'zenpress'),
+    'title' => __('Disable jQuery Migrate script', 'zenpress'),
     'description' => __(
-        'Removes jQuery Migrate from loading on the frontend while keeping it enabled in the admin. Improves frontend performance and reduces legacy overhead.',
+        'Loads jQuery Migrate only in the admin, not on the front. Improves front-end performance.',
         'zenpress'
     ),
     'category' => __('core', 'zenpress'),

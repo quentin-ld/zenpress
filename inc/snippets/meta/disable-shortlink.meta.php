@@ -10,7 +10,7 @@ if (!defined('ABSPATH')) {
 }
 
 return [
-    'title' => __('Disable WordPress shortlink', 'zenpress'),
+    'title' => __('Disable shortlink', 'zenpress'),
     'description' => __('Removes shortlink functionality from both the HTML head and HTTP headers. Reduces unnecessary output, improves performance and SEO clarity.', 'zenpress'),
     'category' => __('core', 'zenpress'),
     'subcategory' => __('performance', 'zenpress'),

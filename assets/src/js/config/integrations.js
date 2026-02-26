@@ -8,45 +8,42 @@ export const INTEGRATIONS_AUTOCONFIG = [
 	{
 		key: 'autoptimize',
 		path: '/zenpress/v1/autoconfig/autoptimize',
-		successMessage: __('Autoptimize has been configured.', 'zenpress'),
+		successMessage: __('Autoptimize configured.', 'zenpress'),
 		errorMessage: __(
-			'Autoptimize autoconfig failed. Is Autoptimize installed and active?',
+			'Autoptimize setup failed. Is Autoptimize installed and active?',
 			'zenpress'
 		),
-		buttonLabel: __('Setup Autoptimize', 'zenpress'),
+		buttonLabel: __('Set up Autoptimize', 'zenpress'),
 		helpText: __(
-			'Apply recommended Autoptimize settings: Minify JS & CSS, aggregate CSS, static files, 404 fallbacks.',
+			'Apply recommended settings: minify JS and CSS, combine CSS, static file caching, 404 fallbacks.',
 			'zenpress'
 		),
 	},
 	{
 		key: 'cache_enabler',
 		path: '/zenpress/v1/autoconfig/cache-enabler',
-		successMessage: __('Cache Enabler has been configured.', 'zenpress'),
+		successMessage: __('Cache Enabler configured.', 'zenpress'),
 		errorMessage: __(
-			'Cache Enabler autoconfig failed. Is Cache Enabler installed and active?',
+			'Cache Enabler setup failed. Is Cache Enabler installed and active?',
 			'zenpress'
 		),
-		buttonLabel: __('Setup Cache Enabler', 'zenpress'),
+		buttonLabel: __('Set up Cache Enabler', 'zenpress'),
 		helpText: __(
-			'Apply recommended Cache Enabler settings: Clear site cache on post or plugin changes, WebP support, Gzip or Brotli compression, and minify HTML (excluding inline CSS/JS).',
+			'Apply recommended settings: clear cache on content changes, WebP, compression, minify HTML.',
 			'zenpress'
 		),
 	},
 	{
 		key: 'sqlite_object_cache',
 		path: '/zenpress/v1/autoconfig/sqlite-object-cache',
-		successMessage: __(
-			'SQLite Object Cache has been configured.',
-			'zenpress'
-		),
+		successMessage: __('SQLite Object Cache configured.', 'zenpress'),
 		errorMessage: __(
-			'SQLite Object Cache autoconfig failed. Is SQLite Object Cache installed and active?',
+			'SQLite Object Cache setup failed. Is it installed and active?',
 			'zenpress'
 		),
-		buttonLabel: __('Setup SQLite Object Cache', 'zenpress'),
+		buttonLabel: __('Set up SQLite Object Cache', 'zenpress'),
 		helpText: __(
-			'Apply recommended SQLite Object Cache settings. Enable "Use APCu" if APCu is available.',
+			'Apply recommended settings. Enable "Use APCu" in the plugin if available.',
 			'zenpress'
 		),
 	},

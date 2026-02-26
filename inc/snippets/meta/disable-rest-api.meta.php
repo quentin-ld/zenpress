@@ -11,9 +11,9 @@ if (!defined('ABSPATH')) {
 }
 
 return [
-    'title' => __('Disable REST API for visitors not logged into WordPress', 'zenpress'),
+    'title' => __('Limit REST API to logged-in users', 'zenpress'),
     'description' => __(
-        'Restricts the WP REST API to logged-in users only; unauthenticated requests receive an error. Bypass filters (zenpress_disable_wp_rest_api_post_var, zenpress_disable_wp_rest_api_server_var) allow specific integrations (e.g. webhooks); use non-guessable values only.',
+        'Only logged-in users can use the REST API. Visitors get an error. Advanced: filters let you allow specific tools; use with care.',
         'zenpress'
     ),
     'category' => __('core', 'zenpress'),

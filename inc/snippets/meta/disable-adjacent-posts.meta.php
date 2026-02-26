@@ -10,7 +10,7 @@ if (!defined('ABSPATH')) {
 }
 
 return [
-    'title' => __('Disable adjacent posts link tags', 'zenpress'),
+    'title' => __('Disable prev/next post links in head', 'zenpress'),
     'description' => __(
         'Removes rel="prev" and rel="next" tags from wp_head. Reduces unnecessary HTML output and slightly improves performance.',
         'zenpress'

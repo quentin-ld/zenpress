@@ -7,7 +7,7 @@ const PRESETS = [
 		icon: '🖼️',
 		title: __('Corporate website', 'zenpress'),
 		description: __(
-			'Optimized for business sites and portfolios. Focuses on security, performance, and removing unnecessary features like RSS feeds and author archives.',
+			'For business sites and portfolios. Focuses on security, performance, and removing unused features like RSS and author archives.',
 			'zenpress'
 		),
 	},
@@ -16,7 +16,7 @@ const PRESETS = [
 		icon: '📰',
 		title: __('Blog', 'zenpress'),
 		description: __(
-			'Tailored for content-focused blogs. Includes performance and security optimizations while preserving essential blog features like RSS feeds.',
+			'For content-focused blogs. Keeps RSS and other blog features while improving performance and security.',
 			'zenpress'
 		),
 	},
@@ -25,7 +25,7 @@ const PRESETS = [
 		icon: '🛒',
 		title: __('E-commerce', 'zenpress'),
 		description: __(
-			'Designed for WooCommerce stores. Includes all performance and security features plus WooCommerce-specific optimizations for faster checkout.',
+			'For WooCommerce stores. Performance and security plus WooCommerce optimizations for faster checkout.',
 			'zenpress'
 		),
 	},
@@ -42,10 +42,10 @@ export function PresetsSidebar({ onEnablePreset }) {
 	return (
 		<div className="zenpress-presets">
 			<div className="zenpress-presets-description">
-				<h2>{__('Pick configuration preset', 'zenpress')}</h2>
+				<h2>{__('Choose a preset', 'zenpress')}</h2>
 				<p>
 					{__(
-						"Don't know which features to enable? Quickly configure ZenPress by selecting a preset that matches your site type. Each preset enables optimized features for your specific use case.",
+						'Not sure what to enable? Choose a preset that matches your site. Each preset turns on a set of features for that type of site.',
 						'zenpress'
 					)}
 				</p>

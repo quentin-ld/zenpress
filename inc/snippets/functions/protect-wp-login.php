@@ -6,7 +6,7 @@ if (!defined('ABSPATH')) {
 
 // Remove detailed login errors
 add_filter('login_errors', static function (): string {
-    return __('Login error.', 'zenpress');
+    return __('Something went wrong. Try again.', 'zenpress');
 });
 
 // Limit login attempts (only when a valid IP is available to avoid site-wide lockout)
@@ -35,7 +35,7 @@ add_filter('authenticate', static function (mixed $user, string $username, strin
     // Check if blocked
     if (get_transient($blockKey)) {
         wp_die(
-            esc_html__('Too many failed login attempts. Try again later.', 'zenpress'),
+            esc_html__('Too many failed attempts. Try again in a few minutes.', 'zenpress'),
             '',
             ['response' => 403]
         );
@@ -49,7 +49,7 @@ add_filter('authenticate', static function (mixed $user, string $username, strin
     if ($attempts > $MAX_LOGIN_ATTEMPTS) {
         set_transient($blockKey, true, $BLOCK_DURATION);
         wp_die(
-            esc_html__('Too many failed login attempts. Try again later.', 'zenpress'),
+            esc_html__('Too many failed attempts. Try again in a few minutes.', 'zenpress'),
             '',
             ['response' => 403]
         );

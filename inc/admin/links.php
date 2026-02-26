@@ -16,7 +16,7 @@ function zenpress_add_settings_link(array $links): array {
     $links[] = sprintf(
         '<a href="%s" aria-label="%s">%s</a>',
         esc_url($url),
-        esc_attr__('Go to ZenPress settings page', 'zenpress'),
+        esc_attr__('Go to ZenPress settings', 'zenpress'),
         esc_html__('Settings', 'zenpress')
     );
 
@@ -37,20 +37,20 @@ function zenpress_plugin_row_meta(array $links, string $file): array {
             sprintf(
                 '<a href="%s" target="_blank" rel="noopener noreferrer" aria-label="%s">%s</a>',
                 esc_url('https://wordpress.org/plugins/zenpress/#developers'),
-                esc_attr__('View ZenPress changelog on WordPress.org (opens in a new tab)', 'zenpress'),
+                esc_attr__('View ZenPress changelog on WordPress.org (opens in new tab)', 'zenpress'),
                 esc_html__('Changelog', 'zenpress')
             ),
             sprintf(
                 '<a href="%s" target="_blank" rel="noopener noreferrer" aria-label="%s">%s</a>',
                 esc_url('https://holdmywp.com/zenpress/'),
-                esc_attr__('Read ZenPress documentation (opens in a new tab)', 'zenpress'),
-                esc_html__('Docs', 'zenpress')
+                esc_attr__('Read ZenPress documentation (opens in new tab)', 'zenpress'),
+                esc_html__('Documentation', 'zenpress')
             ),
             sprintf(
                 '<a href="%s" target="_blank" rel="noopener noreferrer" aria-label="%s">%s</a>',
                 esc_url('https://buymeacoffee.com/quentinld'),
-                esc_attr__('Support ZenPress by buying a coffee (opens in a new tab)', 'zenpress'),
-                esc_html__('Support ☕', 'zenpress')
+                esc_attr__('Support ZenPress: Buy me a coffee (opens in new tab)', 'zenpress'),
+                esc_html__('Support', 'zenpress')
             )
         ];
         $links = array_merge($links, $extra_links);

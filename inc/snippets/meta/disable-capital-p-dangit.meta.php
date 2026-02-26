@@ -10,9 +10,9 @@ if (!defined('ABSPATH')) {
 }
 
 return [
-    'title' => __('Disable capital_P_dangit filter', 'zenpress'),
+    'title' => __('Disable "WordPress" spelling correction', 'zenpress'),
     'description' => __(
-        'Removes the filter that forces "Wordpress" to "WordPress" in titles, content, comments, and widget text. Saves a small amount of processing on each page load.',
+        'Stops WordPress from changing "Wordpress" to "WordPress" in content. Saves a small amount of work on each page.',
         'zenpress'
     ),
     'category' => __('core', 'zenpress'),

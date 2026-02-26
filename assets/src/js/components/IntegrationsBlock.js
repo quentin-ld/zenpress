@@ -25,11 +25,11 @@ export function IntegrationsBlock({
 			<hr />
 			<h3>{__('Integrations', 'zenpress')}</h3>
 			<SnippetToggleControl
-				label={__('Show ZenPress admin bar button', 'zenpress')}
+				label={__('Show cache actions in admin bar', 'zenpress')}
 				value={adminBarEnabled}
 				onChange={() => setAdminBarEnabled(!adminBarEnabled)}
 				help={__(
-					'Show a ZenPress item in the admin bar with "Clear all caches" and sub-items for each active integration (page cache, static assets, object cache). Visible only when at least one of Cache Enabler, AutOptimize, or SQLite Object Cache is active. When enabled, those plugins\' own admin bar buttons are hidden.',
+					'Adds a ZenPress menu to the admin bar with "Clear all caches" and options for each active cache (page, static files, object cache). Only appears when Cache Enabler, Autoptimize, or SQLite Object Cache is active. Hides those plugins\' own admin bar buttons.',
 					'zenpress'
 				)}
 			/>

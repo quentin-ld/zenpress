@@ -133,7 +133,7 @@ final class ZenPress_Integrations {
     public static function rest_autoconfig_autoptimize(WP_REST_Request $request): WP_REST_Response {
         return self::run_rest_autoconfig(
             [ZenPress_Autoptimize::class, 'autoconfig'],
-            __('Autoptimize has been configured.', 'zenpress'),
+            __('Autoptimize configured.', 'zenpress'),
             __('Autoptimize configuration failed.', 'zenpress')
         );
     }
@@ -144,7 +144,7 @@ final class ZenPress_Integrations {
     public static function rest_autoconfig_cache_enabler(WP_REST_Request $request): WP_REST_Response {
         return self::run_rest_autoconfig(
             [ZenPress_Cache_Enabler::class, 'autoconfig'],
-            __('Cache Enabler has been configured.', 'zenpress'),
+            __('Cache Enabler configured.', 'zenpress'),
             __('Cache Enabler configuration failed.', 'zenpress')
         );
     }
@@ -155,7 +155,7 @@ final class ZenPress_Integrations {
     public static function rest_autoconfig_sqlite_object_cache(WP_REST_Request $request): WP_REST_Response {
         return self::run_rest_autoconfig(
             [ZenPress_Sqlite_Object_Cache::class, 'autoconfig'],
-            __('SQLite Object Cache has been configured.', 'zenpress'),
+            __('SQLite Object Cache configured.', 'zenpress'),
             __('SQLite Object Cache configuration failed.', 'zenpress')
         );
     }
@@ -203,7 +203,7 @@ final class ZenPress_Integrations {
             'title' => '<span style="margin-top: 2px;" class="ab-icon dashicons dashicons-trash" aria-hidden="true"></span><span class="ab-label">' . esc_html__('Clear all caches', 'zenpress') . '</span>',
             'href' => wp_nonce_url(add_query_arg('clear', 'all', $base_url), 'zenpress_clear_caches'),
             'meta' => [
-                'title' => __('Clear all caches (page cache, static assets, object cache).', 'zenpress'),
+                'title' => __('Clear page cache, static assets cache, and object cache.', 'zenpress'),
             ],
         ]);
 
@@ -211,7 +211,7 @@ final class ZenPress_Integrations {
             $wp_admin_bar->add_node([
                 'id' => 'zenpress-clear-cache-enabler',
                 'parent' => 'zenpress',
-                'title' => __('Clear pages caches', 'zenpress'),
+                'title' => __('Clear page cache', 'zenpress'),
                 'href' => wp_nonce_url(add_query_arg('clear', 'cache_enabler', $base_url), 'zenpress_clear_caches'),
                 'meta' => [
                     'title' => __('Clear Cache Enabler page cache.', 'zenpress'),
@@ -223,7 +223,7 @@ final class ZenPress_Integrations {
             $wp_admin_bar->add_node([
                 'id' => 'zenpress-clear-autoptimize',
                 'parent' => 'zenpress',
-                'title' => __('Clear static assets caches (CSS/JS)', 'zenpress'),
+                'title' => __('Clear static assets cache (CSS/JS)', 'zenpress'),
                 'href' => wp_nonce_url(add_query_arg('clear', 'autoptimize', $base_url), 'zenpress_clear_caches'),
                 'meta' => [
                     'title' => __('Clear Autoptimize CSS/JS cache.', 'zenpress'),
@@ -262,7 +262,7 @@ final class ZenPress_Integrations {
      */
     private static function get_single_cleared_message(string $slug): string {
         /* translators: 1: cache type (e.g. Page cache), 2: plugin name (e.g. Cache Enabler) */
-        $format = __('%1$s (Managed by %2$s) has been cleared successfully.', 'zenpress');
+        $format = __('%1$s (managed by %2$s) cleared successfully.', 'zenpress');
         switch ($slug) {
             case 'cache_enabler':
                 return sprintf($format, __('Page cache', 'zenpress'), __('Cache Enabler', 'zenpress'));
@@ -314,7 +314,7 @@ final class ZenPress_Integrations {
         if (count($types) === 1) {
             return sprintf(
                 /* translators: %s: cache type (e.g. Page cache) */
-                __('%s has been cleared successfully.', 'zenpress'),
+                __('%s cleared successfully.', 'zenpress'),
                 $types[0]
             );
         }
@@ -323,7 +323,7 @@ final class ZenPress_Integrations {
 
         return sprintf(
             /* translators: %s: comma-separated list of cache types */
-            __('%s have been cleared successfully.', 'zenpress'),
+            __('%s cleared successfully.', 'zenpress'),
             $list
         );
     }
@@ -350,11 +350,11 @@ final class ZenPress_Integrations {
      */
     public static function ajax_clear_caches(): void {
         if (!current_user_can('manage_options')) {
-            wp_die(esc_html__('Forbidden', 'zenpress'), '', ['response' => 403]);
+            wp_die(esc_html__('You don\'t have permission to do that.', 'zenpress'), '', ['response' => 403]);
         }
         $nonce = isset($_REQUEST['_wpnonce']) ? sanitize_text_field(wp_unslash((string) $_REQUEST['_wpnonce'])) : '';
         if (!wp_verify_nonce($nonce, 'zenpress_clear_caches')) {
-            wp_die(esc_html__('Forbidden', 'zenpress'), '', ['response' => 403]);
+            wp_die(esc_html__('You don\'t have permission to do that.', 'zenpress'), '', ['response' => 403]);
         }
 
         $clear = isset($_REQUEST['clear']) ? sanitize_text_field(wp_unslash((string) $_REQUEST['clear'])) : 'all';
@@ -362,7 +362,7 @@ final class ZenPress_Integrations {
             try {
                 do_action('zenpress_caches_clear');
             } catch (\Throwable $e) {
-                wp_die(esc_html__('Cache clear failed.', 'zenpress'), '', ['response' => 500]);
+                wp_die(esc_html__('Clearing cache failed. Try again.', 'zenpress'), '', ['response' => 500]);
             }
             $message = self::get_all_cleared_message();
         } elseif (isset(self::$clear_slug_to_class[$clear])) {
@@ -372,11 +372,11 @@ final class ZenPress_Integrations {
                     $class::clear_cache();
                 }
             } catch (\Throwable $e) {
-                wp_die(esc_html__('Cache clear failed.', 'zenpress'), '', ['response' => 500]);
+                wp_die(esc_html__('Clearing cache failed. Try again.', 'zenpress'), '', ['response' => 500]);
             }
             $message = self::get_single_cleared_message($clear);
         } else {
-            wp_die(esc_html__('Invalid request.', 'zenpress'), '', ['response' => 400]);
+            wp_die(esc_html__('Invalid request. Please refresh and try again.', 'zenpress'), '', ['response' => 400]);
         }
 
         $xhr_header = isset($_SERVER['HTTP_X_REQUESTED_WITH']) && is_string($_SERVER['HTTP_X_REQUESTED_WITH'])

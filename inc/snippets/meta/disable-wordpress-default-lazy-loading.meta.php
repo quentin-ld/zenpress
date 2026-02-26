@@ -10,7 +10,7 @@ if (!defined('ABSPATH')) {
 }
 
 return [
-    'title' => __('Disable WordPress default lazy loading', 'zenpress'),
+    'title' => __('Disable default lazy loading for images', 'zenpress'),
     'description' => __(
         'Stops WordPress from adding loading="lazy" to images and iframes. Use only if you rely on a theme, plugin, or CDN for lazy loading, or if you prefer to load all media immediately.',
         'zenpress'

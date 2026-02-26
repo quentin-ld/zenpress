@@ -12,7 +12,7 @@ if (!defined('ABSPATH')) {
 return [
     'title' => __('Block user enumeration', 'zenpress'),
     'description' => __(
-        'Prevents attackers from guessing WordPress usernames by blocking requests with the `author` parameter in query strings or permalinks. Reduces exposure to brute-force and user-targeted attacks.',
+        'Stops visitors from discovering usernames via author URLs. Reduces brute-force risk.',
         'zenpress'
     ),
     'category' => __('core', 'zenpress'),

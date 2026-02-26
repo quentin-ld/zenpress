@@ -1,117 +1,117 @@
-=== ZenPress - Optimize & Secure ===
+=== ZenPress ===
 Contributors: @quentinldd
 Donate link: https://github.com/sponsors/quentin-ld/
 Tags: optimization, performance, security, bloat, woocommerce
 Requires at least: 6.0
 Tested up to: 6.9
-Stable tag: 2.2.4
+Stable tag: 2.2.5
 Requires PHP: 8.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html/
 
-Easily speed up and strengthen your website in one click: clean out unnecessary features, protect weak points, autoconfigure cache integrations.
+Speed up and harden your site with a single click: cleans up unused features, protects security gaps, and configures cache integrations automatically.
 
 == Description ==
 
-ZenPress is a lightweight, super-fast plugin that boosts your WordPress & WooCommerce website through a wide range of solid actions.
-Combined with [Cache Enabler](https://wordpress.org/plugins/cache-enabler/), [Autoptimize](https://wordpress.org/plugins/autoptimize/) and [SQLite Object Cache](https://wordpress.org/plugins/sqlite-object-cache/), ZenPress is a free alternative to major premium performance plugins.
-This is a simple solution for improving your WordPress website's performance and security while enjoying a simpler and lighter UI without breaking the bank.
-No database clutter, no ads, no pro version. Just install, activate, select what you need or pick up your settings preset and you are ready to go !
+ZenPress is a lightweight, high-performance plugin that improves your WordPress and WooCommerce sites through a range of supportive actions.
+Combined with [Cache Enabler](https://wordpress.org/plugins/cache-enabler/), [Autoptimize](https://wordpress.org/plugins/autoptimize/) and [SQLite Object Cache](https://wordpress.org/plugins/sqlite-object-cache/), you can use ZenPress as a reliable, free alternative to major premium performance plugins.
+By integrating directly into the WordPress core interface, ZenPress provides a simpler experience without the need for complex custom dashboards. You can improve your site's performance and security without ads, pro versions, or database clutter.
 
 = Why choose ZenPress? =
-* Curated settings presets included to help you.
-* Deep integration with the native WordPress interface: no bloat, no extra options page, no weird custom dashboard : only what you need.
-* Free alternative to major premium performance plugin for everyone.
-* Make your WordPress website fast & clean by disabling unwanted features.
-* Improve security by turning off features you don’t use and hardening weak spots.
-* Eliminate third-party plugin bloat (actually hunting them down).
-* Ultra lightweight.
-* Future proof.
+* Use curated settings presets to help you optimize your site instantly.
+* Experience deep integration with the WordPress core interface for a lightweight, familiar experience.
+* Choose a free, reliable alternative to premium performance plugins.
+* Keep your site fast and clean by disabling unused features.
+* Harden your security by turning off unused features and protecting weak spots.
+* Reduce bloat from third-party plugins.
+* Enjoy an ultra-lightweight and future-proof design.
 
 == Features ==
 
-Following features are included :
+ZenPress includes the following features:
 
-= Settings subpage 🧰 =
-* Organized interface with vertical tabs for easy navigation between categories (Core, Gutenberg, WooCommerce, Ads-blocker, Tools).
-* Features grouped by subcategories (Performance, Security, User Interface) with visual icons for quick identification.
-* Three ready-to-use presets: Corporate website, Blog, and E-commerce - each optimized for specific site types.
-* Every action is documented with descriptions so that you understand what you are doing and the benefits.
-* Fully accessible interface with ARIA-compliant tabs and complete keyboard navigation support.
-* Native WordPress interface, benefits from Gutenberg's new features and the site editor.
+= Dashboard Settings =
+* Navigate easily between categories like Core, Gutenberg, and WooCommerce using a structured tabbed interface.
+* Identify features quickly with visual icons organized by Performance, Security, and User Interface.
+* Select from three ready-to-use presets: Corporate, Blog, or E-commerce: each optimized for your specific site type.
+* Understand every choice with concise descriptions that explain the benefits to your site.
+* Use a fully accessible interface that includes ARIA-compliant tabs and full keyboard navigation support.
+* Benefit from a design that matches the WordPress core look and feel, supporting the latest block editor features.
 
-= Core =
-
+= Core Settings =
 * Block user enumeration.
-* Clean up the WordPress admin bar.
-* Disable adjacent posts link tags.
-* Disable all WordPress feeds (RDF, RSS, RSS2, Atom, and comments).
+* Clean up the admin bar.
+* Disable "WordPress" spelling correction.
+* Disable all feeds (RSS, Atom, comments).
 * Disable application passwords.
 * Disable author archives.
-* Disable autosave.
-* Disable capital_P_dangit filter.
-* Disable dashicons.
+* Disable autosave (classic editor).
+* Disable Dashicons (admin icons).
+* Disable default lazy loading for images.
 * Disable DNS prefetch.
-* Disable jQuery migrate.
+* Disable jQuery Migrate script.
+* Disable login language selector.
 * Disable oEmbed.
-* Disable Password Strength Meter.
+* Disable password strength meter.
 * Disable PDF thumbnails.
-* Disable pingback and trackback.
-* Disable REST API for visitors not logged into WordPress.
-* Disable the login language selector.
-* Disable WLW link.
-* Disable WordPress default lazy loading.
+* Disable pingbacks and trackbacks.
+* Disable prev/next post links in head.
+* Disable shortlink.
+* Disable Windows Live Writer link.
 * Disable WordPress emoji scripts and styles.
-* Disable WordPress shortlink.
-* Disable XML-RPC and remove RSD link.
+* Disable XML-RPC and RSD link.
 * Hide WordPress version.
-* Limit post revision to 10.
-* Remove "Help" button.
-* Remove "Thanks for using WordPress" in footer.* Remove REST API links.
-* Remove WordPress logo.
+* Limit post revisions to 10.
+* Limit REST API to logged-in users.
+* Remove "Thanks for using WordPress" from footer.
+* Remove Help tab.
+* Remove REST API links from page source.
+* Remove WordPress logo from admin bar.
 
-= WooCommerce  =
-* Disable unnecessary Stripe scripts on WooCommerce pages.
-* Disable WooCommerce cart fragments script.
-* Disable WooCommerce scripts and styles on non-WooCommerce pages.
+= Gutenberg Settings =
+* Disable default pattern categories in Site Editor.
+* Load block styles separately.
+* Remove WordPress default block patterns.
+
+= WooCommerce Settings =
+* Disable Stripe scripts on product and cart pages.
+* Disable WooCommerce cart fragments.
+* Disable WooCommerce scripts and styles on non-shop pages.
 * Disable WooCommerce widgets.
-* Hide WooCommerce version.* Remove WooCommerce default block patterns.
+* Hide WooCommerce version.
+* Remove WooCommerce default block patterns.
 
-= Gutenberg  =
-* Disable default pattern categories in site editor.
-* Remove WordPress default remote block patterns.
-* Separate loading of core block styles.
+= Ads-blocker Settings =
+* Clean up the Dashboard.
 
-= Ads-blocker =
-* Clean up the WordPress Dashboard.
-
-= Tools =
-* Protect the wp-login form from brute force attacks.
-* Toggle "Show ZenPress admin bar button": ZenPress item in the admin bar with "Clear all caches" and sub-items per active integration (page cache, static assets, object cache). Visible only when at least one of Cache Enabler, Autoptimize, or SQLite Object Cache is active. When enabled, those plugins' own admin bar buttons are hidden. Toggle via Settings > ZenPress > Tools.
+= Tools Settings =
+* Protect login from brute force.
+* Show cache actions in admin bar.
 
 = Integrations =
 
 ZenPress integrates with Cache Enabler, Autoptimize, and SQLite Object Cache. When any of these plugins is active, the Tools tab shows integration status and one-click autoconfig actions.
 
-* Admin bar: One "Clear all caches" button (dashicon) in the admin bar, with sub-items to clear page cache (Cache Enabler), static assets (Autoptimize), or object cache (SQLite Object Cache) separately. When the ZenPress admin bar is enabled, the third-party cache buttons (Cache Enabler, Autoptimize, SQLite Object Cache) are hidden. You can hide the ZenPress admin bar via Settings > ZenPress > Tools.
-* Autoptimize: One-click autoconfig enables recommended options (JS/CSS/aggregate/nogzip/fallback on; defer/HTML/logged-in/meta off).
-* Cache Enabler: One-click autoconfig enables clear site cache on post or plugin changes, WebP support, Gzip or Brotli compression, and minify HTML (excluding inline CSS/JS).
-* SQLite Object Cache: One-click autoconfig enables the "Use APCu" option in the plugin settings when the APCu extension is available.
+* Admin bar: Adds a ZenPress menu to the admin bar with "Clear all caches" and options for each active cache (page, static files, object cache). Only appears when Cache Enabler, Autoptimize, or SQLite Object Cache is active. Hides those plugins' own admin bar buttons.
+* Autoptimize: Minify JS and CSS, combine CSS, static file caching, 404 fallbacks.
+* Cache Enabler: Clear cache on content changes, WebP, compression, minify HTML.
+* SQLite Object Cache: Enable "Use APCu" in the plugin if available.
 
 = Presets =
-* Corporate website / Portfolio: Optimized for business sites and portfolios. Focuses on security, performance, and removing unnecessary features like RSS feeds and author archives.
-* Blog: Tailored for content-focused blogs. Includes performance and security optimizations while preserving essential blog features like RSS feeds.
-* E-commerce: Designed for WooCommerce stores. Includes all performance and security features plus WooCommerce-specific optimizations for faster checkout.
+* Corporate website: For business sites and portfolios. Focuses on security, performance, and removing unused features like RSS and author archives.
+* Blog: For content-focused blogs. Keeps RSS and other blog features while improving performance and security.
+* E-commerce: For WooCommerce stores. Performance and security plus WooCommerce optimizations for faster checkout.
 
 = Accessibility =
-* Fully ARIA-compliant tab interface following W3C ARIA Authoring Practices Guide.
-* Complete keyboard navigation: Arrow keys, Home, End, Space, Enter, and Tab keys fully supported.
-* Automatic tab activation on focus for improved user experience.
-* Proper focus management with visible focus indicators.
-* Screen reader friendly with proper ARIA labels and roles.
+* You can navigate the dashboard with confidence using an interface built to WCAG 2.1 AA accessibility standards.
+* Move through settings efficiently using only your keyboard; we fully support the use of Tab, Arrow keys, Home, End, and Enter for all interactions.
+* Experience faster navigation with automatic tab activation, which displays panels immediately as you move focus between sections.
+* Always identify your position on the page through highly visible focus indicators on every interactive button and link.
+* Every element is optimized for screen readers and assistive technologies with descriptive ARIA labels to provide clear context for every setting.
 
 == Roadmap ==
 
+* Use new Gutenberg Icon component for categories & subcategories icons instead of Dashicons.
 * Additional presets for specific use cases.
 * Documentation pages with detailed guides.
 * Manage Heartbeat API (frontend + backend + admin whitelist).
@@ -192,18 +192,12 @@ ZenPress can be network‑activated or activated per site. Settings are stored p
 
 Nice ! If you can't find anything in the roadmap, feel free to submit your suggestion on the support page! If you know how to code, you can even contribute on GitHub.
 
-== Hooks & filters ==
-
-For developers: ZenPress exposes the following action and filters for extending or bypassing behavior.
-
-= Action =
-* `zenpress_caches_clear` – Fired when the user clears caches from the ZenPress admin bar. Integrations (e.g. Autoptimize) hook into this to clear their own caches. You can add custom cache clear logic with `add_action('zenpress_caches_clear', 'your_callback');`.
-
-= Filters (Disable REST API snippet) =
-* `zenpress_disable_wp_rest_api_post_var` – Allow unauthenticated REST access when a specific POST key is present (e.g. for webhooks). Return a string or array of key names. Use non-guessable values only.
-* `zenpress_disable_wp_rest_api_server_var` – Allow unauthenticated REST access when `REQUEST_URI` matches a specific value. Return a string or array. Use non-guessable values only.
-
 == Changelog ==
+
+= 2.2.5 =
+- Linguistic improvements : Align to WordPress [Style, voice, and tone](https://make.wordpress.org/docs/style-guide/general-guidelines/style-voice-tone/).
+- Accessibility improvements : Align to WordPress [accessibility guidelines](https://make.wordpress.org/docs/style-guide/general-guidelines/accessibility/).
+
 
 = 2.2.4 =
 - Fix: Admin bar “Clear all caches” is now off by default; user turns it on if they want.

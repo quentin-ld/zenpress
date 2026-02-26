@@ -2,21 +2,23 @@
 # This file is distributed under the GPL v2 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: ZenPress - Optimize & Secure 2.2.4\n"
+"Project-Id-Version: ZenPress 2.2.5\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/zenpress\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-02-03T08:48:39+00:00\n"
+"POT-Creation-Date: 2026-02-26T16:13:47+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: zenpress\n"
 
 #. Plugin Name of the plugin
 #: zenpress.php
-msgid "ZenPress - Optimize & Secure"
+#: inc/admin/menu.php:14
+#: inc/admin/menu.php:31
+msgid "ZenPress"
 msgstr ""
 
 #. Plugin URI of the plugin
@@ -26,7 +28,7 @@ msgstr ""
 
 #. Description of the plugin
 #: zenpress.php
-msgid "Easily speed up and strengthen your WordPress site in one click: clean out unnecessary features, protect weak points, autoconfigure cache integrations."
+msgid "Speed up and harden your site with a single click: cleans up unused features, protects security gaps, and configures cache integrations automatically."
 msgstr ""
 
 #. Author of the plugin
@@ -40,16 +42,17 @@ msgid "https://profiles.wordpress.org/quentinldd/"
 msgstr ""
 
 #: inc/admin/links.php:19
-msgid "Go to ZenPress settings page"
+msgid "Go to ZenPress settings"
 msgstr ""
 
 #: inc/admin/links.php:20
+#: inc/admin/menu.php:13
 msgid "Settings"
 msgstr ""
 
 #: inc/admin/links.php:40
 #: inc/admin/menu.php:38
-msgid "View ZenPress changelog on WordPress.org (opens in a new tab)"
+msgid "View ZenPress changelog on WordPress.org (opens in new tab)"
 msgstr ""
 
 #: inc/admin/links.php:41
@@ -57,28 +60,21 @@ msgid "Changelog"
 msgstr ""
 
 #: inc/admin/links.php:46
-msgid "Read ZenPress documentation (opens in a new tab)"
+#: inc/admin/menu.php:48
+msgid "Read ZenPress documentation (opens in new tab)"
 msgstr ""
 
 #: inc/admin/links.php:47
-msgid "Docs"
+#: inc/admin/menu.php:49
+msgid "Documentation"
 msgstr ""
 
 #: inc/admin/links.php:52
-msgid "Support ZenPress by buying a coffee (opens in a new tab)"
+msgid "Support ZenPress: Buy me a coffee (opens in new tab)"
 msgstr ""
 
 #: inc/admin/links.php:53
-msgid "Support ☕"
-msgstr ""
-
-#: inc/admin/menu.php:13
-msgid "ZenPress options"
-msgstr ""
-
-#: inc/admin/menu.php:14
-#: inc/admin/menu.php:31
-msgid "ZenPress"
+msgid "Support"
 msgstr ""
 
 #: inc/admin/menu.php:34
@@ -86,27 +82,19 @@ msgid "Version"
 msgstr ""
 
 #: inc/admin/menu.php:39
-msgid "What's new ?"
-msgstr ""
-
-#: inc/admin/menu.php:48
-msgid "Read the ZenPress documentation (opens in a new tab)"
-msgstr ""
-
-#: inc/admin/menu.php:49
-msgid "Documentation"
+msgid "What's new"
 msgstr ""
 
 #: inc/admin/menu.php:54
-msgid "Leave a review for ZenPress on WordPress.org (opens in a new tab)"
+msgid "Leave a review for ZenPress on WordPress.org (opens in new tab)"
 msgstr ""
 
 #: inc/admin/menu.php:55
-msgid "Leave a review (helps a lot)"
+msgid "Leave a review"
 msgstr ""
 
 #: inc/admin/menu.php:61
-msgid "Support development: Buy me a coffee (opens in a new tab)"
+msgid "Support development: Buy me a coffee (opens in new tab)"
 msgstr ""
 
 #: inc/admin/menu.php:62
@@ -114,37 +102,34 @@ msgid "Buy me a coffee"
 msgstr ""
 
 #: inc/admin/menu.php:70
-msgid "Loading your ZenPress settings…"
+msgid "Loading settings…"
 msgstr ""
 
-#: inc/admin/menu.php:78
-msgid "Made "
-msgstr ""
-
+#. translators: 1: decorative heart emoji, 2: author name
 #: inc/admin/menu.php:80
-msgid " by Quentin Le Duff - Your WordPress Partner"
+#, php-format
+msgid "Made with %1$s by %2$s"
 msgstr ""
 
-#: inc/admin/menu.php:87
-msgid "Visite the developper website"
+#: inc/admin/menu.php:90
+msgid "Visit the developer website (opens in new tab)"
 msgstr ""
 
-#: inc/admin/menu.php:88
-msgid "My place"
+#: inc/admin/menu.php:91
+msgid "Developer website"
 msgstr ""
 
-#: inc/admin/menu.php:93
-msgid "Review the code on Github"
+#: inc/admin/menu.php:96
+msgid "View ZenPress source code on GitHub (opens in new tab)"
 msgstr ""
 
-#: inc/admin/menu.php:94
-msgid "ZenPress code repository"
+#: inc/admin/menu.php:97
+msgid "Source code"
 msgstr ""
 
 #: inc/classes/integrations.php:136
-#: assets/build/index.js:1
 #: assets/src/js/config/integrations.js:11
-msgid "Autoptimize has been configured."
+msgid "Autoptimize configured."
 msgstr ""
 
 #: inc/classes/integrations.php:137
@@ -152,9 +137,8 @@ msgid "Autoptimize configuration failed."
 msgstr ""
 
 #: inc/classes/integrations.php:147
-#: assets/build/index.js:1
 #: assets/src/js/config/integrations.js:25
-msgid "Cache Enabler has been configured."
+msgid "Cache Enabler configured."
 msgstr ""
 
 #: inc/classes/integrations.php:148
@@ -162,9 +146,8 @@ msgid "Cache Enabler configuration failed."
 msgstr ""
 
 #: inc/classes/integrations.php:158
-#: assets/build/index.js:1
 #: assets/src/js/config/integrations.js:39
-msgid "SQLite Object Cache has been configured."
+msgid "SQLite Object Cache configured."
 msgstr ""
 
 #: inc/classes/integrations.php:159
@@ -176,11 +159,11 @@ msgid "Clear all caches"
 msgstr ""
 
 #: inc/classes/integrations.php:206
-msgid "Clear all caches (page cache, static assets, object cache)."
+msgid "Clear page cache, static assets cache, and object cache."
 msgstr ""
 
 #: inc/classes/integrations.php:214
-msgid "Clear pages caches"
+msgid "Clear page cache"
 msgstr ""
 
 #: inc/classes/integrations.php:217
@@ -188,7 +171,7 @@ msgid "Clear Cache Enabler page cache."
 msgstr ""
 
 #: inc/classes/integrations.php:226
-msgid "Clear static assets caches (CSS/JS)"
+msgid "Clear static assets cache (CSS/JS)"
 msgstr ""
 
 #: inc/classes/integrations.php:229
@@ -206,7 +189,7 @@ msgstr ""
 #. translators: 1: cache type (e.g. Page cache), 2: plugin name (e.g. Cache Enabler)
 #: inc/classes/integrations.php:265
 #, php-format
-msgid "%1$s (Managed by %2$s) has been cleared successfully."
+msgid "%1$s (managed by %2$s) cleared successfully."
 msgstr ""
 
 #: inc/classes/integrations.php:268
@@ -245,51 +228,47 @@ msgid "Caches cleared."
 msgstr ""
 
 #. translators: %s: cache type (e.g. Page cache)
+#. translators: %s: comma-separated list of cache types
 #: inc/classes/integrations.php:317
+#: inc/classes/integrations.php:326
 #, php-format
-msgid "%s has been cleared successfully."
+msgid "%s cleared successfully."
 msgstr ""
 
 #: inc/classes/integrations.php:322
 msgid "and"
 msgstr ""
 
-#. translators: %s: comma-separated list of cache types
-#: inc/classes/integrations.php:326
-#, php-format
-msgid "%s have been cleared successfully."
-msgstr ""
-
 #: inc/classes/integrations.php:353
 #: inc/classes/integrations.php:357
-msgid "Forbidden"
+msgid "You don't have permission to do that."
 msgstr ""
 
 #: inc/classes/integrations.php:365
 #: inc/classes/integrations.php:375
-msgid "Cache clear failed."
+msgid "Clearing cache failed. Try again."
 msgstr ""
 
 #: inc/classes/integrations.php:379
-msgid "Invalid request."
+msgid "Invalid request. Please refresh and try again."
 msgstr ""
 
 #: inc/snippets/functions/block-user-enumeration.php:11
 #: inc/snippets/functions/block-user-enumeration.php:19
-msgid "Access denied."
+msgid "You don't have permission to view this."
 msgstr ""
 
 #: inc/snippets/functions/disable-rest-api.php:56
-msgid "REST API restricted to authenticated users."
+msgid "You must be logged in to use this."
 msgstr ""
 
 #: inc/snippets/functions/protect-wp-login.php:9
-msgid "Login error."
+msgid "Something went wrong. Try again."
 msgstr ""
 
 #: inc/snippets/functions/protect-wp-login.php:38
 #: inc/snippets/functions/protect-wp-login.php:52
-msgid "Too many failed login attempts. Try again later."
+msgid "Too many failed attempts. Try again in a few minutes."
 msgstr ""
 
 #: inc/snippets/meta/block-user-enumeration.meta.php:13
@@ -297,7 +276,7 @@ msgid "Block user enumeration"
 msgstr ""
 
 #: inc/snippets/meta/block-user-enumeration.meta.php:14
-msgid "Prevents attackers from guessing WordPress usernames by blocking requests with the `author` parameter in query strings or permalinks. Reduces exposure to brute-force and user-targeted attacks."
+msgid "Stops visitors from discovering usernames via author URLs. Reduces brute-force risk."
 msgstr ""
 
 #: inc/snippets/meta/block-user-enumeration.meta.php:18
@@ -344,7 +323,7 @@ msgid "security"
 msgstr ""
 
 #: inc/snippets/meta/clean-admin-bar.meta.php:13
-msgid "Clean up the WordPress admin bar"
+msgid "Clean up the admin bar"
 msgstr ""
 
 #: inc/snippets/meta/clean-admin-bar.meta.php:14
@@ -362,11 +341,11 @@ msgid "user-interface"
 msgstr ""
 
 #: inc/snippets/meta/clean-dashboard-items.meta.php:13
-msgid "Clean up the WordPress Dashboard"
+msgid "Clean up the Dashboard"
 msgstr ""
 
 #: inc/snippets/meta/clean-dashboard-items.meta.php:14
-msgid "Removes unnecessary and ad widgets from the dashboard. Declutters the admin area and improves usability."
+msgid "Removes unnecessary and promotional widgets from the Dashboard."
 msgstr ""
 
 #: inc/snippets/meta/clean-dashboard-items.meta.php:18
@@ -374,7 +353,7 @@ msgid "ads-blocker"
 msgstr ""
 
 #: inc/snippets/meta/disable-adjacent-posts.meta.php:13
-msgid "Disable adjacent posts link tags"
+msgid "Disable prev/next post links in head"
 msgstr ""
 
 #: inc/snippets/meta/disable-adjacent-posts.meta.php:14
@@ -412,7 +391,7 @@ msgid "Disable application passwords"
 msgstr ""
 
 #: inc/snippets/meta/disable-application-passwords.meta.php:14
-msgid "Disables WordPress application passwords for all users. Improves security; do not enable if you need API or app-based authentication (e.g. mobile apps, REST clients)."
+msgid "Turns off application passwords for everyone. Turn this off if you use mobile apps or other apps that log in to WordPress."
 msgstr ""
 
 #: inc/snippets/meta/disable-author-archives.meta.php:13
@@ -420,11 +399,11 @@ msgid "Disable author archives"
 msgstr ""
 
 #: inc/snippets/meta/disable-author-archives.meta.php:14
-msgid "Forces author archive pages to return a 404 error. Prevents user enumeration and hides unnecessary author pages."
+msgid "Author archive URLs show \"Page not found.\" Helps prevent listing usernames."
 msgstr ""
 
 #: inc/snippets/meta/disable-autosave.meta.php:13
-msgid "Disable autosave"
+msgid "Disable autosave (classic editor)"
 msgstr ""
 
 #: inc/snippets/meta/disable-autosave.meta.php:14
@@ -432,27 +411,27 @@ msgid "Stops the classic editor from autosaving drafts periodically. Reduces dat
 msgstr ""
 
 #: inc/snippets/meta/disable-capital-p-dangit.meta.php:13
-msgid "Disable capital_P_dangit filter"
+msgid "Disable \"WordPress\" spelling correction"
 msgstr ""
 
 #: inc/snippets/meta/disable-capital-p-dangit.meta.php:14
-msgid "Removes the filter that forces \"Wordpress\" to \"WordPress\" in titles, content, comments, and widget text. Saves a small amount of processing on each page load."
+msgid "Stops WordPress from changing \"Wordpress\" to \"WordPress\" in content. Saves a small amount of work on each page."
 msgstr ""
 
 #: inc/snippets/meta/disable-dashicons.meta.php:13
-msgid "Disable dashicons"
+msgid "Disable Dashicons (admin icons)"
 msgstr ""
 
 #: inc/snippets/meta/disable-dashicons.meta.php:14
-msgid "Prevents WordPress from loading the Dashicons CSS for visitors who are not logged in. Improves frontend performance by reducing unnecessary styles."
+msgid "Stops Dashicons (admin icons) from loading for visitors. Logged-in users still see them."
 msgstr ""
 
 #: inc/snippets/meta/disable-default-pattern-categories.meta.php:13
-msgid "Disable default pattern categories in site editor"
+msgid "Disable default pattern categories in Site Editor"
 msgstr ""
 
 #: inc/snippets/meta/disable-default-pattern-categories.meta.php:14
-msgid "Removes default pattern categories from the block pattern inserter in the site editor (e.g. featured, about, audio, banner, buttons, call-to-action, columns, contact, footer, gallery, header, media, portfolio, posts, query, services, team, testimonials, text, videos) and any custom ones. Simplifies the interface; patterns remain accessible."
+msgid "Removes default pattern categories from the block inserter. Patterns are still available; the list is simpler."
 msgstr ""
 
 #: inc/snippets/meta/disable-default-pattern-categories.meta.php:15
@@ -478,15 +457,15 @@ msgid "Removes emoji scripts, styles, and filters from frontend, backend, feeds,
 msgstr ""
 
 #: inc/snippets/meta/disable-jquery-migrate.meta.php:13
-msgid "Disable jQuery migrate"
+msgid "Disable jQuery Migrate script"
 msgstr ""
 
 #: inc/snippets/meta/disable-jquery-migrate.meta.php:14
-msgid "Removes jQuery Migrate from loading on the frontend while keeping it enabled in the admin. Improves frontend performance and reduces legacy overhead."
+msgid "Loads jQuery Migrate only in the admin, not on the front. Improves front-end performance."
 msgstr ""
 
 #: inc/snippets/meta/disable-login-language-selector.meta.php:13
-msgid "Disable the login language selector"
+msgid "Disable login language selector"
 msgstr ""
 
 #: inc/snippets/meta/disable-login-language-selector.meta.php:14
@@ -502,11 +481,11 @@ msgid "Removes WordPress oEmbed features such as auto-discovery, REST API routes
 msgstr ""
 
 #: inc/snippets/meta/disable-password-strength-meter.meta.php:13
-msgid "Disable Password Strength Meter"
+msgid "Disable password strength meter"
 msgstr ""
 
 #: inc/snippets/meta/disable-password-strength-meter.meta.php:14
-msgid "Prevents the password strength meter and zxcvbn scripts from loading on profile, login, and similar pages. Saves roughly 400KB and reduces script parsing. Users will not see the strength indicator when choosing passwords."
+msgid "Stops the password strength meter from loading on login and profile pages. Saves about 400KB. Users won't see how strong their password is."
 msgstr ""
 
 #: inc/snippets/meta/disable-pdf-thumbnails.meta.php:13
@@ -518,7 +497,7 @@ msgid "Prevents WordPress from generating thumbnails for uploaded PDF files by r
 msgstr ""
 
 #: inc/snippets/meta/disable-pingback-trackback.meta.php:13
-msgid "Disable pingback and trackback"
+msgid "Disable pingbacks and trackbacks"
 msgstr ""
 
 #: inc/snippets/meta/disable-pingback-trackback.meta.php:14
@@ -526,15 +505,15 @@ msgid "Removes the X-Pingback header, disables pingbacks and trackbacks on new p
 msgstr ""
 
 #: inc/snippets/meta/disable-rest-api.meta.php:14
-msgid "Disable REST API for visitors not logged into WordPress"
+msgid "Limit REST API to logged-in users"
 msgstr ""
 
 #: inc/snippets/meta/disable-rest-api.meta.php:15
-msgid "Restricts the WP REST API to logged-in users only; unauthenticated requests receive an error. Bypass filters (zenpress_disable_wp_rest_api_post_var, zenpress_disable_wp_rest_api_server_var) allow specific integrations (e.g. webhooks); use non-guessable values only."
+msgid "Only logged-in users can use the REST API. Visitors get an error. Advanced: filters let you allow specific tools; use with care."
 msgstr ""
 
 #: inc/snippets/meta/disable-rss.meta.php:13
-msgid "Disable all WordPress feeds (RDF, RSS, RSS2, Atom, and comments)"
+msgid "Disable all feeds (RSS, Atom, comments)"
 msgstr ""
 
 #: inc/snippets/meta/disable-rss.meta.php:14
@@ -542,7 +521,7 @@ msgid "Prevents access to all default feeds (RDF, RSS, RSS2, Atom, and comments)
 msgstr ""
 
 #: inc/snippets/meta/disable-shortlink.meta.php:13
-msgid "Disable WordPress shortlink"
+msgid "Disable shortlink"
 msgstr ""
 
 #: inc/snippets/meta/disable-shortlink.meta.php:14
@@ -550,19 +529,19 @@ msgid "Removes shortlink functionality from both the HTML head and HTTP headers.
 msgstr ""
 
 #: inc/snippets/meta/disable-wlw-manifest.meta.php:13
-msgid "Disable WLW link"
+msgid "Disable Windows Live Writer link"
 msgstr ""
 
 #: inc/snippets/meta/disable-wlw-manifest.meta.php:14
-msgid "Removes the WLW manifest link from the head, which was only used by the deprecated Windows Live Writer app. Reduces unnecessary metadata and improves performance."
+msgid "Removes the old Windows Live Writer link from the page. Safe to disable."
 msgstr ""
 
 #: inc/snippets/meta/disable-woocommerce-cart-fragments.meta.php:13
-msgid "Disable WooCommerce cart fragments script"
+msgid "Disable WooCommerce cart fragments"
 msgstr ""
 
 #: inc/snippets/meta/disable-woocommerce-cart-fragments.meta.php:14
-msgid "Removes the WooCommerce cart fragments JavaScript (wc-cart-fragments), which is responsible for dynamically updating the cart contents without a page reload. Disabling this can improve performance on stores that do not require live cart updates."
+msgid "Stops the script that updates the cart without reloading the page. Turn off if you don't need live cart updates."
 msgstr ""
 
 #: inc/snippets/meta/disable-woocommerce-cart-fragments.meta.php:15
@@ -575,7 +554,7 @@ msgid "woocommerce"
 msgstr ""
 
 #: inc/snippets/meta/disable-woocommerce-scripts-styles.meta.php:13
-msgid "Disable WooCommerce scripts and styles on non-WooCommerce pages"
+msgid "Disable WooCommerce scripts and styles on non-shop pages"
 msgstr ""
 
 #: inc/snippets/meta/disable-woocommerce-scripts-styles.meta.php:14
@@ -583,7 +562,7 @@ msgid "Dequeues WooCommerce assets on pages where WooCommerce functionality is n
 msgstr ""
 
 #: inc/snippets/meta/disable-woocommerce-stripe-scripts.meta.php:13
-msgid "Disable unnecessary Stripe scripts on WooCommerce pages"
+msgid "Disable Stripe scripts on product and cart pages"
 msgstr ""
 
 #: inc/snippets/meta/disable-woocommerce-stripe-scripts.meta.php:14
@@ -599,7 +578,7 @@ msgid "Unregisters default WooCommerce widgets to reduce bloat in the widget scr
 msgstr ""
 
 #: inc/snippets/meta/disable-wordpress-default-lazy-loading.meta.php:13
-msgid "Disable WordPress default lazy loading"
+msgid "Disable default lazy loading for images"
 msgstr ""
 
 #: inc/snippets/meta/disable-wordpress-default-lazy-loading.meta.php:14
@@ -607,7 +586,7 @@ msgid "Stops WordPress from adding loading=\"lazy\" to images and iframes. Use o
 msgstr ""
 
 #: inc/snippets/meta/disable-xmlrpc-rsdlink.meta.php:13
-msgid "Disable XML-RPC and remove RSD link"
+msgid "Disable XML-RPC and RSD link"
 msgstr ""
 
 #: inc/snippets/meta/disable-xmlrpc-rsdlink.meta.php:14
@@ -631,7 +610,7 @@ msgid "Removes WordPress version info from the head, generator, and asset URLs. 
 msgstr ""
 
 #: inc/snippets/meta/limit-post-revisions.meta.php:13
-msgid "Limit post revision to 10"
+msgid "Limit post revisions to 10"
 msgstr ""
 
 #: inc/snippets/meta/limit-post-revisions.meta.php:14
@@ -639,11 +618,11 @@ msgid "Keeps at most 10 revisions per post (or page). Older revisions are delete
 msgstr ""
 
 #: inc/snippets/meta/protect-wp-login.meta.php:13
-msgid "Protect the wp-login form from brute force attacks"
+msgid "Protect login from brute force"
 msgstr ""
 
 #: inc/snippets/meta/protect-wp-login.meta.php:14
-msgid "Removes detailed login error messages and limits failed login attempts per IP. Blocks further attempts for 5 minutes after 5 failed tries. Mitigates brute-force attacks."
+msgid "Hides detailed login errors and limits failed attempts per IP. After 5 failed tries, blocks that IP for 5 minutes."
 msgstr ""
 
 #: inc/snippets/meta/protect-wp-login.meta.php:15
@@ -651,7 +630,7 @@ msgid "tools"
 msgstr ""
 
 #: inc/snippets/meta/remove-gutenberg-unwanted-block-patterns.meta.php:13
-msgid "Remove WordPress default remote block patterns"
+msgid "Remove WordPress default block patterns"
 msgstr ""
 
 #: inc/snippets/meta/remove-gutenberg-unwanted-block-patterns.meta.php:14
@@ -659,15 +638,15 @@ msgid "Prevents WordPress from loading remote block patterns and removes the bui
 msgstr ""
 
 #: inc/snippets/meta/remove-help-button.meta.php:13
-msgid "Remove \"Help\" button"
+msgid "Remove Help tab"
 msgstr ""
 
 #: inc/snippets/meta/remove-help-button.meta.php:14
-msgid "Hides the Help tab and panel on all admin screens. Reduces clutter for users who do not use the in-app help."
+msgid "Hides the Help tab on all admin screens. Reduces clutter if you don't use in-app help."
 msgstr ""
 
 #: inc/snippets/meta/remove-rest-api-link.meta.php:13
-msgid "Remove REST API links"
+msgid "Remove REST API links from page source"
 msgstr ""
 
 #: inc/snippets/meta/remove-rest-api-link.meta.php:14
@@ -675,11 +654,11 @@ msgid "Prevents WordPress from adding REST API discovery links to the head secti
 msgstr ""
 
 #: inc/snippets/meta/remove-thanks-for-using-wordpress-in-footer.meta.php:13
-msgid "Remove \"Thanks for using WordPress\" in footer"
+msgid "Remove \"Thanks for using WordPress\" from footer"
 msgstr ""
 
 #: inc/snippets/meta/remove-thanks-for-using-wordpress-in-footer.meta.php:14
-msgid "Removes the \"Thank you for creating with WordPress\" message from the admin footer."
+msgid "Removes the \"Thanks for using WordPress\" message from the admin footer."
 msgstr ""
 
 #: inc/snippets/meta/remove-woocommerce-patterns.meta.php:13
@@ -691,167 +670,134 @@ msgid "Removes all WooCommerce block patterns to avoid unnecessary pattern regis
 msgstr ""
 
 #: inc/snippets/meta/remove-wordpress-logo.meta.php:13
-msgid "Remove WordPress logo"
+msgid "Remove WordPress logo from admin bar"
 msgstr ""
 
 #: inc/snippets/meta/remove-wordpress-logo.meta.php:14
-msgid "Removes the WordPress logo and its dropdown from the admin bar."
+msgid "Removes the WordPress logo and its menu from the admin bar."
 msgstr ""
 
 #: inc/snippets/meta/separate-gutenberg-core-block-styles.meta.php:13
-msgid "Separate loading of core block styles"
+msgid "Load block styles separately"
 msgstr ""
 
 #: inc/snippets/meta/separate-gutenberg-core-block-styles.meta.php:14
 msgid "Forces WordPress to load core block styles separately, improving performance by only loading the styles required for the blocks used on a page."
 msgstr ""
 
-#: assets/build/index.js:1
-#: assets/src/js/config/integrations.js:12
-msgid "Autoptimize autoconfig failed. Is Autoptimize installed and active?"
-msgstr ""
-
-#: assets/build/index.js:1
-#: assets/src/js/config/integrations.js:16
-msgid "Setup Autoptimize"
-msgstr ""
-
-#: assets/build/index.js:1
-#: assets/src/js/config/integrations.js:17
-msgid "Apply recommended Autoptimize settings: Minify JS & CSS, aggregate CSS, static files, 404 fallbacks."
-msgstr ""
-
-#: assets/build/index.js:1
-#: assets/src/js/config/integrations.js:26
-msgid "Cache Enabler autoconfig failed. Is Cache Enabler installed and active?"
-msgstr ""
-
-#: assets/build/index.js:1
-#: assets/src/js/config/integrations.js:30
-msgid "Setup Cache Enabler"
-msgstr ""
-
-#: assets/build/index.js:1
-#: assets/src/js/config/integrations.js:31
-msgid "Apply recommended Cache Enabler settings: Clear site cache on post or plugin changes, WebP support, Gzip or Brotli compression, and minify HTML (excluding inline CSS/JS)."
-msgstr ""
-
-#: assets/build/index.js:1
-#: assets/src/js/config/integrations.js:43
-msgid "SQLite Object Cache autoconfig failed. Is SQLite Object Cache installed and active?"
-msgstr ""
-
-#: assets/build/index.js:1
-#: assets/src/js/config/integrations.js:47
-msgid "Setup SQLite Object Cache"
-msgstr ""
-
-#: assets/build/index.js:1
-#: assets/src/js/config/integrations.js:48
-msgid "Apply recommended SQLite Object Cache settings. Enable \"Use APCu\" if APCu is available."
-msgstr ""
-
-#: assets/build/index.js:1
-#: assets/src/js/components/SaveButton.js:20
-msgid "Save settings"
-msgstr ""
-
-#: assets/build/index.js:1
-#: assets/src/js/components/BulkSnippetActions.js:29
-msgid "Enable all actions"
-msgstr ""
-
-#: assets/build/index.js:1
-#: assets/src/js/components/BulkSnippetActions.js:36
-msgid "Disable all actions"
-msgstr ""
-
-#: assets/build/index.js:1
 #: assets/src/js/components/AutoconfigButton.js:32
 msgid "Applying…"
 msgstr ""
 
-#: assets/build/index.js:1
+#: assets/src/js/components/BulkSnippetActions.js:29
+msgid "Enable all"
+msgstr ""
+
+#: assets/src/js/components/BulkSnippetActions.js:36
+msgid "Disable all"
+msgstr ""
+
 #: assets/src/js/components/IntegrationsBlock.js:26
 msgid "Integrations"
 msgstr ""
 
-#: assets/build/index.js:1
 #: assets/src/js/components/IntegrationsBlock.js:28
-msgid "Show ZenPress admin bar button"
+msgid "Show cache actions in admin bar"
 msgstr ""
 
-#: assets/build/index.js:1
 #: assets/src/js/components/IntegrationsBlock.js:31
-msgid "Show a ZenPress item in the admin bar with \"Clear all caches\" and sub-items for each active integration (page cache, static assets, object cache). Visible only when at least one of Cache Enabler, AutOptimize, or SQLite Object Cache is active. When enabled, those plugins' own admin bar buttons are hidden."
+msgid "Adds a ZenPress menu to the admin bar with \"Clear all caches\" and options for each active cache (page, static files, object cache). Only appears when Cache Enabler, Autoptimize, or SQLite Object Cache is active. Hides those plugins' own admin bar buttons."
 msgstr ""
 
-#: assets/build/index.js:1
 #: assets/src/js/components/PresetCard.js:28
-msgid "Enable"
+msgid "Apply preset"
 msgstr ""
 
-#: assets/build/index.js:1
 #: assets/src/js/components/PresetsSidebar.js:8
 msgid "Corporate website"
 msgstr ""
 
-#: assets/build/index.js:1
 #: assets/src/js/components/PresetsSidebar.js:9
-msgid "Optimized for business sites and portfolios. Focuses on security, performance, and removing unnecessary features like RSS feeds and author archives."
+msgid "For business sites and portfolios. Focuses on security, performance, and removing unused features like RSS and author archives."
 msgstr ""
 
-#: assets/build/index.js:1
 #: assets/src/js/components/PresetsSidebar.js:17
 msgid "Blog"
 msgstr ""
 
-#: assets/build/index.js:1
 #: assets/src/js/components/PresetsSidebar.js:18
-msgid "Tailored for content-focused blogs. Includes performance and security optimizations while preserving essential blog features like RSS feeds."
+msgid "For content-focused blogs. Keeps RSS and other blog features while improving performance and security."
 msgstr ""
 
-#: assets/build/index.js:1
 #: assets/src/js/components/PresetsSidebar.js:26
 msgid "E-commerce"
 msgstr ""
 
-#: assets/build/index.js:1
 #: assets/src/js/components/PresetsSidebar.js:27
-msgid "Designed for WooCommerce stores. Includes all performance and security features plus WooCommerce-specific optimizations for faster checkout."
+msgid "For WooCommerce stores. Performance and security plus WooCommerce optimizations for faster checkout."
 msgstr ""
 
-#: assets/build/index.js:1
 #: assets/src/js/components/PresetsSidebar.js:45
-msgid "Pick configuration preset"
+msgid "Choose a preset"
 msgstr ""
 
-#: assets/build/index.js:1
 #: assets/src/js/components/PresetsSidebar.js:47
-msgid "Don't know which features to enable? Quickly configure ZenPress by selecting a preset that matches your site type. Each preset enables optimized features for your specific use case."
+msgid "Not sure what to enable? Choose a preset that matches your site. Each preset turns on a set of features for that type of site."
 msgstr ""
 
-#: assets/build/index.js:1
+#: assets/src/js/components/SaveButton.js:20
+msgid "Save"
+msgstr ""
+
+#: assets/src/js/config/integrations.js:12
+msgid "Autoptimize setup failed. Is Autoptimize installed and active?"
+msgstr ""
+
+#: assets/src/js/config/integrations.js:16
+msgid "Set up Autoptimize"
+msgstr ""
+
+#: assets/src/js/config/integrations.js:17
+msgid "Apply recommended settings: minify JS and CSS, combine CSS, static file caching, 404 fallbacks."
+msgstr ""
+
+#: assets/src/js/config/integrations.js:26
+msgid "Cache Enabler setup failed. Is Cache Enabler installed and active?"
+msgstr ""
+
+#: assets/src/js/config/integrations.js:30
+msgid "Set up Cache Enabler"
+msgstr ""
+
+#: assets/src/js/config/integrations.js:31
+msgid "Apply recommended settings: clear cache on content changes, WebP, compression, minify HTML."
+msgstr ""
+
+#: assets/src/js/config/integrations.js:43
+msgid "SQLite Object Cache setup failed. Is it installed and active?"
+msgstr ""
+
+#: assets/src/js/config/integrations.js:47
+msgid "Set up SQLite Object Cache"
+msgstr ""
+
+#: assets/src/js/config/integrations.js:48
+msgid "Apply recommended settings. Enable \"Use APCu\" in the plugin if available."
+msgstr ""
+
 #: assets/src/js/hooks/useSettings.js:58
-msgid "Failed to load settings."
+msgid "Settings could not be loaded. Refresh the page."
 msgstr ""
 
-#: assets/build/index.js:1
 #: assets/src/js/hooks/useSettings.js:85
 msgid "Settings saved."
 msgstr ""
 
-#: assets/build/index.js:1
 #: assets/src/js/hooks/useSettings.js:87
-msgid "Failed to save settings."
+msgid "Settings could not be saved. Try again."
 msgstr ""
 
-#: assets/build/index.js:1
 #: assets/src/js/utils/snippets.js:43
-msgid "Uncategorized"
-msgstr ""
-
-#: assets/build/index.js:1
 #: assets/src/js/utils/snippets.js:46
-msgid "uncategorized"
+msgid "Uncategorized"
 msgstr ""

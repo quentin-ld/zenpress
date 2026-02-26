@@ -10,7 +10,7 @@ if (!defined('ABSPATH')) {
 }
 
 return [
-    'title' => __('Disable XML-RPC and remove RSD link', 'zenpress'),
+    'title' => __('Disable XML-RPC and RSD link', 'zenpress'),
     'description' => __('Disables XML-RPC (often targeted by brute force or DDoS attacks) and removes the RSD link from the HTML head to reduce exposure.', 'zenpress'),
     'category' => __('core', 'zenpress'),
     'subcategory' => __('security', 'zenpress'),

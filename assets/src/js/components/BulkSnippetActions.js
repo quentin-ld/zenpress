@@ -26,14 +26,14 @@ export function BulkSnippetActions({
 					onClick={onEnableAll}
 					__next40pxDefaultSize
 				>
-					{__('Enable all actions', 'zenpress')}
+					{__('Enable all', 'zenpress')}
 				</Button>
 				<Button
 					isDestructive
 					onClick={onDisableAll}
 					__next40pxDefaultSize
 				>
-					{__('Disable all actions', 'zenpress')}
+					{__('Disable all', 'zenpress')}
 				</Button>
 			</div>
 			<SaveButton onClick={onSave} isBusy={isSaving} />

@@ -10,9 +10,9 @@ if (!defined('ABSPATH')) {
 }
 
 return [
-    'title' => __('Disable dashicons', 'zenpress'),
+    'title' => __('Disable Dashicons (admin icons)', 'zenpress'),
     'description' => __(
-        'Prevents WordPress from loading the Dashicons CSS for visitors who are not logged in. Improves frontend performance by reducing unnecessary styles.',
+        'Stops Dashicons (admin icons) from loading for visitors. Logged-in users still see them.',
         'zenpress'
     ),
     'category' => __('core', 'zenpress'),

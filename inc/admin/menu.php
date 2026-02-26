@@ -10,7 +10,7 @@ if (!defined('ABSPATH')) {
 add_action('admin_menu', 'zenpress_add_option_page');
 function zenpress_add_option_page(): void {
     add_options_page(
-        __('ZenPress options', 'zenpress'),
+        __('Settings', 'zenpress'),
         __('ZenPress', 'zenpress'),
         'manage_options',
         'zenpress',
@@ -35,8 +35,8 @@ function zenpress_options_page(): void {
                         <a href="https://wordpress.org/plugins/zenpress/#developers"
                            target="_blank"
                            rel="noopener noreferrer"
-                           aria-label="<?php echo esc_attr__('View ZenPress changelog on WordPress.org (opens in a new tab)', 'zenpress'); ?>">
-                            <?php echo esc_html__('What\'s new ?', 'zenpress'); ?>
+                           aria-label="<?php echo esc_attr__('View ZenPress changelog on WordPress.org (opens in new tab)', 'zenpress'); ?>">
+                            <?php echo esc_html__('What\'s new', 'zenpress'); ?>
                         </a>
                     </p>
                 <?php } ?>
@@ -45,20 +45,20 @@ function zenpress_options_page(): void {
                 <a href="https://holdmywp.com/zenpress/"
                    target="_blank"
                    rel="noopener noreferrer"
-                   aria-label="<?php echo esc_attr__('Read the ZenPress documentation (opens in a new tab)', 'zenpress'); ?>">
+                   aria-label="<?php echo esc_attr__('Read ZenPress documentation (opens in new tab)', 'zenpress'); ?>">
                     <?php echo esc_html__('Documentation', 'zenpress'); ?>
                 </a>
                 <a href="https://wordpress.org/plugins/zenpress/#reviews"
                    target="_blank"
                    rel="noopener noreferrer"
-                   aria-label="<?php echo esc_attr__('Leave a review for ZenPress on WordPress.org (opens in a new tab)', 'zenpress'); ?>">
-                    <?php echo esc_html__('Leave a review (helps a lot)', 'zenpress'); ?>
+                   aria-label="<?php echo esc_attr__('Leave a review for ZenPress on WordPress.org (opens in new tab)', 'zenpress'); ?>">
+                    <?php echo esc_html__('Leave a review', 'zenpress'); ?>
                 </a>
                 <a href="https://buymeacoffee.com/quentinld"
                    target="_blank"
                    rel="noopener noreferrer"
                    class="components-button is-next-40px-default-size is-tertiary"
-                   aria-label="<?php echo esc_attr__('Support development: Buy me a coffee (opens in a new tab)', 'zenpress'); ?>">
+                   aria-label="<?php echo esc_attr__('Support development: Buy me a coffee (opens in new tab)', 'zenpress'); ?>">
                     <?php echo esc_html__('Buy me a coffee', 'zenpress'); ?> <span aria-hidden="true">☕</span>
                 </a>
             </div>
@@ -67,31 +67,34 @@ function zenpress_options_page(): void {
             <div class="zenpress-loading card">
                 <div class="zenpress-loading-body">
                     <p class="zenpress-loading-text">
-                        <?php echo esc_html__('Loading your ZenPress settings…', 'zenpress'); ?>
+                        <?php echo esc_html__('Loading settings…', 'zenpress'); ?>
                     </p>
                 </div>
             </div>
         </main>
         <footer class="zenpress-footer">
             <div class="zenpress-footer-title">
-                <p>
-                    <?php echo esc_html__('Made ', 'zenpress'); ?>
-                    <span aria-hidden="true"> x ❤️ </span>
-                    <?php echo esc_html__(' by Quentin Le Duff - Your WordPress Partner', 'zenpress'); ?>
-                </p>
+            <?php
+                    echo wp_kses_post(sprintf(
+                        /* translators: 1: decorative heart emoji, 2: author name */
+                        __('Made with %1$s by %2$s', 'zenpress'),
+                        '<span aria-hidden="true">❤️</span>',
+                        'Quentin Le Duff'
+                    ));
+    ?>
             </div>
             <div class="zenpress-footer-navigation">
                 <a href="https://holdmywp.com/"
                    target="_blank"
                    rel="noopener noreferrer"
-                   aria-label="<?php echo esc_attr__('Visite the developper website', 'zenpress'); ?>">
-                    <?php echo esc_html__('My place', 'zenpress'); ?>
+                   aria-label="<?php echo esc_attr__('Visit the developer website (opens in new tab)', 'zenpress'); ?>">
+                    <?php echo esc_html__('Developer website', 'zenpress'); ?>
                 </a>
                 <a href="https://github.com/quentin-ld/zenpress"
                    target="_blank"
                    rel="noopener noreferrer"
-                   aria-label="<?php echo esc_attr__('Review the code on Github', 'zenpress'); ?>">
-                    <?php echo esc_html__('ZenPress code repository', 'zenpress'); ?>
+                   aria-label="<?php echo esc_attr__('View ZenPress source code on GitHub (opens in new tab)', 'zenpress'); ?>">
+                    <?php echo esc_html__('Source code', 'zenpress'); ?>
                 </a>
             </div>
         </footer>

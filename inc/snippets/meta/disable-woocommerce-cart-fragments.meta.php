@@ -10,8 +10,8 @@ if (!defined('ABSPATH')) {
 }
 
 return [
-    'title' => __('Disable WooCommerce cart fragments script', 'zenpress'),
-    'description' => __('Removes the WooCommerce cart fragments JavaScript (wc-cart-fragments), which is responsible for dynamically updating the cart contents without a page reload. Disabling this can improve performance on stores that do not require live cart updates.', 'zenpress'),
+    'title' => __('Disable WooCommerce cart fragments', 'zenpress'),
+    'description' => __('Stops the script that updates the cart without reloading the page. Turn off if you don\'t need live cart updates.', 'zenpress'),
     'category' => __('woocommerce', 'zenpress'),
     'subcategory' => __('performance', 'zenpress'),
     'weight' => 0,

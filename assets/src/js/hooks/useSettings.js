@@ -55,7 +55,10 @@ export const useSettings = () => {
 			} catch {
 				if (!cancelled) {
 					createErrorNotice(
-						__('Failed to load settings.', 'zenpress')
+						__(
+							'Settings could not be loaded. Refresh the page.',
+							'zenpress'
+						)
 					);
 				}
 			}
@@ -84,7 +87,9 @@ export const useSettings = () => {
 			});
 			createSuccessNotice(__('Settings saved.', 'zenpress'));
 		} catch {
-			createErrorNotice(__('Failed to save settings.', 'zenpress'));
+			createErrorNotice(
+				__('Settings could not be saved. Try again.', 'zenpress')
+			);
 		} finally {
 			setIsSaving(false);
 		}

@@ -25,7 +25,7 @@ export function PresetCard({ icon, title, description, presetId, onEnable }) {
 				onClick={() => onEnable(presetId)}
 				__next40pxDefaultSize
 			>
-				{__('Enable', 'zenpress')}
+				{__('Apply preset', 'zenpress')}
 			</Button>
 		</>
 	);

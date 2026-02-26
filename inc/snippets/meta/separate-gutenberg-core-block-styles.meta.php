@@ -10,7 +10,7 @@ if (!defined('ABSPATH')) {
 }
 
 return [
-    'title' => __('Separate loading of core block styles', 'zenpress'),
+    'title' => __('Load block styles separately', 'zenpress'),
     'description' => __('Forces WordPress to load core block styles separately, improving performance by only loading the styles required for the blocks used on a page.', 'zenpress'),
     'category' => __('gutenberg', 'zenpress'),
     'subcategory' => __('performance', 'zenpress'),

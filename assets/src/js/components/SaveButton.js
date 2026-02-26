@@ -17,7 +17,7 @@ export const SaveButton = ({ onClick, isBusy }) => {
 			isBusy={isBusy}
 			__next40pxDefaultSize
 		>
-			{__('Save settings', 'zenpress')}
+			{__('Save', 'zenpress')}
 		</Button>
 	);
 };

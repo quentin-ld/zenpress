@@ -10,8 +10,8 @@ if (!defined('ABSPATH')) {
 }
 
 return [
-    'title' => __('Disable default pattern categories in site editor', 'zenpress'),
-    'description' => __('Removes default pattern categories from the block pattern inserter in the site editor (e.g. featured, about, audio, banner, buttons, call-to-action, columns, contact, footer, gallery, header, media, portfolio, posts, query, services, team, testimonials, text, videos) and any custom ones. Simplifies the interface; patterns remain accessible.', 'zenpress'),
+    'title' => __('Disable default pattern categories in Site Editor', 'zenpress'),
+    'description' => __('Removes default pattern categories from the block inserter. Patterns are still available; the list is simpler.', 'zenpress'),
     'category' => __('gutenberg', 'zenpress'),
     'subcategory' => __('user-interface', 'zenpress'),
     'weight' => 0,

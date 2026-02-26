@@ -10,7 +10,7 @@ if (!defined('ABSPATH')) {
 }
 
 return [
-    'title' => __('Clean up the WordPress admin bar', 'zenpress'),
+    'title' => __('Clean up the admin bar', 'zenpress'),
     'description' => __(
         'Removes unnecessary items from the admin bar in both backend and frontend. Reduces clutter and simplifies the interface.',
         'zenpress'

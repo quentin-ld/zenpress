@@ -53,7 +53,7 @@ $zenpress_disable_wp_rest_api_allow_access = static function (): bool {
 if (version_compare(get_bloginfo('version'), '4.7', '>=')) {
     add_filter('rest_authentication_errors', static function (WP_Error|bool|null $access) use ($zenpress_disable_wp_rest_api_allow_access): WP_Error|bool|null {
         if (!is_user_logged_in() && !$zenpress_disable_wp_rest_api_allow_access()) {
-            $message = apply_filters('zenpress_disable_wp_rest_api_error', __('REST API restricted to authenticated users.', 'zenpress'));
+            $message = apply_filters('zenpress_disable_wp_rest_api_error', __('You must be logged in to use this.', 'zenpress'));
 
             return new WP_Error('rest_login_required', $message, ['status' => rest_authorization_required_code()]);
         }
