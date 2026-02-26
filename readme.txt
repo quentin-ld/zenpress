@@ -164,21 +164,15 @@ In addition, if you like the plugin then I'd love for you to [leave a review](ht
 
 = Does ZenPress work with my existing caching / optimization plugins? =
 
-Yes. ZenPress focuses on disabling unnecessary core features and plugin bloat; it does not handle page caching, minification, or image optimization. It is designed to work alongside plugins like Cache Enabler, Autoptimize, and most object-cache solutions. If a performance feature overlaps, simply disable it in one of the tools.
-
-= Can ZenPress break my theme or plugins? =
-
-Potentially, yes—especially if your theme or plugins rely on features you disable (RSS feeds, oEmbed, REST API, emojis, WooCommerce assets, etc.). That’s why each snippet includes clear descriptions and categories (performance, security, UI). Always test changes on a staging site first and enable snippets gradually.
+Yes. You can use ZenPress alongside tools like Cache Enabler or Autoptimize. Because ZenPress focuses on disabling unused core features and reducing bloat, it does not interfere with page caching or image optimization. If you notice overlapping features, you can easily toggle them off in either tool.
 
 = How do I know which snippets are safe to enable? =
 
-If you are unsure, start with a preset (Corporate, Blog, E‑commerce) and then adjust. For manual tuning, prefer UI and performance snippets first (dashicons, emojis, dashboard/admin-bar cleanup) before more invasive ones (REST API, XML‑RPC, RSS). After each change, check: frontend pages, login, editor, and (if used) WooCommerce flows.
+If you are new to optimization, you can safely start with a curated preset (Corporate, Blog, or E‑commerce). For manual changes, we suggest starting with User Interface (UI) and performance settings, such as cleaning up the Admin Bar, before moving to more advanced core settings.
 
 = What happens if I disable the REST API? =
 
-Unauthenticated REST requests will be blocked except for any explicit bypasses configured via the filters documented in the snippet (`zenpress_disable_wp_rest_api_post_var`, `zenpress_disable_wp_rest_api_server_var`). Core features and plugins that depend on public REST endpoints (some blocks, headless/front-end apps, third-party integrations) may stop working until you whitelist the required routes.
-
-**Important**: If you don't know how to configure bypass filters or whitelist specific routes, don't activate this snippet. It can break functionality that relies on public REST API access.
+The REST API allows different applications to communicate with your site. If you disable it, ZenPress will block unauthenticated requests to keep your site secure. However, some blocks or third-party integrations may require this to be active. If a feature stops working, you can simply use our documented filters to allow specific routes.
 
 = Does ZenPress store any personal data or phone home? =
 
@@ -186,11 +180,11 @@ No. ZenPress does not collect, store, or transmit any personal data. It does not
 
 = Is ZenPress multisite compatible? =
 
-ZenPress can be network‑activated or activated per site. Settings are stored per site, so each site in a network can have different snippets enabled. As with any optimization/security plugin, test network‑wide changes carefully, especially REST API and XML‑RPC related snippets.
+ZenPress is fully compatible with multisite networks. You can activate it across the entire network or on individual sites. Only Network Administrators have the capability to manage these settings across the network to ensure consistent performance and security policies.
 
 = I have a suggestion =
 
-Nice ! If you can't find anything in the roadmap, feel free to submit your suggestion on the support page! If you know how to code, you can even contribute on GitHub.
+I welcome your ideas! If you have a suggestion for the roadmap, please visit the official support forum. If you are a developer, you can also contribute directly to the project on GitHub.
 
 == Changelog ==
 
