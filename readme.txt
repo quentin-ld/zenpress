@@ -192,9 +192,8 @@ I welcome your ideas! If you have a suggestion for the roadmap, please visit the
 - Linguistic improvements : Align to WordPress [Style, voice, and tone](https://make.wordpress.org/docs/style-guide/general-guidelines/style-voice-tone/).
 - Accessibility improvements : Align to WordPress [accessibility guidelines](https://make.wordpress.org/docs/style-guide/general-guidelines/accessibility/).
 
-
 = 2.2.4 =
-- Fix: Admin bar “Clear all caches” is now off by default; user turns it on if they want.
+- Fix : Admin bar “Clear all caches” is now off by default; user turns it on if they want.
 - Code quality : Split Settings page into smaller, modular piece.
 - Interface : After clearing cache from the admin bar, show a WordPress success notice on the next admin load.
 
