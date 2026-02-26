@@ -123,8 +123,8 @@
 			padding: $spacing-md $spacing-md 0 $spacing-md;
 
 			@media screen and (max-width: 1281px) {
-				height: 600px;
-				max-height: 600px;
+				height: $tab-panel-height;
+				max-height: $tab-panel-height;
 			}
 
 			@media screen and (max-width: 960px) {

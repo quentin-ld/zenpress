@@ -45,7 +45,7 @@ $line-height-icon: 1;
 // ----------------------------------------------------------------------------
 $max-width-container: 1440px;
 $tab-list-width: 200px;
-$tab-panel-height: 65vh;
+$tab-panel-height: calc(100vh - 280px);
 $tab-min-height: 40px;
 $icon-size: 20px;
 
