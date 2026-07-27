@@ -41,6 +41,9 @@ if (!defined('ABSPATH')) {
 define('ZENPRESS_PLUGIN_FILE', __FILE__);
 define('ZENPRESS_PLUGIN_DIR', plugin_dir_path(__FILE__));
 
+/** Plugin version (must match Version header above). */
+define('ZENPRESS_VERSION', '2.2.5');
+
 require_once __DIR__ . '/inc/core/constants.php';
 require_once __DIR__ . '/inc/core/metadata.php';
 require_once __DIR__ . '/inc/core/sanitize.php';

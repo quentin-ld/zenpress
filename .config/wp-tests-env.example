@@ -1,0 +1,29 @@
+# Reference template for `.config/wp-tests.env`.
+#
+# You normally do NOT edit this by hand: `bash bin/setup-dev.sh` generates
+# `.config/wp-tests.env` automatically (DB credentials read from your live site via
+# `wp config get`) and installs the WP test stack. This file documents the format and
+# serves as a manual fallback.
+#
+# If the plugin path contains spaces (e.g. "Local Sites"), set WP_CORE_DIR / WP_TESTS_DIR /
+# TMPDIR to a path *without* spaces (see below — default uses $HOME/.cache).
+
+PLUGIN_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+export ZENPRESS_WP_TESTS_CACHE="${HOME}/.cache/zenpress-wp-tests"
+mkdir -p "${ZENPRESS_WP_TESTS_CACHE}/tmp"
+export TMPDIR="${ZENPRESS_WP_TESTS_CACHE}/tmp"
+export WP_CORE_DIR="${ZENPRESS_WP_TESTS_CACHE}/wordpress"
+export WP_TESTS_DIR="${ZENPRESS_WP_TESTS_CACHE}/wordpress-tests-lib"
+
+# Match Local → Database (or wp-config.php).
+export WP_TEST_DB_NAME="local"
+export WP_TEST_DB_USER="root"
+export WP_TEST_DB_PASSWORD="root"
+export WP_TEST_DB_HOST="localhost"
+
+# One-time install is handled by `bash bin/setup-dev.sh`. Manual equivalent
+# (existing DB: last arg `true` skips CREATE DATABASE):
+#   source .config/wp-tests.env
+#   bash bin/install-wp-tests.sh "$WP_TEST_DB_NAME" "$WP_TEST_DB_USER" "$WP_TEST_DB_PASSWORD" "$WP_TEST_DB_HOST" latest true
+#
+# PHPUnit uses table prefix `wptests_` in wp-tests-config.php — it does not use your site's `wp_` tables.

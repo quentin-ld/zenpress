@@ -5,15 +5,25 @@
   "main": "assets/build/index.js",
   "scripts": {
     "lint": "eslint --config .config/.eslintrc.js assets/src/**/*.js",
-    "format": "prettier --config .config/.prettierrc.js --write assets/src/**/*.js",
+    "lint:fix": "eslint --config .config/.eslintrc.js assets/src/**/*.js --fix",
+    "lint:css": "wp-scripts lint-style --config .config/stylelintrc.json 'assets/src/**/*.scss'",
+    "lint:css:fix": "wp-scripts lint-style --config .config/stylelintrc.json 'assets/src/**/*.scss' --fix",
+    "format": "prettier --config .config/.prettierrc.js --check assets/src/**/*.js",
+    "format:fix": "prettier --config .config/.prettierrc.js --write assets/src/**/*.js",
     "start": "wp-scripts start assets/src/index.js --output-path=assets/build",
-    "build": "wp-scripts build assets/src/index.js --output-path=assets/build"
+    "build": "wp-scripts build assets/src/index.js --output-path=assets/build",
+    "setup": "bash bin/setup-dev.sh",
+    "test:all": "composer run verify:all && composer run lint:pcp && npm run lint && npm run lint:css && npm run format",
+    "build:all": "npm run test:all && composer run make:pot && npm run build",
+    "zip": "node .config/zip.js"
   },
   "author": "Quentin Le Duff",
   "license": "GPL-2.0-or-later",
   "devDependencies": {
     "@wordpress/eslint-plugin": "^22.0.0",
     "@wordpress/scripts": "^30.22.0",
+    "@wordpress/stylelint-config": "^23.0.0",
+    "archiver": "^7.0.1",
     "eslint": "^8.57.1",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-import": "^2.32.0",

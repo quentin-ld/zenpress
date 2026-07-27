@@ -1,0 +1,10 @@
+{
+	"extends": [ "@wordpress/stylelint-config/scss-stylistic" ],
+	"rules": {
+		"plugin-wpds/no-setting-wpds-custom-properties": null,
+		"plugin-wpds/no-unknown-ds-tokens": null,
+		"selector-class-pattern": null,
+		"no-descending-specificity": null,
+		"scss/selector-no-redundant-nesting-selector": null
+	}
+}

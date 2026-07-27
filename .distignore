@@ -19,13 +19,17 @@
 .travis.yml
 .vscode
 .wordpress-org
+.agents/
+.agents
 behat.yml
 bin
-eslintrc
-eslintrc.js
 circle.yml
 composer.json
 composer.lock
+eslintrc
+eslintrc.js
+.cache/
+.cache
 Gruntfile.js
 multisite.xml
 multisite.xml.dist
@@ -47,3 +51,7 @@ Thumbs.db
 vendor
 workflow.md
 wp-cli.local.yml
+AGENTS.md
+.php-cs-fixer.cache
+.phpactor.json
+FEATURE_REQUEST.md
