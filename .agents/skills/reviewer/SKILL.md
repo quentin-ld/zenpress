@@ -61,3 +61,5 @@ Verdict: **Ship** · **Fix then ship** · **Needs rework**
 **Performance:** no queries in loops · transients for remote calls · conditional enqueue
 
 **Coherence:** REST shapes match task contracts · no duplicated logic · i18n wrapped, existing strings untouched
+
+**WordPress-specific checklists (audit-tier only):** When running on **audit** tier, use the full WordPress checklists from the QA skill (`inc/core/` surface categories): plugin bootstrap, REST API, SQL, i18n, security, admin UI, configuration & build, multisite, error handling. These are the same checks — the QA skill owns the definitive list.
