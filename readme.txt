@@ -4,7 +4,7 @@ Donate link: https://github.com/sponsors/quentin-ld/
 Tags: optimization, performance, security, woocommerce
 Requires at least: 6.0
 Tested up to: 7.0
-Stable tag: 2.2.5
+Stable tag: 2.2.6
 Requires PHP: 8.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html/
@@ -165,6 +165,11 @@ Visit the official support forum to share ideas. Developers can contribute direc
 
 == Changelog ==
 
+= 2.2.6 =
+- Documentation : Rewrote all snippet descriptions, inline comments, and plugin documentation to follow the [WordPress Documentation Style Guide](https://make.wordpress.org/docs/style-guide/). Descriptions now document boundaries, side effects, and available filters.
+- Readme : Removed promotional language throughout the short description, FAQ, and feature list.
+- Fix : Corrected copy-paste bug in hide-wordpress-version meta file docblock.
+
 = 2.2.5 =
 - Linguistic improvements : Align to WordPress [Style, voice, and tone](https://make.wordpress.org/docs/style-guide/general-guidelines/style-voice-tone/).
 - Accessibility improvements : Align to WordPress [accessibility guidelines](https://make.wordpress.org/docs/style-guide/general-guidelines/accessibility/).
@@ -318,6 +323,9 @@ Visit the official support forum to share ideas. Developers can contribute direc
 - First release of ZenPress, yaaaaayyy!
 
 == Upgrade Notice ==
+
+= 2.2.6 =
+- Ready for translations.
 
 = 2.2.4 =
 - Recommended update, Fix Admin bar “Clear all caches” is now off by default; user turns it on if they want.
