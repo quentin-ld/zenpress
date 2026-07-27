@@ -12,7 +12,7 @@ if (!defined('ABSPATH')) {
 return [
     'title' => __('Disable password strength meter', 'zenpress'),
     'description' => __(
-        'Stops the password strength meter from loading on login and profile pages. Saves about 400KB. Users won\'t see how strong their password is.',
+        'Removes the password strength meter script and styles from the login and profile pages. Users will not see the password strength indicator when creating or changing their password.',
         'zenpress'
     ),
     'category' => __('core', 'zenpress'),

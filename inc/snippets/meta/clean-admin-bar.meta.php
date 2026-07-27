@@ -12,7 +12,7 @@ if (!defined('ABSPATH')) {
 return [
     'title' => __('Clean up the admin bar', 'zenpress'),
     'description' => __(
-        'Removes unnecessary items from the admin bar in both backend and frontend. Reduces clutter and simplifies the interface.',
+        'Removes the new content, comments, updates, and Yoast SEO menu items from the admin bar. The WordPress logo menu and appearance menu are also removed on the front end.',
         'zenpress'
     ),
     'category' => __('core', 'zenpress'),

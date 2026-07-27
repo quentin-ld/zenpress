@@ -13,7 +13,7 @@ if (!defined('ABSPATH')) {
 return [
     'title' => __('Limit REST API to logged-in users', 'zenpress'),
     'description' => __(
-        'Only logged-in users can use the REST API. Visitors get an error. Advanced: filters let you allow specific tools; use with care.',
+        'Restricts REST API access to logged-in users only. Unauthenticated visitors receive an error response. This snippet provides three filters for advanced use: zenpress_disable_wp_rest_api_post_var and zenpress_disable_wp_rest_api_server_var allow specific POST keys or request paths to bypass the restriction (for webhooks or third-party integrations), and zenpress_disable_wp_rest_api_error customizes the error message. Use the bypass filters with values that are secret or not guessable, such as a random token passed via POST.',
         'zenpress'
     ),
     'category' => __('core', 'zenpress'),

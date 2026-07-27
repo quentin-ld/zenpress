@@ -4,7 +4,7 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-// Only proceed if WooCommerce is active
+// Only proceed if WooCommerce is active.
 if (!class_exists('WooCommerce')) {
     return;
 }
@@ -12,7 +12,6 @@ if (!class_exists('WooCommerce')) {
 use Automattic\WooCommerce\Blocks\Package;
 
 add_action('woocommerce_blocks_loaded', static function (): void {
-    // Check if required classes exist before accessing them
     if (!class_exists(Package::class) || !class_exists(\Automattic\WooCommerce\Blocks\BlockPatterns::class)) {
         return;
     }
@@ -31,7 +30,6 @@ add_action('woocommerce_blocks_loaded', static function (): void {
             );
         }
     } catch (\Exception $e) {
-        // Silently fail if container or class is not available
         return;
     }
 });
@@ -52,13 +50,11 @@ add_action('init', static function (): void {
 /**
  * Disables the WooCommerce Pattern Toolkit Full Composability feature.
  *
- * This feature is a flag for advanced block patterns functionality, which can
- * sometimes be tied to large transients/caching issues.
+ * This feature flag controls advanced block patterns functionality
+ * and can be tied to large transients or caching issues.
  */
 add_filter('woocommerce_admin_features', static function (array $features): array {
     $feature_to_disable = 'pattern-toolkit-full-composability';
-
-    // Find the feature's identifier in the array and remove it.
     $key = array_search($feature_to_disable, $features, true);
     if ($key !== false) {
         unset($features[$key]);

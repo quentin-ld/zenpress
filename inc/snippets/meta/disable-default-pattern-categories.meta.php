@@ -11,7 +11,7 @@ if (!defined('ABSPATH')) {
 
 return [
     'title' => __('Disable default pattern categories in Site Editor', 'zenpress'),
-    'description' => __('Removes default pattern categories from the block inserter. Patterns are still available; the list is simpler.', 'zenpress'),
+    'description' => __('Removes default pattern categories from the block inserter in the Site Editor. The patterns themselves remain available but are no longer grouped by category.', 'zenpress'),
     'category' => __('gutenberg', 'zenpress'),
     'subcategory' => __('user-interface', 'zenpress'),
     'weight' => 0,

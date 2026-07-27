@@ -7,9 +7,7 @@ if (!defined('ABSPATH')) {
 add_action(
     'wp_dashboard_setup',
     static function (): void {
-        /**
-         * Core widgets.
-         */
+        // Core widgets.
         remove_meta_box('dashboard_quick_press', 'dashboard', 'side');    // Quick Draft.
         remove_meta_box('dashboard_primary', 'dashboard', 'side');        // WordPress.com Blog.
         remove_meta_box('dashboard_secondary', 'dashboard', 'side');      // Other WordPress News.
@@ -17,9 +15,7 @@ add_action(
         remove_meta_box('dashboard_site_health', 'dashboard', 'normal');  // Site Health.
         remove_action('welcome_panel', 'wp_welcome_panel');               // Welcome Panel.
 
-        /**
-         * Plugin widgets.
-         */
+        // Plugin widgets.
         remove_meta_box('wpseo-dashboard-overview', 'dashboard', 'normal');         // Yoast SEO.
         remove_meta_box('wpseo-wincher-dashboard-overview', 'dashboard', 'normal'); // Wincher ads.
         remove_meta_box('wpa_dashboard_widget', 'dashboard', 'side');               // WP Armour Pro.

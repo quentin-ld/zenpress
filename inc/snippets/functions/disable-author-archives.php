@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * Disables author archives by returning a 404 response for author pages.
+ *
+ * @since 1.0.0
+ */
+
 if (!defined('ABSPATH')) {
     exit;
 }

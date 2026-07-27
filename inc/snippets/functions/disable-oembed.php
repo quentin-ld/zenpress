@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * Removes oEmbed discovery, REST API routes, rewrite rules, and scripts.
+ *
+ * @since 1.0.0
+ */
+
 if (!defined('ABSPATH')) {
     exit;
 }

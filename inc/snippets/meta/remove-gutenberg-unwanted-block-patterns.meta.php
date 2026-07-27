@@ -11,7 +11,7 @@ if (!defined('ABSPATH')) {
 
 return [
     'title' => __('Remove WordPress default block patterns', 'zenpress'),
-    'description' => __('Prevents WordPress from loading remote block patterns and removes the built-in core block patterns. Reduces editor clutter and improves performance by avoiding unnecessary data loading.', 'zenpress'),
+    'description' => __('Stops WordPress from loading remote block patterns and removes the built-in core block patterns from the editor. Reduces the number of patterns displayed in the block inserter.', 'zenpress'),
     'category' => __('gutenberg', 'zenpress'),
     'subcategory' => __('performance', 'zenpress'),
     'weight' => 0,

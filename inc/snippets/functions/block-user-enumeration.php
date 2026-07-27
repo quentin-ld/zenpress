@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * Blocks user enumeration via author query strings and canonical redirects.
+ *
+ * @since 1.0.0
+ */
+
 if (!defined('ABSPATH')) {
     exit;
 }

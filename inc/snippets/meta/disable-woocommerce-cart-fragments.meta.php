@@ -11,7 +11,7 @@ if (!defined('ABSPATH')) {
 
 return [
     'title' => __('Disable WooCommerce cart fragments', 'zenpress'),
-    'description' => __('Stops the script that updates the cart without reloading the page. Turn off if you don\'t need live cart updates.', 'zenpress'),
+    'description' => __('Stops the script that updates the cart count without reloading the page. The cart total no longer updates without a page reload.', 'zenpress'),
     'category' => __('woocommerce', 'zenpress'),
     'subcategory' => __('performance', 'zenpress'),
     'weight' => 0,

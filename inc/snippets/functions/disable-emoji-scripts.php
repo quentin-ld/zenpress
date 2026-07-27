@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * Removes emoji scripts, styles, and filters from the front end, back end, feeds, and emails.
+ *
+ * @since 1.0.0
+ */
+
 if (!defined('ABSPATH')) {
     exit;
 }

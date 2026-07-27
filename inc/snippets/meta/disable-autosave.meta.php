@@ -12,7 +12,7 @@ if (!defined('ABSPATH')) {
 return [
     'title' => __('Disable autosave (classic editor)', 'zenpress'),
     'description' => __(
-        'Stops the classic editor from autosaving drafts periodically. Reduces database writes and heartbeat traffic. The block editor may still use its own autosave; this targets the legacy post editor.',
+        'Disables autosave in the classic editor only. The block editor uses its own autosave mechanism and is not affected.',
         'zenpress'
     ),
     'category' => __('core', 'zenpress'),

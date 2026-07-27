@@ -7,7 +7,6 @@ if (!defined('ABSPATH')) {
 if (class_exists('WooCommerce')) {
     add_action('wp_enqueue_scripts', static function (): void {
         if (!is_woocommerce() && !is_cart() && !is_checkout() && !is_account_page() && !is_product() && !is_product_category() && !is_shop()) {
-            // Dequeue WooCommerce Styles
             wp_dequeue_style('woocommerce-general');
             wp_dequeue_style('woocommerce-layout');
             wp_dequeue_style('woocommerce-smallscreen');
@@ -16,7 +15,6 @@ if (class_exists('WooCommerce')) {
             wp_dequeue_style('woocommerce_chosen_styles');
             wp_dequeue_style('woocommerce_prettyPhoto_css');
 
-            // Dequeue WooCommerce Scripts
             wp_dequeue_script('wc-price-slider');
             wp_dequeue_script('wc-single-product');
             wp_dequeue_script('wc-add-to-cart');

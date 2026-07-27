@@ -12,7 +12,7 @@ if (!defined('ABSPATH')) {
 return [
     'title' => __('Remove Help tab', 'zenpress'),
     'description' => __(
-        'Hides the Help tab on all admin screens. Reduces clutter if you don\'t use in-app help.',
+        'Hides the Help tab on all admin screens. The tab is removed from the screen options area at the top right of each admin page.',
         'zenpress'
     ),
     'category' => __('core', 'zenpress'),

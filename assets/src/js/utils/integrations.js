@@ -4,14 +4,11 @@
  * @return {Object} Map of integration key to boolean; empty if missing or invalid.
  */
 export function getActiveIntegrations() {
-	const raw =
-		typeof window !== 'undefined'
-			? window.zenpressIntegrationsActive
-			: null;
-	if (!raw || typeof raw !== 'object' || Array.isArray(raw)) {
-		return {};
-	}
-	return raw;
+    const raw = typeof window !== 'undefined' ? window.zenpressIntegrationsActive : null;
+    if (!raw || typeof raw !== 'object' || Array.isArray(raw)) {
+        return {};
+    }
+    return raw;
 }
 
 /**
@@ -20,5 +17,5 @@ export function getActiveIntegrations() {
  * @return {boolean} True if at least one integration is active.
  */
 export function hasActiveIntegration() {
-	return Object.values(getActiveIntegrations()).some(Boolean);
+    return Object.values(getActiveIntegrations()).some(Boolean);
 }

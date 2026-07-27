@@ -18,36 +18,36 @@ import { IntegrationsBlock } from './IntegrationsBlock';
  * @return {JSX.Element} Category tab panel (subcategories + optional integrations).
  */
 export function SnippetCategoryPanel({
-	category,
-	groupedSnippets,
-	onToggle,
-	showIntegrations = false,
-	adminBarEnabled,
-	setAdminBarEnabled,
-	autoconfigBusy,
-	getAutoconfigHandler,
+    category,
+    groupedSnippets,
+    onToggle,
+    showIntegrations = false,
+    adminBarEnabled,
+    setAdminBarEnabled,
+    autoconfigBusy,
+    getAutoconfigHandler,
 }) {
-	const subcategories = Object.keys(groupedSnippets[category] || {}).sort();
+    const subcategories = Object.keys(groupedSnippets[category] || {}).sort();
 
-	return (
-		<>
-			<h2>{capitalizeCategory(category)}</h2>
-			{subcategories.map((subcategory) => (
-				<SnippetSubcategory
-					key={subcategory}
-					subcategory={subcategory}
-					items={groupedSnippets[category]?.[subcategory] ?? []}
-					onToggle={onToggle}
-				/>
-			))}
-			{showIntegrations && hasActiveIntegration() && (
-				<IntegrationsBlock
-					adminBarEnabled={adminBarEnabled}
-					setAdminBarEnabled={setAdminBarEnabled}
-					autoconfigBusy={autoconfigBusy}
-					getAutoconfigHandler={getAutoconfigHandler}
-				/>
-			)}
-		</>
-	);
+    return (
+        <>
+            <h2>{capitalizeCategory(category)}</h2>
+            {subcategories.map((subcategory) => (
+                <SnippetSubcategory
+                    key={subcategory}
+                    subcategory={subcategory}
+                    items={groupedSnippets[category]?.[subcategory] ?? []}
+                    onToggle={onToggle}
+                />
+            ))}
+            {showIntegrations && hasActiveIntegration() && (
+                <IntegrationsBlock
+                    adminBarEnabled={adminBarEnabled}
+                    setAdminBarEnabled={setAdminBarEnabled}
+                    autoconfigBusy={autoconfigBusy}
+                    getAutoconfigHandler={getAutoconfigHandler}
+                />
+            )}
+        </>
+    );
 }

@@ -1,8 +1,13 @@
 <?php
 
+/**
+ * PHPStan bootstrap file — loads constants from single source.
+ *
+ * @package zenpress
+ */
+
 if (!defined('ABSPATH')) {
     exit;
 }
 
-define('ZENPRESS_PLUGIN_FILE', '');
-define('ZENPRESS_PLUGIN_DIR', '');
+require_once dirname(__DIR__) . '/inc/core/constants.php';

@@ -10,15 +10,15 @@
  * @license   GPL v2 or later
  *
  * Plugin Name: ZenPress
- * Description: Speed up and harden your site with a single click: cleans up unused features, protects security gaps, and configures cache integrations automatically.
- * Version: 2.2.5
+ * Description: Clean up unused WordPress features, close security gaps, and configure cache integrations from a single settings page.
+ * Version: 2.2.6
  * Plugin URI: https://wordpress.org/plugins/zenpress/
  * Author: Quentin Le Duff
  * Author URI: https://profiles.wordpress.org/quentinldd/
  * Text Domain: zenpress
  * Domain Path: /languages/
  * Requires at least: 6.0
- * Tested up to: 6.9
+ * Tested up to: 7.0
  * Requires PHP: 8.1
  * License URI: https://www.gnu.org/licenses/old-licenses/gpl-2.0.html/
  * License: GPL v2 or later
@@ -37,9 +37,6 @@
 if (!defined('ABSPATH')) {
     exit;
 }
-
-define('ZENPRESS_PLUGIN_FILE', __FILE__);
-define('ZENPRESS_PLUGIN_DIR', plugin_dir_path(__FILE__));
 
 require_once __DIR__ . '/inc/core/constants.php';
 require_once __DIR__ . '/inc/core/metadata.php';

@@ -12,31 +12,18 @@ import { SaveButton } from './SaveButton';
  * @param {boolean}  props.isSaving     - Whether save is in progress.
  * @return {JSX.Element} Bulk actions wrapper (Enable all, Disable all, Save).
  */
-export function BulkSnippetActions({
-	onEnableAll,
-	onDisableAll,
-	onSave,
-	isSaving,
-}) {
-	return (
-		<div className="zenpress-actions">
-			<div className="zenpress-actions-bulk">
-				<Button
-					variant="tertiary"
-					onClick={onEnableAll}
-					__next40pxDefaultSize
-				>
-					{__('Enable all', 'zenpress')}
-				</Button>
-				<Button
-					isDestructive
-					onClick={onDisableAll}
-					__next40pxDefaultSize
-				>
-					{__('Disable all', 'zenpress')}
-				</Button>
-			</div>
-			<SaveButton onClick={onSave} isBusy={isSaving} />
-		</div>
-	);
+export function BulkSnippetActions({ onEnableAll, onDisableAll, onSave, isSaving }) {
+    return (
+        <div className="zenpress-actions">
+            <div className="zenpress-actions-bulk">
+                <Button variant="tertiary" onClick={onEnableAll} __next40pxDefaultSize>
+                    {__('Enable all', 'zenpress')}
+                </Button>
+                <Button isDestructive onClick={onDisableAll} __next40pxDefaultSize>
+                    {__('Disable all', 'zenpress')}
+                </Button>
+            </div>
+            <SaveButton onClick={onSave} isBusy={isSaving} />
+        </div>
+    );
 }

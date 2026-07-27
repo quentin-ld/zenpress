@@ -4,13 +4,11 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-// Redirect all feed requests to homepage.
 function zenpress_disable_all_feeds(): void {
     wp_safe_redirect(home_url(), 301);
     exit;
 }
 
-// Disable all feeds.
 add_action('do_feed', 'zenpress_disable_all_feeds', 1);
 add_action('do_feed_rdf', 'zenpress_disable_all_feeds', 1);
 add_action('do_feed_rss', 'zenpress_disable_all_feeds', 1);

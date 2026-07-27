@@ -1,6 +1,6 @@
 <?php
 /**
- * Metadata for the disable-dashicons.php
+ * Metadata for disable-dashicons.php
  *
  * @since 1.0.0
  */

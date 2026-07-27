@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * Disables the autosave script for the classic editor.
+ *
+ * @since 2.2.0
+ */
+
 if (!defined('ABSPATH')) {
     exit;
 }

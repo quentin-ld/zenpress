@@ -11,7 +11,7 @@ if (!defined('ABSPATH')) {
 
 return [
     'title' => __('Protect login from brute force', 'zenpress'),
-    'description' => __('Hides detailed login errors and limits failed attempts per IP. After 5 failed tries, blocks that IP for 5 minutes.', 'zenpress'),
+    'description' => __('Hides detailed login error messages and limits failed login attempts per IP address. After 5 failed attempts, the IP is blocked for 5 minutes.', 'zenpress'),
     'category' => __('tools', 'zenpress'),
     'subcategory' => __('security', 'zenpress'),
     'weight' => 0,

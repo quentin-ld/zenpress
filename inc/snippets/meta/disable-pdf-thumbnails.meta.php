@@ -11,7 +11,7 @@ if (!defined('ABSPATH')) {
 
 return [
     'title' => __('Disable PDF thumbnails', 'zenpress'),
-    'description' => __('Prevents WordPress from generating thumbnails for uploaded PDF files by removing fallback image sizes. Saves storage space and improves performance by avoiding unnecessary image generation.', 'zenpress'),
+    'description' => __('Stops WordPress from generating thumbnail image sizes for uploaded PDF files. PDFs remain uploadable but no fallback image is created.', 'zenpress'),
     'category' => __('core', 'zenpress'),
     'subcategory' => __('performance', 'zenpress'),
     'weight' => 0,
