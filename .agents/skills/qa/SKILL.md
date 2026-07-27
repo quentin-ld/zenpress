@@ -23,6 +23,15 @@ Analyze the feature's behavior as a hostile QA auditor. Identify:
 
 Be specific, not generic. Assume everything is wrong until proven otherwise.
 
+## Hostile audit framing
+
+Analyze this feature's behavior as a hostile QA auditor. For everything in scope, assume it's broken until proven otherwise. Specifically:
+
+1. **Unhandled states / gaps in logic** — Missing branches, impossible paths, invalid assumptions about the happy path.
+2. **Edge cases that break or silently fail** — Empty/null/negative/oversize input, DB down, API 500, no capabilities, race conditions.
+3. **Bad user feedback or missing error messages** — Silent `return`, swallowed exceptions, vague "An error occurred", no feedback on success either.
+4. **Side effects on the rest of the system** — Option bloat, query slowdown, global state pollution, hook conflicts, capability leaks, uninstall residue.
+
 ## Inputs
 
 - Scope from user: file paths, feature name, task file, or free-form description.
