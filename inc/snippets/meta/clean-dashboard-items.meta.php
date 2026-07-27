@@ -12,7 +12,7 @@ if (!defined('ABSPATH')) {
 return [
     'title' => __('Clean up the Dashboard', 'zenpress'),
     'description' => __(
-        'Removes unnecessary and promotional widgets from the Dashboard.',
+        'Removes default widgets from the Dashboard screen: Quick Draft, WordPress News, Site Health, and the Welcome Panel. Also removes widgets added by popular plugins.',
         'zenpress'
     ),
     'category' => __('ads-blocker', 'zenpress'),

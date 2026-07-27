@@ -11,10 +11,7 @@ if (!defined('ABSPATH')) {
 
 return [
     'title' => __('Disable application passwords', 'zenpress'),
-    'description' => __(
-        'Turns off application passwords for everyone. Do not enable if you use mobile apps or other apps that log in to WordPress.',
-        'zenpress'
-    ),
+    'description' => __('Turns off application passwords for all users. Do not enable if your site relies on external applications or services that authenticate via the WordPress REST API or XML-RPC using application passwords.', 'zenpress'),
     'category' => __('core', 'zenpress'),
     'subcategory' => __('security', 'zenpress'),
     'weight' => 0,

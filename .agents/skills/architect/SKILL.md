@@ -10,10 +10,10 @@ description: >-
 
 Single skill, two model tiers:
 
-- **Planning tier** (Phases 1–3): clarify → research → plan → task file
-- **Worker tier** (Phases 4–5): execute → lint → feedback fixes
+- **Planning tier** (Phases 1–3): clarify the requirements, research the codebase, create the plan and task file
+- **Worker tier** (Phases 4–5): execute the task file, run lint checks, fix feedback issues
 
-Reply in US English regardless of input language.
+Reply in US English. Follow the WordPress Documentation Style Guide for all user-facing prose.
 
 ## Phase 1 — Clarify
 
@@ -27,11 +27,11 @@ Read only what you need:
 2. `.agents/notes/` for the same slug
 3. `workflow.md` for commands
 
-**Reference docs** (never load whole files — grep one section; see `AGENTS.md`).
+**Reference docs** (`.agents/docs/`): never load whole files. Grep one section at a time. The WordPress Documentation Style Guide is at `.agents/docs/wordpress-documentation-style-guide-consolidated.md`.
 
 ## Phase 3 — Plan (planning tier)
 
-Create `.agents/tasks/YYYY-MM-DD-<type>-<slug>.md`. Generate `uid` from the current time if known (YYYYMMDD-HHMMSS), otherwise use date + random suffix (YYYYMMDD-<random>).
+Create `.agents/tasks/YYYY-MM-DD-<type>-<slug>.md`. Generate `uid` from the current time if known (YYYYMMDD-HHMMSS); otherwise use the date plus a random suffix (YYYYMMDD-<random>).
 
 ```markdown
 ---
@@ -61,9 +61,9 @@ Enumerate **3–5 edge cases** relevant to the change; ensure the task plan cove
 
 Set `review_required: yes` and `risk:` per `AGENTS.md` when REST, SQL, auth, export, multisite, user input, or new admin UI is involved.
 
-Show a **~10-line summary**. End with: "Ready to start, or would you like to adjust anything?"
+Show a **~10-line summary** of the plan. End with: "Ready to start, or would you like to adjust anything?"
 
-**Ambiguous SQL/auth/REST design:** Tell the user to re-run planning on **audit** tier before coding.
+**Ambiguous SQL/auth/REST design:** Tell the user to re-run the planning phase on **audit** tier before any coding begins.
 
 ## Phase 4 — Execute (worker tier)
 
@@ -73,19 +73,19 @@ On approval, run all tasks in order.
 
 | Task touches | Lint |
 |--------------|------|
-| REST, SQL, auth, sanitization, PHP logic, JS/React | **Immediate** after task: `composer run verify:php` and/or `npm run lint` + `npm run lint:css` |
-| Comments, docs, pure CSS, no new surface | **Batch** every up to **5** tasks |
-| All tasks done | `npm run test:all` |
+| REST, SQL, auth, sanitization, PHP logic, JS/React | **Immediate** after task: run `composer run verify:php` and `npm run lint` + `npm run lint:css` |
+| Comments, docs, pure CSS, no new surface | **Batch** every **5** tasks |
+| All tasks done | Run `npm run test:all` |
 
-When lint is skipped per economy rules, say so: "Lint skipped — no PHP/JS surface changed."
+When lint is skipped, say: "Lint skipped — no PHP/JS surface changed."
 
 ### Re-evaluate review_required after implementation
 
-After all tasks are done, compare the actual code against the task file's `review_required` and `risk` frontmatter. If the implementation touches a surface (REST, SQL, auth, user input, export, multisite, new admin UI) that the plan didn't flag, update the frontmatter. This ensures the review gate matches what was actually shipped.
+After all tasks are done, compare the actual code against the task file's `review_required` and `risk` frontmatter. If the implementation touches a surface (REST, SQL, auth, user input, export, multisite, new admin UI) that the plan did not flag, update the frontmatter. This ensures the review gate matches what was actually shipped.
 
 ### Thread rotation
 
-After **3 tasks** or **~20 turns**, update `## Session checkpoint` and tell the user: new **worker** tier thread + `/resume` + this task file.
+After **3 tasks** or **~20 turns**, update `## Session checkpoint` and tell the user: start a new **worker** tier thread with `/resume` and this task file.
 
 ### Retry ceiling
 
@@ -97,7 +97,7 @@ Before reporting completion: silently argue against your own solution (redundanc
 
 ### Stop conditions
 
-Stop only for uncovered design decisions, frozen docs, version bumps, or major scope creep.
+Stop only for uncovered design decisions, frozen documentation, version bumps, or major scope creep.
 
 ### Completion message
 

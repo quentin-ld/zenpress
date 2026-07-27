@@ -19,7 +19,7 @@ Reply in US English.
 | `review_required: yes` or `risk` includes `rest`, `sql`, `auth`, `export`, `multisite` | **Audit** |
 | Optional review on low-risk scope | **Planning** |
 
-The user selects the matching model before starting the thread. Abstract tier names only — no vendor-specific model recommendations.
+The user selects the matching model before starting the thread. Reference only abstract tier names — do not recommend specific vendor models.
 
 ## Inputs
 
@@ -46,11 +46,11 @@ Sections: **Coherence** · **Security** · **Accessibility** · **Performance** 
 
 Verdict: **Ship** · **Fix then ship** · **Needs rework**
 
-**Needs rework:** user opens **worker** tier + `/resume` with the task file.
+**Needs rework:** user opens a **worker** tier thread with `/resume` and the task file.
 
 **Fix then ship:** user fixes the listed items, then either:
-- If fixes are trivial (typos, copy, minor escaping): re-review is optional at user's discretion.
-- If fixes touch REST, SQL, auth, user input, or new logic: **re-review required** on **audit** tier. User opens a new `/reviewer` thread.
+- If fixes are trivial (typos, copy, minor escaping): re-review is optional at the user's discretion.
+- If fixes touch REST, SQL, auth, user input, or new logic: **re-review required** on **audit** tier. The user opens a new `/reviewer` thread.
 
 ## Checklists
 
@@ -62,4 +62,4 @@ Verdict: **Ship** · **Fix then ship** · **Needs rework**
 
 **Coherence:** REST shapes match task contracts · no duplicated logic · i18n wrapped, existing strings untouched
 
-**WordPress-specific checklists (audit-tier only):** When running on **audit** tier, use the full WordPress checklists from the QA skill (`inc/core/` surface categories): plugin bootstrap, REST API, SQL, i18n, security, admin UI, configuration & build, multisite, error handling. These are the same checks — the QA skill owns the definitive list.
+**WordPress-specific checklists (audit-tier only):** When running on **audit** tier, use the full WordPress checklists from the QA skill (`inc/core/` surface categories): plugin bootstrap, REST API, SQL, i18n, security, admin UI, configuration and build, multisite, error handling. The QA skill owns the definitive list.

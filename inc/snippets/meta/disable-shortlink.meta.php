@@ -11,7 +11,7 @@ if (!defined('ABSPATH')) {
 
 return [
     'title' => __('Disable shortlink', 'zenpress'),
-    'description' => __('Removes shortlink functionality from both the HTML head and HTTP headers. Reduces unnecessary output, improves performance and SEO clarity.', 'zenpress'),
+    'description' => __('Removes the shortlink tag from the HTML head and the Link HTTP header. Shortlinks (example.com/?p=123) are no longer advertised.', 'zenpress'),
     'category' => __('core', 'zenpress'),
     'subcategory' => __('performance', 'zenpress'),
     'weight' => 0,

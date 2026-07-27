@@ -7,7 +7,7 @@ description: >-
 
 # Release
 
-End-of-cycle packaging. **Worker-tier model** is usually sufficient.
+End-of-cycle packaging. **Worker-tier model** is typically sufficient.
 
 Do not bump versions without explicit owner authorization in this conversation.
 

@@ -1,7 +1,7 @@
 === ZenPress ===
 Contributors: @quentinldd
 Donate link: https://github.com/sponsors/quentin-ld/
-Tags: optimization, performance, security, bloat, woocommerce
+Tags: optimization, performance, security, woocommerce
 Requires at least: 6.0
 Tested up to: 7.0
 Stable tag: 2.2.5
@@ -9,34 +9,34 @@ Requires PHP: 8.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html/
 
-Speed up and harden your site with a single click: cleans up unused features, protects security gaps, and configures cache integrations automatically.
+Clean up unused WordPress features, close security gaps, and configure cache integrations from a single settings page.
 
 == Description ==
 
-ZenPress is a lightweight, high-performance plugin that improves your WordPress and WooCommerce sites through a range of supportive actions.
-Combined with [Cache Enabler](https://wordpress.org/plugins/cache-enabler/), [Autoptimize](https://wordpress.org/plugins/autoptimize/) and [SQLite Object Cache](https://wordpress.org/plugins/sqlite-object-cache/), you can use ZenPress as a reliable, free alternative to major premium performance plugins.
-By integrating directly into the WordPress core interface, ZenPress provides a simpler experience without the need for complex custom dashboards. You can improve your site's performance and security without ads, pro versions, or database clutter.
+ZenPress disables unused WordPress and WooCommerce features, blocks security vulnerabilities, and configures cache plugins from a single settings page.
+Combined with [Cache Enabler](https://wordpress.org/plugins/cache-enabler/), [Autoptimize](https://wordpress.org/plugins/autoptimize/) and [SQLite Object Cache](https://wordpress.org/plugins/sqlite-object-cache/), ZenPress replaces the need for premium performance plugins.
+Settings integrate directly into the WordPress core interface, without requiring a custom dashboard.
 
 = Why choose ZenPress? =
-* Use curated settings presets to help you optimize your site instantly.
-* Experience deep integration with the WordPress core interface for a lightweight, familiar experience.
-* Choose a free, reliable alternative to premium performance plugins.
-* Keep your site fast and clean by disabling unused features.
-* Harden your security by turning off unused features and protecting weak spots.
-* Reduce bloat from third-party plugins.
-* Enjoy an ultra-lightweight and future-proof design.
+* Use curated settings presets to configure your site quickly.
+* Integrates with the WordPress core interface for a familiar experience.
+* A free alternative to premium performance plugins.
+* Disable unused features to reduce page load and remove unnecessary code.
+* Block security vulnerabilities by disabling unused features.
+* Remove unnecessary third-party plugin code.
+* Lightweight codebase with no external dependencies.
 
 == Features ==
 
 ZenPress includes the following features:
 
 = Dashboard Settings =
-* Navigate easily between categories like Core, Gutenberg, and WooCommerce using a structured tabbed interface.
-* Identify features quickly with visual icons organized by Performance, Security, and User Interface.
-* Select from three ready-to-use presets: Corporate, Blog, or E-commerce: each optimized for your specific site type.
-* Understand every choice with concise descriptions that explain the benefits to your site.
-* Use a fully accessible interface that includes ARIA-compliant tabs and full keyboard navigation support.
-* Benefit from a design that matches the WordPress core look and feel, supporting the latest block editor features.
+* Navigate between categories using a tabbed interface.
+* Features are grouped by Performance, Security, and User Interface.
+* Select from three presets: Corporate, Blog, or E-commerce.
+* Each setting includes a description of what it does and what side effects to expect.
+* ARIA-compliant tabs with full keyboard navigation.
+* Design matches the WordPress core interface.
 
 = Core Settings =
 * Block user enumeration.
@@ -98,46 +98,23 @@ ZenPress integrates with Cache Enabler, Autoptimize, and SQLite Object Cache. Wh
 * SQLite Object Cache: Enable "Use APCu" in the plugin if available.
 
 = Presets =
-* Corporate website: For business sites and portfolios. Focuses on security, performance, and removing unused features like RSS and author archives.
-* Blog: For content-focused blogs. Keeps RSS and other blog features while improving performance and security.
-* E-commerce: For WooCommerce stores. Performance and security plus WooCommerce optimizations for faster checkout.
+* Corporate website: For business sites and portfolios. Disables RSS, author archives, and other features typically unused on company sites.
+* Blog: For content-focused sites. Keeps RSS and other blog-related features while disabling unnecessary assets.
+* E-commerce: For WooCommerce stores. Disables non-essential WooCommerce features and removes unused WordPress functionality.
 
 = Accessibility =
-* You can navigate the dashboard with confidence using an interface built to WCAG 2.1 AA accessibility standards.
-* Move through settings efficiently using only your keyboard; we fully support the use of Tab, Arrow keys, Home, End, and Enter for all interactions.
-* Experience faster navigation with automatic tab activation, which displays panels immediately as you move focus between sections.
-* Always identify your position on the page through highly visible focus indicators on every interactive button and link.
-* Every element is optimized for screen readers and assistive technologies with descriptive ARIA labels to provide clear context for every setting.
-
-== Roadmap ==
-
-* Use new Gutenberg Icon component for categories & subcategories icons instead of Dashicons.
-* Additional presets for specific use cases.
-* Documentation pages with detailed guides.
-* Manage Heartbeat API (frontend + backend + admin whitelist).
-* Remove "site health" page.
-* Remove "Privacy tools".
-* Disable WooCommerce tracking.
-* Disable marketing hub.
-* Disable dashboard setup widget.
-* Disable new product editor.
-* Disable WooCommerce blocks.
-* Disable WooCommerce promo emails.
-* Disable CF7 CSS & JS.
-* Disable Elementor bloat.
-* Disable WP Bakery bloat.
-* Disable Divi bloat.
-* Disable Yoast SEO bloat.
-* Disable Jetpack bloat.
-* Disable Updraft bloat.
+* Navigate the dashboard using a keyboard: Tab, Arrow keys, Home, End, and Enter for all interactions.
+* Tab panels activate immediately when focus moves between sections.
+* Visible focus indicators on every interactive element.
+* ARIA labels provide context for screen readers and assistive technologies.
 
 == Privacy Statement ==
 
-ZenPress is private by default and always will be. It does not store any data. It does not send data to any third party, nor does it include any third party resources.
+ZenPress does not store, collect, or transmit any data. It does not send data to any third party and does not include third-party resources.
 
 == Accessibility Statement ==
 
-ZenPress aims to be fully accessible to all of its users.
+ZenPress aims to be accessible to all users.
 
 == Screenshots ==
 
@@ -156,35 +133,35 @@ ZenPress aims to be fully accessible to all of its users.
 
 = No pro version? Really? =
 
-Yes, there is no pro version for this plugin and there never will be.
+Yes, there is no pro version and there never will be.
 
-However, [I am accepting sponsorships via the GitHub Sponsors program](https://github.com/sponsors/quentin-ld/dashboard). If you work at an agency that develops with WordPress, ask your company to provide sponsorship in order to invest in its supply chain. The tools that I maintain probably save your company time and money, and GitHub sponsorship can now be done at the organisation level.
+[Sponsorships are accepted via the GitHub Sponsors program](https://github.com/sponsors/quentin-ld/dashboard). If you work at an agency that develops with WordPress, ask your company to sponsor the project.
 
-In addition, if you like the plugin then I'd love for you to [leave a review](https://wordpress.org/support/plugin/zenpress/reviews/). Tell all your friends about it too!
+If you like the plugin, [leave a review](https://wordpress.org/support/plugin/zenpress/reviews/).
 
-= Does ZenPress work with my existing caching / optimization plugins? =
+= Does ZenPress work with my existing caching or optimization plugins? =
 
-Yes. You can use ZenPress alongside tools like Cache Enabler or Autoptimize. Because ZenPress focuses on disabling unused core features and reducing bloat, it does not interfere with page caching or image optimization. If you notice overlapping features, you can easily toggle them off in either tool.
+Yes. ZenPress disables unused WordPress core features and does not interfere with page caching or image optimization. If you notice overlapping features, toggle them off in either tool.
 
 = How do I know which snippets are safe to enable? =
 
-If you are new to optimization, you can safely start with a curated preset (Corporate, Blog, or E‑commerce). For manual changes, we suggest starting with User Interface (UI) and performance settings, such as cleaning up the Admin Bar, before moving to more advanced core settings.
+If you are new to these settings, start with a preset (Corporate, Blog, or E-commerce). For manual changes, begin with User Interface and performance settings, such as cleaning up the Admin Bar, before moving to more advanced core settings.
 
 = What happens if I disable the REST API? =
 
-The REST API allows different applications to communicate with your site. If you disable it, ZenPress will block unauthenticated requests to keep your site secure. However, some blocks or third-party integrations may require this to be active. If a feature stops working, you can simply use our documented filters to allow specific routes.
+The REST API allows external applications to communicate with your site. ZenPress blocks unauthenticated requests while keeping the API accessible to logged-in users. Some blocks or third-party integrations may require the REST API to be publicly accessible. If a feature stops working, use the `zenpress_disable_wp_rest_api_post_var` or `zenpress_disable_wp_rest_api_server_var` filters to allow specific requests.
 
-= Does ZenPress store any personal data or phone home? =
+= Does ZenPress store any personal data? =
 
-No. ZenPress does not collect, store, or transmit any personal data. It does not contact external services or include third‑party trackers. All settings are stored in standard WordPress options and remain on your site only.
+No. ZenPress does not collect, store, or transmit any personal data. All settings are stored in standard WordPress options on your site.
 
 = Is ZenPress multisite compatible? =
 
-ZenPress is fully compatible with multisite networks. You can activate it across the entire network or on individual sites. Only Network Administrators have the capability to manage these settings across the network to ensure consistent performance and security policies.
+ZenPress is compatible with multisite networks. You can activate it across the entire network or on individual sites. Only Network Administrators can manage these settings across the network.
 
 = I have a suggestion =
 
-I welcome your ideas! If you have a suggestion for the roadmap, please visit the official support forum. If you are a developer, you can also contribute directly to the project on GitHub.
+Visit the official support forum to share ideas. Developers can contribute directly on GitHub.
 
 == Changelog ==
 

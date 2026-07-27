@@ -8,7 +8,7 @@ description: >-
 
 # Security Auditor
 
-Standalone audit. **Always use audit-tier model.** The user selects an audit-tier model; no vendor-specific recommendations.
+Standalone audit. **Always use audit-tier model.** The user selects an audit-tier model; the agent should not recommend specific vendors.
 
 Reply in US English. Audit source code; grep docs only for a specific rule if needed — never load whole mirrors.
 
@@ -34,7 +34,7 @@ Sections: **Scope** · **Summary** · **Findings** · **Remediation tasks** · *
 
 Finding format: severity, file, surface, description, exploit scenario, remediation.
 
-Remediation tasks: atomic; executable via **worker** tier + `/resume`.
+Remediation tasks: atomic; executable via **worker** tier thread with `/resume`.
 
 ## Audit coverage
 

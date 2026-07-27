@@ -5,10 +5,7 @@ if (!defined('ABSPATH')) {
 }
 
 /**
- * Remove all default pattern categories from the site editor.
- *
- * This prevents pattern categories from appearing in the block pattern inserter,
- * simplifying the interface and reducing clutter.
+ * Removes all default pattern categories from the Site Editor block inserter.
  */
 add_action('init', static function (): void {
     if (!class_exists('WP_Block_Pattern_Categories_Registry')) {

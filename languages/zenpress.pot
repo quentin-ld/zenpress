@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-07-27T12:02:44+00:00\n"
+"POT-Creation-Date: 2026-07-27T12:54:51+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: zenpress\n"
@@ -28,7 +28,7 @@ msgstr ""
 
 #. Description of the plugin
 #: zenpress.php
-msgid "Speed up and harden your site with a single click: cleans up unused features, protects security gaps, and configures cache integrations automatically."
+msgid "Clean up unused WordPress features, close security gaps, and configure cache integrations from a single settings page."
 msgstr ""
 
 #. Author of the plugin
@@ -253,8 +253,8 @@ msgstr ""
 msgid "Invalid request. Please refresh and try again."
 msgstr ""
 
-#: inc/snippets/functions/block-user-enumeration.php:11
-#: inc/snippets/functions/block-user-enumeration.php:19
+#: inc/snippets/functions/block-user-enumeration.php:17
+#: inc/snippets/functions/block-user-enumeration.php:25
 msgid "You don't have permission to view this."
 msgstr ""
 
@@ -262,12 +262,12 @@ msgstr ""
 msgid "You must be logged in to use this."
 msgstr ""
 
-#: inc/snippets/functions/protect-wp-login.php:9
+#: inc/snippets/functions/protect-wp-login.php:8
 msgid "Something went wrong. Try again."
 msgstr ""
 
-#: inc/snippets/functions/protect-wp-login.php:38
-#: inc/snippets/functions/protect-wp-login.php:52
+#: inc/snippets/functions/protect-wp-login.php:36
+#: inc/snippets/functions/protect-wp-login.php:50
 msgid "Too many failed attempts. Try again in a few minutes."
 msgstr ""
 
@@ -276,13 +276,13 @@ msgid "Block user enumeration"
 msgstr ""
 
 #: inc/snippets/meta/block-user-enumeration.meta.php:14
-msgid "Stops visitors from discovering usernames via author URLs. Reduces brute-force risk."
+msgid "Blocks user enumeration via author archive URLs and query strings (/?author=1). Prevents attackers from discovering usernames, a common step in targeted brute-force attacks."
 msgstr ""
 
 #: inc/snippets/meta/block-user-enumeration.meta.php:18
 #: inc/snippets/meta/clean-admin-bar.meta.php:18
 #: inc/snippets/meta/disable-adjacent-posts.meta.php:18
-#: inc/snippets/meta/disable-application-passwords.meta.php:18
+#: inc/snippets/meta/disable-application-passwords.meta.php:15
 #: inc/snippets/meta/disable-author-archives.meta.php:18
 #: inc/snippets/meta/disable-autosave.meta.php:18
 #: inc/snippets/meta/disable-capital-p-dangit.meta.php:18
@@ -306,12 +306,12 @@ msgstr ""
 #: inc/snippets/meta/remove-help-button.meta.php:18
 #: inc/snippets/meta/remove-rest-api-link.meta.php:15
 #: inc/snippets/meta/remove-thanks-for-using-wordpress-in-footer.meta.php:18
-#: inc/snippets/meta/remove-wordpress-logo.meta.php:18
+#: inc/snippets/meta/remove-wordpress-logo.meta.php:15
 msgid "core"
 msgstr ""
 
 #: inc/snippets/meta/block-user-enumeration.meta.php:19
-#: inc/snippets/meta/disable-application-passwords.meta.php:19
+#: inc/snippets/meta/disable-application-passwords.meta.php:16
 #: inc/snippets/meta/disable-author-archives.meta.php:19
 #: inc/snippets/meta/disable-pingback-trackback.meta.php:16
 #: inc/snippets/meta/disable-rest-api.meta.php:20
@@ -327,7 +327,7 @@ msgid "Clean up the admin bar"
 msgstr ""
 
 #: inc/snippets/meta/clean-admin-bar.meta.php:14
-msgid "Removes unnecessary items from the admin bar in both backend and frontend. Reduces clutter and simplifies the interface."
+msgid "Removes the new content, comments, updates, and Yoast SEO menu items from the admin bar. The WordPress logo menu and appearance menu are also removed on the front end."
 msgstr ""
 
 #: inc/snippets/meta/clean-admin-bar.meta.php:19
@@ -336,7 +336,7 @@ msgstr ""
 #: inc/snippets/meta/disable-login-language-selector.meta.php:16
 #: inc/snippets/meta/remove-help-button.meta.php:19
 #: inc/snippets/meta/remove-thanks-for-using-wordpress-in-footer.meta.php:19
-#: inc/snippets/meta/remove-wordpress-logo.meta.php:19
+#: inc/snippets/meta/remove-wordpress-logo.meta.php:16
 msgid "user-interface"
 msgstr ""
 
@@ -345,7 +345,7 @@ msgid "Clean up the Dashboard"
 msgstr ""
 
 #: inc/snippets/meta/clean-dashboard-items.meta.php:14
-msgid "Removes unnecessary and promotional widgets from the Dashboard."
+msgid "Removes default widgets from the Dashboard screen: Quick Draft, WordPress News, Site Health, and the Welcome Panel. Also removes widgets added by popular plugins."
 msgstr ""
 
 #: inc/snippets/meta/clean-dashboard-items.meta.php:18
@@ -357,7 +357,7 @@ msgid "Disable prev/next post links in head"
 msgstr ""
 
 #: inc/snippets/meta/disable-adjacent-posts.meta.php:14
-msgid "Removes rel=\"prev\" and rel=\"next\" tags from wp_head. Reduces unnecessary HTML output and slightly improves performance."
+msgid "Removes rel=\"prev\" and rel=\"next\" tags from the HTML head. Stops WordPress from indicating paginated post relationships for search engines."
 msgstr ""
 
 #: inc/snippets/meta/disable-adjacent-posts.meta.php:19
@@ -391,7 +391,7 @@ msgid "Disable application passwords"
 msgstr ""
 
 #: inc/snippets/meta/disable-application-passwords.meta.php:14
-msgid "Turns off application passwords for everyone. Turn this off if you use mobile apps or other apps that log in to WordPress."
+msgid "Turns off application passwords for all users. Do not enable if your site relies on external applications or services that authenticate via the WordPress REST API or XML-RPC using application passwords."
 msgstr ""
 
 #: inc/snippets/meta/disable-author-archives.meta.php:13
@@ -399,7 +399,7 @@ msgid "Disable author archives"
 msgstr ""
 
 #: inc/snippets/meta/disable-author-archives.meta.php:14
-msgid "Author archive URLs show \"Page not found.\" Helps prevent listing usernames."
+msgid "Author archive URLs show a 404 Page Not Found response. Prevents listing all posts by a specific author and hides usernames from the URL structure."
 msgstr ""
 
 #: inc/snippets/meta/disable-autosave.meta.php:13
@@ -407,7 +407,7 @@ msgid "Disable autosave (classic editor)"
 msgstr ""
 
 #: inc/snippets/meta/disable-autosave.meta.php:14
-msgid "Stops the classic editor from autosaving drafts periodically. Reduces database writes and heartbeat traffic. The block editor may still use its own autosave; this targets the legacy post editor."
+msgid "Disables autosave in the classic editor only. The block editor uses its own autosave mechanism and is not affected."
 msgstr ""
 
 #: inc/snippets/meta/disable-capital-p-dangit.meta.php:13
@@ -415,7 +415,7 @@ msgid "Disable \"WordPress\" spelling correction"
 msgstr ""
 
 #: inc/snippets/meta/disable-capital-p-dangit.meta.php:14
-msgid "Stops WordPress from changing \"Wordpress\" to \"WordPress\" in content. Saves a small amount of work on each page."
+msgid "Stops the capitalization filter that corrects \"Wordpress\" to \"WordPress\" in titles and content. The filter runs on every page load; disabling it removes that processing step."
 msgstr ""
 
 #: inc/snippets/meta/disable-dashicons.meta.php:13
@@ -431,7 +431,7 @@ msgid "Disable default pattern categories in Site Editor"
 msgstr ""
 
 #: inc/snippets/meta/disable-default-pattern-categories.meta.php:14
-msgid "Removes default pattern categories from the block inserter. Patterns are still available; the list is simpler."
+msgid "Removes default pattern categories from the block inserter in the Site Editor. The patterns themselves remain available but are no longer grouped by category."
 msgstr ""
 
 #: inc/snippets/meta/disable-default-pattern-categories.meta.php:15
@@ -445,7 +445,7 @@ msgid "Disable DNS prefetch"
 msgstr ""
 
 #: inc/snippets/meta/disable-dns-prefetch.meta.php:14
-msgid "Removes DNS prefetch resource hints from wp_head. Avoids unnecessary DNS lookups and slightly improves performance on some sites."
+msgid "Removes DNS prefetch resource hints from the HTML head. Stops WordPress from instructing browsers to resolve domain names for external services before they are needed."
 msgstr ""
 
 #: inc/snippets/meta/disable-emoji-scripts.meta.php:13
@@ -453,7 +453,7 @@ msgid "Disable WordPress emoji scripts and styles"
 msgstr ""
 
 #: inc/snippets/meta/disable-emoji-scripts.meta.php:14
-msgid "Removes emoji scripts, styles, and filters from frontend, backend, feeds, emails, and TinyMCE. Reduces unnecessary assets and improves performance."
+msgid "Removes emoji detection script, styles, and filters from the front end, back end, feeds, emails, and TinyMCE. Reduces the number of assets loaded on each page."
 msgstr ""
 
 #: inc/snippets/meta/disable-jquery-migrate.meta.php:13
@@ -461,7 +461,7 @@ msgid "Disable jQuery Migrate script"
 msgstr ""
 
 #: inc/snippets/meta/disable-jquery-migrate.meta.php:14
-msgid "Loads jQuery Migrate only in the admin, not on the front. Improves front-end performance."
+msgid "Disables the jQuery Migrate script on the front end while keeping it loaded in the admin area. Reduces the JavaScript payload for site visitors."
 msgstr ""
 
 #: inc/snippets/meta/disable-login-language-selector.meta.php:13
@@ -469,7 +469,7 @@ msgid "Disable login language selector"
 msgstr ""
 
 #: inc/snippets/meta/disable-login-language-selector.meta.php:14
-msgid "Removes the language dropdown from the WordPress login page. Simplifies login screen and reduces distractions."
+msgid "Removes the language dropdown from the WordPress login page. The login screen shows the site language without offering a language selection option."
 msgstr ""
 
 #: inc/snippets/meta/disable-oembed.meta.php:13
@@ -477,7 +477,7 @@ msgid "Disable oEmbed"
 msgstr ""
 
 #: inc/snippets/meta/disable-oembed.meta.php:14
-msgid "Removes WordPress oEmbed features such as auto-discovery, REST API routes, TinyMCE integration, and the wp-embed script. Reduces API calls, improves performance, and limits unnecessary external requests."
+msgid "Removes WordPress oEmbed features: auto-discovery links, REST API route, TinyMCE integration, rewrite rules, and the wp-embed script. Embedded content from external sites will no longer display inline."
 msgstr ""
 
 #: inc/snippets/meta/disable-password-strength-meter.meta.php:13
@@ -485,7 +485,7 @@ msgid "Disable password strength meter"
 msgstr ""
 
 #: inc/snippets/meta/disable-password-strength-meter.meta.php:14
-msgid "Stops the password strength meter from loading on login and profile pages. Saves about 400KB. Users won't see how strong their password is."
+msgid "Removes the password strength meter script and styles from the login and profile pages. Users will not see the password strength indicator when creating or changing their password."
 msgstr ""
 
 #: inc/snippets/meta/disable-pdf-thumbnails.meta.php:13
@@ -493,7 +493,7 @@ msgid "Disable PDF thumbnails"
 msgstr ""
 
 #: inc/snippets/meta/disable-pdf-thumbnails.meta.php:14
-msgid "Prevents WordPress from generating thumbnails for uploaded PDF files by removing fallback image sizes. Saves storage space and improves performance by avoiding unnecessary image generation."
+msgid "Stops WordPress from generating thumbnail image sizes for uploaded PDF files. PDFs remain uploadable but no fallback image is created."
 msgstr ""
 
 #: inc/snippets/meta/disable-pingback-trackback.meta.php:13
@@ -501,7 +501,7 @@ msgid "Disable pingbacks and trackbacks"
 msgstr ""
 
 #: inc/snippets/meta/disable-pingback-trackback.meta.php:14
-msgid "Removes the X-Pingback header, disables pingbacks and trackbacks on new posts, and prevents self-pingbacks. Reduces spam, blocks potential DDoS vectors, and slightly improves performance by avoiding useless requests."
+msgid "Removes the X-Pingback header from HTTP responses, disables pingbacks and trackbacks on new posts, and prevents self-pingbacks. Reduces spam and blocks a potential DDoS amplification vector."
 msgstr ""
 
 #: inc/snippets/meta/disable-rest-api.meta.php:14
@@ -509,7 +509,7 @@ msgid "Limit REST API to logged-in users"
 msgstr ""
 
 #: inc/snippets/meta/disable-rest-api.meta.php:15
-msgid "Only logged-in users can use the REST API. Visitors get an error. Advanced: filters let you allow specific tools; use with care."
+msgid "Restricts REST API access to logged-in users only. Unauthenticated visitors receive an error response. This snippet provides three filters for advanced use: zenpress_disable_wp_rest_api_post_var and zenpress_disable_wp_rest_api_server_var allow specific POST keys or request paths to bypass the restriction (for webhooks or third-party integrations), and zenpress_disable_wp_rest_api_error customizes the error message. Use the bypass filters with values that are secret or not guessable, such as a random token passed via POST."
 msgstr ""
 
 #: inc/snippets/meta/disable-rss.meta.php:13
@@ -517,7 +517,7 @@ msgid "Disable all feeds (RSS, Atom, comments)"
 msgstr ""
 
 #: inc/snippets/meta/disable-rss.meta.php:14
-msgid "Prevents access to all default feeds (RDF, RSS, RSS2, Atom, and comments). Also removes feed links from head, and redirects feed requests to the homepage. Reduces unnecessary requests and improves SEO consistency."
+msgid "Prevents access to all default feeds — RDF, RSS, RSS2, Atom, and comments feed. Feed links are removed from the HTML head, and feed URL requests redirect to the homepage."
 msgstr ""
 
 #: inc/snippets/meta/disable-shortlink.meta.php:13
@@ -525,7 +525,7 @@ msgid "Disable shortlink"
 msgstr ""
 
 #: inc/snippets/meta/disable-shortlink.meta.php:14
-msgid "Removes shortlink functionality from both the HTML head and HTTP headers. Reduces unnecessary output, improves performance and SEO clarity."
+msgid "Removes the shortlink tag from the HTML head and the Link HTTP header. Shortlinks (example.com/?p=123) are no longer advertised."
 msgstr ""
 
 #: inc/snippets/meta/disable-wlw-manifest.meta.php:13
@@ -533,7 +533,7 @@ msgid "Disable Windows Live Writer link"
 msgstr ""
 
 #: inc/snippets/meta/disable-wlw-manifest.meta.php:14
-msgid "Removes the old Windows Live Writer link from the page. Safe to disable."
+msgid "Removes the Windows Live Writer manifest link from the HTML head. This link was used by the deprecated Windows Live Writer desktop application."
 msgstr ""
 
 #: inc/snippets/meta/disable-woocommerce-cart-fragments.meta.php:13
@@ -541,7 +541,7 @@ msgid "Disable WooCommerce cart fragments"
 msgstr ""
 
 #: inc/snippets/meta/disable-woocommerce-cart-fragments.meta.php:14
-msgid "Stops the script that updates the cart without reloading the page. Turn off if you don't need live cart updates."
+msgid "Stops the script that updates the cart count without reloading the page. The cart total no longer updates without a page reload."
 msgstr ""
 
 #: inc/snippets/meta/disable-woocommerce-cart-fragments.meta.php:15
@@ -558,7 +558,7 @@ msgid "Disable WooCommerce scripts and styles on non-shop pages"
 msgstr ""
 
 #: inc/snippets/meta/disable-woocommerce-scripts-styles.meta.php:14
-msgid "Dequeues WooCommerce assets on pages where WooCommerce functionality is not required, such as homepage, blog posts, or custom pages. Helps improve performance by preventing unnecessary asset loading."
+msgid "Dequeues WooCommerce styles and scripts on pages where WooCommerce is not active, such as the homepage, blog posts, and custom pages. WooCommerce pages are not affected."
 msgstr ""
 
 #: inc/snippets/meta/disable-woocommerce-stripe-scripts.meta.php:13
@@ -566,7 +566,7 @@ msgid "Disable Stripe scripts on product and cart pages"
 msgstr ""
 
 #: inc/snippets/meta/disable-woocommerce-stripe-scripts.meta.php:14
-msgid "Prevents loading of Stripe-related scripts on the product and cart pages when the \"Payment Request Button Support\" (PRBS) is disabled. Helps improve performance by avoiding unnecessary JavaScript loading."
+msgid "Stops Stripe-related scripts from loading on product and cart pages when the Payment Request Button Support (PRBS) is disabled in WooCommerce. The checkout page still loads Stripe scripts."
 msgstr ""
 
 #: inc/snippets/meta/disable-woocommerce-widgets.meta.php:13
@@ -574,7 +574,7 @@ msgid "Disable WooCommerce widgets"
 msgstr ""
 
 #: inc/snippets/meta/disable-woocommerce-widgets.meta.php:14
-msgid "Unregisters default WooCommerce widgets to reduce bloat in the widget screen and improve performance by removing unused features."
+msgid "Unregisters all default WooCommerce widgets. Removes them from the widget administration screen and prevents them from rendering in widget areas."
 msgstr ""
 
 #: inc/snippets/meta/disable-wordpress-default-lazy-loading.meta.php:13
@@ -590,7 +590,7 @@ msgid "Disable XML-RPC and RSD link"
 msgstr ""
 
 #: inc/snippets/meta/disable-xmlrpc-rsdlink.meta.php:14
-msgid "Disables XML-RPC (often targeted by brute force or DDoS attacks) and removes the RSD link from the HTML head to reduce exposure."
+msgid "Disables XML-RPC and removes the RSD link from the HTML head. XML-RPC is often targeted by brute-force attacks and can be used in DDoS amplification attacks."
 msgstr ""
 
 #: inc/snippets/meta/hide-woocommerce-version.meta.php:13
@@ -598,7 +598,7 @@ msgid "Hide WooCommerce version"
 msgstr ""
 
 #: inc/snippets/meta/hide-woocommerce-version.meta.php:14
-msgid "Removes WooCommerce version info from HTTP headers and asset URLs. Reduces exposure of version number and makes it harder for attackers to target specific WooCommerce versions."
+msgid "Removes the WooCommerce version number from HTTP headers and asset URLs. Prevents the version from being visible in page source and enqueued file URLs."
 msgstr ""
 
 #: inc/snippets/meta/hide-wordpress-version.meta.php:13
@@ -606,7 +606,7 @@ msgid "Hide WordPress version"
 msgstr ""
 
 #: inc/snippets/meta/hide-wordpress-version.meta.php:14
-msgid "Removes WordPress version info from the head, generator, and asset URLs. Reduces exposure of version number and makes it harder for attackers to target specific WordPress versions."
+msgid "Removes the WordPress version number from the HTML head, RSS feeds, and asset URLs. Prevents the version from being visible in page source and enqueued file URLs."
 msgstr ""
 
 #: inc/snippets/meta/limit-post-revisions.meta.php:13
@@ -614,7 +614,7 @@ msgid "Limit post revisions to 10"
 msgstr ""
 
 #: inc/snippets/meta/limit-post-revisions.meta.php:14
-msgid "Keeps at most 10 revisions per post (or page). Older revisions are deleted when new ones are created. Reduces database size and improves performance."
+msgid "Limits post revisions to a maximum of 10 per post or page. Older revisions are automatically deleted when new ones are created."
 msgstr ""
 
 #: inc/snippets/meta/protect-wp-login.meta.php:13
@@ -622,7 +622,7 @@ msgid "Protect login from brute force"
 msgstr ""
 
 #: inc/snippets/meta/protect-wp-login.meta.php:14
-msgid "Hides detailed login errors and limits failed attempts per IP. After 5 failed tries, blocks that IP for 5 minutes."
+msgid "Hides detailed login error messages and limits failed login attempts per IP address. After 5 failed attempts, the IP is blocked for 5 minutes."
 msgstr ""
 
 #: inc/snippets/meta/protect-wp-login.meta.php:15
@@ -634,7 +634,7 @@ msgid "Remove WordPress default block patterns"
 msgstr ""
 
 #: inc/snippets/meta/remove-gutenberg-unwanted-block-patterns.meta.php:14
-msgid "Prevents WordPress from loading remote block patterns and removes the built-in core block patterns. Reduces editor clutter and improves performance by avoiding unnecessary data loading."
+msgid "Stops WordPress from loading remote block patterns and removes the built-in core block patterns from the editor. Reduces the number of patterns displayed in the block inserter."
 msgstr ""
 
 #: inc/snippets/meta/remove-help-button.meta.php:13
@@ -642,7 +642,7 @@ msgid "Remove Help tab"
 msgstr ""
 
 #: inc/snippets/meta/remove-help-button.meta.php:14
-msgid "Hides the Help tab on all admin screens. Reduces clutter if you don't use in-app help."
+msgid "Hides the Help tab on all admin screens. The tab is removed from the screen options area at the top right of each admin page."
 msgstr ""
 
 #: inc/snippets/meta/remove-rest-api-link.meta.php:13
@@ -650,7 +650,7 @@ msgid "Remove REST API links from page source"
 msgstr ""
 
 #: inc/snippets/meta/remove-rest-api-link.meta.php:14
-msgid "Prevents WordPress from adding REST API discovery links to the head section of the site. Reduces unnecessary HTML output and slightly improves performance while keeping REST API functionality available."
+msgid "Removes REST API discovery links from the HTML head section. The REST API itself remains functional; only the link tags that advertise its URL are removed."
 msgstr ""
 
 #: inc/snippets/meta/remove-thanks-for-using-wordpress-in-footer.meta.php:13
@@ -666,7 +666,7 @@ msgid "Remove WooCommerce default block patterns"
 msgstr ""
 
 #: inc/snippets/meta/remove-woocommerce-patterns.meta.php:14
-msgid "Removes all WooCommerce block patterns to avoid unnecessary pattern registration in the editor."
+msgid "Removes all WooCommerce block patterns from the editor. Reduces the number of patterns displayed in the block inserter."
 msgstr ""
 
 #: inc/snippets/meta/remove-wordpress-logo.meta.php:13
@@ -674,7 +674,7 @@ msgid "Remove WordPress logo from admin bar"
 msgstr ""
 
 #: inc/snippets/meta/remove-wordpress-logo.meta.php:14
-msgid "Removes the WordPress logo and its menu from the admin bar."
+msgid "Removes the WordPress logo and its associated menu from the admin bar."
 msgstr ""
 
 #: inc/snippets/meta/separate-gutenberg-core-block-styles.meta.php:13
@@ -682,7 +682,7 @@ msgid "Load block styles separately"
 msgstr ""
 
 #: inc/snippets/meta/separate-gutenberg-core-block-styles.meta.php:14
-msgid "Forces WordPress to load core block styles separately, improving performance by only loading the styles required for the blocks used on a page."
+msgid "Forces WordPress to load core block styles as separate files instead of inlining them. Each block loads only the stylesheet it requires, reducing the CSS payload on pages that use few blocks."
 msgstr ""
 
 #: assets/src/js/components/AutoconfigButton.js:21
@@ -718,7 +718,7 @@ msgid "Corporate website"
 msgstr ""
 
 #: assets/src/js/components/PresetsSidebar.js:9
-msgid "For business sites and portfolios. Focuses on security, performance, and removing unused features like RSS and author archives."
+msgid "For business sites and portfolios. Disables RSS, author archives, and other features typically unused on company sites."
 msgstr ""
 
 #: assets/src/js/components/PresetsSidebar.js:17
@@ -726,7 +726,7 @@ msgid "Blog"
 msgstr ""
 
 #: assets/src/js/components/PresetsSidebar.js:18
-msgid "For content-focused blogs. Keeps RSS and other blog features while improving performance and security."
+msgid "For content-focused sites. Keeps RSS and other blog-related features while disabling unnecessary assets."
 msgstr ""
 
 #: assets/src/js/components/PresetsSidebar.js:26
@@ -734,7 +734,7 @@ msgid "E-commerce"
 msgstr ""
 
 #: assets/src/js/components/PresetsSidebar.js:27
-msgid "For WooCommerce stores. Performance and security plus WooCommerce optimizations for faster checkout."
+msgid "For WooCommerce stores. Disables non-essential WooCommerce features and removes unused WordPress functionality."
 msgstr ""
 
 #: assets/src/js/components/PresetsSidebar.js:45
@@ -742,7 +742,7 @@ msgid "Choose a preset"
 msgstr ""
 
 #: assets/src/js/components/PresetsSidebar.js:47
-msgid "Not sure what to enable? Choose a preset that matches your site. Each preset turns on a set of features for that type of site."
+msgid "Not sure what to enable? Choose a preset that matches your site. Each preset enables a set of features for that type of site."
 msgstr ""
 
 #: assets/src/js/components/SaveButton.js:15

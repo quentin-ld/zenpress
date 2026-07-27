@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * Disables pingbacks, trackbacks, and the X-Pingback HTTP header.
+ *
+ * @since 1.0.0
+ */
+
 if (!defined('ABSPATH')) {
     exit;
 }

@@ -11,7 +11,7 @@ if (!defined('ABSPATH')) {
 
 return [
     'title' => __('Disable WooCommerce scripts and styles on non-shop pages', 'zenpress'),
-    'description' => __('Dequeues WooCommerce assets on pages where WooCommerce functionality is not required, such as homepage, blog posts, or custom pages. Helps improve performance by preventing unnecessary asset loading.', 'zenpress'),
+    'description' => __('Dequeues WooCommerce styles and scripts on pages where WooCommerce is not active, such as the homepage, blog posts, and custom pages. WooCommerce pages are not affected.', 'zenpress'),
     'category' => __('woocommerce', 'zenpress'),
     'subcategory' => __('performance', 'zenpress'),
     'weight' => 0,

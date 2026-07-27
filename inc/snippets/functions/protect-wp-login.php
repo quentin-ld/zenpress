@@ -4,12 +4,10 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-// Remove detailed login errors
 add_filter('login_errors', static function (): string {
     return __('Something went wrong. Try again.', 'zenpress');
 });
 
-// Limit login attempts (only when a valid IP is available to avoid site-wide lockout)
 add_filter('authenticate', static function (mixed $user, string $username, string $password): mixed {
     $ipAddress = filter_var(
         wp_unslash($_SERVER['REMOTE_ADDR'] ?? ''),

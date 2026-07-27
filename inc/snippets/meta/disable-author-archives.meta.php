@@ -12,7 +12,7 @@ if (!defined('ABSPATH')) {
 return [
     'title' => __('Disable author archives', 'zenpress'),
     'description' => __(
-        'Author archive URLs show "Page not found." Helps prevent listing usernames.',
+        'Author archive URLs show a 404 Page Not Found response. Prevents listing all posts by a specific author and hides usernames from the URL structure.',
         'zenpress'
     ),
     'category' => __('core', 'zenpress'),

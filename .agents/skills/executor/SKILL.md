@@ -10,7 +10,7 @@ description: >-
 
 Continue `/architect` work without chat history. **Use a worker-tier model.**
 
-Reply in US English.
+Reply in US English. Follow the WordPress Documentation Style Guide for all user-facing prose.
 
 ## Start
 
@@ -21,7 +21,7 @@ Reply in US English.
 
 ## Reference docs
 
-Grep one section only — never load whole `.agents/docs/` mirrors.
+Grep one section only — never load whole `.agents/docs/` mirrors. The WordPress Documentation Style Guide is at `.agents/docs/wordpress-documentation-style-guide-consolidated.md`.
 
 ## Plan changes
 

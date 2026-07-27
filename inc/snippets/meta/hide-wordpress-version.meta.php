@@ -1,6 +1,6 @@
 <?php
 /**
- * Metadata for hide-woocommerce-version.php
+ * Metadata for hide-wordpress-version.php
  *
  * @since 1.0.0
  */
@@ -11,7 +11,7 @@ if (!defined('ABSPATH')) {
 
 return [
     'title' => __('Hide WordPress version', 'zenpress'),
-    'description' => __('Removes WordPress version info from the head, generator, and asset URLs. Reduces exposure of version number and makes it harder for attackers to target specific WordPress versions.', 'zenpress'),
+    'description' => __('Removes the WordPress version number from the HTML head, RSS feeds, and asset URLs. Prevents the version from being visible in page source and enqueued file URLs.', 'zenpress'),
     'category' => __('core', 'zenpress'),
     'subcategory' => __('security', 'zenpress'),
     'weight' => 0,

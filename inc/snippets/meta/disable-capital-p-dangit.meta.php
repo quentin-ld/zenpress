@@ -12,7 +12,7 @@ if (!defined('ABSPATH')) {
 return [
     'title' => __('Disable "WordPress" spelling correction', 'zenpress'),
     'description' => __(
-        'Stops WordPress from changing "Wordpress" to "WordPress" in content. Saves a small amount of work on each page.',
+        'Stops the capitalization filter that corrects "Wordpress" to "WordPress" in titles and content. The filter runs on every page load; disabling it removes that processing step.',
         'zenpress'
     ),
     'category' => __('core', 'zenpress'),

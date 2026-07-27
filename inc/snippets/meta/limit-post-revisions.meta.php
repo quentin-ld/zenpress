@@ -12,7 +12,7 @@ if (!defined('ABSPATH')) {
 return [
     'title' => __('Limit post revisions to 10', 'zenpress'),
     'description' => __(
-        'Keeps at most 10 revisions per post (or page). Older revisions are deleted when new ones are created. Reduces database size and improves performance.',
+        'Limits post revisions to a maximum of 10 per post or page. Older revisions are automatically deleted when new ones are created.',
         'zenpress'
     ),
     'category' => __('core', 'zenpress'),

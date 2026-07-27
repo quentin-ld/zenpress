@@ -12,7 +12,7 @@ if (!defined('ABSPATH')) {
 return [
     'title' => __('Disable WordPress emoji scripts and styles', 'zenpress'),
     'description' => __(
-        'Removes emoji scripts, styles, and filters from frontend, backend, feeds, emails, and TinyMCE. Reduces unnecessary assets and improves performance.',
+        'Removes emoji detection script, styles, and filters from the front end, back end, feeds, emails, and TinyMCE. Reduces the number of assets loaded on each page.',
         'zenpress'
     ),
     'category' => __('core', 'zenpress'),

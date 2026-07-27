@@ -10,7 +10,7 @@
  * @license   GPL v2 or later
  *
  * Plugin Name: ZenPress
- * Description: Speed up and harden your site with a single click: cleans up unused features, protects security gaps, and configures cache integrations automatically.
+ * Description: Clean up unused WordPress features, close security gaps, and configure cache integrations from a single settings page.
  * Version: 2.2.5
  * Plugin URI: https://wordpress.org/plugins/zenpress/
  * Author: Quentin Le Duff
