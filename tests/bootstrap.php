@@ -5,11 +5,12 @@
  * @package zenpress
  */
 
-// Define constants directly — don't load inc/core/constants.php
-// which calls plugin_dir_path() (WordPress function, unavailable in unit tests).
-define('ZENPRESS_VERSION', '2.2.5');
-define('ZENPRESS_PLUGIN_FILE', dirname(__DIR__) . '/zenpress.php');
-define('ZENPRESS_PLUGIN_DIR', dirname(__DIR__) . '/');
+if (!defined('ABSPATH')) {
+    define('ABSPATH', true);
+}
+
+// Load constants from single source (no WordPress functions needed).
+require_once dirname(__DIR__) . '/inc/core/constants.php';
 
 // Load the plugin's core files for testing.
 require_once dirname(__DIR__) . '/inc/core/metadata.php';

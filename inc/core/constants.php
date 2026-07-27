@@ -13,7 +13,7 @@ if (!defined('ABSPATH')) {
 }
 
 define('ZENPRESS_PLUGIN_FILE', dirname(__DIR__, 2) . '/zenpress.php');
-define('ZENPRESS_PLUGIN_DIR', plugin_dir_path(ZENPRESS_PLUGIN_FILE));
+define('ZENPRESS_PLUGIN_DIR', dirname(__DIR__, 2) . '/');
 
 /** Plugin version (must match Version header in zenpress.php). */
 define('ZENPRESS_VERSION', '2.2.5');

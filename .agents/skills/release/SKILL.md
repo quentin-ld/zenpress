@@ -20,7 +20,7 @@ Do not bump versions without explicit owner authorization in this conversation.
 
 ## Version sync (lockstep)
 
-`updatronix.php` (`Version:` + `UPDATRONIX_VERSION`) · `composer.json` / `package.json` `version` · `readme.txt` `Stable tag:`
+`zenpress.php` (`Version:` + `ZENPRESS_VERSION`) · `composer.json` / `package.json` `version` · `readme.txt` `Stable tag:`
 
 Confirm version with owner before writing.
 
