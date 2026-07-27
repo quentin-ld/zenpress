@@ -1,10 +1,10 @@
 # WordPress Plugin & Theme Development — Engineering Documentation Library
 
-Last updated: 2026-05-05
+Last updated: 2026-07-27
 
 > See also: `AGENTS.md` at the plugin root — project facts, lint order, i18n protection, frozen files, and note metadata. Always-applied in compatible agent systems.
 
-**Single document:** Curated sections (tables, Agent Directives, project pointers) live **above** `<!-- updatronix:handbook-mirror:start -->`. Below that marker, an **auto-generated appendix** mirrors outbound WordPress.org handbook pages (run `python3 .agents/scripts/build_docs_library_consolidated.py` after changing **Key Resources** links above the marker — do not hand-edit the appendix).
+**Single document:** Curated sections (tables, Agent Directives, project pointers) live **above** `<!-- zenpress:handbook-mirror:start -->`. Below that marker, an **auto-generated appendix** mirrors outbound WordPress.org handbook pages. **Do not hand-edit the appendix.**
 
 This library serves as the authoritative reference for WordPress plugin and theme development, security, optimization, and accessibility. It is designed for both human developers and autonomous agents, ensuring all architectural decisions are grounded in official WordPress standards, W3C protocols, and best practices.
 
@@ -848,7 +848,7 @@ This library serves as the authoritative reference for WordPress plugin and them
 > **Frozen file.** `.agents/docs/wordpress-native-updates-reference.md` is **read-only for all agents**. Do not modify, rewrite, append to, or restructure this file under any circumstances. Only the project owner may authorize changes.
 
 - **`.agents/docs/wordpress-native-updates-reference.md`** — **WordPress core only:** discovery (§1.1–§1.10) vs application (§2.1–§2.13), **upgrader skins** (§2.5), **`wp-config.php` constants** (§5.10), **rollback** (§2.7), **locks** (§2.8), **Site Health** (§4.3), **`WP_Plugin_Dependencies`** (§2.6), entry points (§5.1–§5.13), **in-admin notices** vs **`wp_mail`** (§4.1–§4.6), **`automatic_updates_complete`** / results payload (**§4.7**), branch policy (`Core_Upgrader::should_update_to_version()` method and `auto_update_core` filter in **§1.3**, **§3.7**), full hook and filter reference (§6.1–§6.8), key core file paths and class reference (§7.1–§7.2).
-- **Updatronix plugin:** how this codebase consumes core (hooks, logger, REST, settings) lives in **`inc/`** and **`updatronix.php`** — there is no separate integration markdown; trace behaviour from source and the frozen reference above.
+- **ZenPress plugin:** how this codebase consumes core (hooks, logger, REST, settings) lives in **`inc/`** and **`zenpress.php`** — there is no separate integration markdown; trace behaviour from source and the frozen reference above.
 
 ### Key Resources (official)
 
@@ -971,7 +971,7 @@ This library serves as the authoritative reference for WordPress plugin and them
 
 **When to consult:** When an agent produces any user-facing content — readme.txt, inline help text, tooltips, tutorial steps, release notes, or any prose that will be read by humans outside the development team.
 
-**Inside this repo:** For article-level HelpHub rules (capitalization, punctuation, formatting, word list, linking), use `.agents/docs/wordpress-documentation-style-guide-consolidated.md` — a Markdown mirror of the official WordPress Documentation Style Guide (built from upstream `?output_format=md`). Each section carries a **`Source:`** URL for the canonical live page. For **PHPDoc and JSDoc block structure** (required tags, file headers, hook examples), use **WordPress Coding Standards** above and [Inline Documentation Standards](https://developer.wordpress.org/coding-standards/inline-documentation-standards/) — the consolidated file does not replace DevHub for that. Regenerate the mirror with `python3 .agents/scripts/build_style_guide_consolidated.py` after the URL manifest in `.agents/tasks/2026-05-05-documentation-wordpress-style-guide-consolidated.md` changes.
+**Inside this repo:** For article-level HelpHub rules (capitalization, punctuation, formatting, word list, linking), use `.agents/docs/wordpress-documentation-style-guide-consolidated.md` — a Markdown mirror of the official WordPress Documentation Style Guide (built from upstream `?output_format=md`). Each section carries a **`Source:`** URL for the canonical live page. For **PHPDoc and JSDoc block structure** (required tags, file headers, hook examples), use **WordPress Coding Standards** above and [Inline Documentation Standards](https://developer.wordpress.org/coding-standards/inline-documentation-standards/) — the consolidated file does not replace DevHub for that.
 
 ### Key Resources
 - [Documentation Team Handbook](https://make.wordpress.org/docs/handbook/documentation-team-handbook/)
@@ -1217,7 +1217,7 @@ When an agent encounters something worth preserving across projects, append it t
 
 Append entries under the most relevant existing section. Use the established format: a brief "When to consult" note, key resources (links), implementation patterns (tables where applicable), and agent directives. Keep entries concise and actionable.
 
-> Any agent that modifies `docs-library.md` must update the `Last updated` date at the top of the file to the current date (YYYY-MM-DD). **Edit only the curated region above `<!-- updatronix:handbook-mirror:start -->`.** After adding or removing **Key Resources** links there, run `python3 .agents/scripts/build_docs_library_consolidated.py` to refresh the appendix.
+> Any agent that modifies `docs-library.md` must update the `Last updated` date at the top of the file to the current date (YYYY-MM-DD). **Edit only the curated region above `<!-- zenpress:handbook-mirror:start -->`.** The appendix below the marker is auto-generated — do not hand-edit it.
 
 ### Documentation update reflexes
 
@@ -1232,19 +1232,15 @@ Append entries under the most relevant existing section. Use the established for
 | Translatable string added, removed, or changed | Flag to the human in chat: "Translatable string modified — retranslation required for: `{string}` in `{file}`." Add changelog entry. Run `composer run make:pot` once intentional. | Agent that touched the string |
 | New REST endpoint added | Document the route in the relevant agent note and add changelog entry. | `fullstack` (route), `interface-content` (docblock) |
 | New public hook exposed | PHPDoc on the hook, including `@since` and one example, plus changelog entry. | `interface-content` (PHPDoc), `fullstack` (signature) |
-| Version bump | All four anchors aligned (`Version:`, `UPDATRONIX_VERSION`, `composer.json` `version`, `Stable tag:`); promote the active changelog block to a versioned entry. | `release` |
+| Version bump | All four anchors aligned (`Version:`, `ZENPRESS_VERSION`, `composer.json` `version`, `Stable tag:`); promote the active changelog block to a versioned entry. | `release` |
 
 **Hard rule on translatable strings:** never silent-edit. Always flag to the human and append a changelog entry. See `AGENTS.md` § Hard Rules — i18n.
 
-<!-- updatronix:handbook-mirror:start -->
+<!-- zenpress:handbook-mirror:start -->
 
 ## Appendix: WordPress handbook sources (generated 2026-05-05T09:22:43Z)
 
-This section is **machine-generated**. Do not edit by hand — run:
-
-```bash
-python3 .agents/scripts/build_docs_library_consolidated.py
-```
+This section is **auto-generated** and should not be hand-edited.
 
 - **WordPress.org family** URLs are fetched as Markdown via `?output_format=md`.
 - **Other hosts** (GitHub, W3C, `web.dev`, …) appear as **stubs** only.
@@ -46334,4 +46330,4 @@ Status is managed by this spreadsheet: [https://docs.google.com/spreadsheets/d/1
 
 ---
 
-<!-- updatronix:handbook-mirror:end -->
+<!-- zenpress:handbook-mirror:end -->

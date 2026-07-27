@@ -3,16 +3,12 @@ title: "WordPress Documentation Style Guide (consolidated mirror)"
 generated_at: 2026-05-05T08:37:40Z
 source: make.wordpress.org/docs/style-guide + wordpress.org/documentation (WordPress Glossary)
 generator_note: .agents/scripts/build_style_guide_consolidated.py — urllib, upstream ?output_format=md
-copyright_notice: Convenience mirror for Updatronix contributors; canonical sources are the live URLs cited per section.
+copyright_notice: Convenience mirror for ZenPress contributors; canonical sources are the live URLs cited per section.
 ---
 
 # WordPress Documentation Style Guide — consolidated Markdown
 
-This file aggregates **official** WordPress Documentation Style Guide pages listed in `.agents/tasks/2026-05-05-documentation-wordpress-style-guide-consolidated.md` (URL manifest). Each block is fetched as Markdown via WordPress.org (`output_format=md`). **Canonical sources** are the live URLs on each `**Source:**` line. For **PHPDoc/JSDoc tag rules and block structure**, use [Inline Documentation Standards](https://developer.wordpress.org/coding-standards/inline-documentation-standards/) (see `.agents/docs/docs-library.md` → WordPress Coding Standards). Regenerate with:
-
-```bash
-python3 .agents/scripts/build_style_guide_consolidated.py
-```
+This file aggregates **official** WordPress Documentation Style Guide pages. Each block is fetched as Markdown via WordPress.org (`output_format=md`). **Canonical sources** are the live URLs on each `**Source:**` line. For **PHPDoc/JSDoc tag rules and block structure**, use [Inline Documentation Standards](https://developer.wordpress.org/coding-standards/inline-documentation-standards/) (see `.agents/docs/docs-library.md` → WordPress Coding Standards).
 
 ## Table of contents
 

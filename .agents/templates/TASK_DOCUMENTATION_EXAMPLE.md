@@ -22,7 +22,7 @@ priority: <!-- low | normal | high -->
 
 ## Trigger
 
-<!-- What change made this documentation task necessary? Reference the commit, task file, or event. Examples: "New REST endpoint added in task 2026-04-01-new-feature-export-log", "Public hook `updatronix_after_log` lacks a docblock", "readme.txt FAQ outdated after settings rework". -->
+<!-- What change made this documentation task necessary? Reference the commit, task file, or event. Examples: "New REST endpoint added in task 2026-04-01-new-feature-export-log", "Public hook `zenpress_caches_clear` lacks a docblock", "readme.txt FAQ outdated after settings rework". -->
 
 ## Target surface
 
@@ -82,8 +82,8 @@ Reminder bullets (details and edge cases live in the agent profile and docs abov
 
 - `.agents/docs/wordpress-documentation-style-guide-consolidated.md` — HelpHub prose mirror; hard constraints and checklist.
 - `.agents/docs/docs-library.md` — WordPress Documentation Standards; DevHub docblock structure.
-- `.agents/docs/wordpress-documentation-style-guide-consolidated.md` — HelpHub Documentation Style Guide (generated; regenerate with `python3 .agents/scripts/build_style_guide_consolidated.py` when the URL manifest in `.agents/tasks/2026-05-05-documentation-wordpress-style-guide-consolidated.md` changes).
-- `.agents/docs/docs-library.md` — WordPress Documentation Standards, WordPress Coding Standards (Inline Documentation Standards), Internationalization & Localization, **WordPress native updates (core)** (includes generated handbook appendix — refresh with `python3 .agents/scripts/build_docs_library_consolidated.py` when Key Resources change).
+- `.agents/docs/wordpress-documentation-style-guide-consolidated.md` — HelpHub Documentation Style Guide (generated Markdown mirror; hand-maintained).
+- `.agents/docs/docs-library.md` — WordPress Documentation Standards, WordPress Coding Standards (Inline Documentation Standards), Internationalization & Localization, **WordPress native updates (core)** (includes generated handbook appendix; hand-maintained).
 - `.agents/docs/wordpress-native-updates-reference.md` — when a docblock documents behaviour tied to the core update lifecycle (`automatic_updates_complete`, auto-update filters, etc.); cite the frozen reference only.
 
 ## When to use this template instead of X
