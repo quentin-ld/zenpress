@@ -11,24 +11,21 @@ import { capitalizeCategory } from '../utils/snippets';
  * @return {JSX.Element} Subcategory block (heading + snippet toggles).
  */
 export function SnippetSubcategory({ subcategory, items, onToggle }) {
-	const slug = subcategory.toLowerCase().replace(/\s+/g, '-');
+    const slug = subcategory.toLowerCase().replace(/\s+/g, '-');
 
-	return (
-		<div
-			key={subcategory}
-			className={`zenpress-subcategory zenpress-subcategory-${slug}`}
-		>
-			<hr />
-			<h3>{capitalizeCategory(subcategory)}</h3>
-			{items.map(({ name, data }) => (
-				<SnippetToggleControl
-					key={name}
-					label={data.title || name}
-					value={data?.['enable-snippet'] || false}
-					onChange={() => onToggle(name)}
-					help={data.description || ''}
-				/>
-			))}
-		</div>
-	);
+    return (
+        <div key={subcategory} className={`zenpress-subcategory zenpress-subcategory-${slug}`}>
+            <hr />
+            <h3>{capitalizeCategory(subcategory)}</h3>
+            {items.map(({ name, data }) => (
+                <SnippetToggleControl
+                    key={name}
+                    label={data.title || name}
+                    value={data?.['enable-snippet'] || false}
+                    onChange={() => onToggle(name)}
+                    help={data.description || ''}
+                />
+            ))}
+        </div>
+    );
 }

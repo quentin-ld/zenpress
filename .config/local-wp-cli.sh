@@ -175,9 +175,14 @@ if [[ -z "$SSH_ENTRY" ]] && LOCAL_SITE_ID="$(_find_local_site_id || true)" && [[
 fi
 
 if [[ -n "$SSH_ENTRY" ]]; then
+	# Save system PATH before sourcing Local's environment, which may override it.
+	SYSTEM_PATH="$PATH"
 	_source_ssh_entry_exports "$SSH_ENTRY"
+	PATH="$PATH:$SYSTEM_PATH"
 elif LOCAL_SITE_ID="$(_find_local_site_id || true)" && [[ -n "$LOCAL_SITE_ID" ]]; then
+	SYSTEM_PATH="$PATH"
 	_source_local_from_sites_json "$LOCAL_SITE_ID"
+	PATH="$PATH:$SYSTEM_PATH"
 else
 	echo "Local WP not detected for WordPress path:" >&2
 	echo "  ${WP_ROOT}" >&2

@@ -42,7 +42,7 @@ Skills define **what** to do. **Model tier** defines **which capability level** 
 |------|----------|-------------------------|
 | **Planning** | Answer not yet in the task file — clarify, design, trade-offs, ambiguous scope | `/architect` Phase 1–3 (plan) · low-risk `/reviewer` |
 | **Worker** | Task file is the contract — implement, lint, fix, rotate threads | `/architect` Phase 4–5 (execute) · `/resume` · `/release` |
-| **Audit** | Judge only — no implementation; security and integration gates | `/reviewer` when required · `/security` always |
+| **Audit** | Judge only — no implementation; security and integration gates | `/reviewer` when required · `/security` always · `/qa` always |
 
 **Rules**
 

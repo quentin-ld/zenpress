@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-02-26T16:25:36+00:00\n"
+"POT-Creation-Date: 2026-07-27T11:53:00+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: zenpress\n"
@@ -137,7 +137,7 @@ msgid "Autoptimize configuration failed."
 msgstr ""
 
 #: inc/classes/integrations.php:147
-#: assets/src/js/config/integrations.js:25
+#: assets/src/js/config/integrations.js:22
 msgid "Cache Enabler configured."
 msgstr ""
 
@@ -146,7 +146,7 @@ msgid "Cache Enabler configuration failed."
 msgstr ""
 
 #: inc/classes/integrations.php:158
-#: assets/src/js/config/integrations.js:39
+#: assets/src/js/config/integrations.js:33
 msgid "SQLite Object Cache configured."
 msgstr ""
 
@@ -685,31 +685,31 @@ msgstr ""
 msgid "Forces WordPress to load core block styles separately, improving performance by only loading the styles required for the blocks used on a page."
 msgstr ""
 
-#: assets/src/js/components/AutoconfigButton.js:32
+#: assets/src/js/components/AutoconfigButton.js:21
 msgid "Applying…"
 msgstr ""
 
-#: assets/src/js/components/BulkSnippetActions.js:29
+#: assets/src/js/components/BulkSnippetActions.js:20
 msgid "Enable all"
 msgstr ""
 
-#: assets/src/js/components/BulkSnippetActions.js:36
+#: assets/src/js/components/BulkSnippetActions.js:23
 msgid "Disable all"
 msgstr ""
 
-#: assets/src/js/components/IntegrationsBlock.js:26
+#: assets/src/js/components/IntegrationsBlock.js:21
 msgid "Integrations"
 msgstr ""
 
-#: assets/src/js/components/IntegrationsBlock.js:28
+#: assets/src/js/components/IntegrationsBlock.js:23
 msgid "Show cache actions in admin bar"
 msgstr ""
 
-#: assets/src/js/components/IntegrationsBlock.js:31
+#: assets/src/js/components/IntegrationsBlock.js:26
 msgid "Adds a ZenPress menu to the admin bar with \"Clear all caches\" and options for each active cache (page, static files, object cache). Only appears when Cache Enabler, Autoptimize, or SQLite Object Cache is active. Hides those plugins' own admin bar buttons."
 msgstr ""
 
-#: assets/src/js/components/PresetCard.js:28
+#: assets/src/js/components/PresetCard.js:24
 msgid "Apply preset"
 msgstr ""
 
@@ -745,7 +745,7 @@ msgstr ""
 msgid "Not sure what to enable? Choose a preset that matches your site. Each preset turns on a set of features for that type of site."
 msgstr ""
 
-#: assets/src/js/components/SaveButton.js:20
+#: assets/src/js/components/SaveButton.js:15
 msgid "Save"
 msgstr ""
 
@@ -753,51 +753,51 @@ msgstr ""
 msgid "Autoptimize setup failed. Is Autoptimize installed and active?"
 msgstr ""
 
-#: assets/src/js/config/integrations.js:16
+#: assets/src/js/config/integrations.js:13
 msgid "Set up Autoptimize"
 msgstr ""
 
-#: assets/src/js/config/integrations.js:17
+#: assets/src/js/config/integrations.js:14
 msgid "Apply recommended settings: minify JS and CSS, combine CSS, static file caching, 404 fallbacks."
 msgstr ""
 
-#: assets/src/js/config/integrations.js:26
+#: assets/src/js/config/integrations.js:23
 msgid "Cache Enabler setup failed. Is Cache Enabler installed and active?"
 msgstr ""
 
-#: assets/src/js/config/integrations.js:30
+#: assets/src/js/config/integrations.js:24
 msgid "Set up Cache Enabler"
 msgstr ""
 
-#: assets/src/js/config/integrations.js:31
+#: assets/src/js/config/integrations.js:25
 msgid "Apply recommended settings: clear cache on content changes, WebP, compression, minify HTML."
 msgstr ""
 
-#: assets/src/js/config/integrations.js:40
+#: assets/src/js/config/integrations.js:34
 msgid "SQLite Object Cache setup failed. Is it installed and active?"
 msgstr ""
 
-#: assets/src/js/config/integrations.js:44
+#: assets/src/js/config/integrations.js:35
 msgid "Set up SQLite Object Cache"
 msgstr ""
 
-#: assets/src/js/config/integrations.js:45
+#: assets/src/js/config/integrations.js:36
 msgid "Apply recommended settings. Enable \"Use APCu\" in the plugin if available."
 msgstr ""
 
-#: assets/src/js/hooks/useSettings.js:58
+#: assets/src/js/hooks/useSettings.js:49
 msgid "Settings could not be loaded. Refresh the page."
 msgstr ""
 
-#: assets/src/js/hooks/useSettings.js:88
+#: assets/src/js/hooks/useSettings.js:73
 msgid "Settings saved."
 msgstr ""
 
-#: assets/src/js/hooks/useSettings.js:91
+#: assets/src/js/hooks/useSettings.js:75
 msgid "Settings could not be saved. Try again."
 msgstr ""
 
-#: assets/src/js/utils/snippets.js:43
-#: assets/src/js/utils/snippets.js:46
+#: assets/src/js/utils/snippets.js:32
+#: assets/src/js/utils/snippets.js:33
 msgid "Uncategorized"
 msgstr ""

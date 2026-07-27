@@ -1,6 +1,9 @@
 <?php
 /**
- * Plugin path constants.
+ * Plugin constants.
+ *
+ * Single source of truth for all ZenPress constants.
+ * Must be loaded before any other plugin file.
  *
  * @package zenpress
  */
@@ -9,11 +12,8 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-if (!defined('ZENPRESS_PLUGIN_FILE')) {
-    $zenpress_plugin_file = dirname(__DIR__, 2) . '/zenpress.php';
-    define('ZENPRESS_PLUGIN_FILE', is_file($zenpress_plugin_file) ? $zenpress_plugin_file : __FILE__);
-}
+define('ZENPRESS_PLUGIN_FILE', dirname(__DIR__, 2) . '/zenpress.php');
+define('ZENPRESS_PLUGIN_DIR', plugin_dir_path(ZENPRESS_PLUGIN_FILE));
 
-if (!defined('ZENPRESS_PLUGIN_DIR')) {
-    define('ZENPRESS_PLUGIN_DIR', plugin_dir_path(ZENPRESS_PLUGIN_FILE));
-}
+/** Plugin version (must match Version header in zenpress.php). */
+define('ZENPRESS_VERSION', '2.2.5');

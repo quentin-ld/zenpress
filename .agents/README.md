@@ -4,7 +4,7 @@ Agent configuration. Always-on rules: `../AGENTS.md`. Human playbook: `HOW_TO_US
 
 | Path | Role |
 |------|------|
-| `skills/` | `/architect` · `/resume` · `/reviewer` · `/security` · `/release` |
+| `skills/` | `/architect` · `/resume` · `/reviewer` · `/security` · `/release` · `/qa` |
 | `templates/` | Reference task patterns (agent writes real tasks) |
 | `tasks/` | Task files — external memory (gitignored) |
 | `notes/` | Review & audit deliverables (gitignored) |

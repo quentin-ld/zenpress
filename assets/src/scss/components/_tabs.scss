@@ -1,6 +1,7 @@
-@use '../abstracts/variables' as *;
+@use "../abstracts/variables" as *;
 
 .zenpress {
+
 	&-tabs {
 		display: grid;
 		width: 100%;
@@ -75,7 +76,7 @@
 				background-color: $color-accent-active-bg;
 
 				&::after {
-					content: '';
+					content: "";
 					position: absolute;
 					right: 0;
 					top: 0;
@@ -87,23 +88,23 @@
 
 			// Category-specific dashicons
 			&--category-core::before {
-				content: '\f226'; // dashicons-dashboard
+				content: "\f226"; // dashicons-dashboard
 			}
 
 			&--category-gutenberg::before {
-				content: '\f12b'; // dashicons-block-default
+				content: "\f12b"; // dashicons-block-default
 			}
 
 			&--category-woocommerce::before {
-				content: '\f174'; // dashicons-cart
+				content: "\f174"; // dashicons-cart
 			}
 
 			&--category-tools::before {
-				content: '\f107'; // dashicons-admin-tools
+				content: "\f107"; // dashicons-admin-tools
 			}
 
 			&--category-ads-blocker::before {
-				content: '\f332'; // dashicons-superhero
+				content: "\f332"; // dashicons-superhero
 			}
 
 			.zenpress-tabs__list--vertical & {
@@ -114,7 +115,6 @@
 
 		&__panel {
 			flex: 1;
-			padding: 0;
 			min-width: 0;
 			height: $tab-panel-height;
 			max-height: $tab-panel-height;

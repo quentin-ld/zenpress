@@ -9,32 +9,29 @@ import { useRef, useLayoutEffect } from '@wordpress/element';
  * @param {Function}    onChange  - Change handler to call when Enter is pressed.
  */
 const addEnterKeySupport = (container, onChange) => {
-	if (!container) {
-		return;
-	}
+    if (!container) {
+        return;
+    }
 
-	const handleKeyDown = (e) => {
-		if (e.key === 'Enter') {
-			const toggleInput = container.querySelector(
-				'input[type="checkbox"]'
-			);
-			const ownerDocument = container.ownerDocument || document;
-			if (
-				toggleInput &&
-				(ownerDocument.activeElement === toggleInput ||
-					container.contains(ownerDocument.activeElement))
-			) {
-				e.preventDefault();
-				e.stopPropagation();
-				onChange();
-			}
-		}
-	};
+    const handleKeyDown = (e) => {
+        if (e.key === 'Enter') {
+            const toggleInput = container.querySelector('input[type="checkbox"]');
+            const ownerDocument = container.ownerDocument || document;
+            if (
+                toggleInput &&
+                (ownerDocument.activeElement === toggleInput || container.contains(ownerDocument.activeElement))
+            ) {
+                e.preventDefault();
+                e.stopPropagation();
+                onChange();
+            }
+        }
+    };
 
-	container.addEventListener('keydown', handleKeyDown);
-	return () => {
-		container.removeEventListener('keydown', handleKeyDown);
-	};
+    container.addEventListener('keydown', handleKeyDown);
+    return () => {
+        container.removeEventListener('keydown', handleKeyDown);
+    };
 };
 
 /**
@@ -51,21 +48,15 @@ const addEnterKeySupport = (container, onChange) => {
  * @return {JSX.Element} The toggle control.
  */
 export const SnippetToggleControl = ({ label, value, onChange, help }) => {
-	const containerRef = useRef(null);
+    const containerRef = useRef(null);
 
-	useLayoutEffect(() => {
-		return addEnterKeySupport(containerRef.current, onChange);
-	}, [onChange]);
+    useLayoutEffect(() => {
+        return addEnterKeySupport(containerRef.current, onChange);
+    }, [onChange]);
 
-	return (
-		<div ref={containerRef}>
-			<ToggleControl
-				label={label}
-				checked={value}
-				onChange={onChange}
-				help={help}
-				__nextHasNoMarginBottom
-			/>
-		</div>
-	);
+    return (
+        <div ref={containerRef}>
+            <ToggleControl label={label} checked={value} onChange={onChange} help={help} __nextHasNoMarginBottom />
+        </div>
+    );
 };

@@ -18,7 +18,7 @@
  * Text Domain: zenpress
  * Domain Path: /languages/
  * Requires at least: 6.0
- * Tested up to: 6.9
+ * Tested up to: 7.0
  * Requires PHP: 8.1
  * License URI: https://www.gnu.org/licenses/old-licenses/gpl-2.0.html/
  * License: GPL v2 or later
@@ -37,12 +37,6 @@
 if (!defined('ABSPATH')) {
     exit;
 }
-
-define('ZENPRESS_PLUGIN_FILE', __FILE__);
-define('ZENPRESS_PLUGIN_DIR', plugin_dir_path(__FILE__));
-
-/** Plugin version (must match Version header above). */
-define('ZENPRESS_VERSION', '2.2.5');
 
 require_once __DIR__ . '/inc/core/constants.php';
 require_once __DIR__ . '/inc/core/metadata.php';

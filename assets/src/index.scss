@@ -1,10 +1,6 @@
-@use 'scss/abstracts/variables';
-
-@use 'scss/base/typography';
-
-@use 'scss/components/button';
-@use 'scss/components/notice';
-@use 'scss/components/tabs';
-@use 'scss/components/toggle-control';
-
-@use 'scss/pages/settings';
+@use "scss/abstracts/variables";
+@use "scss/components/button";
+@use "scss/components/notice";
+@use "scss/components/tabs";
+@use "scss/components/toggle-control";
+@use "scss/pages/settings";

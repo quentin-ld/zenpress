@@ -13,20 +13,16 @@ import { Button } from '@wordpress/components';
  * @return {JSX.Element} Single preset card (title, description, Enable button).
  */
 export function PresetCard({ icon, title, description, presetId, onEnable }) {
-	return (
-		<>
-			<hr />
-			<h3>
-				{icon} {title}
-			</h3>
-			<p>{description}</p>
-			<Button
-				variant="secondary"
-				onClick={() => onEnable(presetId)}
-				__next40pxDefaultSize
-			>
-				{__('Apply preset', 'zenpress')}
-			</Button>
-		</>
-	);
+    return (
+        <>
+            <hr />
+            <h3>
+                {icon} {title}
+            </h3>
+            <p>{description}</p>
+            <Button variant="secondary" onClick={() => onEnable(presetId)} __next40pxDefaultSize>
+                {__('Apply preset', 'zenpress')}
+            </Button>
+        </>
+    );
 }

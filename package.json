@@ -13,7 +13,7 @@
     "start": "wp-scripts start assets/src/index.js --output-path=assets/build",
     "build": "wp-scripts build assets/src/index.js --output-path=assets/build",
     "setup": "bash bin/setup-dev.sh",
-    "test:all": "composer run verify:all && composer run lint:pcp && npm run lint && npm run lint:css && npm run format",
+    "test:all": "composer run verify:all && composer run lint:pcp && npm run lint:fix && npm run lint:css:fix && npm run format:fix",
     "build:all": "npm run test:all && composer run make:pot && npm run build",
     "zip": "node .config/zip.js"
   },
@@ -30,6 +30,7 @@
     "eslint-plugin-jsx-a11y": "^6.10.2",
     "eslint-plugin-prettier": "^5.5.4",
     "eslint-plugin-react": "^7.37.5",
-    "prettier": "^3.6.2"
+    "prettier": "^3.6.2",
+    "typescript": "^5.5.4"
   }
 }
