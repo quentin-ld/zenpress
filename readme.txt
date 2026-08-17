@@ -3,8 +3,8 @@ Contributors: @quentinldd
 Donate link: https://github.com/sponsors/quentin-ld/
 Tags: optimization, performance, security, woocommerce
 Requires at least: 6.0
-Tested up to: 7.0
-Stable tag: 2.2.6
+Tested up to: 7.1
+Stable tag: 2.2.7
 Requires PHP: 8.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html/
@@ -164,6 +164,9 @@ ZenPress is compatible with multisite networks. You can activate it across the e
 Visit the official support forum to share ideas. Developers can contribute directly on GitHub.
 
 == Changelog ==
+
+= 2.2.7 =
+- Tested up to WordPress 7.1.
 
 = 2.2.6 =
 - Documentation : Rewrote all snippet descriptions, inline comments, and plugin documentation to follow the [WordPress Documentation Style Guide](https://make.wordpress.org/docs/style-guide/). Descriptions now document boundaries, side effects, and available filters.
