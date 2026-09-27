@@ -2054,8 +2054,12 @@ cmd_counterfactual() {
 		# The pre-image is read here rather than reused from the candidate pass,
 		# because the pass that builds `covered_candidates` keeps only the three
 		# fields the loop consumes.
-		local pre_image substituted offset end escaped
+		local pre_image substituted offset end escaped previous_line
 		pre_image="$(sed -n "${line}p" "$PROJECT_ROOT/$file" 2>/dev/null || true)"
+		# The line above, because that is where a sweep writes the annotation the
+		# other gate reads and Infection honours: see
+		# `_counterfactual_other_gate_note`.
+		previous_line="$(sed -n "$(( line - 1 ))p" "$PROJECT_ROOT/$file" 2>/dev/null || true)"
 
 		# Where the candidate pass found the token: outside the string literals
 		# and outside the comment, so the line the substitution produces is one a
@@ -2134,7 +2138,7 @@ cmd_counterfactual() {
 				# C2: and the other gate, named where the claim is printed. A
 				# report, not a failure — `mutation` is the gate that decides.
 				local other_gate
-				other_gate="$(_counterfactual_other_gate_note "$pre_image" || true)"
+				other_gate="$(_counterfactual_other_gate_note "$pre_image" "$previous_line" || true)"
 				if [[ -n "$other_gate" ]]; then
 					printf '  %-46s %s\n' "" "$other_gate"
 				fi
@@ -2637,13 +2641,23 @@ _counterfactual_spaceship_only() {
 # mutant was a `TrueValue`, `CastString`, `Coalesce` or `Foreach_` twin on a line
 # the counterfactual had just classified.
 #
+# The annotation is read on the line **or on the line above it**, which is where a
+# sweep writes it and where Infection reads it: `updatronix`'s
+# `class-updatronix-export-body-builder.php` carries `// @infection-ignore-all.`
+# on line 626 over the statement on 627, and a note asked only about line 627
+# told the reader that an annotated statement was unannotated — the defect this
+# command exists to report, one turn along. Measured on that line: Infection
+# generated no mutant for it, and the run's one mutant was `Foreach_` on the
+# enclosing loop at 621, killed.
+#
 # Prints nothing when the project has no Infection config — the other gate is not
-# there to run — or when the line already carries the annotation.
+# there to run — or when the statement already carries the annotation.
 _counterfactual_other_gate_note() {
-	local line="$1"
+	local line="$1" previous="${2:-}"
 	[[ -n "$(_infection_config)" ]] || return 0
 	[[ "$line" == *"@infection-ignore-all"* ]] && return 0
-	printf '%s' "— the other gate: \`mutation\` reads \`@infection-ignore-all\` on the statement, and this line does not carry it, so Infection may still judge it. Run \`bin/harness mutation\` too (DESIGN.md section 5)"
+	[[ "$previous" == *"@infection-ignore-all"* ]] && return 0
+	printf '%s' "— the other gate: \`mutation\` reads \`@infection-ignore-all\` on the statement or on the line above it, and this line carries neither, so Infection may still judge it. Run \`bin/harness mutation\` too (DESIGN.md section 5)"
 }
 
 # Where, on this line, the substitution list's `$2` first occurs **in the code**:
