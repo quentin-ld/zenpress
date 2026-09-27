@@ -1424,18 +1424,29 @@ cmd_coverage() {
 		--configuration=${config@Q} --coverage-text"
 }
 
+# The Infection config this project has, or nothing.
+#
+# One function because two commands ask the question now: `cmd_mutation` to run
+# the gate, and the counterfactual's classification report to say whether the
+# other gate is there to be run at all. Two spellings of the list would be a
+# second declaration of the same fact.
+_infection_config() {
+	local candidate
+	for candidate in infection.json5 infection.json infection.json5.dist infection.json.dist; do
+		if [[ -f "$PROJECT_ROOT/$candidate" ]]; then
+			printf '%s' "$candidate"
+			return 0
+		fi
+	done
+	return 0
+}
+
 cmd_mutation() {
 	_require_test_layer || return 0
 	step "Mutation testing on the diff (anti-tautology)"
 
 	local config=""
-	local candidate
-	for candidate in infection.json5 infection.json infection.json5.dist infection.json.dist; do
-		if [[ -f "$PROJECT_ROOT/$candidate" ]]; then
-			config="$candidate"
-			break
-		fi
-	done
+	config="$(_infection_config)"
 	if [[ -z "$config" ]]; then
 		fail "no infection config. The harness owns this file: run \`harness sync\`
   from the generator repository.
@@ -1841,7 +1852,12 @@ cmd_counterfactual() {
 	# a comment. Counted rather than silently dropped: a line this gate did not
 	# ask about has to be a number in the report, not an absence that reads the
 	# same as a line nothing happened to.
-	local comment_only=0 outside_code=0
+	# Changed lines carrying a substitution token the gate cannot substitute:
+	# only inside the classification comment, only inside a `<=>`, or only
+	# inside a string literal or a comment. Counted rather than silently
+	# dropped: a line this gate did not ask about has to be a number in the
+	# report, not an absence that reads the same as a line nothing happened to.
+	local comment_only=0 outside_code=0 spaceship_only=0
 	while read -r target; do
 		[[ -n "$target" ]] || continue
 		file="${target%:*}"
@@ -1881,6 +1897,12 @@ cmd_counterfactual() {
 				# `code != original` is exactly "the line carries a marker", so
 				# this asks the question only of the lines that can have one.
 				comment_only=$(( comment_only + 1 ))
+			elif [[ -n "$(_counterfactual_spaceship_only "$original")" ]]; then
+				# A `<=` the gate refuses because it is half of a `<=>` is a
+				# line it did not ask about, so it is a number here rather than
+				# nothing -- asked before `outside_code`, which would otherwise
+				# claim it and say "inside a string literal or a comment".
+				spaceship_only=$(( spaceship_only + 1 ))
 			elif [[ -n "$(_counterfactual_outside_code "$original")" ]]; then
 				outside_code=$(( outside_code + 1 ))
 			fi
@@ -1980,6 +2002,10 @@ cmd_counterfactual() {
 	if [[ "$outside_code" -gt 0 ]]; then
 		printf '  %s of them carry the token only inside a string literal or a comment, so nothing was substituted\n' \
 			"$outside_code"
+	fi
+	if [[ "$spaceship_only" -gt 0 ]]; then
+		printf '  %s of them carry `<=` only inside a `<=>` — the spaceship operator, not a comparison — so nothing was substituted\n' \
+			"$spaceship_only"
 	fi
 
 	if [[ "$covered_total" -eq 0 ]]; then
@@ -2105,6 +2131,13 @@ cmd_counterfactual() {
 				# place to re-litigate it. Counted apart, and the claim is printed.
 				printf '  %-46s %s  %s\n' "${file}:${line}" "$pattern -> $replacement" "CLASSIFIED equivalent"
 				printf '  %-46s %s\n' "" "— ${class_reason[$target]}"
+				# C2: and the other gate, named where the claim is printed. A
+				# report, not a failure — `mutation` is the gate that decides.
+				local other_gate
+				other_gate="$(_counterfactual_other_gate_note "$pre_image" || true)"
+				if [[ -n "$other_gate" ]]; then
+					printf '  %-46s %s\n' "" "$other_gate"
+				fi
 				classified=$(( classified + 1 ))
 			elif [[ -n "$classification" ]]; then
 				# The line is classified, and not for *this* substitution — S2.
@@ -2564,6 +2597,55 @@ _counterfactual_outside_code() {
 	printf '%s' "$first"
 }
 
+# The substitution token a line carries only as half of a `<=>`.
+#
+# `<=` is in the pattern list because `$a <= $b` is a comparison worth
+# substituting. `<=>` is a different operator — `<`, `=`, `>` — and the
+# substitution changes its *kind* rather than its direction. Measured on
+# updatronix's `inc/classes/class-updatronix-security.php:190`:
+#
+#   usort( $path_prefixes, static fn ( string $a, string $b ): int => strlen( $b ) <=> strlen( $a ) );
+#
+# became `… strlen( $b ) <> strlen( $a ) );`, which `php -l` accepts, so the gate
+# checked an operator the line did not carry and reported the line as a
+# survivor — a finding that is not one, in the command whose whole job is to
+# produce findings. `updatronix-pro` has no spaceship operator, which is why it
+# was invisible there.
+#
+# Answers with the token, so the report can be specific, and with nothing when
+# the code carries a substitutable one of its own.
+_counterfactual_spaceship_only() {
+	local original="$1" code pattern replacement first=""
+	code="$(_counterfactual_code "$original")"
+	[[ "$code" == *"<=>"* ]] || return 0
+	while IFS= read -r pattern && IFS= read -r replacement; do
+		[[ -n "$pattern" ]] || continue
+		[[ -n "$(_counterfactual_find "$code" "$pattern")" ]] && return 0
+		[[ -z "$first" && "$code" == *"$pattern"* ]] && first="$pattern"
+	done < <(_counterfactual_patterns)
+	printf '%s' "$first"
+}
+
+# The other gate's claim, said where a classification is printed — C2.
+#
+# The `// counterfactual: equivalent` marker and `@infection-ignore-all` are two
+# gates' claims. This command reads the first; Infection reads the second, at
+# statement granularity, which is the granularity Infection works at. A line
+# classified for one is not classified for the other, and a sweep runs both:
+# measured when S3 was first pushed, `mutation` put the covered MSI at 69 %
+# against a 70 % floor — 36 mutants, 25 killed, 11 escaped — and every escaped
+# mutant was a `TrueValue`, `CastString`, `Coalesce` or `Foreach_` twin on a line
+# the counterfactual had just classified.
+#
+# Prints nothing when the project has no Infection config — the other gate is not
+# there to run — or when the line already carries the annotation.
+_counterfactual_other_gate_note() {
+	local line="$1"
+	[[ -n "$(_infection_config)" ]] || return 0
+	[[ "$line" == *"@infection-ignore-all"* ]] && return 0
+	printf '%s' "— the other gate: \`mutation\` reads \`@infection-ignore-all\` on the statement, and this line does not carry it, so Infection may still judge it. Run \`bin/harness mutation\` too (DESIGN.md section 5)"
+}
+
 # Where, on this line, the substitution list's `$2` first occurs **in the code**:
 # not inside a string literal and not inside a comment. Prints the 0-based offset,
 # or nothing when the token only ever appears inside one.
@@ -2611,7 +2693,20 @@ _counterfactual_find() {
 				continue
 			fi
 		fi
-		[[ "${line:i:lp}" == "$pattern" ]] && { printf '%s' "$i"; return 0; }
+		[[ "${line:i:lp}" == "$pattern" ]] && {
+			# A `<=` inside a `<=>` is the spaceship operator, not a comparison
+			# — S1's class with the substitution in the wrong *operator* rather
+			# than the wrong region. Substituting it produces `<>`, which parses
+			# and means something else, so the gate would check an operator the
+			# line does not carry and report the line as a survivor. Measured on
+			# updatronix: see `_counterfactual_spaceship_only`.
+			if [[ "$pattern" == "<=" && "${line:i+lp:1}" == ">" ]]; then
+				i=$(( i + 1 ))
+				continue
+			fi
+			printf '%s' "$i"
+			return 0
+		}
 		i=$(( i + 1 ))
 	done
 	return 1

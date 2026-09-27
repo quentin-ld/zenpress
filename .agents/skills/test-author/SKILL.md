@@ -214,6 +214,19 @@ by the classification comment, or only by a string literal or a comment — so a
 line you expected the gate to check and did not see is a number in the output
 rather than a silence. `DESIGN.md` section 5 lists the whole report.
 
+**A classification is one gate's claim, and there are two gates.** The marker
+above is what `bin/harness counterfactual` reads on the line. `bin/harness
+mutation` is Infection, its mutator set and its granularity are different, and
+what it reads is `@infection-ignore-all` — statement-granular, which is the
+granularity Infection works at. A line classified for one is **not** classified
+for the other, and a sweep runs both. Measured on `updatronix`: the first push of
+a swept file had `mutation` at 69 % covered MSI against a 70 % floor — 36
+mutants, 25 killed, 11 escaped — and every escaped mutant was a `TrueValue`,
+`CastString`, `Coalesce` or `Foreach_` twin on a line the counterfactual had just
+classified. When a run reports `CLASSIFIED equivalent` on a line that carries no
+`@infection-ignore-all`, it prints a line naming the other gate. That is a
+reminder to run it, not a failure: `mutation` is the gate that can decide.
+
 ## Three rules that catch most tautologies
 
 **Assert the specific, not the plausible.** `assertIsArray( $result )` where the
