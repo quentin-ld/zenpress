@@ -28,7 +28,7 @@ The `TASK_*.md` files in this folder stay unchanged so they remain available as 
 | `TASK_ACCESSIBILITY_AUDIT_EXAMPLE.md` | WCAG 2.1/2.2 AA review: keyboard nav, ARIA, contrast, focus management |
 | `TASK_I18N_EXAMPLE.md` | Internationalization: translatable strings, JS translations, POT generation |
 | `TASK_TESTING_EXAMPLE.md` | Write or fix automated tests: PHPUnit, Jest, Playwright E2E |
-| `TASK_DOCUMENTATION_EXAMPLE.md` | PHPDoc, JSDoc, comments, `readme.txt`, in-admin help — style rules in `.agents/docs/wordpress-documentation-style-guide-consolidated.md` and `AGENTS.md` |
+| `TASK_DOCUMENTATION_EXAMPLE.md` | PHPDoc, JSDoc, comments, `readme.txt`, in-admin help — style rules in the fleet's `wordpress-documentation-style-guide-consolidated.md` mirror and `AGENTS.md` |
 
 The **first line** of each template (`task-type: ...`) documents the task type for human readers and historical task files.
 

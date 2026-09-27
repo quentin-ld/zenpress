@@ -1,7 +1,12 @@
 <?php
+/**
+ * Core: sanitize.
+ *
+ * @package zenpress
+ */
 
-if (!defined('ABSPATH')) {
-    exit;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
 }
 
 /**
@@ -10,10 +15,13 @@ if (!defined('ABSPATH')) {
  * @param mixed $value Raw option value.
  * @return array<string>
  */
-function zenpress_sanitize_snippets_option(mixed $value): array {
-    return array_values(
-        array_filter(
-            array_map('sanitize_file_name', (array) $value)
-        )
-    );
+function zenpress_sanitize_snippets_option( mixed $value ): array {
+	return array_values(
+		array_filter(
+			array_map( 'sanitize_file_name', (array) $value ),
+			static function ( string $name ): bool {
+				return '' !== $name;
+			}
+		)
+	);
 }

@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<!--
+	Project-specific PHP_CodeSniffer exceptions.
+
+	Seeded by `bin/harness sync` and never written again. Included by
+	`.config/phpcs.xml`, which IS regenerated on every sync — put your own
+	exceptions here rather than in there, where they would be overwritten.
+
+	An exclusion is a decision, not a fix. Both of the ones below say why.
+-->
+<ruleset name="zenpress-project">
+	<!--
+		`inc/snippets/` is built from paired files: `name.php` holds a snippet
+		and `name.meta.php` holds that same snippet's metadata. The metadata
+		file exists to be read by `zenpress_extract_snippet_metadata()`, which
+		looks for exactly that double extension — the pairing is the design,
+		and the suffix is how the loader finds it.
+
+		`WordPress.Files.FileName` implements the naming convention of
+		WordPress core, where one file holds one concept and needs no suffix.
+		Satisfying it means renaming 39 files and the loader that reads them
+		together, which buys a reader nothing.
+
+		Scoped to the one directory. Everywhere else in the plugin the sniff
+		still applies, for the remaining 51 files.
+	-->
+	<rule ref="WordPress.Files.FileName">
+		<exclude-pattern>*/inc/snippets/meta/*</exclude-pattern>
+	</rule>
+
+	<!--
+		Same reasoning for `inc/classes/`: each file is named after the thing it
+		integrates with (`cache-enabler.php`, `autoptimize.php`), not after its
+		class. The directory already says these are classes, so a `class-`
+		prefix would only repeat it.
+
+		A plugin is not core, and this convention is core's.
+	-->
+	<rule ref="WordPress.Files.FileName.InvalidClassFileName">
+		<exclude-pattern>*/inc/classes/*</exclude-pattern>
+	</rule>
+</ruleset>

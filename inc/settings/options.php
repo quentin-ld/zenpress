@@ -1,47 +1,56 @@
 <?php
+/**
+ * Settings: options.
+ *
+ * @package zenpress
+ */
 
-if (!defined('ABSPATH')) {
-    exit;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
 }
 
-/**
- * Registers zenpress_active_snippets and zenpress_admin_bar_enabled (REST + sanitize).
- */
-add_action('init', 'zenpress_register_snippet_settings');
-function zenpress_register_snippet_settings(): void {
-    register_setting(
-        'options',
-        'zenpress_active_snippets',
-        [
-            'type' => 'array',
-            'default' => [],
-            'sanitize_callback' => 'zenpress_sanitize_snippets_option',
-            'show_in_rest' => [
-                'schema' => [
-                    'type' => 'array',
-                    'items' => ['type' => 'string'],
-                ],
-            ],
-        ]
-    );
+add_action( 'init', 'zenpress_register_snippet_settings' );
 
-    register_setting(
-        'options',
-        'zenpress_admin_bar_enabled',
-        [
-            'type' => 'boolean',
-            'default' => false,
-            'sanitize_callback' => 'zenpress_sanitize_admin_bar_enabled',
-            'show_in_rest' => [
-                'schema' => ['type' => 'boolean'],
-            ],
-        ]
-    );
+/**
+ * Registers zenpress_active_snippets and zenpress_admin_bar_enabled, with
+ * their REST schemas and sanitize callbacks.
+ */
+function zenpress_register_snippet_settings(): void {
+	register_setting(
+		'options',
+		'zenpress_active_snippets',
+		array(
+			'type'              => 'array',
+			'default'           => array(),
+			'sanitize_callback' => 'zenpress_sanitize_snippets_option',
+			'show_in_rest'      => array(
+				'schema' => array(
+					'type'  => 'array',
+					'items' => array( 'type' => 'string' ),
+				),
+			),
+		)
+	);
+
+	register_setting(
+		'options',
+		'zenpress_admin_bar_enabled',
+		array(
+			'type'              => 'boolean',
+			'default'           => false,
+			'sanitize_callback' => 'zenpress_sanitize_admin_bar_enabled',
+			'show_in_rest'      => array(
+				'schema' => array( 'type' => 'boolean' ),
+			),
+		)
+	);
 }
 
 /**
  * Sanitizes zenpress_admin_bar_enabled to bool.
+ *
+ * @param mixed $value The raw value submitted for the option.
  */
-function zenpress_sanitize_admin_bar_enabled(mixed $value): bool {
-    return (bool) $value;
+function zenpress_sanitize_admin_bar_enabled( mixed $value ): bool {
+	return (bool) $value;
 }

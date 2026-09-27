@@ -1,7 +1,12 @@
 <?php
+/**
+ * Snippet: disable WordPress default lazy loading.
+ *
+ * @package zenpress
+ */
 
-if (!defined('ABSPATH')) {
-    exit;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
 }
 
-add_filter('wp_lazy_loading_enabled', '__return_false');
+add_filter( 'wp_lazy_loading_enabled', '__return_false' );

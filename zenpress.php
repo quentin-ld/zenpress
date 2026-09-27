@@ -1,5 +1,4 @@
 <?php
-
 /**
  * ZenPress plugin for WordPress
  *
@@ -34,8 +33,8 @@
  * GNU General Public License for more details.
  */
 
-if (!defined('ABSPATH')) {
-    exit;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
 }
 
 require_once __DIR__ . '/inc/core/constants.php';

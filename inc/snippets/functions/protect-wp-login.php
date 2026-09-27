@@ -1,59 +1,75 @@
 <?php
+/**
+ * Snippet: protect wp login.
+ *
+ * @package zenpress
+ */
 
-if (!defined('ABSPATH')) {
-    exit;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
 }
 
-add_filter('login_errors', static function (): string {
-    return __('Something went wrong. Try again.', 'zenpress');
-});
+add_filter(
+	'login_errors',
+	static function (): string {
+		return __( 'Something went wrong. Try again.', 'zenpress' );
+	}
+);
 
-add_filter('authenticate', static function (mixed $user, string $username, string $password): mixed {
-    $ipAddress = filter_var(
-        wp_unslash($_SERVER['REMOTE_ADDR'] ?? ''),
-        FILTER_VALIDATE_IP
-    );
-    if ($ipAddress === false) {
-        return $user;
-    }
+// `authenticate` passes ( $user, $username, $password ). This callback only
+// reads `$user`, so it declares one parameter and registers one accepted
+// argument rather than naming two it never looks at.
+add_filter(
+	'authenticate',
+	static function ( mixed $user ): mixed {
+		$ip_address = filter_var(
+			wp_unslash( $_SERVER['REMOTE_ADDR'] ?? '' ),
+			FILTER_VALIDATE_IP
+		);
+		if ( false === $ip_address ) {
+			return $user;
+		}
 
-    $MAX_LOGIN_ATTEMPTS = 5;
-    $BLOCK_DURATION = 300; // 5 minutes
-    $blockKey = 'zenpress_login_block_' . $ipAddress;
-    $attemptKey = 'zenpress_login_attempts_' . $ipAddress;
+		$max_login_attempts = 5;
+		$block_duration     = 300; // Five minutes.
+		$block_key          = 'zenpress_login_block_' . $ip_address;
+		$attempt_key        = 'zenpress_login_attempts_' . $ip_address;
 
-    // Successful login clears attempts
-    if ($user instanceof WP_User) {
-        delete_transient($blockKey);
-        delete_transient($attemptKey);
+		// A successful login clears the attempts.
+		if ( $user instanceof WP_User ) {
+			delete_transient( $block_key );
+			delete_transient( $attempt_key );
 
-        return $user;
-    }
+			return $user;
+		}
 
-    // Check if blocked
-    if (get_transient($blockKey)) {
-        wp_die(
-            esc_html__('Too many failed attempts. Try again in a few minutes.', 'zenpress'),
-            '',
-            ['response' => 403]
-        );
-    }
+		// Refuse early if this address is already blocked.
+		if ( (bool) get_transient( $block_key ) ) {
+			wp_die(
+				esc_html__( 'Too many failed attempts. Try again in a few minutes.', 'zenpress' ),
+				'',
+				array( 'response' => 403 )
+			);
+		}
 
-    // Track failed attempts
-    $attemptsData = get_transient($attemptKey);
-    $attempts = $attemptsData['count'] ?? 0;
-    $attempts++;
+		// Track the failed attempt.
+		$attempts_data = get_transient( $attempt_key );
+		$attempts      = $attempts_data['count'] ?? 0;
+		$attempts++;
 
-    if ($attempts > $MAX_LOGIN_ATTEMPTS) {
-        set_transient($blockKey, true, $BLOCK_DURATION);
-        wp_die(
-            esc_html__('Too many failed attempts. Try again in a few minutes.', 'zenpress'),
-            '',
-            ['response' => 403]
-        );
-    }
+		if ( $attempts > $max_login_attempts ) {
+			set_transient( $block_key, true, $block_duration );
+			wp_die(
+				esc_html__( 'Too many failed attempts. Try again in a few minutes.', 'zenpress' ),
+				'',
+				array( 'response' => 403 )
+			);
+		}
 
-    set_transient($attemptKey, ['count' => $attempts], $BLOCK_DURATION);
+		set_transient( $attempt_key, array( 'count' => $attempts ), $block_duration );
 
-    return $user;
-}, 30, 3);
+		return $user;
+	},
+	30,
+	1
+);

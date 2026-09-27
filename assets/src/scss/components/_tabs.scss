@@ -47,7 +47,7 @@
 			gap: $gap-sm;
 
 			&::before {
-				font-family: dashicons;
+				font-family: dashicons, sans-serif;
 				font-size: $font-size-icon;
 				line-height: $line-height-icon;
 				display: inline-block;

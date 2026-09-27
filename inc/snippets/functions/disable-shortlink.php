@@ -1,8 +1,13 @@
 <?php
+/**
+ * Snippet: disable shortlink.
+ *
+ * @package zenpress
+ */
 
-if (!defined('ABSPATH')) {
-    exit;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
 }
 
-remove_action('wp_head', 'wp_shortlink_wp_head');
-remove_action('template_redirect', 'wp_shortlink_header', 11);
+remove_action( 'wp_head', 'wp_shortlink_wp_head' );
+remove_action( 'template_redirect', 'wp_shortlink_header', 11 );

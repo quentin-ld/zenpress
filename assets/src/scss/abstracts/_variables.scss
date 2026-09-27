@@ -10,7 +10,8 @@ $color-background-hover: #f0f0f1;
 $color-border: #e0e0e0;
 $color-border-light: #d6e2ed;
 $color-accent: var(--wp-components-color-accent, var(--wp-admin-theme-color, #3858e9));
-$color-accent-hover: var(--wp-components-color-accent-darker-20 var(--wp-admin-theme-color-darker-20, #3858e9));
+$color-accent-hover: var(--wp-components-color-accent-darker-20
+var(--wp-admin-theme-color-darker-20, #3858e9));
 $color-accent-active-bg: color-mix(in srgb, var(--wp-components-color-accent, var(--wp-admin-theme-color, #3858e9)), transparent 96%);
 
 // WordPress CSS Variables (with fallbacks)
@@ -65,4 +66,3 @@ $gap-xl: $spacing-xl;
 // Grid Layout
 // ----------------------------------------------------------------------------
 $grid-columns-main-sidebar: 3fr 1fr;
-

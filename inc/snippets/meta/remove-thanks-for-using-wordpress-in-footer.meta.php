@@ -3,20 +3,22 @@
  * Metadata for remove-thanks-for-using-wordpress-in-footer.php
  *
  * @since 2.2.0
+ *
+ * @package zenpress
  */
 
-if (!defined('ABSPATH')) {
-    exit;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
 }
 
-return [
-    'title' => __('Remove "Thanks for using WordPress" from footer', 'zenpress'),
-    'description' => __(
-        'Removes the "Thanks for using WordPress" message from the admin footer.',
-        'zenpress'
-    ),
-    'category' => __('core', 'zenpress'),
-    'subcategory' => __('user-interface', 'zenpress'),
-    'weight' => 0,
-    'preset' => [],
-];
+return array(
+	'title'       => __( 'Remove "Thanks for using WordPress" from footer', 'zenpress' ),
+	'description' => __(
+		'Removes the "Thanks for using WordPress" message from the admin footer.',
+		'zenpress'
+	),
+	'category'    => __( 'core', 'zenpress' ),
+	'subcategory' => __( 'user-interface', 'zenpress' ),
+	'weight'      => 0,
+	'preset'      => array(),
+);

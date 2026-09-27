@@ -317,7 +317,6 @@ $RECYCLE.BIN/
 # NPM #
 ##########
 # Ignore all directories called node_modules in current folder and any subfolders.
-node_modules/
 /node_modules/
 
 # Packages #
@@ -326,27 +325,20 @@ node_modules/
 *.dmg
 *.gz
 *.bz2
-*.iso
 *.jar
 *.rar
-*.tar
 *.zip
-*.tgz
 *.map
 
 # Logs and databases #
 ######################
-*.log
 *.sql
 *.env
 
 # OS generated files #
 ######################
 **.DS_Store*
-ehthumbs.db
 Icon?
-Thumbs.db
-._*
 
 # Vim generated files #
 ######################
@@ -362,7 +354,6 @@ Thumbs.db
 ##########
 !assets/js/vendor/
 wpcs/
-/vendor/
 
 # Bower #
 ##########
@@ -399,3 +390,9 @@ FEATURE_REQUEST.md
 
 .php-cs-fixer.cache
 .phpactor.json
+**/.cache/
+/build/
+test-results/
+**/test-results/
+artifacts/
+**/artifacts/

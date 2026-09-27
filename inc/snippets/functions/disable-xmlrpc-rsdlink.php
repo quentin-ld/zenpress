@@ -1,8 +1,13 @@
 <?php
+/**
+ * Snippet: disable xmlrpc rsdlink.
+ *
+ * @package zenpress
+ */
 
-if (!defined('ABSPATH')) {
-    exit;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
 }
 
-add_filter('xmlrpc_enabled', '__return_false');
-remove_action('wp_head', 'rsd_link');
+add_filter( 'xmlrpc_enabled', '__return_false' );
+remove_action( 'wp_head', 'rsd_link' );

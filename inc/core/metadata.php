@@ -1,7 +1,12 @@
 <?php
+/**
+ * Core: metadata.
+ *
+ * @package zenpress
+ */
 
-if (!defined('ABSPATH')) {
-    exit;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
 }
 
 /**
@@ -10,33 +15,33 @@ if (!defined('ABSPATH')) {
  * @param string $snippet_name Snippet base name (no extension).
  * @return array<string, mixed> title, description, category, subcategory, weight, preset.
  */
-function zenpress_extract_snippet_metadata(string $snippet_name): array {
-    $defaults = [
-        'title' => '',
-        'description' => '',
-        'category' => '',
-        'subcategory' => '',
-        'weight' => 0,
-        'preset' => [],
-    ];
+function zenpress_extract_snippet_metadata( string $snippet_name ): array {
+	$defaults = array(
+		'title'       => '',
+		'description' => '',
+		'category'    => '',
+		'subcategory' => '',
+		'weight'      => 0,
+		'preset'      => array(),
+	);
 
-    $file = ZENPRESS_PLUGIN_DIR . 'inc/snippets/meta/' . sanitize_file_name($snippet_name) . '.meta.php';
-    $data = [];
-    if (is_file($file)) {
-        try {
-            $data = include $file;
-        } catch (\Throwable $e) {
-            $data = [];
-        }
-    }
-    $metadata = array_merge($defaults, is_array($data) ? $data : []);
+	$file = ZENPRESS_PLUGIN_DIR . 'inc/snippets/meta/' . sanitize_file_name( $snippet_name ) . '.meta.php';
+	$data = array();
+	if ( is_file( $file ) ) {
+		try {
+			$data = include $file;
+		} catch ( \Throwable $e ) {
+			$data = array();
+		}
+	}
+	$metadata = array_merge( $defaults, is_array( $data ) ? $data : array() );
 
-    return [
-        'title' => sanitize_text_field($metadata['title']),
-        'description' => sanitize_text_field($metadata['description']),
-        'category' => sanitize_text_field($metadata['category']),
-        'subcategory' => sanitize_text_field($metadata['subcategory']),
-        'weight' => (int) $metadata['weight'],
-        'preset' => array_map('sanitize_text_field', (array) $metadata['preset']),
-    ];
+	return array(
+		'title'       => sanitize_text_field( $metadata['title'] ),
+		'description' => sanitize_text_field( $metadata['description'] ),
+		'category'    => sanitize_text_field( $metadata['category'] ),
+		'subcategory' => sanitize_text_field( $metadata['subcategory'] ),
+		'weight'      => (int) $metadata['weight'],
+		'preset'      => array_map( 'sanitize_text_field', (array) $metadata['preset'] ),
+	);
 }

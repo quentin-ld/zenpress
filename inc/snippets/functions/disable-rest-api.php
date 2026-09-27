@@ -1,17 +1,22 @@
 <?php
+/**
+ * Snippet: disable rest api.
+ *
+ * @package zenpress
+ */
 
-if (!defined('ABSPATH')) {
-    exit;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
 }
 
-// Remove REST API link from HTTP headers.
-// Link: <https://example.com/wp-json/>; rel="https://api.w.org/"
-remove_action('template_redirect', 'rest_output_link_header', 11);
+// Remove the REST API link from the HTTP headers.
+// Link: <https://example.com/wp-json/>; rel="https://api.w.org/".
+remove_action( 'template_redirect', 'rest_output_link_header', 11 );
 
-// Remove REST API links from HTML <head>.
-// <link rel='https://api.w.org/' href='https://example.com/wp-json/' />
-remove_action('wp_head', 'rest_output_link_wp_head', 10);
-remove_action('xmlrpc_rsd_apis', 'rest_output_rsd');
+// Remove the REST API links from the HTML <head>.
+// <link rel='https://api.w.org/' href='https://example.com/wp-json/' />.
+remove_action( 'wp_head', 'rest_output_link_wp_head', 10 );
+remove_action( 'xmlrpc_rsd_apis', 'rest_output_rsd' );
 
 /**
  * Check whether to allow unauthenticated REST API access (bypass).
@@ -23,49 +28,53 @@ remove_action('xmlrpc_rsd_apis', 'rest_output_rsd');
  * REST API access and weaken the protection provided by the "Disable REST API" snippet.
  */
 $zenpress_disable_wp_rest_api_allow_access = static function (): bool {
-    $post_var = apply_filters('zenpress_disable_wp_rest_api_post_var', false);
-    $server_var = apply_filters('zenpress_disable_wp_rest_api_server_var', false);
+	$post_var   = apply_filters( 'zenpress_disable_wp_rest_api_post_var', false );
+	$server_var = apply_filters( 'zenpress_disable_wp_rest_api_server_var', false );
 
-    if (!empty($post_var)) {
-        $post_vars = is_array($post_var) ? $post_var : [$post_var];
-        foreach ($post_vars as $var) {
+	if ( (bool) $post_var ) {
+		$post_vars = is_array( $post_var ) ? $post_var : array( $post_var );
+		foreach ( $post_vars as $var ) {
             // phpcs:ignore WordPress.Security.NonceVerification.Missing -- Intentional: Allows bypass via specific POST vars for webhooks/third-party integrations
-            if (!empty($_POST[$var] ?? null)) {
-                return true;
-            }
-        }
-    }
+			$posted = isset( $_POST[ $var ] ) ? sanitize_text_field( wp_unslash( (string) $_POST[ $var ] ) ) : '';
+			if ( '' !== $posted && '0' !== $posted ) {
+				return true;
+			}
+		}
+	}
 
-    if (!empty($server_var)) {
-        $server_vars = is_array($server_var) ? $server_var : [$server_var];
-        $request_uri = isset($_SERVER['REQUEST_URI']) ? sanitize_text_field(wp_unslash($_SERVER['REQUEST_URI'])) : '';
-        foreach ($server_vars as $var) {
-            if ($request_uri === $var) {
-                return true;
-            }
-        }
-    }
+	if ( (bool) $server_var ) {
+		$server_vars = is_array( $server_var ) ? $server_var : array( $server_var );
+		$request_uri = isset( $_SERVER['REQUEST_URI'] ) ? sanitize_text_field( wp_unslash( $_SERVER['REQUEST_URI'] ) ) : '';
+		foreach ( $server_vars as $var ) {
+			if ( $request_uri === $var ) {
+				return true;
+			}
+		}
+	}
 
-    return false;
+	return false;
 };
 
-// Disable REST API
-if (version_compare(get_bloginfo('version'), '4.7', '>=')) {
-    add_filter('rest_authentication_errors', static function (WP_Error|bool|null $access) use ($zenpress_disable_wp_rest_api_allow_access): WP_Error|bool|null {
-        if (!is_user_logged_in() && !$zenpress_disable_wp_rest_api_allow_access()) {
-            $message = apply_filters('zenpress_disable_wp_rest_api_error', __('You must be logged in to use this.', 'zenpress'));
+// Disable the REST API.
+if ( version_compare( get_bloginfo( 'version' ), '4.7', '>=' ) ) {
+	add_filter(
+		'rest_authentication_errors',
+		static function ( WP_Error|bool|null $access ) use ( $zenpress_disable_wp_rest_api_allow_access ): WP_Error|bool|null {
+			if ( ! is_user_logged_in() && ! $zenpress_disable_wp_rest_api_allow_access() ) {
+				$message = apply_filters( 'zenpress_disable_wp_rest_api_error', __( 'You must be logged in to use this.', 'zenpress' ) );
 
-            return new WP_Error('rest_login_required', $message, ['status' => rest_authorization_required_code()]);
-        }
+				return new WP_Error( 'rest_login_required', $message, array( 'status' => rest_authorization_required_code() ) );
+			}
 
-        return $access;
-    });
+			return $access;
+		}
+	);
 } else {
-    // REST API 1.x
-    add_filter('json_enabled', '__return_false');
-    add_filter('json_jsonp_enabled', '__return_false');
+	// REST API version 1.x.
+	add_filter( 'json_enabled', '__return_false' );
+	add_filter( 'json_jsonp_enabled', '__return_false' );
 
-    // REST API 2.x
-    add_filter('rest_enabled', '__return_false');
-    add_filter('rest_jsonp_enabled', '__return_false');
+	// REST API version 2.x.
+	add_filter( 'rest_enabled', '__return_false' );
+	add_filter( 'rest_jsonp_enabled', '__return_false' );
 }

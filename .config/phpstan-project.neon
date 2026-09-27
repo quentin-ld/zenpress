@@ -1,0 +1,35 @@
+# PHPStan parameters for zenpress.
+#
+# This file was seeded by `bin/harness sync` and will never be written again. It
+# is included by `.config/phpstan.neon`, which IS regenerated on every sync --
+# put your own parameters here rather than in there, where they would be
+# overwritten.
+#
+# The floor is level 8 with the strict and deprecation rules (docs/TOOLCHAIN.md).
+# Two rules of thumb before adding an entry to `ignoreErrors`:
+#
+#   - An exclusion is a decision, not a fix. Say why, in a comment here.
+#   - Exclude the narrowest thing that covers the case. A blanket `#.*#` hides
+#     every future finding, including the ones you would have wanted to see.
+#
+# A third-party dependency's types are the usual reason for one, and `scanFiles`
+# is usually better than an ignore:
+#
+#   parameters:
+#       scanFiles:
+#           - vendor/woocommerce/woocommerce/woocommerce.php
+parameters:
+    excludePaths:
+        analyseAndScan:
+            - .config/*
+            - vendor/*
+            - node_modules/*
+    ignoreErrors:
+        # Ignore all errors about WooCommerce functions not found
+        - '#Function is_woocommerce not found#'
+        - '#Function is_cart not found#'
+        - '#Function is_account_page not found#'
+        - '#Function is_product not found#'
+        - '#Function is_product_category not found#'
+        - '#Function is_shop not found#'
+        - '#Function is_checkout not found#'

@@ -41,9 +41,9 @@ priority: <!-- low | normal | high -->
 
 ## Style requirements
 
-Follow `.agents/docs/wordpress-documentation-style-guide-consolidated.md` and `.agents/docs/docs-library.md` (WordPress Documentation Standards) for writing rules. In short:
+Follow the fleet's `wordpress-documentation-style-guide-consolidated.md` mirror and this project's `.agents/docs/docs-library.md` (WordPress Documentation Standards) for writing rules. In short:
 
-- **User-facing prose** (readme, help, comments that address the reader): HelpHub rules in `.agents/docs/wordpress-documentation-style-guide-consolidated.md` — large file; search or use its Table of contents; each section has a **`Source:`** URL.
+- **User-facing prose** (readme, help, comments that address the reader): HelpHub rules in the fleet's `wordpress-documentation-style-guide-consolidated.md` mirror — look a section up (`./bin/harness docs find "<query>"`), never load it; each section has a **`Source:`** URL.
 - **PHPDoc / JSDoc structure** (tags, hook examples, file headers): [Inline Documentation Standards](https://developer.wordpress.org/coding-standards/inline-documentation-standards/) — also linked from `.agents/docs/docs-library.md` → WordPress Coding Standards.
 
 Reminder bullets (details and edge cases live in the agent profile and docs above):
@@ -80,10 +80,10 @@ Reminder bullets (details and edge cases live in the agent profile and docs abov
 
 ## References
 
-- `.agents/docs/wordpress-documentation-style-guide-consolidated.md` — HelpHub prose mirror; hard constraints and checklist.
+- the fleet's `wordpress-documentation-style-guide-consolidated.md` mirror — HelpHub prose; hard constraints and checklist.
 - `.agents/docs/docs-library.md` — WordPress Documentation Standards; DevHub docblock structure.
-- `.agents/docs/wordpress-documentation-style-guide-consolidated.md` — HelpHub Documentation Style Guide (generated Markdown mirror; hand-maintained).
-- `.agents/docs/docs-library.md` — WordPress Documentation Standards, WordPress Coding Standards (Inline Documentation Standards), Internationalization & Localization, **WordPress native updates (core)** (includes generated handbook appendix; hand-maintained).
+- the fleet's `wordpress-documentation-style-guide-consolidated.md` mirror — HelpHub Documentation Style Guide; rebuilt from `mirrors/manifests/style-guide.urls` in the generator repository.
+- `.agents/docs/docs-library.md` — WordPress Documentation Standards, WordPress Coding Standards (Inline Documentation Standards), Internationalization & Localization, **WordPress native updates (core)** (the fetched page text is the fleet mirror, `mirrors/docs-library.md`).
 - `.agents/docs/wordpress-native-updates-reference.md` — when a docblock documents behaviour tied to the core update lifecycle (`automatic_updates_complete`, auto-update filters, etc.); cite the frozen reference only.
 
 ## When to use this template instead of X

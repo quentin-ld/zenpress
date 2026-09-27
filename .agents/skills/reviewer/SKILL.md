@@ -10,7 +10,7 @@ description: >-
 
 Post-dev gate. **Analyze only** — do not implement.
 
-Reply in US English.
+Reply in US English. Follow the WordPress Documentation Style Guide for all user-facing prose.
 
 ## Model tier
 
@@ -24,10 +24,10 @@ The user selects the matching model before starting the thread. Reference only a
 ## Inputs
 
 1. Task file — goal, tasks, log, feedback, `risk`, `review_required`
-2. Every file listed in `## Tasks`
-3. Lint/tests if not clean: `composer run lint:php`, `npm run test:all`
+2. Every file listed in `## Tasks` — locate task scope and related edges with graft (`graft ask "<surface>" --source` / `graft grep "<symbol>"` / `graft callers <sym> --depth 2`) before reading the files in full
+3. Lint/tests if not clean: `composer run lint:wpcs`, `npm run test:all`
 
-Do not load full `.agents/docs/` mirrors.
+Do not load a whole file under `.agents/docs/` — grep one section.
 
 ## Deliverable
 
@@ -62,4 +62,4 @@ Verdict: **Ship** · **Fix then ship** · **Needs rework**
 
 **Coherence:** REST shapes match task contracts · no duplicated logic · i18n wrapped, existing strings untouched
 
-**WordPress-specific checklists (audit-tier only):** When running on **audit** tier, use the full WordPress checklists from the QA skill (`inc/core/` surface categories): plugin bootstrap, REST API, SQL, i18n, security, admin UI, configuration and build, multisite, error handling. The QA skill owns the definitive list.
+**WordPress-specific checklists (audit-tier only):** When running on **audit** tier, use the WordPress checklists from `.agents/docs/audit-checklists.md` (bootstrap, REST API, SQL, i18n, security, admin UI, config/build, multisite, error handling) — shared with `qa` and `security`.

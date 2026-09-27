@@ -12,4 +12,20 @@
             <directory>../tests/Integration</directory>
         </testsuite>
     </testsuites>
+    <!--
+        Coverage collection is active only when a coverage driver (xdebug or
+        pcov) is enabled. zenpress has no unit suite, so `bin/harness mutation`
+        builds the report Infection consumes from this file rather than from
+        the unit config.
+    -->
+    <coverage>
+        <include>
+            <directory suffix=".php">../inc</directory>
+            <file>../zenpress.php</file>
+        </include>
+        <report>
+            <clover outputFile="../.cache/coverage/integration.xml"/>
+            <text outputFile="../.cache/coverage/integration.txt"/>
+        </report>
+    </coverage>
 </phpunit>
