@@ -396,3 +396,4 @@ test-results/
 **/test-results/
 artifacts/
 **/artifacts/
+.reasonix/

@@ -29,9 +29,15 @@ before the expensive gate sees them.
 place. `infection.json5` owns only paths.
 
 ```
-bin/harness mutation                       # the diff, versus origin/HEAD
-HARNESS_MUTATION_BASE=main bin/harness ... # versus another ref
+bin/harness mutation                              # the diff the push would send
+HARNESS_MUTATION_BASE=HEAD bin/harness mutation   # versus your own edit
 ```
+
+The base is the branch's upstream (`@{upstream}`), so a run judges the commits
+the push adds rather than the branch it sits on. `origin/HEAD` is `origin/main`
+in this fleet, which reads a one-line edit as the whole migration;
+`HARNESS_MUTATION_BASE` scopes a run to something else, and
+`bin/harness counterfactual` reads the same base.
 
 ## Reading a run
 

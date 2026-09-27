@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# pre-push gate — budget < 480 s, and the number is a measurement rather than a
+# pre-push gate — budget < 360 s, and the number is a measurement rather than a
 # wish: this hook read "< 90 s" for as long as it existed and nothing checked
 # it. The full correctness gate before code leaves the machine. Mutation testing
 # is scoped to the diff so the budget holds.
@@ -14,28 +14,38 @@ cd "$ROOT"
 # The budget, reported the way `pre-commit` reports its 10 s: on the way out,
 # against what the run actually cost.
 #
-# Measured by running this hook, on a clean tree, in the fleet's two slowest
-# projects:
+# Measured by running this hook, on a clean tree, with a diff that touches
+# twelve covered lines of PHP, in the fleet's two slowest projects:
 #
-#   updatronix       130 s
-#   updatronix-pro   421 s
+#   updatronix       108 s
+#   updatronix-pro   317 s
 #
-# A theme costs 6-10 s. Both plugins' figures are dominated by their two
-# diff-scoped stages — `mutation` runs the project's suite once per mutant on
-# the changed lines, and `counterfactual` runs the covering tests once per
-# substitution — and both read the diff against `origin/HEAD`, which in this
-# fleet resolves to `origin/main`, so they judge the whole branch rather than
-# the push. That is where the seconds are, and it is why the number is minutes
-# rather than the 90 s that was written there.
+# The seconds are three things, in that order. The project's own suite and its
+# lint come first and do not scale with the diff at all: they are about 140 s of
+# `updatronix-pro`'s 317 s, which is what a push touching nothing in the gates'
+# scope costs there (`updatronix`: 47 s for the same). Then `mutation`, which
+# runs that suite once per mutant on the changed lines. Then `counterfactual`,
+# which runs the covering tests once per substitution — measured 8.2 s each on
+# `updatronix-pro`, on top of a 93 s coverage run the command cannot go below —
+# and stops after HARNESS_COUNTERFACTUAL_MAX of the lines it found, naming the
+# ones it did not reach. That cap is a decision with its own measurements and
+# its own reasons; DESIGN.md section 5 has both.
+#
+# What "the diff" means changed under these figures. Both diff-scoped stages now
+# judge the commits a push would send (`@{upstream}`) instead of `origin/HEAD`,
+# which is `origin/main` in every project here: before that change the same two
+# hooks cost 130 s and 421 s, mostly for judging the whole `major/harness`
+# migration rather than the push, and a one-line edit read as 94 changed lines.
 #
 # One budget has to hold for thirteen projects, so the target is the fleet's
 # slowest, rounded up: the two large stages scale with the diff, and two runs of
-# the same gate a few minutes apart measured 384 s and 421 s, so a target set at
-# the measurement itself would report an overrun every other push.
+# the same gate a few minutes apart measured 384 s and 421 s under the old base,
+# so a target set at the measurement itself would report an overrun every other
+# push.
 #
 # It is a target, not a limit. The hook reports the overrun and does not fail on
 # it; what it must not do is state a number nobody has ever checked.
-BUDGET=480
+BUDGET=360
 SECONDS=0
 
 status=0
