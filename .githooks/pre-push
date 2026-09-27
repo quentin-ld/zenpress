@@ -20,16 +20,33 @@ cd "$ROOT"
 #   updatronix       108 s
 #   updatronix-pro   317 s
 #
+# That is the size the target below is a target *for*, and saying which size it
+# is is half of what this header is for: two of the four stages scale with the
+# diff and two do not, so a budget without a diff size is a number about
+# nothing. Re-measured on 2026-09-27, the two scoped stages timed apart in
+# `updatronix-pro` on a working tree touching more covered lines:
+#
+#   changed covered lines | `counterfactual` | `mutation`
+#   50                    | 690 s            | 198 s
+#   100                   | 915 s           | 249 s
+#
 # The seconds are three things, in that order. The project's own suite and its
 # lint come first and do not scale with the diff at all: they are about 140 s of
 # `updatronix-pro`'s 317 s, which is what a push touching nothing in the gates'
 # scope costs there (`updatronix`: 47 s for the same). Then `mutation`, which
-# runs that suite once per mutant on the changed lines. Then `counterfactual`,
-# which runs the covering tests once per substitution — measured 8.2 s each on
-# `updatronix-pro`, on top of a 93 s coverage run the command cannot go below —
-# and stops after HARNESS_COUNTERFACTUAL_MAX of the lines it found, naming the
-# ones it did not reach. That cap is a decision with its own measurements and
-# its own reasons; DESIGN.md section 5 has both.
+# runs that suite once per mutant on the changed lines — in parallel across
+# `nproc` threads, which is why it is the cheaper of the two at both of the
+# larger sizes above. Then `counterfactual`, which runs the covering tests once
+# per substitution — measured 8.2 s each on `updatronix-pro` for a small subset
+# and about 12 s on the sweep's larger ones, on top of a coverage run the command
+# cannot go below — and stops after HARNESS_COUNTERFACTUAL_MAX of the lines it
+# found, naming the ones it did not reach.
+#
+# **Nothing caps `mutation`**, and that is the decision rather than an omission:
+# see DESIGN.md section 5. So the target below is the twelve-line figure, and a
+# push that touches fifty or a hundred covered lines costs the table's numbers
+# on top of it — which this hook reports on the way out rather than failing on,
+# because it is a target and not a limit.
 #
 # What "the diff" means changed under these figures. Both diff-scoped stages now
 # judge the commits a push would send (`@{upstream}`) instead of `origin/HEAD`,

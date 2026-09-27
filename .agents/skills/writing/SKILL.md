@@ -90,7 +90,12 @@ Distilled in part from `mattpocock/skills/writing-for-agents`, whose levers —
 pruning, no-ops, leading words, negation — apply to prose as much as to
 documents. See `.agents/docs/DISTILLATION.md`.
 
-The `humanizer`-named skills on skills.sh were rejected: every one wraps a paid
-API (`humanizerai.com` and similar) and sends the text off the machine. That
-contradicts the fleet's first rule — everything runs locally — so the skill was
-written here instead.
+The `humanizer`-named skills on skills.sh that wrap a paid API
+(`humanizerai.com` and similar) were rejected: they send the text off the
+machine, which contradicts the fleet's first rule — everything runs locally. The
+two that hold no API were distilled instead, as `humanizer` for English and
+`humaniseur-fr` for French.
+
+This skill is still the one to reach for first. `humanizer` reads a draft and
+takes the machine out of it; this one is how to write the sentence that does not
+have the machine in it to begin with.

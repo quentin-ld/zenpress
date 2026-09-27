@@ -1,9 +1,9 @@
 {
-  "commit": "0289f3e",
+  "commit": "a212141",
   "files": {
     ".agents/docs/DISTILLATION.md": {
       "class": "owned",
-      "sha256": "8b4934c49c3d53af99b91ac32fb3cfaf6c6c5b72a23cf940477b3615e7b57716"
+      "sha256": "019d311a94b15824cabc9d60ac95a5f6bc9a2f9de4963be57be074ff8df5e17d"
     },
     ".agents/docs/audit-checklists.md": {
       "class": "owned",
@@ -20,6 +20,18 @@
     ".agents/skills/graft/SKILL.md": {
       "class": "owned",
       "sha256": "a3c8ec00dc54ec5abbe41bfae00ad550d6d3b47c711189125b28c9198dde0df6"
+    },
+    ".agents/skills/grilling/SKILL.md": {
+      "class": "owned",
+      "sha256": "4e2ed4afe49879a11263addcb78678542bea6b098c96f03ab3a509fe9a6c1ee8"
+    },
+    ".agents/skills/humaniseur-fr/SKILL.md": {
+      "class": "owned",
+      "sha256": "8032c7c05a1677819bb6a7be30f199e30a3d209b3096f7c2d5a403de7c42d6e0"
+    },
+    ".agents/skills/humanizer/SKILL.md": {
+      "class": "owned",
+      "sha256": "94d99a6554ad826da584bb62abc6242c9f9e6989b0c502a772ea9a61070080cd"
     },
     ".agents/skills/mutation-testing/SKILL.md": {
       "class": "owned",
@@ -47,7 +59,7 @@
     },
     ".agents/skills/test-author/SKILL.md": {
       "class": "owned",
-      "sha256": "0baeae05dbdbd351bd4c0223a7a48907b12368e8e434b7fb2d597c6416bc481d"
+      "sha256": "0db49b4ce9e788b589c645a67014011dd1705758bee252d2dc79ce5f1f63ad5a"
     },
     ".agents/skills/translation/SKILL.md": {
       "class": "owned",
@@ -55,7 +67,7 @@
     },
     ".agents/skills/writing/SKILL.md": {
       "class": "owned",
-      "sha256": "de508134fc6c0f41c16063bb55d67886c0ced93b79a26024b7c1cd2f485a62c6"
+      "sha256": "6245ed5d5ee28bd0f1908980f0346538aec14e017ba065d6ee6aee3ffa999b7d"
     },
     ".config/phpcs-project.xml": {
       "class": "seed",
@@ -83,7 +95,7 @@
     },
     ".githooks/pre-push": {
       "class": "owned",
-      "sha256": "7159d16aef958881aeabb6caef1e9bef0dfc4bd44d8972efa01cfca33ed35c6f"
+      "sha256": "373a8f47b44bbf9f59d4f834f10cbe385deedc378da595d55850290453d3455e"
     },
     ".githooks/pre-release": {
       "class": "owned",
@@ -107,6 +119,21 @@
       "class": "mirror",
       "from": ".agents/skills/graft/SKILL.md",
       "sha256": "1de973231c013b59b93b669494cbed67e608f6dc1b2c91143e8a2ac81a54b0ed"
+    },
+    ".reasonix/skills/grilling/SKILL.md": {
+      "class": "mirror",
+      "from": ".agents/skills/grilling/SKILL.md",
+      "sha256": "0e7302f5dd34ec1db62373abddff19c756deb3a7e0c14c1e63e2c2e206b531ed"
+    },
+    ".reasonix/skills/humaniseur-fr/SKILL.md": {
+      "class": "mirror",
+      "from": ".agents/skills/humaniseur-fr/SKILL.md",
+      "sha256": "e4f3c9c3a7b5d333c1e2706ceb3864fa079987d035082bf2e67dc2ac40df6260"
+    },
+    ".reasonix/skills/humanizer/SKILL.md": {
+      "class": "mirror",
+      "from": ".agents/skills/humanizer/SKILL.md",
+      "sha256": "268952dfaec9f40879d4c367a9bad8778de2cb787e8d9febb1a15dc8f31a9072"
     },
     ".reasonix/skills/mutation-testing/SKILL.md": {
       "class": "mirror",
@@ -141,7 +168,7 @@
     ".reasonix/skills/test-author/SKILL.md": {
       "class": "mirror",
       "from": ".agents/skills/test-author/SKILL.md",
-      "sha256": "0baeae05dbdbd351bd4c0223a7a48907b12368e8e434b7fb2d597c6416bc481d"
+      "sha256": "0db49b4ce9e788b589c645a67014011dd1705758bee252d2dc79ce5f1f63ad5a"
     },
     ".reasonix/skills/translation/SKILL.md": {
       "class": "mirror",
@@ -151,7 +178,7 @@
     ".reasonix/skills/writing/SKILL.md": {
       "class": "mirror",
       "from": ".agents/skills/writing/SKILL.md",
-      "sha256": "0e084af82f650e25c5d1207fc98efa85dc58df22414f21d0d17c73af241ee123"
+      "sha256": "64aaf8d9da3eb9b80729eb0ce8ce8e55884e9bccc1b38adcfcf00e44ee07ecd0"
     },
     "AGENTS.md": {
       "class": "block",
@@ -171,7 +198,7 @@
     },
     "bin/harness": {
       "class": "owned",
-      "sha256": "8309b75a0c63b0930ffc95ab9eded299ceb50fe545401dba104ece7205be172b"
+      "sha256": "9441ba310e5596d7c696f39b1814368dd6afec6652cb581b644a4bbf027bc21c"
     },
     "bin/install-wp-tests.sh": {
       "class": "owned",

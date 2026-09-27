@@ -39,15 +39,26 @@ Deterministic, run by `harness skills scan`, one line per finding.
    what decides whether the skill is ever reached, so a vague one is a defect
    rather than a style choice.
 
+**The scan is a gate, not a report.** `distil` records the findings in the brief,
+and `promote` runs the same rules again over the text it is about to install —
+the text that becomes a live prompt, running with the owner's permissions — and
+refuses a brief with a blocking finding. A finding nobody acts on is not a
+control.
+
 ## The locality rule
 
 **Nothing leaves the machine.** The owner's first constraint: everything runs
 locally in DDEV, and the agent never needs to reach outside the project.
 
 A skill that calls a hosted API fails this even when it is the best tool for the
-job. That is what happened to every `humanizer`-named skill on skills.sh — see
-below. It is not a judgement about quality; it is the one rule the fleet does
-not trade.
+job. That is what happened to the `humanizer` skills that wrap one — see
+`humanizerai/agent-skills/humanize` below. It is not a judgement about quality;
+it is the one rule the fleet does not trade.
+
+A pattern catalogue that runs entirely in the prompt is a different thing from a
+hosted rewriter, and two of them were accepted on that distinction:
+`blader/humanizer/humanizer` and `samber/cc-skills/humaniseur-fr` send nothing
+anywhere.
 
 ## What has been distilled
 
@@ -55,20 +66,28 @@ not trade.
 |---|---|---|
 | `trailofbits/skills/mutation-testing` | — | **distilled** into `mutation-testing`, with the class-method limitation recorded |
 | `mattpocock/skills/writing-for-agents` | 316k | **distilled** into `documentation`, and the levers reused in `writing` |
+| `blader/humanizer/humanizer` | 7,853 | **distilled** into `humanizer`: 25 patterns down to 24, the vocabulary list kept, the worked examples dropped |
+| `samber/cc-skills/humaniseur-fr` | 2,420 | **distilled** into `humaniseur-fr`, in US English with the French triggers kept verbatim |
+| `mattpocock/skills/grilling` + `grill-with-docs` + `grill-me` + `batch-grill-me` | 782k + 1.05M + 1.2M + 65k | **merged and distilled** into one `grilling`: three wrappers and a duplicate became the method plus the documents it produces |
 
 ## What has been rejected
 
 | source | installs | why |
 |---|---|---|
-| `humanizerai/agent-skills/humanize` | 3,970 | **Paid API.** Posts the text to `humanizerai.com` and bills per word. Fails the locality rule outright. |
+| `humanizerai/agent-skills/humanize` | 3,980 | **Paid API.** Posts the text to `humanizerai.com` and bills per word. Fails the locality rule outright. |
 | `op7418/humanizer-zh/humanizer-zh` | 50,313 | Same shape, Chinese. |
-| `blader/humanizer/humanizer` | 7,743 | No `SKILL.md` at the declared path. |
 | `vercel-labs/agent-skills/writing-guidelines` | 75,768 | Fetches its rules from a `raw.githubusercontent.com` URL on every review. Read-only, but the fleet's reviews have to work with the network off. |
 | `karnonson/marketing-skills/french-writing` | 5 | Below the install bar. |
 | `rogueropemaster/safeword/french-inclusive-writing` | 1 | Below the install bar. |
 
 The install bar is 100. It is not a quality measure — it is a proxy for "enough
 people have read this that a hostile one would have been noticed".
+
+`blader/humanizer/humanizer` was on this list as "no `SKILL.md` at the declared
+path", and that was a bug in `fetch`, not a property of the source. The
+repository keeps its `SKILL.md` at the root because the repository *is* the
+skill, and the resolver only looked inside a folder named after the id. It
+resolves now.
 
 ## What was written instead
 
@@ -77,6 +96,11 @@ people have read this that a hostile one would have been noticed".
 prose, and the English-to-French software vocabulary in `translation` is narrow
 enough to state directly. Writing them was cheaper than distilling something
 adjacent and wrong.
+
+They were also the answer to the rejected humanizers, which is no longer the
+whole story: the two that hold no API exist as `humanizer` and `humaniseur-fr`,
+and `writing` and `translation` keep the jobs that are not detection — how to
+write, and how to move a string between the two languages.
 
 ## Completing a distillation
 
@@ -95,5 +119,13 @@ question the person promoting it has to answer:
   WordPress codebase.
 - **Procedure** and **Verification**.
 
-A brief promoted with TODOs still in it is an unread skill. That is the one
-thing `promote` cannot check for you.
+The house names for those sections are the ones in the skills themselves — *What
+this skill kept from upstream*, *What was dropped, and why*, *What upstream was
+missing* — and the header block keeps the `source:` line, so a promoted skill
+carries its provenance into every project. `distilled/<name>.md` is the same
+document, and the two are kept in step: the brief *is* the skill before it is
+installed.
+
+Two gates stand between a brief and a project. A brief with a `TODO(` in it is an
+unread skill. A brief with a blocking scan finding is a live prompt carrying a
+credential, an override or a payload. `promote` refuses both.

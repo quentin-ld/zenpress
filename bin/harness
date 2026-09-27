@@ -1836,11 +1836,12 @@ cmd_counterfactual() {
 	local candidates=""
 	local -A is_classified=() class_reason=()
 	local target file line original pattern replacement marker class code matched
-	# Changed lines carrying a substitution token only inside their own
-	# classification comment. Counted rather than silently dropped: a line this
-	# gate did not ask about has to be a number in the report, not an absence
-	# that reads the same as a line nothing happened to.
-	local comment_only=0
+	# Changed lines carrying a substitution token the gate cannot substitute:
+	# only inside the classification comment, or only inside a string literal or
+	# a comment. Counted rather than silently dropped: a line this gate did not
+	# ask about has to be a number in the report, not an absence that reads the
+	# same as a line nothing happened to.
+	local comment_only=0 outside_code=0
 	while read -r target; do
 		[[ -n "$target" ]] || continue
 		file="${target%:*}"
@@ -1857,23 +1858,31 @@ cmd_counterfactual() {
 			class_reason["${file}:${line}"]="${marker#*$'\t'}"
 		fi
 		# Once per line, not once per pattern: which code the pattern is chosen
-		# from is a property of the line. The same two answers decide both the
-		# candidate and the count of what the comment swallowed.
+		# from is a property of the line. The same answer decides both the
+		# candidate and the count of what a comment or a string swallowed.
 		code="$(_counterfactual_code "$original")"
 		matched=""
 		while IFS= read -r pattern && IFS= read -r replacement; do
 			[[ -n "$pattern" ]] || continue
-			if [[ "$code" == *"$pattern"* ]]; then
+			# The token has to sit in the code, outside the string literals and
+			# outside the comment. A bare `[[ "$code" == *"$pattern"* ]]` matched
+			# a token that only a quoted string carried, and the substitution
+			# then landed inside the quotes where no assertion can see it — S1,
+			# which is why `_counterfactual_find` answers this rather than a
+			# substring test.
+			if [[ -n "$(_counterfactual_find "$original" "$pattern")" ]]; then
 				candidates="${candidates}${file}:${line}"$'\t'"${pattern}"$'\t'"${replacement}"$'\n'
 				matched=1
 				break
 			fi
 		done < <(_counterfactual_patterns)
-		if [[ -z "$matched" && "$code" != "$original" ]]; then
-			# `code != original` is exactly "the line carries a marker", so this
-			# asks the question only of the lines that can have one.
-			if [[ -n "$(_counterfactual_comment_only "$original")" ]]; then
+		if [[ -z "$matched" ]]; then
+			if [[ "$code" != "$original" && -n "$(_counterfactual_comment_only "$original")" ]]; then
+				# `code != original` is exactly "the line carries a marker", so
+				# this asks the question only of the lines that can have one.
 				comment_only=$(( comment_only + 1 ))
+			elif [[ -n "$(_counterfactual_outside_code "$original")" ]]; then
+				outside_code=$(( outside_code + 1 ))
 			fi
 		fi
 	done <<< "$targets"
@@ -1968,6 +1977,10 @@ cmd_counterfactual() {
 		printf '  %s of them carry the token only inside their classification comment, so nothing was substituted\n' \
 			"$comment_only"
 	fi
+	if [[ "$outside_code" -gt 0 ]]; then
+		printf '  %s of them carry the token only inside a string literal or a comment, so nothing was substituted\n' \
+			"$outside_code"
+	fi
 
 	if [[ "$covered_total" -eq 0 ]]; then
 		fail "the diff changes ${substitutable} line(s) of code the suite never runs.
@@ -1981,6 +1994,12 @@ cmd_counterfactual() {
 	local total="$covered_total"
 	local checked=0 killed=0 survived=0 skipped=0 classified=0 seen=0
 	local narrow=0 wide=0 fallbacks=0 ungreen=0
+	# What the proof that precedes a substitution cost — S7. `proofs_run` is a
+	# real run of a subset, `proofs_cached` is a request the cache answered (so a
+	# run it saved), and `ungreen_subsets` names the ones that fell back rather
+	# than only counting them.
+	local proofs_run=0 proofs_cached=0
+	local -a ungreen_subsets=()
 	# Which subsets have been proved green on their own, keyed by the `--filter`
 	# string that names them: see `_prove_covering_subset`.
 	local -A subset_green=()
@@ -2009,26 +2028,35 @@ cmd_counterfactual() {
 		# The pre-image is read here rather than reused from the candidate pass,
 		# because the pass that builds `covered_candidates` keeps only the three
 		# fields the loop consumes.
-		local pre_image substituted
+		local pre_image substituted offset end escaped
 		pre_image="$(sed -n "${line}p" "$PROJECT_ROOT/$file" 2>/dev/null || true)"
 
-		# `sed` needs `&` and the delimiter escaped in the replacement. Without
-		# this, `&&` becomes "the whole match repeated" and the mutation is not
-		# the one that was intended.
-		local escaped escaped_pat
-		escaped="$(_sed_replacement "$replacement")"
-		escaped_pat="${pattern//|/\\|}"
+		# Where the candidate pass found the token: outside the string literals
+		# and outside the comment, so the line the substitution produces is one a
+		# test can observe. The location is recomputed rather than carried, so
+		# the substitution cannot drift from the diff the pass judged.
+		offset="$(_counterfactual_find "$pre_image" "$pattern" || true)"
+		if [[ -z "$offset" ]]; then
+			continue
+		fi
+		end=$(( offset + ${#pattern} ))
+		substituted="${pre_image:0:offset}${replacement}${pre_image:end}"
+		if [[ "$substituted" == "$pre_image" ]]; then
+			# Nothing to check and nothing to put back.
+			continue
+		fi
 
 		# What the substitution will produce, computed on the string *before*
 		# the project's file changes. The journal needs both halves so the next
 		# run can tell our edit from someone else's, and it cannot be written
 		# after the edit without leaving a window with no journal at all.
-		substituted="$(printf '%s\n' "$pre_image" | sed "s|${escaped_pat}|${escaped}|" 2>/dev/null || true)"
-		if [[ -z "$substituted" || "$substituted" == "$pre_image" ]]; then
-			# `sed` produced the line unchanged, so there is nothing to check and
-			# nothing to put back.
-			continue
-		fi
+		#
+		# The whole line is replaced rather than `sed s|pattern|twin|`, because
+		# that form substitutes the *first* occurrence on the line, wherever it
+		# is — inside a quoted string, which is S1, or inside the comment, which
+		# is the same defect one token over. `_sed_replacement` still escapes the
+		# three characters `sed` reserves in a replacement.
+		escaped="$(_sed_replacement "$substituted")"
 
 		# The subset that will be asked about this line has to pass with the
 		# tree exactly as it is now, or a failure of it says nothing about the
@@ -2042,7 +2070,7 @@ cmd_counterfactual() {
 		cp "$PROJECT_ROOT/$file" "$work/current"
 		_counterfactual_journal_write "$file" "$line" "$substituted" "$pre_image"
 
-		if ! sed -i "${line}s|${escaped_pat}|${escaped}|" "$PROJECT_ROOT/$file" 2>/dev/null; then
+		if ! sed -i "${line}s|.*|${escaped}|" "$PROJECT_ROOT/$file" 2>/dev/null; then
 			cp "$work/current" "$PROJECT_ROOT/$file"
 			_counterfactual_journal_clear
 			continue
@@ -2070,14 +2098,22 @@ cmd_counterfactual() {
 			status=$?
 		fi
 		if [[ "$status" -eq 0 ]]; then
-			if [[ -n "$classification" ]]; then
-				# A survivor whose line says it is an equivalent mutation. The
-				# finding is real — nothing in the suite depends on the line —
-				# but it is not a weak test, and the gate is not the place to
-				# re-litigate it. Counted apart, and the claim is printed.
+			if [[ -n "$classification" ]] && _counterfactual_covers "$pre_image" "$pattern" "$replacement"; then
+				# A survivor whose line says this substitution is an equivalent
+				# mutation. The finding is real — nothing in the suite depends on
+				# the line — but it is not a weak test, and the gate is not the
+				# place to re-litigate it. Counted apart, and the claim is printed.
 				printf '  %-46s %s  %s\n' "${file}:${line}" "$pattern -> $replacement" "CLASSIFIED equivalent"
 				printf '  %-46s %s\n' "" "— ${class_reason[$target]}"
 				classified=$(( classified + 1 ))
+			elif [[ -n "$classification" ]]; then
+				# The line is classified, and not for *this* substitution — S2.
+				# The marker is per line and the substitution is per pattern, so
+				# a claim about one token cannot excuse another: the line has more
+				# than one substitutable pair and the marker names neither this
+				# one nor a pair at all.
+				printf '  %-46s %s  %s\n' "${file}:${line}" "$pattern -> $replacement" "SURVIVED (the classification does not name this pair)"
+				survived=$(( survived + 1 ))
 			else
 				printf '  %-46s %s  %s\n' "${file}:${line}" "$pattern -> $replacement" "SURVIVED"
 				survived=$(( survived + 1 ))
@@ -2111,6 +2147,16 @@ cmd_counterfactual() {
 		printf '  %s ran the covering tests alone, %s ran the whole suite\n' \
 			"$narrow" "$wide"
 	fi
+	# R1 added a proof run per distinct subset and reported the *fallback* rather
+	# than the *cost*. A run said how many substitutions used the covering tests
+	# and never how many extra runs the proof cost, nor how many the cache
+	# answered — and that number is what says whether the optimisation is still
+	# paying for itself. The cache is per run, so the saving is real only within
+	# one command, which is why it is counted here and not assumed.
+	if [[ "$proofs_run" -gt 0 || "$proofs_cached" -gt 0 ]]; then
+		printf '  %s covering subset(s) proved green on their own, %s answered from the cache — %s run(s) saved\n' \
+			"$proofs_run" "$proofs_cached" "$proofs_cached"
+	fi
 	if [[ "$fallbacks" -gt 0 ]]; then
 		warn "${fallbacks} substitution(s) fell back to the whole suite: the coverage
   report named no test PHPUnit could select for the line. The suite that runs
@@ -2123,6 +2169,10 @@ cmd_counterfactual() {
   the tree exactly as it stands would be reported as a kill — a pass — and the
   kill would be a fact about how the tests are ordered rather than about the
   change. Fix the subset, or say why the line has no honest subset."
+		local subset
+		for subset in "${ungreen_subsets[@]}"; do
+			warn "    fell back for: ${subset}"
+		done
 	fi
 
 	# A cap that quietly leaves work undone is the same trap as a skipped test,
@@ -2159,7 +2209,12 @@ cmd_counterfactual() {
   If the twin cannot change behaviour for any operand this line can hold it is
   an equivalent mutation, not a weak test: say so on the line with
   \`// counterfactual: equivalent — <reason>\` and this gate will report it as
-  classified instead of failing. And if the finding looks impossible, check for
+  classified instead of failing. A line carrying more than one substitution
+  token has to name the pair the claim is about —
+  \`// counterfactual: equivalent (bool) -> (int) — <reason>\` — because the
+  marker is read per line and the substitution is applied per pattern: a bare
+  \`equivalent\` there would excuse whichever pair this run happened to choose.
+  And if the finding looks impossible, check for
   a journal first: a run killed mid-substitution leaves its edit in the tree at
   ${COUNTERFACTUAL_JOURNAL_REL}, and the next run restores it."
 	fi
@@ -2484,6 +2539,149 @@ _counterfactual_comment_only() {
 	printf '%s' "$first"
 }
 
+# The substitution token a line carries only where the gate cannot reach it —
+# inside a string literal, or inside a comment.
+#
+# S1's other half. `_counterfactual_find` passes over a token that lives inside
+# quotes, which is what stops the substitution landing there; but a line it
+# passes over has to come out of the report as a number, exactly as
+# `_counterfactual_comment_only` argues for the comment. Measured before the fix:
+# `$s = '(bool) is not it'; $x = (bool) $v;` was mutated to
+# `$s = '(int) is not it'; $x = (bool) $v;` — the token no test can see — and
+# the line was reported as a survivor while the `(bool)` the change was about
+# was never asked.
+#
+# Answers with the token, so the report can be specific, and with nothing when
+# the code carries one the gate can substitute.
+_counterfactual_outside_code() {
+	local original="$1" code pattern replacement first=""
+	code="$(_counterfactual_code "$original")"
+	while IFS= read -r pattern && IFS= read -r replacement; do
+		[[ -n "$pattern" ]] || continue
+		[[ -n "$(_counterfactual_find "$original" "$pattern")" ]] && return 0
+		[[ -z "$first" && "$code" == *"$pattern"* ]] && first="$pattern"
+	done < <(_counterfactual_patterns)
+	printf '%s' "$first"
+}
+
+# Where, on this line, the substitution list's `$2` first occurs **in the code**:
+# not inside a string literal and not inside a comment. Prints the 0-based offset,
+# or nothing when the token only ever appears inside one.
+#
+# The offset is what the substitution needs. `sed s|pattern|twin|` replaces the
+# first occurrence on the line wherever it is, so a line carrying the token
+# inside a quoted string before the real one was mutated in the quotes — a change
+# no assertion can observe, reported as a survivor, with the token the diff was
+# actually about left unasked. This walks the line instead: a quoted region is
+# stepped over whole, a `//` comment runs to the end of the line, a `/* … */` to
+# its close, and a backslash escapes the character after it as it does in PHP.
+#
+# A whole-line substitution needs the offset, and the candidate pass needs the
+# same answer — which is why this is one function and not two: the location the
+# pattern was chosen at and the location it is replaced at cannot drift.
+_counterfactual_find() {
+	local line="$1" pattern="$2"
+	local n=${#line} lp=${#pattern} i=0 ch j k
+	while (( i < n )); do
+		ch="${line:i:1}"
+		if [[ "$ch" == "\\" ]]; then
+			i=$(( i + 2 ))
+			continue
+		fi
+		if [[ "$ch" == "'" || "$ch" == '"' ]]; then
+			j=$(( i + 1 ))
+			while (( j < n )); do
+				k="${line:j:1}"
+				[[ "$k" == "\\" ]] && { j=$(( j + 2 )); continue; }
+				[[ "$k" == "$ch" ]] && break
+				j=$(( j + 1 ))
+			done
+			i=$(( j < n ? j + 1 : n ))
+			continue
+		fi
+		if [[ "$ch" == "/" ]]; then
+			k="${line:i+1:1}"
+			[[ "$k" == "/" ]] && break
+			if [[ "$k" == "*" ]]; then
+				j="${line:i+2}"
+				k="$j"
+				j="${j%%\*/*}"
+				[[ "$j" == "$k" ]] && { i=$n; continue; }
+				i=$(( i + 2 + ${#j} + 2 ))
+				continue
+			fi
+		fi
+		[[ "${line:i:lp}" == "$pattern" ]] && { printf '%s' "$i"; return 0; }
+		i=$(( i + 1 ))
+	done
+	return 1
+}
+
+# The substitution a classification names, `<pattern> -> <replacement>`, or
+# nothing when the marker names none — S2.
+#
+# The marker is per *line* and the substitution is per *pattern*. A changed line
+# can carry two substitution tokens, and the gate applies one of them, first
+# match wins, so a bare `equivalent` on such a line would excuse whichever pair
+# the gate happened to pick — including a killable one. The marker can therefore
+# name the pair it speaks about: `equivalent (bool) -> (int) — the operand is an
+# int`. A line with a single pair keeps the bare form; there is nothing for the
+# claim to be about but that pair.
+_counterfactual_marker_pair() {
+	local line="$1" rest class pattern replacement
+	[[ "$line" =~ $_COUNTERFACTUAL_MARKER_RE ]] || return 0
+	rest="${line:${#BASH_REMATCH[1]}}"
+	[[ "$rest" == "/*"* ]] && rest="${rest%%\*/*}"
+	rest="${rest#*counterfactual:}"
+	class="${rest#"${rest%%[![:space:]]*}"}"
+	class="${class%%[[:space:]]*}"
+	[[ "$class" == "equivalent" ]] || return 0
+	rest="${rest#"${rest%%[![:space:]]*}"}"
+	rest="${rest#"$class"}"
+	rest="${rest#"${rest%%[![:space:]]*}"}"
+	while IFS= read -r pattern && IFS= read -r replacement; do
+		[[ -n "$pattern" ]] || continue
+		if [[ "$rest" == "$pattern -> $replacement"* ]]; then
+			printf '%s -> %s' "$pattern" "$replacement"
+			return 0
+		fi
+	done < <(_counterfactual_patterns)
+	return 0
+}
+
+# How many distinct substitutions this line offers — S2's question.
+_counterfactual_pairs_on_line() {
+	local line="$1" pattern replacement count=0
+	while IFS= read -r pattern && IFS= read -r replacement; do
+		[[ -n "$pattern" ]] || continue
+		[[ -n "$(_counterfactual_find "$line" "$pattern")" ]] && count=$(( count + 1 ))
+	done < <(_counterfactual_patterns)
+	printf '%s' "$count"
+}
+
+# Whether the classification written on this line covers the substitution the
+# gate is about to apply.
+#
+# A named pair covers exactly that pair. A marker that names none covers the line
+# only when the line offers one substitution, which is the shape the bare form is
+# for. Anything else is the line being classified for one mutation while another
+# is applied, and the gate reports the survivor rather than excusing it.
+#
+# The register offered the other answer — report that a multi-pair marker covers
+# all of them — and it was not taken: said that way the claim still excuses the
+# pair the gate did not apply, which is the whole of S2. Naming the pair makes
+# the claim specific enough to check, which is the first of the register's two
+# options.
+_counterfactual_covers() {
+	local line="$1" pattern="$2" replacement="$3" named
+	named="$(_counterfactual_marker_pair "$line")"
+	if [[ -n "$named" ]]; then
+		[[ "$named" == "$pattern -> $replacement" ]]
+		return
+	fi
+	[[ "$(_counterfactual_pairs_on_line "$line")" -le 1 ]]
+}
+
 # Run the substitution against the tests that cover that line, not the suite.
 #
 # The whole suite is what makes a substitution expensive: 148 tests under
@@ -2573,15 +2771,21 @@ _junit_tests_run() {
 #      back for it; answering it here too would count one cause twice.
 #   1  red — the whole suite answers for this line instead.
 #
-# Sees `covered_by`, `config`, `prefix`, `subset_green` and `ungreen` from its
-# caller.
+# Sees `covered_by`, `config`, `prefix`, `subset_green`, `ungreen`,
+# `ungreen_subsets`, `proofs_run` and `proofs_cached` from its caller — bash
+# locals are dynamically scoped, which is what `_run_covering_tests` relies on
+# too.
 _prove_covering_subset() {
 	local target="$1" config="$2" prefix="$3"
 	local filter="${covered_by[$target]:-}" status=0 ran
 	[[ -n "$filter" ]] || return 0
 	if [[ -n "${subset_green[$filter]+proved}" ]]; then
+		# The cache is the optimisation's own receipt: this subset was asked
+		# about before, in this run, and this request cost no suite.
+		proofs_cached=$(( proofs_cached + 1 ))
 		return "${subset_green[$filter]}"
 	fi
+	proofs_run=$(( proofs_run + 1 ))
 
 	rm -f "$PROJECT_ROOT/$COUNTERFACTUAL_JUNIT_REL"
 	run_sh "${prefix} exec php vendor/bin/phpunit \
@@ -2603,6 +2807,9 @@ _prove_covering_subset() {
 
 	subset_green["$filter"]=0
 	ungreen=$(( ungreen + 1 ))
+	# Named, not only counted: the cap's report was fixed the same way, because
+	# "one subset is red" does not say which test group to go and look at.
+	ungreen_subsets+=("$filter")
 	warn "${target}: the ${ran} test(s) that cover this line do not pass on their own.
   They fail with the tree exactly as it stands — before any substitution — so a
   red run of them would say nothing about a mutation, and reading it as a kill
@@ -3035,6 +3242,33 @@ cmd_doctor() {
 		printf '  the tree, so a source file may not be what git last recorded.\n'
 		printf '  Repair: bin/harness counterfactual — it restores the pre-image from the\n'
 		printf '  journal before it reads the diff.\n'
+	fi
+	# The lock the journal's one-writer assumption rests on, and the two states
+	# it can be in. Reported because neither is visible otherwise: a *held* lock
+	# is another run in progress, and a *stale* one is what a `kill -9` left —
+	# the next run takes it over without a word, so the fact that a run died
+	# here is never said out loud. Neither is an error; this is what a project's
+	# own session sees, and `inspect.py` is the fleet's reader.
+	if [[ -d "$(_counterfactual_lock_path)" ]]; then
+		local lock_pid
+		lock_pid="$(cat "$(_counterfactual_lock_path)/pid" 2>/dev/null || true)"
+		step "counterfactual lock"
+		if [[ -n "$lock_pid" ]] && kill -0 "$lock_pid" 2>/dev/null; then
+			printf '  HELD  %s\n' "$COUNTERFACTUAL_LOCK_REL"
+			printf '  a counterfactual run is in progress, pid %s — another run waits for it.\n' \
+				"$lock_pid"
+			printf '  Nothing to repair.\n'
+		else
+			printf '  STALE %s\n' "$COUNTERFACTUAL_LOCK_REL"
+			if [[ -n "$lock_pid" ]]; then
+				printf '  a killed run (pid %s) left its lock; the next counterfactual run\n' \
+					"$lock_pid"
+			else
+				printf '  the lock names no pid — a run that died between taking the lock and\n'
+				printf '  writing the pid it belongs to. The next counterfactual run\n'
+			fi
+			printf '  takes it over without a word.\n'
+		fi
 	fi
 	# Reported because nothing else does. `composer install` prints advisories
 	# while it works and then scrolls them away, and no gate reads them: a

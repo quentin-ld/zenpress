@@ -192,6 +192,28 @@ saying so on the line — `// counterfactual: equivalent — <reason>` — which
 reports it as classified instead of failing the gate. That is the same
 classification step five asks for, in the place the gate can read it.
 
+Four things about the marker, each one a way a classification can be read as
+something it is not:
+
+- **The reason is prose and may name a token.** The gate chooses the substitution
+  from the code *outside* the comment, so a reason saying "false in the reason"
+  does not make it mutate `false`. Write the reason freely.
+- **A block comment is a marker too.** `/* counterfactual: equivalent — … */`
+  works, and the code after its `*/` is still code.
+- **A `//` inside a string literal is not a comment.** `$s = '// counterfactual:
+  equivalent';` is a line with no marker, and the gate substitutes in the code
+  after the string — not in the quoted text, where nothing could see it.
+- **A line carrying two substitution tokens needs its pair named.** The marker is
+  read per *line* and the substitution is applied per *pattern*; on a line with
+  two, the first match wins, and a bare `equivalent` would excuse whichever pair
+  the gate happened to pick. Name it: `// counterfactual: equivalent (bool) ->
+  (int) — the operand is an int`. A line with a single pair keeps the bare form.
+
+The run also prints the lines it could **not** ask about — a token carried only
+by the classification comment, or only by a string literal or a comment — so a
+line you expected the gate to check and did not see is a number in the output
+rather than a silence. `DESIGN.md` section 5 lists the whole report.
+
 ## Three rules that catch most tautologies
 
 **Assert the specific, not the plausible.** `assertIsArray( $result )` where the
