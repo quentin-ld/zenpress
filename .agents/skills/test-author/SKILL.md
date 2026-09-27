@@ -44,6 +44,43 @@ Choose the suite by the oracle, not by speed:
 When in doubt pick integration. A unit suite that stubs WordPress is cheap and
 is often measuring the stubs.
 
+**A stub has to mirror core for the input shapes the code guards against.** A
+stub is a claim about what WordPress does, and it is only as good as the inputs
+it was given. `updatronix-pro`'s unit bootstrap stubbed `wp_parse_args( $args,
+$defaults )` so that anything that was not an array came back as `$defaults` —
+one line, and sensible-looking. WordPress does not do that: for a non-array,
+non-object argument it runs `parse_str()` over the string and merges what falls
+out. The stub therefore made a malformed license option look harmless, and the
+two guards that exist for exactly that option could not be reached *through the
+stub* — so the counterfactual reported the guard's line as a survivor, and the
+finding looked like a weak test.
+
+The rule: **a stub for a WordPress function must answer, the way core does, the
+input shapes the code under test guards against.** A stub that turns a malformed
+input into a sane default is not a simplification — it is a branch deleted from
+the code under test, and it will be reported as a test's fault. Where the honest
+answer is hard to write, that case belongs in the integration suite, where core
+answers it for you.
+
+```php
+// The stub that hid the branch: a non-array came back as $defaults.
+function wp_parse_args( $args, array $defaults ): array {
+    return is_array( $args ) ? array_merge( $defaults, $args ) : $defaults;
+}
+
+// The stub that mirrors core, so the guard's input can be produced.
+function wp_parse_args( $args, array $defaults ): array {
+    if ( is_object( $args ) ) {
+        $args = get_object_vars( $args );
+    } elseif ( ! is_array( $args ) ) {
+        $parsed = array();
+        parse_str( (string) $args, $parsed );
+        $args = $parsed;
+    }
+    return array_merge( $defaults, $args );
+}
+```
+
 ## Procedure
 
 1. **Read the code you are about to test, and find its decisions.** Not its
@@ -62,6 +99,23 @@ bin/harness integration       # real WordPress
 bin/harness antipatterns      # structural bans, instant
 bin/harness mutation          # the automated version of step 5
 ```
+
+## The line has to be killable before the test can kill it
+
+Step five above cannot succeed on a line whose fix is observationally identical
+to its own twin, and the strict rules push you toward exactly such a line. When
+a condition's operand is an `int`, a `string`, an `array` or a nullable, the fix
+is an **explicit comparison** — `0 !== $x`, `'' !== $x`, `count( $x ) > 0`,
+`null !== $v` — and never a bare `(bool)`: on those types `(bool) $x` and
+`(int) $x` have the same truthiness, so `bin/harness mutation` (Infection's
+`CastBool`) and `bin/harness counterfactual` (`(bool)` → `(int)`) both produce a
+mutant no honest test can kill. The cast is right only on a `mixed` operand, and
+only where a test can reach a **non-numeric string**.
+
+The table, the reason, and the four lines the last raise reformed are in
+`docs/TOOLCHAIN.md`, "How to write a condition, and why the cast is the wrong
+default" — read it before deciding what a line's fix should be, and before
+concluding that a survivor is your test's fault.
 
 ## Step five, worked
 
@@ -95,6 +149,48 @@ person does not re-litigate it:
 Do **not** write a test that reaches the branch by inventing a fixture, unless
 that fixture represents something real. A test that only passes because of a
 file the suite creates is testing the file.
+
+## What `counterfactual` does to a changed line
+
+`bin/harness counterfactual` reads each changed line and applies the **first**
+pattern it finds, from the list below, in this order — first match wins, which
+is why a line carrying both `false` and `(bool)` is substituted at `false` and
+never at the cast. You cannot avoid a substitution you have not seen, so here is
+the whole list, with one operand shape per row where the twin's behaviour
+differs and a test can therefore kill it:
+
+| the line contains | it is replaced by | a shape where the twin is **not** equivalent |
+|---|---|---|
+| `===` | `!==` | any value the comparison is about: the two take different branches |
+| `!==` | `===` | as above |
+| `&&` | `\|\|` | the left operand false and the right one true |
+| `\|\|` | `&&` | the left operand true and the right one false |
+| `>=` | `>` | the equal case — `4 >= 4` is true, `4 > 4` is not |
+| `<=` | `<` | the equal case |
+| `true` | `false` | any line whose branch the literal decides |
+| `false` | `true` | as above |
+| `(int)` | `(string)` | the result is compared strictly or concatenated: `12` and `'12'` differ |
+| `(bool)` | `(int)` | **a non-numeric string** (`(bool) 'v1'` is true, `(int) 'v1'` is 0) or a float in `(-1, 1)` (`(bool) 0.5` is true, `(int) 0.5` is 0). On an `int`, a `bool`, an `array`, `null` or a numeric string the twin is observationally identical |
+| `(string)` | `(int)` | the value is used where its type shows: `'0'` and `0` are not the same question |
+| `min(` | `max(` | two arguments that differ |
+| `max(` | `min(` | as above |
+| `strtolower(` | `strtoupper(` | any letter the code compares or stores |
+| `strtoupper(` | `strtolower(` | as above |
+| `array_values(` | `array_filter(` | an array holding a falsy element — `array_filter` drops it |
+
+The list is **asymmetric**, and that is worth knowing before you write a line:
+`array_filter(` appears as a twin and never as a pattern, so a line whose only
+substitution token is `array_filter(` is not substituted at all. A substitution
+you expected and did not get reads exactly like a mutation you killed, so the
+generator's suite holds this table to `_counterfactual_patterns` pair for pair —
+an addition, a removal or a reordering fails the suite until this table moves
+with it.
+
+A row whose third cell is empty for your operand is an **equivalent mutation**:
+no honest test can kill it, and `bin/harness counterfactual` has a marker for
+saying so on the line — `// counterfactual: equivalent — <reason>` — which
+reports it as classified instead of failing the gate. That is the same
+classification step five asks for, in the place the gate can read it.
 
 ## Three rules that catch most tautologies
 

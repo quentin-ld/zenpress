@@ -1509,6 +1509,15 @@ cmd_mutation() {
 	# points at the flags rather than at the two options being mutually
 	# exclusive. The mutant runs need no coverage driver, so they are faster
 	# without one.
+	# The two floors are ratios over the *diff's* mutants, and that is the
+	# decision rather than a threshold anyone derived: the margin exists so a
+	# sweep — which is what a floor raise forces — can carry mutants no test
+	# can kill without making the gate unsatisfiable. `CastBool` removal on a
+	# `(bool)` in a condition, `(string)` on a concatenation, an integer clamp
+	# standing behind another clamp. Where a survivor is classified, and why
+	# this command does not print the mutator names itself, is DESIGN.md
+	# section 5; the per-line classification lives in the test file that
+	# covers the line, which is where the next person reads the assertion.
 	if ! run_sh "${prefix} exec php vendor/bin/infection \
 		--configuration=${config@Q} \
 		--coverage=${coverage_dir@Q} \
@@ -1655,6 +1664,59 @@ _tests_config() {
 		phpunit.xml.dist phpunit.xml
 }
 
+# The tests that cover each executed line, as `file:line<TAB>Class::method|…`.
+#
+# The second half of the report `_covered_lines` reads: PHPUnit writes one
+# `<covered by="…"/>` per test that executed the line, inside the `<line>`
+# element. A line is emitted when its element closes, because the children come
+# after the `<line nr="…">` that opens it — so the state carried across the
+# three cases is the line number and the tests seen since.
+#
+# Two things the format makes easy to get wrong, and that were: the report has a
+# second `<line …>` vocabulary — `<source>`, one `<line no="…">` per token of
+# the file — and those also close with `</line>`. Read without the section, and
+# every token line emits the last coverage line's tests again.
+#
+# The names are joined with `|` and handed to PHPUnit as one `--filter`, which
+# is a PCRE. Backslashes are escaped for that reason: no test class in this
+# fleet is namespaced today, and the first one that is must not silently match
+# nothing — a filter that selects no tests makes PHPUnit exit non-zero, which
+# this command would read as a killed mutant.
+_covering_tests() {
+	local dir="$1" report name
+	while read -r report; do
+		[[ -n "$report" ]] || continue
+		name="${report#"$PROJECT_ROOT/$dir"/}"
+		awk -v f="${name%.xml}" '
+			/<coverage>/ { inside = 1; next }
+			/<\/coverage>/ { exit }
+			!inside { next }
+			/<line nr="/ {
+				if (match($0, /nr="[0-9]+"/)) { n = substr($0, RSTART + 4, RLENGTH - 5) }
+				tests = ""
+				# A covered line opens a tag that does not close on this line;
+				# an uncovered one closes immediately and has no children.
+				open = ($0 !~ /\/>[[:space:]]*$/)
+				next
+			}
+			/<covered by="/ {
+				if (open && match($0, /by="[^"]+"/)) {
+					t = substr($0, RSTART + 4, RLENGTH - 5)
+					gsub(/\\/, "\\\\", t)
+					tests = (tests == "" ? t : tests "|" t)
+				}
+				next
+			}
+			/<\/line>/ {
+				if (open && tests != "") { print f ":" n "\t" tests }
+				open = 0
+				tests = ""
+				next
+			}
+		' "$report"
+	done < <(find "$PROJECT_ROOT/$dir" -name '*.xml' ! -name 'index.xml' ! -name 'junit.xml' 2>/dev/null | sort)
+}
+
 # The `file:line` pairs the coverage report says were executed.
 #
 # PHPUnit writes a covered line as `<line nr="19">` with a `<covered by="…"/>`
@@ -1678,9 +1740,12 @@ _covered_lines() {
 }
 
 cmd_counterfactual() {
+	# Before anything else, and before the diff is even read: a journal left by
+	# a killed run means the tree is not what git thinks it is, and every check
+	# below would be reading a substituted line.
+	_counterfactual_recover
 	_require_test_layer || return 0
 	step "Counterfactual check on the diff (for code Infection cannot reach)"
-
 	local config
 	config="$(_tests_config || true)"
 	if [[ -z "$config" ]]; then
@@ -1728,16 +1793,26 @@ cmd_counterfactual() {
 	# made the cap message read "12 checked of 2310" on a diff that was almost
 	# entirely comments, which is a report about nothing.
 	local candidates=""
-	local target file line original pattern replacement
+	local -A is_classified=() class_reason=()
+	local target file line original pattern replacement marker class
 	while read -r target; do
 		[[ -n "$target" ]] || continue
 		file="${target%:*}"
 		line="${target##*:}"
 		original="$(sed -n "${line}p" "$PROJECT_ROOT/$file" 2>/dev/null || true)"
 		[[ -n "$original" ]] || continue
+		# The classification, read from the line, and the code the pattern is
+		# chosen from — see `_counterfactual_marker` and `_counterfactual_code`
+		# for why the reason is not allowed to pick the substitution.
+		marker="$(_counterfactual_marker "$original" || true)"
+		if [[ -n "$marker" ]]; then
+			class="${marker%%$'\t'*}"
+			is_classified["${file}:${line}"]="$class"
+			class_reason["${file}:${line}"]="${marker#*$'\t'}"
+		fi
 		while IFS= read -r pattern && IFS= read -r replacement; do
 			[[ -n "$pattern" ]] || continue
-			if [[ "$original" == *"$pattern"* ]]; then
+			if [[ "$(_counterfactual_code "$original")" == *"$pattern"* ]]; then
 				candidates="${candidates}${file}:${line}"$'\t'"${pattern}"$'\t'"${replacement}"$'\n'
 				break
 			fi
@@ -1800,12 +1875,25 @@ cmd_counterfactual() {
   Fix it first: bin/harness ${suite}"
 	fi
 
-	local -A is_covered=()
-	local pair
+	local -A is_covered=() covered_by=()
+	local pair name tests
 	while read -r pair; do
 		[[ -n "$pair" ]] || continue
 		is_covered["$pair"]=1
 	done < <(_covered_lines "$coverage_dir")
+
+	# The same report, read for its other half: which tests cover each line.
+	#
+	# PHPUnit writes `<covered by="Class::method"/>` inside the `<line>` it
+	# covers. Nothing used it, and it is what makes running the whole suite for
+	# every substitution unnecessary — measured on `updatronix-pro`, whose 148
+	# tests take 33 s under `@runTestsInSeparateProcesses`, so twelve
+	# substitutions cost twelve suites. Infection has the same optimisation
+	# (`--only-covering-test-cases`); this is the counterfactual's.
+	while IFS=$'\t' read -r pair tests; do
+		[[ -n "$pair" ]] || continue
+		covered_by["$pair"]="$tests"
+	done < <(_covering_tests "$coverage_dir")
 
 	local covered_candidates="" covered_total=0
 	while IFS=$'\t' read -r target pattern replacement; do
@@ -1828,14 +1916,18 @@ cmd_counterfactual() {
 
 	local limit="${HARNESS_COUNTERFACTUAL_MAX:-12}"
 	local total="$covered_total"
-	local checked=0 killed=0 survived=0 skipped=0
+	local checked=0 killed=0 survived=0 skipped=0 classified=0
+	local narrow=0 wide=0 fallbacks=0
 
 	local work
 	work="$(mktemp -d)"
 	# `set -e` means any early exit below would otherwise leave a mutated file
-	# behind. The trap is the whole safety story of this command.
+	# behind, and a signal is the other way out of this command. One handler
+	# covers the normal exit, the three catchable signals and the restore; the
+	# journal is what covers the one it cannot (`kill -9`) — the next run
+	# repairs the tree from it before it checks anything.
 	# shellcheck disable=SC2064
-	trap "rm -rf '$work'" EXIT
+	trap "_counterfactual_recover; rm -rf '$work'" EXIT INT TERM HUP
 
 	while IFS=$'\t' read -r target pattern replacement; do
 		[[ -n "$target" ]] || continue
@@ -1843,17 +1935,37 @@ cmd_counterfactual() {
 
 		file="${target%:*}"
 		line="${target##*:}"
-		cp "$PROJECT_ROOT/$file" "$work/current"
+
+		# The pre-image is read here rather than reused from the candidate pass,
+		# because the pass that builds `covered_candidates` keeps only the three
+		# fields the loop consumes.
+		local pre_image substituted
+		pre_image="$(sed -n "${line}p" "$PROJECT_ROOT/$file" 2>/dev/null || true)"
 
 		# `sed` needs `&` and the delimiter escaped in the replacement. Without
 		# this, `&&` becomes "the whole match repeated" and the mutation is not
 		# the one that was intended.
-		local escaped="${replacement//\\/\\\\}"
-		escaped="${escaped//&/\\&}"
-		escaped="${escaped//|/\\|}"
-		local escaped_pat="${pattern//|/\\|}"
+		local escaped escaped_pat
+		escaped="$(_sed_replacement "$replacement")"
+		escaped_pat="${pattern//|/\\|}"
+
+		# What the substitution will produce, computed on the string *before*
+		# the project's file changes. The journal needs both halves so the next
+		# run can tell our edit from someone else's, and it cannot be written
+		# after the edit without leaving a window with no journal at all.
+		substituted="$(printf '%s\n' "$pre_image" | sed "s|${escaped_pat}|${escaped}|" 2>/dev/null || true)"
+		if [[ -z "$substituted" || "$substituted" == "$pre_image" ]]; then
+			# `sed` produced the line unchanged, so there is nothing to check and
+			# nothing to put back.
+			continue
+		fi
+
+		cp "$PROJECT_ROOT/$file" "$work/current"
+		_counterfactual_journal_write "$file" "$line" "$substituted" "$pre_image"
+
 		if ! sed -i "${line}s|${escaped_pat}|${escaped}|" "$PROJECT_ROOT/$file" 2>/dev/null; then
 			cp "$work/current" "$PROJECT_ROOT/$file"
+			_counterfactual_journal_clear
 			continue
 		fi
 
@@ -1861,6 +1973,7 @@ cmd_counterfactual() {
 		# for a reason unrelated to the assertion. Discarded, not counted.
 		if ! run_sh "php -l ${file@Q} >/dev/null 2>&1" </dev/null; then
 			cp "$work/current" "$PROJECT_ROOT/$file"
+			_counterfactual_journal_clear
 			skipped=$(( skipped + 1 ))
 			continue
 		fi
@@ -1870,20 +1983,61 @@ cmd_counterfactual() {
 		# inside a `while read` loop reading from a here-string, and a child
 		# that reads stdin consumes the loop's remaining input: the first
 		# version checked exactly one line and reported it as the whole run.
-		if "cmd_${suite}" </dev/null >/dev/null 2>&1; then
-			printf '  %-46s %s  %s\n' "${file}:${line}" "$pattern -> $replacement" "SURVIVED"
-			survived=$(( survived + 1 ))
+		local classification="${is_classified[$target]:-}"
+		local status=0
+		if _run_covering_tests "$target" "$config" "$prefix"; then
+			status=0
+		else
+			status=$?
+		fi
+		if [[ "$status" -eq 0 ]]; then
+			if [[ -n "$classification" ]]; then
+				# A survivor whose line says it is an equivalent mutation. The
+				# finding is real — nothing in the suite depends on the line —
+				# but it is not a weak test, and the gate is not the place to
+				# re-litigate it. Counted apart, and the claim is printed.
+				printf '  %-46s %s  %s\n' "${file}:${line}" "$pattern -> $replacement" "CLASSIFIED equivalent"
+				printf '  %-46s %s\n' "" "— ${class_reason[$target]}"
+				classified=$(( classified + 1 ))
+			else
+				printf '  %-46s %s  %s\n' "${file}:${line}" "$pattern -> $replacement" "SURVIVED"
+				survived=$(( survived + 1 ))
+			fi
 		else
 			killed=$(( killed + 1 ))
+			if [[ -n "$classification" ]]; then
+				# The marker claims the twin is unobservable and the suite just
+				# killed it. Not a failure — a kill is the gate working — but a
+				# classification that is wrong is worth the line, because the
+				# next reader will believe it.
+				printf '  %-46s %s  %s\n' "${file}:${line}" "$pattern -> $replacement" "KILLED (the marker claims equivalent — it is stale)"
+			fi
 		fi
 
 		cp "$work/current" "$PROJECT_ROOT/$file"
+		_counterfactual_journal_clear
 	done <<< "$covered_candidates"
 
 	printf '\n  %s checked of %s executed changed line(s): %s killed, %s survived' \
 		"$checked" "$total" "$killed" "$survived"
+	[[ "$classified" -gt 0 ]] && printf ', %s classified equivalent' "$classified"
 	[[ "$skipped" -gt 0 ]] && printf ', %s not valid PHP' "$skipped"
 	printf '\n'
+	rm -f "$PROJECT_ROOT/$COUNTERFACTUAL_JUNIT_REL"
+
+	# Which suite answered each substitution. Reported because the saving is
+	# invisible otherwise — and because a run that fell back is a run that cost
+	# what it used to, which is worth knowing rather than assuming.
+	if [[ "$checked" -gt 0 ]]; then
+		printf '  %s ran the covering tests alone, %s ran the whole suite\n' \
+			"$narrow" "$wide"
+	fi
+	if [[ "$fallbacks" -gt 0 ]]; then
+		warn "${fallbacks} substitution(s) fell back to the whole suite: the coverage
+  report named no test PHPUnit could select for the line. The suite that runs
+  nothing exits non-zero, which this command would count as a kill, so the
+  whole suite is asked instead. See .cache/counterfactual-coverage."
+	fi
 
 	# A cap that quietly leaves work undone is the same trap as a skipped test,
 	# and it has to be said before the failure or it is never read.
@@ -1896,12 +2050,215 @@ cmd_counterfactual() {
 		fail "${survived} mutation(s) survived: the suite runs that line and still
   passes with it changed, so nothing it asserts depends on it. That is the
   finding this gate exists to produce — see
-  .agents/skills/test-author/SKILL.md."
+  .agents/skills/test-author/SKILL.md.
+  If the twin cannot change behaviour for any operand this line can hold it is
+  an equivalent mutation, not a weak test: say so on the line with
+  \`// counterfactual: equivalent — <reason>\` and this gate will report it as
+  classified instead of failing. And if the finding looks impossible, check for
+  a journal first: a run killed mid-substitution leaves its edit in the tree at
+  ${COUNTERFACTUAL_JOURNAL_REL}, and the next run restores it."
 	fi
 }
 
-cmd_build() {
-	_require_frontend || {
+# The journal that makes a killed run recoverable.
+#
+# This command edits a project's source file, runs a suite, and puts the file
+# back. A trap covers the signals; nothing covers SIGKILL, and nothing covers
+# the machine going away. Measured in the raise this round comes from: a
+# `(bool) preg_match(` became `(int) preg_match(` in a project's tree when a run
+# was killed inside that window, and the next `lint` reported a finding that did
+# not exist, then the next `counterfactual` a survivor that was not one. Both
+# were chased before the cause was found, and the cause was nowhere near the
+# symptom.
+#
+# So the pre-image goes down here **before** the project's file is touched, and
+# the next run restores it before it checks anything. Four lines, fixed order:
+# the file, the line number, the line the substitution produced, and the line it
+# replaced. None of them can contain a newline, and the file is written whole
+# and renamed into place, so a half-written journal is not a state this reaches.
+COUNTERFACTUAL_JOURNAL_REL=".cache/counterfactual-journal"
+# Where a filtered run's JUnit log goes, so the runtime can tell whether the
+# `--filter` it built selected anything. Inside the project, because the path is
+# read by the PHPUnit process in the container and by this script outside it.
+COUNTERFACTUAL_JUNIT_REL=".cache/counterfactual-junit.xml"
+
+_counterfactual_journal_path() {
+	printf '%s/%s' "$PROJECT_ROOT" "$COUNTERFACTUAL_JOURNAL_REL"
+}
+
+# $1 file (relative to the project), $2 line, $3 substituted, $4 pre-image.
+_counterfactual_journal_write() {
+	local path tmp
+	path="$(_counterfactual_journal_path)"
+	mkdir -p "$(dirname "$path")"
+	tmp="${path}.$$"
+	printf '%s\n%s\n%s\n%s\n' "$1" "$2" "$3" "$4" > "$tmp"
+	mv -f "$tmp" "$path"
+}
+
+_counterfactual_journal_clear() {
+	rm -f "$(_counterfactual_journal_path)"
+}
+
+# The replacement text for a `sed s|…|…|`: backslash, `&` and the delimiter are
+# the three the language reserves, and all three occur in PHP.
+_sed_replacement() {
+	local out="$1"
+	out="${out//\\/\\\\}"
+	out="${out//&/\\&}"
+	out="${out//|/\\|}"
+	printf '%s' "$out"
+}
+
+# Put the tree back the way a killed run found it — and say so.
+#
+# A silent repair would be worse than none: a file that changed without its
+# owner changing it is the other half of the defect the journal exists for.
+# Every path here reports, and the two that cannot decide leave the file alone
+# rather than guessing.
+_counterfactual_recover() {
+	local path file line mutated original current
+	path="$(_counterfactual_journal_path)"
+	[[ -f "$path" ]] || return 0
+
+	# `|| true` on the group: a short journal is handled below, not by `set -e`
+	# in the middle of a trap.
+	{ IFS= read -r file; IFS= read -r line; IFS= read -r mutated; IFS= read -r original; } < "$path" || true
+
+	if [[ -z "${file:-}" || -z "${line:-}" || -z "${mutated:-}" || -z "${original:-}" ]]; then
+		warn "a counterfactual journal is present but unreadable: ${COUNTERFACTUAL_JOURNAL_REL}"
+		warn "It names no pre-image, so nothing was restored. Remove it once the tree is"
+		warn "known good: rm -f ${COUNTERFACTUAL_JOURNAL_REL}"
+		return 0
+	fi
+
+	if [[ ! -f "$PROJECT_ROOT/$file" ]]; then
+		warn "a counterfactual journal names ${file}, which is not in this project any more."
+		warn "Dropping it: ${COUNTERFACTUAL_JOURNAL_REL}"
+		rm -f "$path"
+		return 0
+	fi
+
+	current="$(sed -n "${line}p" "$PROJECT_ROOT/$file" 2>/dev/null || true)"
+	if [[ "$current" == "$mutated" ]]; then
+		if sed -i "${line}s|.*|$(_sed_replacement "$original")|" "$PROJECT_ROOT/$file"; then
+			info "restored ${file}:${line} — a previous counterfactual run was killed mid-substitution"
+			rm -f "$path"
+		else
+			warn "could not restore ${file}:${line}. The pre-image is still in"
+			warn "${COUNTERFACTUAL_JOURNAL_REL}."
+		fi
+	elif [[ "$current" == "$original" ]]; then
+		info "${file}:${line} is already the pre-image — the killed run had put it back"
+		rm -f "$path"
+	else
+		warn "${file}:${line} is neither the journal's pre-image nor its substitution,"
+		warn "so it was left alone — it has been edited since the killed run."
+		warn "Remove the journal once the tree is known good: rm -f ${COUNTERFACTUAL_JOURNAL_REL}"
+	fi
+	return 0
+}
+
+# The classification marker: `// counterfactual: equivalent — <reason>`.
+#
+# `test-author` requires every survivor to be classified as equivalent,
+# unreachable or a gap, and to write the classification where the next person
+# finds it. The gate offered no such place, so a correctly classified
+# equivalent failed the gate and the classification went nowhere. Sixteen of
+# the substitution patterns have a shape where the twin differs; the rest are
+# observationally identical on the operand the strict rules push you toward,
+# and no test can kill them.
+#
+# Only `equivalent` is accepted. A `gap` is a missing test and has to fail; an
+# `unreachable` line is what the coverage filter already answers for. The
+# marker is a claim, so the reason is echoed — a reviewer sees it or fails to.
+#
+# It has to be on the changed line itself: the substitution happens there, and
+# a marker on its own line above has nothing to substitute.
+_counterfactual_marker() {
+	local line="$1" rest class reason
+	[[ "$line" == *counterfactual:* ]] || return 0
+	rest="${line#*counterfactual:}"
+	class="${rest#"${rest%%[![:space:]]*}"}"
+	class="${class%%[[:space:]]*}"
+	[[ "$class" == "equivalent" ]] || return 0
+	reason="${rest#"${rest%%[![:space:]]*}"}"
+	reason="${reason#"$class"}"
+	reason="${reason#"${reason%%[![:space:]]*}"}"
+	reason="${reason#—}"
+	reason="${reason#--}"
+	reason="${reason#-}"
+	reason="${reason#"${reason%%[![:space:]]*}"}"
+	printf '%s\t%s' "$class" "$reason"
+}
+
+# The line without its classification comment.
+#
+# The reason is prose and may contain any token the substitution list knows —
+# "false in the reason" would match the `false` → `true` pattern ahead of the
+# `(bool)` the line actually carries. So the pattern is chosen from the code,
+# and the reason is not allowed to decide what is mutated. The `//` is required
+# to sit immediately before `counterfactual:` so a `https://` in a string
+# cannot be mistaken for the comment's start.
+_counterfactual_code() {
+	printf '%s' "${1%%//[[:space:]]*counterfactual:*}"
+}
+
+# Run the substitution against the tests that cover that line, not the suite.
+#
+# The whole suite is what makes a substitution expensive: 148 tests under
+# `@runTestsInSeparateProcesses` take 33 s, so twelve of them took twelve
+# suites. The coverage report already answers which tests ran the line, and
+# PHPUnit's `--filter` takes their names.
+#
+# The fallback is not politeness. A `--filter` that selects nothing makes
+# PHPUnit exit non-zero, and this command reads a non-zero exit as a *killed*
+# mutant — so a mis-built filter would report the gate as satisfied while
+# asking no test anything. The JUnit log is read back for that reason: no tests
+# in it, and the whole suite runs instead.
+#
+# Sees `covered_by`, `suite`, `config`, `prefix` and the counters from its only
+# caller; bash locals are dynamically scoped, which is what `_explain_no_mutants`
+# already relies on.
+_run_covering_tests() {
+	local target="$1" config="$2" prefix="$3"
+	local covering="${covered_by[$target]:-}" ran="" status=0
+
+	if [[ -n "$covering" ]]; then
+		rm -f "$PROJECT_ROOT/$COUNTERFACTUAL_JUNIT_REL"
+		# `--no-coverage`, as `cmd_test` does: the gate is correctness, not
+		# instrumentation, and the config declares coverage, so PHPUnit would
+		# print a warning about a driver on every one of these runs.
+		#
+		# `</dev/null` for the same reason as the call it replaces: a child that
+		# reads stdin eats the loop's remaining input.
+		if run_sh "${prefix} exec php vendor/bin/phpunit \
+			--configuration=${config@Q} \
+			--no-coverage \
+			--filter=${covering@Q} \
+			--log-junit=${COUNTERFACTUAL_JUNIT_REL@Q}" </dev/null >/dev/null 2>&1; then
+			status=0
+		else
+			status=$?
+		fi
+		ran="$(awk '
+			/tests="/ {
+				if (match($0, /tests="[0-9]+"/)) { print substr($0, RSTART + 7, RLENGTH - 8); exit }
+			}
+		' "$PROJECT_ROOT/$COUNTERFACTUAL_JUNIT_REL" 2>/dev/null || true)"
+		if [[ "${ran:-0}" -gt 0 ]]; then
+			narrow=$(( narrow + 1 ))
+			return "$status"
+		fi
+		fallbacks=$(( fallbacks + 1 ))
+	fi
+
+	wide=$(( wide + 1 ))
+	"cmd_${suite}" </dev/null >/dev/null 2>&1 || return 1
+	return 0
+}
+
+cmd_build() {	_require_frontend || {
 		info "nothing to build."
 		return 0
 	}
@@ -2305,6 +2662,26 @@ cmd_doctor() {
 		else
 			printf '  git hooks NOT wired — run: bin/harness setup\n'
 		fi
+	fi
+	# A killed `counterfactual` leaves its substitution in a project's file, and
+	# every gate after that reports on a tree nobody edited: the next `lint` a
+	# phantom finding, the next `counterfactual` a phantom survivor. Reported
+	# here because this is the only command that runs before the gates and asks
+	# nothing of the diff — and because the symptom is two directories away from
+	# the cause, which is what made it expensive the first time.
+	if [[ -f "$PROJECT_ROOT/$COUNTERFACTUAL_JOURNAL_REL" ]]; then
+		local journal_file journal_line
+		journal_file="$(sed -n '1p' "$PROJECT_ROOT/$COUNTERFACTUAL_JOURNAL_REL" 2>/dev/null || true)"
+		journal_line="$(sed -n '2p' "$PROJECT_ROOT/$COUNTERFACTUAL_JOURNAL_REL" 2>/dev/null || true)"
+		step "counterfactual journal"
+		printf '  STALE %s\n' "$COUNTERFACTUAL_JOURNAL_REL"
+		if [[ -n "$journal_file" ]]; then
+			printf '  it names %s%s\n' "$journal_file" "${journal_line:+:$journal_line}"
+		fi
+		printf '  A previous `counterfactual` run was killed while it had a substitution in\n'
+		printf '  the tree, so a source file may not be what git last recorded.\n'
+		printf '  Repair: bin/harness counterfactual — it restores the pre-image from the\n'
+		printf '  journal before it reads the diff.\n'
 	fi
 	# Reported because nothing else does. `composer install` prints advisories
 	# while it works and then scrolls them away, and no gate reads them: a
