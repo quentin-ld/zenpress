@@ -39,6 +39,22 @@ in this fleet, which reads a one-line edit as the whole migration;
 `HARNESS_MUTATION_BASE` scopes a run to something else, and
 `bin/harness counterfactual` reads the same base.
 
+## Before you read a survivor, know what the mutation reaches
+
+A survivor is a statement about the *tests that cover the mutated line*, and the
+cheapest way to get that wrong is to reason about the wrong set of callers. Ask
+the graph first:
+
+```
+bin/harness graft callers <the method the mutant lives in> --depth 2
+```
+
+That is who exercises the line, transitively, read from the code rather than
+from your reading of the test files. A mutant that escapes because no caller ever
+reaches the branch is a test-shaped hole; one that escapes because the branch is
+genuinely unreachable is a finding about the code, and the two want opposite
+fixes. The `graft` skill is the full command table.
+
 ## Reading a run
 
 ```

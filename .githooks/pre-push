@@ -69,6 +69,18 @@ status=0
 
 "$ROOT/bin/harness" lint || status=1
 
+# The code graph the agents read, verified against the tree being pushed.
+#
+# `graft check` refreshes and then verifies, in that order, and the order is the
+# point: upstream `check` never refreshes, so a plain call reports drift for
+# every file edited since the last query — which is every push that changes
+# code, and a gate that fires wrongly is a gate that gets bypassed with
+# --no-verify. Refresh-then-check asks what a push can answer: does the cache
+# describe this tree, and can it be rebuilt when it does not? It fails when the
+# rebuild cannot complete. Costs about two seconds in the fleet's largest
+# project, against the 360 s target.
+"$ROOT/bin/harness" graft check || status=1
+
 # A plugin carries a test layer; a theme does not (ADR 0009). A theme's pre-push
 # is the full lint and nothing more. The kind is baked into the hook rather than
 # asked of the runtime, because `bin/harness suite` prints a sentence for a

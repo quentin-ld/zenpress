@@ -35,7 +35,7 @@ Analyze this feature's behavior as a hostile QA auditor. For everything in scope
 ## Inputs
 
 - Scope from user: file paths, feature name, task file, or free-form description.
-- Locate the full blast radius with graft first (`graft ask "<surface>" --source` / `graft grep "<symbol>"` / `graft callers <sym> --depth 2`) so no related file is missed, then read every in-scope file in full for the surfaces you audit.
+- Locate the full blast radius with graft first (`bin/harness graft ask "<surface>" --source` / `bin/harness graft grep "<symbol>"` / `bin/harness graft callers <sym> --depth 2`) so no related file is missed, then read every in-scope file in full for the surfaces you audit.
 - `.agents/notes/` for the same slug if applicable (previous findings).
 - **Do not** load a whole file under `.agents/docs/`. Grep one section if a specific WP rule is needed.
 

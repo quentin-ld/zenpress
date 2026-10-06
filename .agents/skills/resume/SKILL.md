@@ -15,9 +15,15 @@ Follow the architect Phase 4–5 rules throughout (retry ceiling, self-review, t
 ## Start
 
 1. Read the task file in full — `## Session checkpoint` first
-2. If the file does not exist or cannot be read, say: "Task file not found at `<path>`. Please provide the correct path or describe what we were working on."
-3. Say: "Resuming from task N. Remaining: [list]. Next: [action]."
-4. Execute from the first unchecked task (architect Phase 4–5 rules)
+2. **Rebuild the code context from the graph, not from chat history.**
+   `bin/harness graft ask "<the area this task touches>" --source` costs a few
+   hundred tokens and returns exact `file:line` spans; reading the files it names
+   to reconstruct that picture is the cost a rotation exists to avoid. Add
+   `bin/harness graft callers <symbol> --depth 2` when the remaining tasks change
+   a signature. The rule and the full command table are in the `graft` skill.
+3. If the file does not exist or cannot be read, say: "Task file not found at `<path>`. Please provide the correct path or describe what we were working on."
+4. Say: "Resuming from task N. Remaining: [list]. Next: [action]."
+5. Execute from the first unchecked task (architect Phase 4–5 rules)
 
 ## Reference docs
 

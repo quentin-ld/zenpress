@@ -1,5 +1,5 @@
 {
-  "commit": "f4f2784",
+  "commit": "2694754",
   "files": {
     ".agents/docs/DISTILLATION.md": {
       "class": "owned",
@@ -11,7 +11,7 @@
     },
     ".agents/skills/architect/SKILL.md": {
       "class": "owned",
-      "sha256": "6e7091ccde876cd630c8673a7eed65ff47e64a3d5cd96bd9d4e1eca2ed7d21e5"
+      "sha256": "f214749d22743225fe75603f6a75e97c03e21fbf28a02e5a07890b655420fa77"
     },
     ".agents/skills/documentation/SKILL.md": {
       "class": "owned",
@@ -19,7 +19,7 @@
     },
     ".agents/skills/graft/SKILL.md": {
       "class": "owned",
-      "sha256": "a3c8ec00dc54ec5abbe41bfae00ad550d6d3b47c711189125b28c9198dde0df6"
+      "sha256": "0cc0ce7eb2df0d03ddd8ad202f1c9fd58d5cda1841045f7bf155717bd5fcb118"
     },
     ".agents/skills/grilling/SKILL.md": {
       "class": "owned",
@@ -35,11 +35,11 @@
     },
     ".agents/skills/mutation-testing/SKILL.md": {
       "class": "owned",
-      "sha256": "c01441c31eefa2bd80ea7debb66ddb0b4a70afbb3806537321972e230018881b"
+      "sha256": "419f29e1bc135d7e828181f04b482ca0e5fb3b8e68ea71d45525eed1e2431de5"
     },
     ".agents/skills/qa/SKILL.md": {
       "class": "owned",
-      "sha256": "7c7833af460e407d1f367a369d8ada44eed97ee18492e13ba2ed6789bb518db2"
+      "sha256": "1c8d718e5ddfb3c4e9943fca6caec922e5c52c15d4beff349fb37dfc76d0d9df"
     },
     ".agents/skills/release/SKILL.md": {
       "class": "owned",
@@ -47,15 +47,15 @@
     },
     ".agents/skills/resume/SKILL.md": {
       "class": "owned",
-      "sha256": "b7ea767c8db809087e998248147e032d070f1a3f73d74ae8d67ac36d7cce7bca"
+      "sha256": "8f096b147609a6b5babf36e2b86905d2b76310b42c7ab54d6436a946a4691484"
     },
     ".agents/skills/reviewer/SKILL.md": {
       "class": "owned",
-      "sha256": "68d867df514675ffa4ce45d2d42ebc9d89cd924696d64574254ebdf2ba72e7b4"
+      "sha256": "54cabbfd648d745bd1ec75b9a894015b2ec7446802e4669e84e4b384c2b901fa"
     },
     ".agents/skills/security/SKILL.md": {
       "class": "owned",
-      "sha256": "002b3fa23ada6b7c37c458b02bbcd72b2848ddc655504395a5323aeb810cf2fd"
+      "sha256": "c16427ddcd25c4b3f07471e6a66d1eb870d3acfb3f69ea971cb1471e032311c2"
     },
     ".agents/skills/test-author/SKILL.md": {
       "class": "owned",
@@ -91,11 +91,11 @@
     },
     ".githooks/pre-commit": {
       "class": "owned",
-      "sha256": "dff9b0e3a177b24e4f2a938e987abb2ce80c45dd12f272f5da3c0fb6384d8380"
+      "sha256": "bf5141bd2402d0b60c70b2b49817f273648fecbad5c7cc95809e9ae030a4b8a2"
     },
     ".githooks/pre-push": {
       "class": "owned",
-      "sha256": "373a8f47b44bbf9f59d4f834f10cbe385deedc378da595d55850290453d3455e"
+      "sha256": "b4c26ca1d85396d26b04a7dc0a82a1f234ce320f7ea5dfa9e8d02a269ddb5013"
     },
     ".githooks/pre-release": {
       "class": "owned",
@@ -103,12 +103,12 @@
     },
     ".gitignore": {
       "class": "lines",
-      "sha256": "4e3793b2d416b11266f97bf4412c54f79570d1251a2bd378f76c2bf20f093e72"
+      "sha256": "34aa679254d9316cb061ac0bf77279406f5503afbfc9dcb34967dfd227ed349a"
     },
     ".reasonix/skills/architect/SKILL.md": {
       "class": "mirror",
       "from": ".agents/skills/architect/SKILL.md",
-      "sha256": "932f48379cf2d19e10c37dec19e585a7a6d9e451ceaacc05fcf33cfc48d62924"
+      "sha256": "4da1fdf326ae8031fc59a5537fbc6ad97af13c49c3e9a898b9b213d03966d7b0"
     },
     ".reasonix/skills/documentation/SKILL.md": {
       "class": "mirror",
@@ -118,7 +118,7 @@
     ".reasonix/skills/graft/SKILL.md": {
       "class": "mirror",
       "from": ".agents/skills/graft/SKILL.md",
-      "sha256": "1de973231c013b59b93b669494cbed67e608f6dc1b2c91143e8a2ac81a54b0ed"
+      "sha256": "060512e28621c008955a3c2c327bdfea6f50708cb1f92d2820df12c68f66237d"
     },
     ".reasonix/skills/grilling/SKILL.md": {
       "class": "mirror",
@@ -138,12 +138,12 @@
     ".reasonix/skills/mutation-testing/SKILL.md": {
       "class": "mirror",
       "from": ".agents/skills/mutation-testing/SKILL.md",
-      "sha256": "c01441c31eefa2bd80ea7debb66ddb0b4a70afbb3806537321972e230018881b"
+      "sha256": "419f29e1bc135d7e828181f04b482ca0e5fb3b8e68ea71d45525eed1e2431de5"
     },
     ".reasonix/skills/qa/SKILL.md": {
       "class": "mirror",
       "from": ".agents/skills/qa/SKILL.md",
-      "sha256": "010de8ca2066378084fab354c356501dc785bd4bbbc403af6c196d20c14150d2"
+      "sha256": "fff331fcabd71bc0c2e5d0a4020b115a30fb0dd8a53e9f7c0caebf8b15ad19f9"
     },
     ".reasonix/skills/release/SKILL.md": {
       "class": "mirror",
@@ -153,17 +153,17 @@
     ".reasonix/skills/resume/SKILL.md": {
       "class": "mirror",
       "from": ".agents/skills/resume/SKILL.md",
-      "sha256": "3dd2bc35b98ea372149c8b9eb29f877dfd913a2497da1c9499cbc72538c0425e"
+      "sha256": "4739c6bd50c0edbe8a42140d530fe1083a1f245a2deb2372ac5763a7151c2a59"
     },
     ".reasonix/skills/reviewer/SKILL.md": {
       "class": "mirror",
       "from": ".agents/skills/reviewer/SKILL.md",
-      "sha256": "6b354846b3e6c18eff5d49f3e214023ab5af520e4de74603a5cbdf1156983d6f"
+      "sha256": "d2cfeb48cb898e1f0e53873d029696ec51ceacfbf9a100dc0f5fb6063f99bf9f"
     },
     ".reasonix/skills/security/SKILL.md": {
       "class": "mirror",
       "from": ".agents/skills/security/SKILL.md",
-      "sha256": "557ba79584d536410e69e4046d9ad11bcad95ec3821ea1eb8fa952174685f7ea"
+      "sha256": "dff6a906b9b6b9b42e06486832cd08f2e339a59bbb8327f711b89e7505d1b0ce"
     },
     ".reasonix/skills/test-author/SKILL.md": {
       "class": "mirror",
@@ -182,7 +182,7 @@
     },
     "AGENTS.md": {
       "class": "block",
-      "sha256": "7abaa4a5fc751ded2efc88326d8625e2c55bf1c0b42c763a75656362c1697308"
+      "sha256": "4a0a3a1680c4a40d4d9d8688442e642b3e936725df68e03e52fa25eb129c73b4"
     },
     "README.md": {
       "class": "block",
@@ -198,7 +198,7 @@
     },
     "bin/harness": {
       "class": "owned",
-      "sha256": "b0c83b7b8de9a7af09de7441ab07f32039251a0fbe2cbfa77d0ea18191b5f213"
+      "sha256": "956f5a82bbe4911ffd87329f049b4ea3c38d9bb109cc09484310619068b3b979"
     },
     "bin/install-wp-tests.sh": {
       "class": "owned",
@@ -214,7 +214,7 @@
     },
     "package.json": {
       "class": "merge",
-      "sha256": "45a4d4d9a524a218c4b639f9ff6ab2e8b0d7085856780caaf05d2f4538f79382"
+      "sha256": "1133f67314edfafd6f8cb2d0f9f6cd67ed78363094e445ec5bdfbf3093c16e6b"
     },
     "workflow.md": {
       "class": "block",

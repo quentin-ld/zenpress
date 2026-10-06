@@ -16,7 +16,7 @@ If requirements are unclear, ask **one grouped message**. Skip if already clear.
 
 ## Phase 2 — Research
 Build context from **graft first**, then read only what you need:
-1. `graft ask "<research question>" --source` to locate/understand · `graft grep "<symbol>"` to find every occurrence · `graft callers <sym>` (or `--depth all` for multi-file changes) to trace edges · `graft skeleton <file>` for an API skim. Add `--in <dir>/` to narrow a subtree.
+1. `bin/harness graft ask "<research question>" --source` to locate/understand · `bin/harness graft grep "<symbol>"` to find every occurrence · `bin/harness graft callers <sym>` (or `--depth all` for multi-file changes) to trace edges · `bin/harness graft skeleton <file>` for an API skim. Add `--in <dir>/` to narrow a subtree. **Always through `bin/harness graft`** — a bare `graft` answers an empty graph as "no matching nodes" and exits 0.
 2. Open source files only at the exact `file:line` graft names — never whole files to rebuild understanding graft gives.
 3. `.agents/notes/` for the same slug
 4. `workflow.md` for the project's commands, and `AGENTS.md` for its layout

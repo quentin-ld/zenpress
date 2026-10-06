@@ -11,7 +11,7 @@ description: >-
 Standalone audit. **Always use audit-tier model.** The user selects the tier; do not recommend vendors. Follow AGENTS.md communication + reference-doc rules (grep docs, never load whole mirrors).
 
 ## Inputs
-Scope from user or `.agents/tasks/` task file. Locate every in-scope surface with graft first (`graft ask "<surface>" --source` / `graft grep "<symbol>"` / `graft callers <sym> --depth 2`) so nothing related is missed, then each in-scope file read in full.
+Scope from user or `.agents/tasks/` task file. Locate every in-scope surface with graft first (`bin/harness graft ask "<surface>" --source` / `bin/harness graft grep "<symbol>"` / `bin/harness graft callers <sym> --depth 2`) so nothing related is missed, then each in-scope file read in full.
 
 ## Checklists
 `.agents/docs/audit-checklists.md` — grep the Security category (shared with `qa`/`reviewer`).

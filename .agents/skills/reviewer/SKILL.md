@@ -24,7 +24,7 @@ The user selects the matching model before starting the thread. Reference only a
 ## Inputs
 
 1. Task file — goal, tasks, log, feedback, `risk`, `review_required`
-2. Every file listed in `## Tasks` — locate task scope and related edges with graft (`graft ask "<surface>" --source` / `graft grep "<symbol>"` / `graft callers <sym> --depth 2`) before reading the files in full
+2. Every file listed in `## Tasks` — locate task scope and related edges with graft (`bin/harness graft ask "<surface>" --source` / `bin/harness graft grep "<symbol>"` / `bin/harness graft callers <sym> --depth 2`) before reading the files in full
 3. Lint/tests if not clean: `composer run lint:wpcs`, `npm run test:all`
 
 Do not load a whole file under `.agents/docs/` — grep one section.

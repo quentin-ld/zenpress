@@ -116,6 +116,21 @@ if [[ "plugin" == "plugin" && ${#PHP_FILES[@]} -gt 0 && "${HARNESS_SKIP_TESTS:-0
 	fi
 fi
 
+# The code graph, before the commit rather than at the next query.
+#
+# `ensure` builds only when there is nothing to read, so on a checkout that has
+# ever answered a graft query this is a no-op and the 10 s budget is untouched.
+# On one that has never been asked, it makes the graph exist — and that is the
+# failure worth spending the gate on: `graft ask` with no graph answers "no
+# matching nodes — try different words" and exits 0, so an agent reads a missing
+# index as a bad question and goes back to reading whole files.
+#
+# PHP or JS only. The graph indexes code; a commit that touches neither cannot
+# have changed what it describes.
+if [[ ${#PHP_FILES[@]} -gt 0 || ${#JS_FILES[@]} -gt 0 ]]; then
+	"$ROOT/bin/harness" graft ensure || status=1
+fi
+
 if [[ $status -ne 0 ]]; then
 	printf '\npre-commit failed after %ss (target %ss). Fix the findings above,\n' "$SECONDS" "$BUDGET" >&2
 	printf 'or state explicitly why the gate is wrong.\n' >&2
