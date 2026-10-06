@@ -22,6 +22,16 @@ PROJECT_MAIN_FILE="zenpress.php"
 PROJECT_PHP_MIN="8.1"
 PROJECT_SOURCE_DIRS="inc"
 PROJECT_ASSET_DIRS="assets/src"
+# "1" when `composer.json` requires a package rather than only the platform, so
+# this project's release archive has to carry `vendor/`. See `_prune_before_packaging`
+# and `_verify_archive`: every one of the four behaviours it changes is a place
+# where a shipped dependency and a development tree want opposite things.
+PROJECT_SHIPS_VENDOR="0"
+# The release archive's file name, and the directory inside it -- one string,
+# because `wp dist-archive` makes them one. Normally the project directory's own
+# name; `.harness/archive` overrides it for a project whose archive has to be
+# rooted elsewhere, and then the tree is staged under that name to build it.
+PROJECT_ARCHIVE_NAME="zenpress"
 
 PROJECT_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 PROJECT_REL=""
@@ -3015,7 +3025,18 @@ cmd_pot() {
 	# first version passed PROJECT_REL, which is relative to the WordPress root,
 	# and would have resolved to wp-content/plugins/<slug>/wp-content/plugins/<slug>.
 	local langs="languages"
+	# `--slug` because `make-pot` defaults it to the source directory's basename,
+	# and this project's directory name is not the name it is distributed under.
+	# It is the same fact `cmd_zip` builds the archive from and `_verify_archive`
+	# anchors to — one declaration in `.harness/archive`, three uses — and the
+	# line it changes is the POT's `Report-Msgid-Bugs-To`.
+	#
+	# Without it the committed `languages/<domain>.pot` cannot be reproduced from
+	# this checkout: it was generated from the site whose directory *is* named
+	# `holdmywp`, so regenerating here rewrote that URL to `holdmywp-theme` and
+	# every regeneration on either checkout produced a diff.
 	run wp i18n make-pot . "$langs/$PROJECT_TEXT_DOMAIN.pot" \
+		--slug="$PROJECT_ARCHIVE_NAME" \
 		--exclude=assets/build,node_modules,vendor,.git,tests
 	run wp i18n make-mo "$langs" || true
 	run wp i18n make-json "$langs" --no-purge || true
@@ -3082,7 +3103,6 @@ _ARCHIVE_NEVER_AT_ROOT=(
 	'node_modules/'
 	'test-results/'
 	'tests/'
-	'vendor/'
 	'.distignore'
 	'AGENTS.md'
 	'composer.json'
@@ -3099,6 +3119,20 @@ _ARCHIVE_NEVER_AT_ROOT=(
 	'screenshot-min.png'
 	'workflow.md'
 )
+
+# `vendor/` is the one entry that is not always a leak.
+#
+# Thirteen projects reached this list with no runtime dependency in any of their
+# `composer.json` files -- every `require` was `{"php": ">=8.1"}` -- so `vendor/`
+# was 176 MB of PHPStan, PHPCS and PHPUnit and it belonged on the never-ship
+# list. A project that requires a package is the opposite case: `vendor/` is its
+# dependency, and refusing the archive for containing it would refuse the
+# release for being correct.
+#
+# Derived from the manifest by the generator (`PROJECT_SHIPS_VENDOR`) rather than
+# declared here, so this stays a fact about the project instead of a setting
+# somebody has to remember.
+[[ "$PROJECT_SHIPS_VENDOR" == "1" ]] || _ARCHIVE_NEVER_AT_ROOT+=('vendor/')
 
 # Trees that are never part of a distributable at any depth. The two lists are
 # separate because the failure modes are: a tooling directory at the root is a
@@ -3126,16 +3160,73 @@ _ARCHIVE_NEVER_ANYWHERE=(
 	'.git'
 )
 
+# The one thing a shipped `vendor/` must be: a runtime-only install.
+#
+# This is an assertion about the *archive*, not about the checkout, and on the
+# `HARNESS_ZIP_KEEP=1` path it is the only thing between a development `vendor/`
+# and a published archive -- nothing was staged there, so `zip` walks whatever is
+# on disk. That path is not hypothetical: it is the one the release workflow
+# took, and the project this was written for ships a 176 MB development tree
+# beside the megabyte it is supposed to publish.
+#
+# The check reads Composer's own `dev` flag rather than comparing the archive
+# against `require-dev`. Composer writes that flag from exactly the decision that
+# produced the tree, so the two cannot disagree; a list of package names kept in
+# the runtime would have to be kept in agreement with fourteen manifests, which
+# is the defect `.distignore` and the deleted `zip.js` already demonstrated.
+#
+# `vendor/bin/` is deliberately NOT asserted absent: a runtime dependency that
+# ships a binary populates it under `--no-dev` too, and a check that fails a
+# correct archive is a check somebody switches off.
+_verify_shipped_vendor() {
+	local archive="$1" prefix="$2" listing="$3" installed
+	local archive_name="${archive##*/}"
+	local entry="${prefix}vendor/composer/installed.json"
+
+	if ! grep -qF -- "${prefix}vendor/autoload.php" <<< "$listing"; then
+		fail "this project ships its vendor tree and the archive has no ${prefix}vendor/autoload.php.
+  Install the runtime dependencies first:
+    composer install --no-dev --optimize-autoloader --classmap-authoritative"
+	fi
+
+	if ! grep -qF -- "$entry" <<< "$listing"; then
+		fail "the archive has no ${entry}, so nothing records what was installed."
+	fi
+
+	# Through the backend, like every other tool the runtime uses, and by the
+	# archive's name rather than its host path: the path in `$archive` is the
+	# host's and the container has a different one for the same file. `unzip`
+	# therefore runs on the same side as the `has_tool` that gated it.
+	installed="$(run_sh "unzip -p ${archive_name@Q} ${entry@Q}" 2>/dev/null || true)"
+	if ! grep -qE '"dev"[[:space:]]*:[[:space:]]*false' <<< "$installed"; then
+		fail "the archive's vendor tree is not a \`--no-dev\` install, so development dependencies would ship.
+  Install the runtime dependencies first:
+    composer install --no-dev --optimize-autoloader --classmap-authoritative"
+	fi
+	info "  shipped vendor: ${prefix}vendor/ is a --no-dev install."
+}
+
 _verify_archive() {
-	local archive="$1" entry listing prefix="${PROJECT_SLUG}/" leaked=()
+	# The archive's root is named after the project's own directory by default
+	# and after `.harness/archive` where a project declares one, so the prefix
+	# comes from the same fact the archive was built with. Hardcoding the slug
+	# here would make every check below miss on `holdmywp-theme`, silently.
+	local archive="$1" entry listing prefix="${PROJECT_ARCHIVE_NAME}/" leaked=()
+	# The absolute path is the host's, and it is what the two lines around this
+	# one need: the existence test runs here. `unzip` does not -- it is resolved
+	# by `has_tool` and run by `run_sh`, both of which go through the backend, and
+	# inside a container `$archive` names a file that is not there. The name is the
+	# same path relative to the project, which is where every backend's working
+	# directory is.
+	local archive_name="${archive##*/}"
 	[[ -f "$archive" ]] || fail "no archive was written at ${archive}."
 
 	if ! has_tool unzip; then
-		warn "unzip is unavailable; the archive was not verified."
+		warn "unzip is unavailable in the '$BACKEND' backend; the archive was not verified."
 		return 0
 	fi
 
-	listing="$(unzip -Z1 "$archive" 2>/dev/null || true)"
+	listing="$(run_sh "unzip -Z1 ${archive_name@Q}" 2>/dev/null || true)"
 	if [[ -z "$listing" ]]; then
 		fail "the archive at ${archive} is empty or unreadable."
 	fi
@@ -3158,7 +3249,19 @@ _verify_archive() {
 		for entry in "${leaked[@]}"; do
 			printf '      %s\n' "$entry"
 		done
+		# `vendor/` used to be excluded by a `.distignore` line instead, so this
+		# failure was a silent success. It was silent only because `dist-archive`
+		# appends `/*` to a line naming a directory at the project root, and the
+		# root `vendor/` was still there -- the exclusion and the prune were
+		# each hiding the other's absence. Nothing is pruned when this is set,
+		# so say which of the two failed to happen.
+		if [[ "${HARNESS_ZIP_KEEP:-0}" != "0" ]]; then
+			warn "HARNESS_ZIP_KEEP is set, so nothing was moved aside before the walk."
+		fi
 		fail "packaging is not clean; fix .distignore before releasing."
+	fi
+	if [[ "$PROJECT_SHIPS_VENDOR" == "1" ]]; then
+		_verify_shipped_vendor "$archive" "$prefix" "$listing"
 	fi
 	# The check names what it refused to let through. A verifier that prints
 	# only "verified" is a verifier nobody can tell was looking at the wrong
@@ -3188,9 +3291,32 @@ _verify_archive() {
 # pruned (CI does this) where the walk is cheap.
 _ZIP_PRUNED=()
 _ZIP_STASH=""
+# Set while a runtime-only `vendor/` is in place for the archive. The restore
+# deletes it before putting the development tree back, so the checkout ends the
+# run exactly as it started -- which matters because `vendor/` is where the
+# toolchain lives: losing it would leave `bin/harness lint` unable to run.
+_ZIP_STAGED_VENDOR=0
+# The staged tree when the archive has to be rooted under a name the project
+# directory does not have. `_ZIP_STAGED_ROOT` is a host path, for removing it;
+# `_ZIP_STAGED_TARGET` is the same tree expressed relative to the project, for
+# handing to `dist-archive`. Both empty on the ordinary path.
+_ZIP_STAGED_ROOT=""
+_ZIP_STAGED_TARGET=""
 
 _restore_after_packaging() {
 	local name
+	if [[ "$_ZIP_STAGED_VENDOR" == "1" ]]; then
+		rm -rf "$PROJECT_ROOT/vendor"
+		_ZIP_STAGED_VENDOR=0
+	fi
+	if [[ -n "$_ZIP_STAGED_ROOT" ]]; then
+		# The whole farm, not just the tree: its parent is the `archive-root`
+		# directory that was created for it, and leaving either behind leaves a
+		# directory full of hard links beside the project.
+		rm -rf "${_ZIP_STAGED_ROOT%/*}"
+		_ZIP_STAGED_ROOT=""
+		_ZIP_STAGED_TARGET=""
+	fi
 	for name in "${_ZIP_PRUNED[@]-}"; do
 		[[ -n "$name" && -e "$_ZIP_STASH/$name" && ! -e "$PROJECT_ROOT/$name" ]] || continue
 		mv "$_ZIP_STASH/$name" "$PROJECT_ROOT/$name"
@@ -3200,22 +3326,31 @@ _restore_after_packaging() {
 	_ZIP_STASH=""
 }
 
+# The stash, created on first use. A sibling of the project rather than a temp
+# directory: `mv` is atomic within a filesystem and a copy across one, and
+# `node_modules` is tens of thousands of files. It is outside the tree `zip` is
+# given, so the walk cannot see it.
+_zp_stash() {
+	if [[ -z "$_ZIP_STASH" ]]; then
+		_ZIP_STASH="$PROJECT_ROOT/../.harness-zip-stash.$$"
+		mkdir -p "$_ZIP_STASH"
+	fi
+}
+
 _prune_before_packaging() {
 	if [[ "${HARNESS_ZIP_KEEP:-0}" != "0" ]]; then
 		return 0
 	fi
-	local name candidates=(node_modules vendor)
+	local name candidates=(node_modules)
+	# A project that ships its vendor tree keeps it. The walk has to see it --
+	# an archive that omits it is a broken release -- and the reason `vendor`
+	# is moved aside at all is that it is 176 MB of development tooling in the
+	# projects this was written for.
+	[[ "$PROJECT_SHIPS_VENDOR" == "1" ]] || candidates+=(vendor)
 	trap '_restore_after_packaging' EXIT INT TERM
 	for name in "${candidates[@]}"; do
 		[[ -d "$PROJECT_ROOT/$name" ]] || continue
-		if [[ -z "$_ZIP_STASH" ]]; then
-			# A sibling of the project, not a temp directory: `mv` is atomic
-			# within a filesystem and a copy across one, and `node_modules` is
-			# tens of thousands of files. It is outside the tree `zip` is given,
-			# so the walk cannot see it.
-			_ZIP_STASH="$PROJECT_ROOT/../.harness-zip-stash.$$"
-			mkdir -p "$_ZIP_STASH"
-		fi
+		_zp_stash
 		mv "$PROJECT_ROOT/$name" "$_ZIP_STASH/$name"
 		_ZIP_PRUNED+=("$name")
 	done
@@ -3224,18 +3359,112 @@ _prune_before_packaging() {
 	fi
 }
 
+# Put a runtime-only `vendor/` in place for the walk, and let the trap take it
+# back out.
+#
+# The alternative was to refuse to package until the operator ran
+# `composer install --no-dev` themselves, and it is worse for the reason the
+# release path here is a person running one command: three commands in the right
+# order, by hand, on release day, is a sequence that gets run in the wrong order
+# exactly once and then produces an archive nobody notices is wrong.
+#
+# `.distignore` cannot express this. It is a deny list of paths and the
+# difference between the two `vendor/` trees is not a path -- it is Composer's
+# `dev` flag inside a file the two share. So the tree is rebuilt rather than
+# filtered, and `_verify_shipped_vendor` checks what came out.
+_stage_runtime_vendor() {
+	[[ "$PROJECT_SHIPS_VENDOR" == "1" ]] || return 0
+	# `HARNESS_ZIP_KEEP=1` means the caller has already prepared the tree, which
+	# is the same meaning it has for the prune.
+	[[ "${HARNESS_ZIP_KEEP:-0}" == "0" ]] || return 0
+	require_tool composer
+	trap '_restore_after_packaging' EXIT INT TERM
+
+	if [[ -d "$PROJECT_ROOT/vendor" ]]; then
+		_zp_stash
+		mv "$PROJECT_ROOT/vendor" "$_ZIP_STASH/vendor"
+		_ZIP_PRUNED+=("vendor")
+	fi
+
+	info "installing the runtime dependencies into vendor/ for the archive."
+	# `--no-scripts` because this is a packaging step: a project's Composer
+	# scripts are development commands, and running them here would run
+	# `bin/harness` subcommands in the middle of `bin/harness zip`.
+	run composer install --no-dev --optimize-autoloader --classmap-authoritative \
+		--no-scripts --no-interaction || {
+		fail "could not install the runtime dependencies; the archive would ship a development vendor/."
+	}
+	_ZIP_STAGED_VENDOR=1
+}
+
+# Put the tree under the archive's own root name, when that is not the project
+# directory's name.
+#
+# `wp dist-archive` derives the archive's root directory from
+# `basename(realpath($path))` and has no flag for it, so the only way to root an
+# archive at `holdmywp/` is to hand it a directory called `holdmywp`. This is the
+# one project in the fleet that needs it -- the deployed theme directory is
+# `holdmywp`, the updater's asset filter names `holdmywp.zip`, and the repository
+# is checked out as `holdmywp-theme` here and `holdmywp` on the live site -- and
+# it is recorded in `.harness/archive` rather than in the generator.
+#
+# The copy is a hardlink farm: `cp -al` is instant and costs no space, and
+# nothing in the walk writes to it. `node_modules` and `.git` are skipped by
+# name, not by `.distignore`, because they are 2.2 GB between them and the walk
+# is the thing the prune exists to keep away from them.
+#
+# `HARNESS_ZIP_KEEP` does NOT skip this. That flag means "the tree is already
+# prepared"; this is not preparation, it is the name of the artifact, and
+# skipping it would produce a correctly-built archive under the wrong name.
+#
+# It installs the restore trap itself rather than relying on the prune or the
+# vendor staging to have done it: under `HARNESS_ZIP_KEEP=1` both of those return
+# before setting one, and this can be the only thing that left something behind.
+_stage_archive_root() {
+	[[ -n "$PROJECT_ARCHIVE_NAME" && "$PROJECT_ARCHIVE_NAME" != "$PROJECT_SLUG" ]] || return 0
+	trap '_restore_after_packaging' EXIT INT TERM
+	_zp_stash
+	local stage="$_ZIP_STASH/archive-root/$PROJECT_ARCHIVE_NAME" entry name
+	mkdir -p "$stage"
+	for entry in "$PROJECT_ROOT"/* "$PROJECT_ROOT"/.[!.]* "$PROJECT_ROOT"/..?*; do
+		[[ -e "$entry" || -L "$entry" ]] || continue
+		name="$(basename "$entry")"
+		case "$name" in
+		.git | node_modules) continue ;;
+		esac
+		cp -al "$entry" "$stage/" 2>/dev/null || cp -a "$entry" "$stage/"
+	done
+	_ZIP_STAGED_ROOT="$stage"
+	# Relative, and the reason is a bug this had: every backend runs with the
+	# project as its working directory, and a host-absolute path is not a path the
+	# container has. `dist-archive` answered `Provided path is not a directory.`
+	# for `/home/…/.harness-zip-stash.<pid>/archive-root/holdmywp`. The stash is a
+	# sibling of the project, so `../` is the shortest form valid on both sides.
+	_ZIP_STAGED_TARGET="../${_ZIP_STASH##*/}/archive-root/$PROJECT_ARCHIVE_NAME"
+	info "staged the tree as ${PROJECT_ARCHIVE_NAME}/ so the archive is rooted there."
+}
+
 cmd_zip() {
 	step "Packaging (wp dist-archive)"
 	require_tool wp
 	_ensure_dist_archive
-	local archive="${PROJECT_SLUG}.zip"
+	local archive="${PROJECT_ARCHIVE_NAME}.zip"
+	local target="."
 	rm -f "$PROJECT_ROOT/$archive"
 	_prune_before_packaging
+	_stage_runtime_vendor
+	_stage_archive_root
+	if [[ -n "$_ZIP_STAGED_ROOT" ]]; then
+		target="$_ZIP_STAGED_TARGET"
+	fi
 	# Relative paths, and the project as the working directory: `dist-archive`
 	# derives the archive's root directory from the path it is given, so
 	# absolute paths put the plugin inside a tree named after every parent
-	# directory.
-	run wp dist-archive . "$archive" || {
+	# directory. The archive name stays relative for the same reason -- it is
+	# resolved against the working directory before `dist-archive` changes to the
+	# parent of the tree it is walking, so it lands at the project root in both
+	# branches.
+	run wp dist-archive "$target" "$archive" || {
 		_restore_after_packaging
 		fail "packaging failed."
 	}
@@ -3269,9 +3498,9 @@ cmd_pcp() {
 	# returned on any provisioned project — 900 s of nothing — while the same
 	# command with `.cache` added finished in under two minutes and passed.
 	# `artifacts/` and `test-results/` are Playwright's, and the archive itself
-	# is named by slug, because `bin/harness zip` leaves it at the project root.
+	# is named by `bin/harness zip`, which leaves it at the project root.
 	local exclude_dirs=".git,.github,.agents,.reasonix,.harness,.githooks,.config,.claude,.cursor,.vscode,graft,bin,tests,vendor,node_modules,build,assets/src,.cache,artifacts,test-results"
-	local exclude_files="workflow.md,AGENTS.md,infection.json5,.distignore,.ignore,.gitignore,.gitattributes,.editorconfig,.mcp.json,${PROJECT_SLUG}.zip"
+	local exclude_files="workflow.md,AGENTS.md,infection.json5,.distignore,.ignore,.gitignore,.gitattributes,.editorconfig,.mcp.json,${PROJECT_ARCHIVE_NAME}.zip"
 
 	# Only two codes are silenced outright, and both because this plugin exists
 	# to use them: it is an update manager, so touching the update APIs is the

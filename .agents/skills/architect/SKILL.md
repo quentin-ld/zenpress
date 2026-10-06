@@ -87,6 +87,6 @@ On completion: `status: done`, full test gate, one-line summary of what was done
 ## Phase 5 — Feedback (worker tier)
 Fix reported issues; append to `## Feedback`. When stable: `review_required: yes` → "Open `/reviewer` on **audit** tier (planning tier OK only for low-risk optional review)."; else "Review optional; ship when satisfied."
 ## Implementation reflexes
-ABSPATH guard · `zenpress_` hooks · REST `current_user_can()` · `$wpdb->prepare()` · sanitize in / escape out · docblocks on public surfaces · never reword existing i18n strings.
+ABSPATH guard · the project's own prefix on every hook — `zenpress_` is derived from the text domain, which is the same string for the projects this was written for and a different one for any project that was renamed, forked or shortened its prefix, so **confirm the prefix with the owner before relying on it, and ask rather than assume when the code disagrees with it** · REST `current_user_can()` · `$wpdb->prepare()` · sanitize in / escape out · docblocks on public surfaces · never reword existing i18n strings.
 ## Project specifics
 The reflexes above are the baseline. What this project adds — its own capability names, REST namespace, tables, prefix exceptions, block bindings — is in `AGENTS.md`, and it wins where the two disagree. Read it before your first edit, not after.
