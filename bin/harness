@@ -213,6 +213,49 @@ has_tool() {
 	run_sh "command -v $(printf '%q' "$1") >/dev/null 2>&1"
 }
 
+# One crossing, not one per step.
+#
+# `detect_backend` already knows how to run without a container: `IS_DDEV_PROJECT`
+# is set inside the web container, so it returns `host` and every `run` becomes a
+# direct `exec`. That branch was written so a composer script calling back into
+# this runner would not nest a second `ddev exec` — and it is also the fastest
+# way to run the harness. Until now nothing on the outside used it, so every
+# `run` and `run_sh` paid for its own `ddev exec` at 0.8-1.3 s a time to run a
+# command that takes about 10 ms.
+#
+# So the entry point re-enters itself, once, with the argument vector unchanged.
+# Only the container backend re-enters: `local` and `host` are already there.
+#
+# Four output lines legitimately differ, and all four are facts about *where* the
+# runtime is running rather than about what it found: the two root paths and the
+# two backend labels. Nothing else may move.
+#
+# `HARNESS_*` is forwarded explicitly because `ddev exec` does not carry
+# arbitrary host variables into the container — the same reason `WP_MULTISITE` is
+# forwarded where it is read. A knob read inside the runtime and not named here
+# would be read as unset inside the container while the host still exports it,
+# which is the failure this list exists to prevent; `tests/test_runtime.py`
+# derives the list from the file rather than trusting it.
+_reenter_in_container() {
+	[[ "$BACKEND" == "ddev" ]] || return 0
+
+	# The inner runtime must resolve to `host`, so `HARNESS_BACKEND` is
+	# deliberately *not* forwarded — `IS_DDEV_PROJECT` is the signal that it is
+	# already inside. It goes first so the array is never empty.
+	local -a forward=(IS_DDEV_PROJECT=1)
+	local knob
+	for knob in HARNESS_MUTATION_BASE HARNESS_COVERAGE_TIMEOUT \
+		HARNESS_COUNTERFACTUAL_MAX HARNESS_COUNTERFACTUAL_LOCK_WAIT \
+		HARNESS_DIST_ARCHIVE HARNESS_ZIP_KEEP WP_MULTISITE; do
+		[[ -n "${!knob:-}" ]] || continue
+		forward+=("${knob}=${!knob}")
+	done
+
+	cd "$WP_ROOT"
+	exec ddev exec -q --raw -d "$PROJECT_CONTAINER_DIR" -- \
+		env "${forward[@]}" bash "$PROJECT_CONTAINER_DIR/bin/harness" "$@"
+}
+
 require_tool() {
 	if ! has_tool "$1"; then
 		fail "'$1' is not available in the '$BACKEND' backend.
@@ -481,6 +524,43 @@ _lint_paths() {
 	done
 }
 
+# PHP_CodeSniffer's cache file.
+#
+# PHPCS builds the cache key from the content of the files it checked, the
+# content of the rulesets that were loaded, the PHP version and the loaded
+# extensions (`Util/Cache.php`), and it revalidates every entry against
+# `md5_file` and the file's permissions on the way back in — so a changed file
+# or a changed ruleset cannot be answered from a stale entry. Both halves of
+# that were measured rather than assumed: the commit that added this records
+# the probe (edit a file, edit the ruleset, re-run warm, require the new
+# violation to appear).
+#
+# `.cache/` is gitignored in every project and excluded from the release
+# archive, so the file neither ships nor is committed. All three entry points
+# share the one file on purpose: the cache is per file, not per run, so the
+# staged-file lint warms the full lint and the full lint warms the staged-file
+# lint.
+PHPCS_CACHE_REL=".cache/phpcs.cache"
+
+# PHP_CodeSniffer analyses files in parallel with `--parallel=<n>`, off by
+# default. 4 is this fleet's machine: four physical cores — `cpu0`-`cpu3` are
+# one thread of each, `cpu4`-`cpu7` their siblings — where `nproc` reports 8.
+#
+# It is a constant rather than `nproc` on purpose. Reading `nproc` costs one
+# more container crossing per lint (0.8-1.3 s on the ddev backend) and a warm
+# PHPCS is 0.7 s, so the crossing to size the pool would cost more than the pool
+# saves. The `nproc`-versus-physical-cores question is Infection's, where the
+# pool serves one long run rather than being paid for on every lint.
+PHPCS_PARALLEL=4
+
+
+# PHPCS writes the cache file itself but not the directory holding it, and
+# `.cache/` is not guaranteed to exist in a fresh checkout.
+_phpcs_cache_dir() {
+	mkdir -p "$PROJECT_ROOT/.cache"
+}
+
+
 cmd_lint_wpcs() {
 	local config
 	config="$(_require_config 'PHP_CodeSniffer' .config/phpcs.xml phpcs.xml phpcs.xml.dist)"
@@ -490,7 +570,8 @@ cmd_lint_wpcs() {
 	while IFS= read -r line; do
 		[[ -n "$line" ]] && targets+=("$line")
 	done < <(_lint_paths)
-	run vendor/bin/phpcs --standard="$config" "${targets[@]}"
+	_phpcs_cache_dir
+	run vendor/bin/phpcs --standard="$config" --cache="$PHPCS_CACHE_REL" --parallel="$PHPCS_PARALLEL" "${targets[@]}"
 }
 
 cmd_lint() {
@@ -505,7 +586,8 @@ cmd_lint() {
 	while IFS= read -r line; do
 		[[ -n "$line" ]] && lint_targets+=("$line")
 	done < <(_lint_paths)
-	run vendor/bin/phpcs --standard="$phpcs_config" "${lint_targets[@]}"
+	_phpcs_cache_dir
+	run vendor/bin/phpcs --standard="$phpcs_config" --cache="$PHPCS_CACHE_REL" --parallel="$PHPCS_PARALLEL" "${lint_targets[@]}"
 
 	step "PHPStan (${phpstan_config})"
 	local -a targets=()
@@ -539,7 +621,8 @@ cmd_lint_files() {
 	phpcs_config="$(_require_config 'PHP_CodeSniffer' .config/phpcs.xml phpcs.xml phpcs.xml.dist)"
 	_require_binary phpcs squizlabs/php_codesniffer
 	step "WPCS (${#} file(s))"
-	run vendor/bin/phpcs --standard="$phpcs_config" "$@"
+	_phpcs_cache_dir
+	run vendor/bin/phpcs --standard="$phpcs_config" --cache="$PHPCS_CACHE_REL" --parallel="$PHPCS_PARALLEL" "$@"
 }
 
 cmd_test_js() {
@@ -1390,7 +1473,30 @@ cmd_e2e() {
 # updatronix-pro, eight test classes isolated.
 COVERAGE_FLAGS=()
 COVERAGE_EXPORT=""
+COVERAGE_DRIVER=""
 COVERAGE_INI_REL=".cache/coverage-ini"
+
+# PHPUnit's static-analysis cache, shared by both gates' coverage runs.
+#
+# A coverage run has two halves: statically analysing every file under the
+# config's `<include>` for the lines that are executable, and executing the
+# tests. `--coverage-cache` persists the first half across runs; PHPUnit creates
+# the directory itself (`Filesystem::createDirectory`).
+#
+# It **must live outside** any directory a run removes: the shared gate pass
+# stages its report in `.cache/gate-coverage/staging.<pid>` and clears that
+# before it starts, so a cache placed inside one is gone before it can be read.
+# `.cache/coverage-static` itself is never removed — it is the one thing here
+# that has to survive between runs. `.cache/` is gitignored in every project and
+# excluded from the release archive.
+#
+# The key is content-addressed — the file's own bytes, php-code-coverage's
+# version, and the analyser's two settings (`CachingFileAnalyser::cacheFile`) —
+# never an mtime, so a changed file cannot be answered from a stale entry. That
+# is a claim about a vendor file, so it is proved rather than read; the probe is
+# recorded on `cmd_mutation`'s coverage invocation, which is the one both gates
+# share the shape of.
+COVERAGE_STATIC_CACHE_REL=".cache/coverage-static"
 
 # Probed by output, not by exit status. `ddev exec` prints a loud
 # "Failed to execute command" line to stderr whenever the wrapped command exits
@@ -1431,12 +1537,14 @@ _coverage_ini() {
 _coverage_driver() {
 	if _php_has_module pcov; then
 		COVERAGE_FLAGS=(-d pcov.enabled=1)
+		COVERAGE_DRIVER=pcov
 		info "coverage driver: pcov"
 		return 0
 	fi
 
 	if _php_has_module xdebug; then
 		_coverage_ini ""
+		COVERAGE_DRIVER=xdebug
 		info "coverage driver: xdebug, already loaded"
 		return 0
 	fi
@@ -1449,6 +1557,7 @@ _coverage_driver() {
 	# permanently loaded debugger, and coverage only where it was asked for.
 	if run_sh 'php -d zend_extension=xdebug.so -m 2>/dev/null | grep -qix xdebug || true' >/dev/null 2>&1; then
 		_coverage_ini "zend_extension=xdebug.so"
+		COVERAGE_DRIVER=xdebug-on-demand
 		info "coverage driver: xdebug, loaded for this invocation only"
 		return 0
 	fi
@@ -1457,6 +1566,289 @@ _coverage_driver() {
   Neither pcov nor xdebug is loaded, and xdebug.so could not be loaded on demand.
   Install one in .ddev/web-build/Dockerfile, or run: ddev xdebug on"
 }
+
+# ---------------------------------------------------------------------------
+# one coverage pass, shared by both gates
+# ---------------------------------------------------------------------------
+# `mutation` and `counterfactual` ask the same question of the same tree — which
+# lines did this suite execute, and which tests executed them — and each used to
+# answer it alone, into a directory of its own. On `updatronix-pro` that is
+# 66.1 s + 60.4 s for one report, and the register measured the two reports
+# identical (`A=165 B=165`, covering-test map identical).
+#
+# The report is a function of the tree, so one key names it and one pass
+# produces it. This is a cache with a fallback, never a hand-off: a gate that
+# finds no valid artifact runs a pass of its own, so `bin/harness mutation` and
+# `bin/harness counterfactual` still work when run alone.
+#
+# The artifact is a directory of XML, which cannot be written atomically, so it
+# is staged beside its destination and moved into place with `mv -T`: the whole
+# directory appears at once or not at all, and a run killed mid-write leaves a
+# staging directory that nothing reads. `COMPLETE`, written inside the stage
+# *before* the move, carries the key, so a reader can tell a whole artifact from
+# one a killed run left behind. Neither gate deletes it.
+GATE_COVERAGE_ROOT=".cache/gate-coverage"
+
+# Where the gate that just called `_gate_coverage` should read.
+#
+# A global rather than stdout, because the pass prints PHPUnit's output and
+# `$(...)` would capture that along with the path — which it did: Infection was
+# handed a `--coverage` value beginning with PHPUnit's report and answered
+# "Could not find the index.xml file".
+GATE_COVERAGE_DIR=""
+
+
+# Changed lines that are still in the file, as `<file>:<line>`.
+#
+# The path list comes from `_code_paths`, not from `PROJECT_SOURCE_DIRS`
+# directly: those are subdirectories only, so a theme's `functions.php` was not
+# merely unlinted, it was invisible to this gate.
+#
+# It was `cmd_counterfactual`'s own, and it is shared because the key below
+# names the changed lines and both gates have to agree on what those are.
+_changed_lines() {
+	local base="$1"
+	local scope
+	scope="$(_code_paths | tr '\n' ' ')"
+	run_sh "git diff -U0 --diff-filter=AM ${base@Q} -- $scope | awk '
+		/^\\+\\+\\+ b\\// { file = substr(\$0, 7); next }
+		/^@@/ { if (match(\$0, /\\+[0-9]+/)) { ln = substr(\$0, RSTART + 1, RLENGTH - 1) + 0 } next }
+		/^\\+/ { print file \":\" ln; ln++; next }
+		/^-/  { next }
+		{ if (ln) ln++ }
+	'" | sort -u
+}
+
+
+# Everything the report depends on, as one digest.
+#
+# A key missing an input is a gate that passes on a tree it did not look at, so
+# this list is deliberately over-inclusive: the driver, whose *identity* changes
+# the answer — `_coverage_driver` prefers pcov the moment it exists, and a map
+# written under xdebug can be read under pcov if the driver is not named here;
+# the runtime file's own bytes, because the gate's policy lives in it; the PHP
+# version **and** the loaded extensions, which PHPCS keys on for the same
+# reason; PHPUnit's version; the config; the analysed sources; the test tree;
+# the diff base; and the changed lines.
+#
+# Sources and tests are hashed whole rather than through the config's
+# `<include>` list. A file under `<include>` is the analyser's input and a test
+# file is the *covering* input — the report says which tests covered which line,
+# so an edited test changes the answer as surely as an edited source, and a key
+# built only from the analysed sources would let the second gate read a map from
+# before a test existed.
+_gate_coverage_key() {
+	local base="$1" config="$2" changed="$3"
+	local scope includes digest
+	scope="$(_code_paths | grep -v '^\.$' | tr '\n' ' ')"
+	[[ -n "$scope" ]] || scope="."
+
+	# What the config says it analyses, resolved the way PHPUnit resolves it:
+	# `<directory>` is relative to the config file, not to the project root.
+	#
+	# This is here because `_code_paths` is not the same list — it is the paths
+	# the *linters* take — and a directory the config names and `_code_paths`
+	# does not was a source this key could not see. A test caught it: editing a
+	# file under `inc/` in a project whose `PROJECT_SOURCE_DIRS` does not carry
+	# `inc` left the key unmoved, so the second gate would have read a report
+	# from before the edit.
+	includes="$(
+		sed -n 's:.*<directory[^>]*>\([^<]*\)</directory>.*:\1:p' "$PROJECT_ROOT/$config" 2>/dev/null \
+			| while read -r dir; do
+				printf '%s\n' "${config%/*}/${dir}"
+			done | LC_ALL=C sort -u | tr '\n' ' '
+	)"
+
+	digest="$(run_sh "
+		{
+			printf 'driver %s\n' ${COVERAGE_DRIVER@Q}
+			printf 'base %s\n' ${base@Q}
+			printf 'changed %s\n' ${changed@Q}
+			php -r 'echo PHP_VERSION, \"|\", implode(\",\", get_loaded_extensions()), \"\n\";'
+			php vendor/bin/phpunit --version 2>&1 | head -1
+			md5sum bin/harness
+			md5sum ${config@Q}
+			find ${scope} ${includes} tests -name '*.php' -type f 2>/dev/null \
+				| LC_ALL=C sort | xargs -r md5sum
+		} | md5sum | cut -d' ' -f1
+	" 2>/dev/null)"
+	printf '%s' "${digest:-unkeyable}"
+}
+
+
+# A whole artifact, or nothing. The marker is what tells the two apart: a
+# directory a killed run left behind has the XML and no marker, or a marker
+# naming a different key.
+_gate_coverage_valid() {
+	local dir="$PROJECT_ROOT/${GATE_COVERAGE_ROOT}/$1"
+	[[ -f "$dir/COMPLETE" ]] || return 1
+	[[ "$(cat "$dir/COMPLETE" 2>/dev/null)" == "$1" ]] || return 1
+	[[ -f "$dir/index.xml" ]] || return 1
+	return 0
+}
+
+
+# One pass, into a stage, moved into place.
+#
+# The invocation is `counterfactual`'s, which was the stricter of the two: it is
+# bounded by `HARNESS_COVERAGE_TIMEOUT`, its stdin is detached, and a non-zero
+# exit *fails the gate* with PHPUnit's 124 told apart from a red suite.
+# `mutation` ran the same PHPUnit with none of that — `set -euo pipefail` still
+# aborted it on a red suite, but nothing told the two apart and nothing bounded
+# a stuck one. Sharing a pass that only satisfied `mutation` would have turned a
+# broken tree into a gate that reports nothing, so the stricter contract is the
+# shared one and **both** gates now emit these two messages.
+_produce_gate_coverage() {
+	local key="$1" config="$2" suite="$3" prefix="$4"
+	local root="$PROJECT_ROOT/$GATE_COVERAGE_ROOT"
+	local shared="$root/$key"
+	local staging="$root/staging.$$"
+	local stale owner
+
+	# A staging directory whose owner is gone is what `kill -9` leaves. `.cache/`
+	# is invisible to `git status`, so nothing else would ever collect it.
+	for stale in "$root"/staging.*; do
+		[[ -d "$stale" ]] || continue
+		owner="${stale##*/staging.}"
+		[[ "$owner" == "$$" ]] && continue
+		kill -0 "$owner" 2>/dev/null || rm -rf "$stale"
+	done
+
+	mkdir -p "$root"
+	rm -rf "$staging"
+	mkdir -p "$staging"
+
+	local coverage_timeout="${HARNESS_COVERAGE_TIMEOUT:-600}"
+	local coverage_status=0
+	run_sh "${COVERAGE_EXPORT} ${prefix} timeout ${coverage_timeout} php ${COVERAGE_FLAGS[*]} vendor/bin/phpunit \
+		--configuration=${config@Q} \
+		--coverage-xml=${staging@Q} \
+		--coverage-cache=${COVERAGE_STATIC_CACHE_REL@Q} \
+		--log-junit=${staging@Q}/junit.xml" </dev/null || coverage_status=$?
+
+	if [[ "$coverage_status" -eq 124 ]]; then
+		rm -rf "$staging"
+		fail "the coverage run did not finish in ${coverage_timeout}s.
+  Not slow — stuck: the same suite passes in seconds without --coverage-xml,
+  and under it the PHP process disappears without printing a word.
+  Raise the bound with HARNESS_COVERAGE_TIMEOUT=<seconds> once the cause is
+  known. Until it is, this check cannot say which lines the suite ran, and
+  guessing would be worse than not checking."
+	fi
+	if [[ "$coverage_status" -ne 0 ]]; then
+		rm -rf "$staging"
+		fail "the suite does not pass, so a surviving mutation would mean nothing.
+  Fix it first: bin/harness ${suite}"
+	fi
+
+	# The marker goes in last, and inside the stage: the move is one rename, so a
+	# reader sees a whole artifact or none. `-T` so that two runs racing on one
+	# key cannot move a stage *inside* the winner's directory, where the reader
+	# would count its XML twice.
+	printf '%s' "$key" >"$staging/COMPLETE"
+	if mv -T "$staging" "$shared" 2>/dev/null; then
+		GATE_COVERAGE_DIR="${GATE_COVERAGE_ROOT}/$key"
+		return 0
+	fi
+
+	# The destination is taken. If what is there is a complete artifact for this
+	# key it is the same report, so ours is redundant; otherwise ours is the only
+	# whole one on disk and this run reads it where it was built.
+	#
+	# Nothing already in place is deleted either way: a reader may be in the
+	# middle of it, and a report that is *probably* stale is not worth a reader
+	# seeing half of one. The cost is that a destination which cannot be written
+	# means these two gates stop sharing — a slower push, never a wrong one.
+	if _gate_coverage_valid "$key"; then
+		rm -rf "$staging"
+		GATE_COVERAGE_DIR="${GATE_COVERAGE_ROOT}/$key"
+	else
+		GATE_COVERAGE_DIR="${GATE_COVERAGE_ROOT}/staging.$$"
+	fi
+}
+
+
+# Content-addressed gate *verdicts*, in `.cache/gate-results/`.
+#
+# Every other cache in this file stores something a gate *reads*. This one stores
+# the gate's own answer, and a cached PASS replaces a run — a different kind of
+# claim. The key names everything the tree carries that can change the answer:
+# the gate, its tool's version line, and the whole of `_gate_coverage_key` — the
+# runtime's own bytes, the coverage driver, the PHP version and its extensions,
+# PHPUnit's version, the config, the analysed sources, the test tree, the diff
+# base and the changed lines.
+#
+# What the key **cannot** name is anything that is not in the tree: a flaky test,
+# a shared resource, a machine under load. So the invalidation is one command, it
+# is named here and in `bin/harness help`, and a replay says out loud that it is
+# one:
+#
+#     rm -rf .cache/gate-results
+#
+# Only a PASS is stored. A gate that failed, or that could not run at all, has to
+# run again — a cached failure would hide the fix.
+GATE_RESULTS_ROOT=".cache/gate-results"
+
+# Set by a gate before it asks for its coverage, so the key is computed once and
+# the gate can consult it before deciding whether to run at all.
+GATE_COVERAGE_KEY=""
+
+
+# The verdict key: the gate, its tool's version *line*, and everything the
+# coverage key names.
+#
+# A version line rather than a path, so a gate whose binary has gone — an empty
+# version — cannot replay a verdict taken while it was there. That is the one
+# input the tree does not carry, and it is the input that decides whether the
+# gate could run.
+_gate_verdict_key() {
+	printf '%s\n' "$1" "$2" "${GATE_COVERAGE_KEY:-none}" | md5sum | cut -d' ' -f1
+}
+
+
+# Replays a stored PASS, or returns 1 so the gate runs. Prints the verdict the
+# way the gate would have, so nothing about the run is silent.
+_gate_verdict_replay() {
+	local file
+	file="$PROJECT_ROOT/$GATE_RESULTS_ROOT/$(_gate_verdict_key "$1" "$2")"
+	[[ -f "$file" ]] || return 1
+	info "$1: this gate already passed on this exact tree, with this tool and this runtime"
+	info "  replayed, not run — the report the run produced is still in .cache/"
+	info "  to run it for real: rm -rf $GATE_RESULTS_ROOT"
+	cat "$file"
+	return 0
+}
+
+
+_gate_verdict_store() {
+	local key
+	key="$(_gate_verdict_key "$1" "$2")"
+	[[ -n "$key" ]] || return 0
+	mkdir -p "$PROJECT_ROOT/$GATE_RESULTS_ROOT"
+	printf '%s passed on this tree, with this tool and this runtime\n' "$1" \
+		>"$PROJECT_ROOT/$GATE_RESULTS_ROOT/$key"
+}
+
+
+# The directory a gate reads: the one already built for this tree, or a fresh
+# pass. Leaves it in `GATE_COVERAGE_DIR`, relative to the project root, which is
+# what `_covered_lines` and `_covering_tests` take.
+_gate_coverage() {
+	local base="$1" config="$2" changed="$3" suite="$4" prefix="$5"
+	# The key is computed once, and the gate may already have it: it has to know
+	# the key *before* this call in order to ask whether it must run at all.
+	if [[ -z "$GATE_COVERAGE_KEY" ]]; then
+		GATE_COVERAGE_KEY="$(_gate_coverage_key "$base" "$config" "$changed")"
+	fi
+	local key="$GATE_COVERAGE_KEY"
+	if _gate_coverage_valid "$key"; then
+		info "coverage: reusing the report already built for this tree"
+		GATE_COVERAGE_DIR="${GATE_COVERAGE_ROOT}/$key"
+		return 0
+	fi
+	_produce_gate_coverage "$key" "$config" "$suite" "$prefix"
+}
+
 
 cmd_coverage() {
 	_require_test_layer || return 0
@@ -1541,6 +1933,23 @@ cmd_mutation() {
 	local base
 	base="$(_mutation_base)"
 
+	# Infection's mutant pool, sized from `nproc` — which returns 8 on this
+	# fleet's machine, a 4-physical-core part with hyper-threading, so the number
+	# is wrong for a CPU-bound pool. Measured on `updatronix-pro`, twelve covered
+	# lines, one real sweep each: 41 mutations in 35 s at `nproc` and 33 s at 4,
+	# which is inside the run-to-run variance (the same arm measured 35 s and
+	# 51 s across its own runs). The register says to change this input only if
+	# the difference exceeds that variance, and on the duration it does not, so
+	# it stays `nproc`.
+	#
+	# What it *does* change, reproducibly, is how a mutant is classified: at 8
+	# threads 10 were killed and 31 timed out, at 4 it was 25 killed and 16 timed
+	# out — twice each, with the same 41 mutations generated. The verdict is not
+	# touched: both arms report `Covered Code MSI: 100%` and exit 0, and with 31
+	# of 41 timed out at 8 threads that metric can only be 100% if a timeout
+	# counts as detected rather than as a survivor. The split is recorded here
+	# rather than acted on, and it is the reason a future change to this line
+	# should be measured on the classification as well as the clock.
 	local threads
 	threads="$(run_sh 'nproc' 2>/dev/null | tr -d '[:space:]')"
 	threads="${threads:-4}"
@@ -1611,19 +2020,72 @@ cmd_mutation() {
     <coverage><include><directory suffix=\".php\">../inc</directory></include></coverage>"
 	fi
 
-	# `.cache/` rather than `build/`: both are transient, but only `.cache/` is
-	# ignored in every project — a report directory that shows up in
-	# `git status` is a report directory people will try to delete.
-	local coverage_dir=".cache/infection-coverage"
-	run_sh "rm -rf ${coverage_dir@Q} && mkdir -p ${coverage_dir@Q}"
+	# Which suite this mutates against, named so the shared pass can point a
+	# failure at the right command.
+	local suite="test"
+	[[ "$phpunit_config" == *integration* ]] && suite="integration"
+
+	# Nothing to mutate is not a failure, and a whole coverage pass to discover
+	# it is a pass wasted.
+	#
+	# Infection's own answer comes *after* it has consumed the report — "Could
+	# not find any modified files in the configured sources for the git filter"
+	# — which is 23.5 s and 12 container crossings measured on a clean tree, on
+	# every push that touches no PHP. `counterfactual` reads the diff first and
+	# returns early; this is the same early exit.
+	#
+	# It sits **here** and not at the top of the function. The infection binary
+	# and the `<coverage>` section are checked above it, and each exists so that
+	# a gate which cannot run at all fails loudly; above them, a push that
+	# touches no PHP would report green on a project whose mutation gate is
+	# broken.
+	#
+	# Containment, checked rather than assumed: `_code_paths` is a superset of
+	# the config's `source.directories` — it is what generated them (`updatronix`
+	# gives `updatronix.php uninstall.php index.php inc` against `["inc"]`) — so
+	# an empty diff here implies Infection's own filter matched nothing either.
+	local targets
+	targets="$(_changed_lines "$base")"
+	if [[ -z "$targets" ]]; then
+		info "no changed line in the mutation scope — nothing to mutate"
+		return 0
+	fi
+
+	# The changed lines are part of the shared pass's key: both gates are
+	# diff-scoped, and they have to agree on what changed before they can agree
+	# on what to read.
+	local changed
+	changed="$(printf '%s' "$targets" | md5sum | cut -d' ' -f1)"
+
+	# The verdict is consulted *here*, and the place is the point: both fail-fast
+	# checks above have already fired if the gate cannot run at all, and the key
+	# needs the tree and the diff before it means anything. The tool's version is
+	# part of the key, so a binary that has gone cannot replay a verdict taken
+	# while it was there.
+	GATE_COVERAGE_KEY="$(_gate_coverage_key "$base" "$phpunit_config" "$changed")"
+	local infection_version
+	infection_version="$(run_sh 'vendor/bin/infection --version 2>/dev/null | head -1')"
+	_gate_verdict_replay mutation "$infection_version" && return 0
 
 	step "Coverage (${phpunit_config}) — Infection will not run the tests itself"
+	# The pass is shared with `counterfactual` and keyed on the tree, so a push
+	# that runs both pays for it once. `.cache/` rather than `build/`: both are
+	# transient, but only `.cache/` is ignored in every project — a report
+	# directory that shows up in `git status` is one people try to delete.
+	#
+	# `--coverage-cache` is PHPUnit's static-analysis half inside that pass, and
+	# its invalidation was measured rather than inferred from
+	# `CachingFileAnalyser`: warm the cache, put a *new executable line* into an
+	# analysed file, re-run — the report moves, 743 covered lines to 744, with
+	# the line numbers following the insertion. "Cold and warm agree" on an
+	# unchanged tree is answer-stability and would have passed either way, which
+	# is why it is not the probe. The file was restored afterwards.
+	#
 	# Both reports land in one directory: Infection looks for `index.xml` and a
 	# `junit.xml` side by side and will not look in two places.
-	run_sh "${COVERAGE_EXPORT} ${prefix} exec php ${COVERAGE_FLAGS[*]} vendor/bin/phpunit \
-		--configuration=${phpunit_config@Q} \
-		--coverage-xml=${coverage_dir@Q} \
-		--log-junit=${coverage_dir@Q}/junit.xml"
+	local coverage_dir
+	_gate_coverage "$base" "$phpunit_config" "$changed" "$suite" "$prefix"
+	coverage_dir="$GATE_COVERAGE_DIR"
 
 	step "Mutation testing on the diff against ${base}"
 	# No `--initial-tests-php-options` here, and that is not an oversight: it
@@ -1663,10 +2125,13 @@ cmd_mutation() {
 		if _explain_no_mutants; then
 			warn "Nothing to judge here — bin/harness counterfactual is the gate that"
 			warn "can still disagree with this diff."
+			_gate_verdict_store mutation "$infection_version"
 			return 0
 		fi
 		exit 1
 	fi
+
+	_gate_verdict_store mutation "$infection_version"
 }
 
 # Why a run can find nothing to mutate, when that is not a test-quality problem.
@@ -2002,8 +2467,6 @@ cmd_counterfactual() {
 	# it as a survivor hides the difference between "your suite is weak" and
 	# "your suite is absent". Measured on zenpress: without this filter the
 	# command reported 12 survivors out of 12 and was unusable as a gate.
-	local coverage_dir=".cache/counterfactual-coverage"
-	run_sh "rm -rf ${coverage_dir@Q} && mkdir -p ${coverage_dir@Q}"
 	step "Coverage (${config}) — the check only asks about lines the suite ran"
 
 	local prefix=""
@@ -2014,34 +2477,30 @@ cmd_counterfactual() {
 			       TMPDIR=\"\$PWD/\$TMPDIR\";"
 	fi
 
-	# A failing suite makes every mutation look killed, which is the one way
-	# this gate could report something confidently and wrongly.
-	#
-	# Bounded, and the two failure modes are told apart. A run that never
-	# returns left the hook sitting there with nothing on screen to explain it —
-	# over thirty minutes on a theme, killed by hand — and reporting that as
-	# "the suite does not pass" would send someone to debug a suite that is
-	# fine. `timeout` is GNU coreutils and present in every image the harness
-	# supports; 124 is its "timed out" status.
-	local coverage_timeout="${HARNESS_COVERAGE_TIMEOUT:-600}"
-	local coverage_status=0
-	run_sh "${COVERAGE_EXPORT} ${prefix} timeout ${coverage_timeout} php ${COVERAGE_FLAGS[*]} vendor/bin/phpunit \
-		--configuration=${config@Q} \
-		--coverage-xml=${coverage_dir@Q} \
-		--log-junit=${coverage_dir@Q}/junit.xml" </dev/null || coverage_status=$?
+	# The changed lines are part of the key: both gates are diff-scoped, and they
+	# have to agree on what changed before they can agree on what to read.
+	local changed
+	changed="$(printf '%s' "$targets" | md5sum | cut -d' ' -f1)"
 
-	if [[ "$coverage_status" -eq 124 ]]; then
-		fail "the coverage run did not finish in ${coverage_timeout}s.
-  Not slow — stuck: the same suite passes in seconds without --coverage-xml,
-  and under it the PHP process disappears without printing a word.
-  Raise the bound with HARNESS_COVERAGE_TIMEOUT=<seconds> once the cause is
-  known. Until it is, this check cannot say which lines the suite ran, and
-  guessing would be worse than not checking."
-	fi
-	if [[ "$coverage_status" -ne 0 ]]; then
-		fail "the suite does not pass, so a surviving mutation would mean nothing.
-  Fix it first: bin/harness ${suite}"
-	fi
+	# The verdict is consulted *here* — after the diff check above, which is what
+	# says there is anything to judge, and after the config and driver checks
+	# further up, which are what say the gate can run at all.
+	#
+	# There is no version line of its own to add: this gate's tools are PHPUnit
+	# and the runtime, and `_gate_coverage_key` already names both, with the PHP
+	# version and its extensions beside them.
+	GATE_COVERAGE_KEY="$(_gate_coverage_key "$base" "$config" "$changed")"
+	_gate_verdict_replay counterfactual "" && return 0
+
+	# The pass is `mutation`'s too, keyed on the tree, so a push that runs both
+	# pays for it once. A failing suite makes every mutation look killed, which is
+	# the one way this gate could report something confidently and wrongly — that
+	# check, and the bound that tells a stuck suite from a red one, moved into
+	# `_produce_gate_coverage` when the pass stopped being this command's own, and
+	# both gates emit its two messages.
+	local coverage_dir
+	_gate_coverage "$base" "$config" "$changed" "$suite" "$prefix"
+	coverage_dir="$GATE_COVERAGE_DIR"
 
 	local -A is_covered=() covered_by=()
 	local pair name tests
@@ -2276,7 +2735,7 @@ cmd_counterfactual() {
 		warn "${fallbacks} substitution(s) fell back to the whole suite: the coverage
   report named no test PHPUnit could select for the line. The suite that runs
   nothing exits non-zero, which this command would count as a kill, so the
-  whole suite is asked instead. See .cache/counterfactual-coverage."
+  whole suite is asked instead. See .cache/gate-coverage."
 	fi
 	if [[ "$ungreen" -gt 0 ]]; then
 		warn "${ungreen} covering subset(s) do not pass on their own, so the substitutions
@@ -2333,6 +2792,8 @@ cmd_counterfactual() {
   a journal first: a run killed mid-substitution leaves its edit in the tree at
   ${COUNTERFACTUAL_JOURNAL_REL}, and the next run restores it."
 	fi
+
+	_gate_verdict_store counterfactual ""
 }
 
 # The journal that makes a killed run recoverable.
@@ -2368,10 +2829,12 @@ COUNTERFACTUAL_LOCK_WAIT="${HARNESS_COUNTERFACTUAL_LOCK_WAIT:-300}"
 # The journal is written on the assumption that one run at a time is editing a
 # project, and two runs share more than it: they substitute the same changed
 # lines, so each reads the other's substitution as its pre-image and restores a
-# line it did not write; they share `.cache/counterfactual-junit.xml`, so one
-# run's "the filter selected nothing" is read off the other's log; and they
-# share `.cache/counterfactual-coverage`, which one run deletes while the other
-# is reading it. Both ways in are ordinary: a developer running
+# line it did not write; and they share `.cache/counterfactual-junit.xml`, so one
+# run's "the filter selected nothing" is read off the other's log. The coverage
+# report was the third way in — one run deleting `.cache/counterfactual-coverage`
+# while the other read it — and that one is closed: the shared pass writes an
+# artifact keyed on the tree and neither gate deletes one. Both ways in are
+# ordinary: a developer running
 # `bin/harness counterfactual` while a push is in flight, and an agent doing the
 # same, which this fleet's sessions do.
 #
@@ -3596,14 +4059,35 @@ cmd_env() {
 cmd_doctor() {
 	cmd_env
 	step "tools in the '$BACKEND' backend"
-	local tool
-	for tool in php composer wp node npm git; do
-		if has_tool "$tool"; then
-			printf '  ok   %-10s %s\n' "$tool" "$(run_sh "$tool --version 2>/dev/null | head -1")"
+	# One crossing for six tools, where there used to be twelve.
+	#
+	# Learning one fact about one tool cost two crossings: `has_tool` asks
+	# `command -v` through the backend and the version is a second `run_sh`. The
+	# ddev CLI spends 0.8-1.3 s arranging to run a command that takes about
+	# 10 ms, so twelve of them to answer six questions was most of what this
+	# command cost. Nothing about what is checked changes: the batch prints what
+	# the report printed.
+	#
+	# `MISS` stays a word. A tool that is absent and a tool that answered
+	# nothing both produce an empty string, and the report has to be able to
+	# tell them apart.
+	local status tool rest
+	while read -r status tool rest; do
+		[[ -n "$tool" ]] || continue
+		if [[ "$status" == "ok" ]]; then
+			printf '  ok   %-10s %s\n' "$tool" "$rest"
 		else
 			printf '  MISS %-10s\n' "$tool"
 		fi
-	done
+	done < <(run_sh '
+for tool in php composer wp node npm git; do
+	if command -v "$tool" >/dev/null 2>&1; then
+		printf "ok %s %s\n" "$tool" "$("$tool" --version 2>/dev/null | head -1)"
+	else
+		printf "MISS %s\n" "$tool"
+	fi
+done
+')
 	step "graft"
 	local graft_bin
 	if graft_bin="$(_graft_bin)"; then
@@ -3752,6 +4236,10 @@ ${PROJECT_SLUG} harness ${HARNESS_VERSION} — backend: ${BACKEND:-unresolved}
   bin/harness mutation            Infection on the diff (anti-tautology)
   bin/harness counterfactual      mutation by substitution, for code Infection
                                   cannot reach (global functions)
+                                  Both gate commands replay a PASS they have
+                                  already recorded for this exact tree, this
+                                  tool and this runtime. To run one for real:
+                                    rm -rf .cache/gate-results
   bin/harness pcp                 Plugin Check
   bin/harness verify              the pre-push gate
 
@@ -3768,6 +4256,12 @@ EOF
 main() {
 	_init
 	local command="${1:-}"
+	# `help` and an empty command are answered here and cross nothing; every
+	# other command belongs inside the container, and gets there in one crossing.
+	case "$command" in
+	"" | -h | --help | help) ;;
+	*) _reenter_in_container "$@" ;;
+	esac
 	shift || true
 	case "$command" in
 	"") usage ;;

@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# pre-push gate — budget < 360 s, and the number is a measurement rather than a
+# pre-push gate — budget < 270 s, and the number is a measurement rather than a
 # wish: this hook read "< 90 s" for as long as it existed and nothing checked
 # it. The full correctness gate before code leaves the machine. Mutation testing
 # is scoped to the diff so the budget holds.
@@ -30,6 +30,24 @@ cd "$ROOT"
 #   50                    | 690 s            | 198 s
 #   100                   | 915 s           | 249 s
 #
+# Re-measured on 2026-10-07 at the same twelve-line size and the same stage
+# order, after the performance work:
+#
+#   updatronix        65 s
+#   updatronix-pro   206 s
+#
+# Read the two rows together with the caveat that `updatronix`'s `lint` carried a
+# cold PHPCS cache (`.cache/phpcs.cache` had been cleared for a probe and not
+# rebuilt) while `updatronix-pro`'s was warm, so the fixed halves are not
+# comparable between them: 30.7 s against 9.3 s is that, not a slower project.
+#
+# The two diff-scoped stages are what moved. They share one coverage pass now,
+# keyed on the tree and kept in `.cache/gate-coverage/`, instead of computing the
+# same report twice; PHPUnit caches the analysis half of it; and `mutation` reads
+# its diff before running a pass at all, so a push that touches no PHP pays none
+# of it. The rest is the crossing — every command enters the container once
+# rather than once per step — which is most of the fixed half above.
+#
 # The seconds are three things, in that order. The project's own suite and its
 # lint come first and do not scale with the diff at all: they are about 140 s of
 # `updatronix-pro`'s 317 s, which is what a push touching nothing in the gates'
@@ -58,11 +76,13 @@ cd "$ROOT"
 # slowest, rounded up: the two large stages scale with the diff, and two runs of
 # the same gate a few minutes apart measured 384 s and 421 s under the old base,
 # so a target set at the measurement itself would report an overrun every other
-# push.
+# push. The twelve-line measurement above is 206.2 s and that spread is about
+# 37 s, so the target is the measurement rounded up past its own variance: 270 s,
+# a quarter below the 360 s the same rule produced from 317 s.
 #
 # It is a target, not a limit. The hook reports the overrun and does not fail on
 # it; what it must not do is state a number nobody has ever checked.
-BUDGET=360
+BUDGET=270
 SECONDS=0
 
 status=0

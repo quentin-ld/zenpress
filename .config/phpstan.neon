@@ -23,6 +23,27 @@ parameters:
     # declared floor rather than against whatever PHP it happens to be running
     # on. Same declaration as `testVersion` in `.config/phpcs.xml`.
     phpVersion: 80100
+    # PHPStan's result cache, moved out of the container's `/tmp`.
+    #
+    # It defaults to `<tmp>/phpstan`, which is already cached and already fast —
+    # a warm run is 4.5 s against 30.6 s cold — and which does **not** survive a
+    # `ddev rebuild`: the container is recreated, `/tmp` with it, and the next
+    # `lint` pays the whole analysis again. `.cache/` is bind-mounted into it,
+    # gitignored in every project and excluded from the release archive, so the
+    # cache outlives the container and never ships.
+    #
+    # This is durability, not speed. The 30.6 s -> 4.5 s is PHPStan's own
+    # default and is not this line's doing; what this line buys is that the
+    # figure survives a rebuild. It still invalidates on a PHP-version change
+    # and on any analysed-source change — PHPStan keys on both — so "durable"
+    # does not mean "stale-proof".
+    #
+    # `../` for the same reason `includes` and `excludePaths` above carry it:
+    # PHPStan resolves `tmpDir` from THIS file's directory, not from the project
+    # root. Measured rather than assumed — `.cache/phpstan` here created
+    # `.config/.cache/phpstan`, inside the tracked directory the cache must not
+    # land in.
+    tmpDir: ../.cache/phpstan
     # Only a project that carries a bootstrap gets the line, so a theme's config
     # never names a file that does not exist.
     bootstrapFiles:
