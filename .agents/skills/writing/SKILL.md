@@ -1,8 +1,11 @@
 ---
 name: writing
 description: >-
-  Writing prose that reads as written. Use when the output is read by a person:
-  a README, a changelog, a commit message, a review, a user-facing string.
+  Writing anything the fleet produces for a person to read: a README, a
+  changelog, a commit message, a review note, a task file, a docblock, a
+  user-facing string. Carries the WordPress Documentation Style Guide rules in
+  `references/`. Use before drafting or rewriting prose, then run the pass that
+  takes the machine out: `humanizer` for English, `humaniseur-fr` for French.
 ---
 
 # Writing
@@ -12,6 +15,148 @@ wrote it, because someone did.
 
 The fleet's register is **US English, conclusion first, no preamble**. Everything
 below is what that means in practice.
+
+## The guide's rules
+
+The fleet's standard is the **WordPress Documentation Style Guide**, and its
+rules are the house style wherever a person reads the output. Each heading below
+links to the reference that holds that section of the guide in full, with its
+examples and its exceptions. The lines are the whole guide in one line each;
+open the reference when a line is not enough to decide.
+
+### [General guidelines](references/general-guidelines.md)
+
+- Follow a defined document structure throughout your documentation.
+- Write in a conversational tone that is succinct, natural, and friendly.
+- Write documentation that is accessible to everyone.
+- Write for a global audience, and consider translation.
+- Use inclusive language, word choice, and examples.
+- Avoid excessive claims about products and services. Do not document or predict
+  future features.
+- Write in your own words. Do not copy content from external sources.
+
+### [Language and grammar](references/language-and-grammar.md)
+
+- Spell out and declare an abbreviation the first time it is used. Avoid
+  internet slang and jargon.
+- Include definite and indefinite articles.
+- Follow standard American (US) English capitalization rules. In general, use
+  sentence case.
+- Put conditional clauses before instructions, not after them.
+- Contractions are generally acceptable; watch the exceptions.
+- In general, use indirect speech.
+- In general, use second person.
+- Capitalize proper nouns. Do not use a verb as a noun or a noun as a verb.
+- Pluralize a singular noun by adding _-s_.
+- Form a singular possessive with an _apostrophe-s_.
+- Do not use three or more affixes in a single word.
+- Use prepositions as needed, even at the end of a sentence.
+- Ensure that a pronoun clearly refers to its antecedent.
+- In general, write in the present tense rather than the future tense.
+- Use precise verbs to write clear, succinct sentences.
+- In general, use active voice rather than passive voice.
+- Use common and simple technical terms that most readers understand.
+
+### [Punctuation](references/punctuation.md)
+
+- Use straight apostrophes.
+- Use colons to introduce closely related content that follows.
+- Use commas to separate items in a series and certain kinds of clauses. Use
+  serial commas.
+- Use an em dash to set off a break in the flow of a sentence. Use an en dash for
+  a range of numbers, a minus sign, or a negative number.
+- In general, avoid ellipses.
+- Use exclamation points only when absolutely needed, and never in code
+  examples.
+- Hyphenate words only when needed for clarity.
+- Use parentheses sparingly.
+- End every independent sentence with a period, and insert one space after it.
+- Use question marks sparingly.
+- Use straight double quotation marks.
+- Use semicolons to separate independent clauses.
+- Avoid slashes except in code examples, file paths, and URLs.
+
+### [Formatting](references/formatting.md)
+
+- Use the _day of week, month dd, year_ date format. Express time on the 12-hour
+  clock and always include _AM_ and _PM_. Use Coordinated Universal Time (UTC),
+  and always include the time zone for a real time.
+- Write unbiased examples that reveal no personally identifiable information.
+- Use all-lowercase filenames and separate words with hyphens.
+- Avoid footnotes.
+- Use sentence case for headings, and follow the heading hierarchy.
+- Use italics to emphasize or introduce a particular word or phrase.
+- Use numbered lists for sequences, bulleted lists for non-sequential items, and
+  description lists for pairs of related data.
+- Use SVG or PNG images, and provide alt text.
+- Use notices to warn, alert, notify, or inform.
+- Spell out whole numbers from zero through nine.
+- Mark outdated content with a warning notice.
+- Use mock phone numbers in examples.
+- Use procedures for a sequence of numbered steps.
+- Use tables for lengthy, related, complex data.
+- Maintain consistent type and text formatting.
+- Follow the trademark, licensing, and citation rules of the mark's owner.
+- Put a nonbreaking space between a number and its unit of measurement.
+- Italicize words used as words.
+
+### [Linking](references/linking.md)
+
+- Use cross-references to guide readers to related information.
+- Linking to an external site for more information is fine.
+- Use heading anchors.
+- Use root-relative URLs for image links.
+- Write link text that is detailed and gives the reader context.
+
+### [Developer content](references/developer-content.md)
+
+- Use code blocks, preformatted text, and code fences for code examples.
+- Set code-related content in a monospace code font.
+- Follow the WordPress coding standards.
+- Follow proper command-line syntax and formatting.
+- Wrap a placeholder in a `<var>` element and use uppercase characters with
+  underscore delimiters.
+- Emphasize the task to be accomplished rather than how to interact with a UI
+  element.
+- Format UI element names in bold, and use the right nouns and verbs to describe
+  interacting with them.
+
+### [Word list and usage dictionary](references/word-list/index.md)
+
+- A term's spelling and usage is in the dictionary, split by first letter:
+  `references/word-list/<first letter>.md`. Open one letter, never the whole
+  dictionary.
+
+## Where the rest lives
+
+Seven references sit beside this file. What you are writing decides which one you
+open — not how big it is.
+
+| reference | open it when |
+|---|---|
+| `references/general-guidelines.md` | the question is structure, tone, audience, inclusivity, or a claim |
+| `references/language-and-grammar.md` | articles, capitalization, clauses, tense, voice, pronouns, word choice |
+| `references/punctuation.md` | apostrophes, colons, commas, dashes, hyphens, periods, quotation marks, slashes |
+| `references/formatting.md` | dates, filenames, headings, lists, notices, numbers, procedures, tables, trademarks, units |
+| `references/linking.md` | cross-references, heading anchors, image links, link text |
+| `references/developer-content.md` | code examples, inline code, command-line syntax, placeholders, UI elements |
+| `references/word-list/<letter>.md` | a term's spelling or usage — one file per first letter |
+
+## Which register wins
+
+The guide governs documents and quoted text: em dashes for a break in the flow,
+straight apostrophes, straight double quotation marks. The humanizer lists govern
+prose habit: a dash used as a universal connector is a tell, and stacked
+punctuation is rationed. Both hold at once — documentation punctuation is house
+style, and the habit of reaching for the same mark is the tell.
+
+## The pass that takes the machine out
+
+Draft, then run the pass that matches the language: `humanizer` for an English
+text, `humaniseur-fr` for a French one. Their lists are theirs and are not
+restated here. Name the pass in the summary of anything you write about the text
+— `reviewer` and `qa` record whether it ran, on any change that adds or rewrites
+a sentence or more of reader-visible prose.
 
 ## The tests a sentence has to pass
 
@@ -71,9 +216,12 @@ wearing a claim's clothes.
 |---|---|
 | `README.md`, generated block and the project's own parts | a developer deciding whether to use this |
 | commit messages | whoever runs `git log` in a year, probably you |
+| pull-request prose | a reviewer deciding whether to read the diff |
 | changelog and `readme.txt` | a user deciding whether to update |
 | review and QA findings | the person who has to fix them |
-| code comments | the next reader of the line above them |
+| task files | the next agent, who has only this to go on |
+| code comments and docblocks | the next reader of the line above them |
+| user-facing strings | someone reading the screen, in their own language |
 
 **Not** the harness's own internal docs: `DESIGN.md`, the ADRs and the
 migrations notes are written for whoever maintains the harness, and prose that
@@ -95,6 +243,11 @@ The `humanizer`-named skills on skills.sh that wrap a paid API
 machine, which contradicts the fleet's first rule — everything runs locally. The
 two that hold no API were distilled instead, as `humanizer` for English and
 `humaniseur-fr` for French.
+
+The rules above are the WordPress Documentation Style Guide, cut from
+`mirrors/wordpress-documentation-style-guide-consolidated.md` by
+`mirrors/tools/build_style_guide_references.py` and shipped in `references/`.
+Every page in them keeps the live URL it came from on its `**Source:**` line.
 
 This skill is still the one to reach for first. `humanizer` reads a draft and
 takes the machine out of it; this one is how to write the sentence that does not

@@ -1,5 +1,5 @@
 {
-  "commit": "7d26e61",
+  "commit": "6d72e9f",
   "files": {
     ".agents/docs/DISTILLATION.md": {
       "class": "owned",
@@ -15,7 +15,7 @@
     },
     ".agents/skills/documentation/SKILL.md": {
       "class": "owned",
-      "sha256": "b965943599da15f19da1ec04d165bd56c32f725fdfbad2e5ee7176a5ab61492c"
+      "sha256": "9d00ad8eea2dfe8c68c7f878470375d270d383aab418a64dcf75378a8ee56108"
     },
     ".agents/skills/graft/SKILL.md": {
       "class": "owned",
@@ -39,7 +39,7 @@
     },
     ".agents/skills/qa/SKILL.md": {
       "class": "owned",
-      "sha256": "1c8d718e5ddfb3c4e9943fca6caec922e5c52c15d4beff349fb37dfc76d0d9df"
+      "sha256": "857428922e8300aa6bcd1237c9c3843574a700296411dbcf0288fdedbfa420fd"
     },
     ".agents/skills/release/SKILL.md": {
       "class": "owned",
@@ -51,7 +51,7 @@
     },
     ".agents/skills/reviewer/SKILL.md": {
       "class": "owned",
-      "sha256": "54cabbfd648d745bd1ec75b9a894015b2ec7446802e4669e84e4b384c2b901fa"
+      "sha256": "92f67ed3bf3729951b64f03a4668f2eeef67db8e443399cc9394e92f39fda0e1"
     },
     ".agents/skills/security/SKILL.md": {
       "class": "owned",
@@ -71,7 +71,147 @@
     },
     ".agents/skills/writing/SKILL.md": {
       "class": "owned",
-      "sha256": "6245ed5d5ee28bd0f1908980f0346538aec14e017ba065d6ee6aee3ffa999b7d"
+      "sha256": "5a8a3b3a6e9ea2673c78974e6f24472bee17811bc38117a6f65700743240773f"
+    },
+    ".agents/skills/writing/references/developer-content.md": {
+      "class": "owned",
+      "sha256": "323d20f7c826153db95a86db653f74c4c84e0bf675f302e8675db382fb934aab"
+    },
+    ".agents/skills/writing/references/formatting.md": {
+      "class": "owned",
+      "sha256": "9ff68abe29a7eb195e9dc18da1f0b59f58b4744aae9503f49599888d92925f80"
+    },
+    ".agents/skills/writing/references/general-guidelines.md": {
+      "class": "owned",
+      "sha256": "d3df9405078598f7b9f7e897ecb3d60208ff856c0e957e22cd10163f618ad36d"
+    },
+    ".agents/skills/writing/references/language-and-grammar.md": {
+      "class": "owned",
+      "sha256": "1d14fabee89e1112c148a7548b7f4c149e177a2aac2062619e3d728e9fb7491d"
+    },
+    ".agents/skills/writing/references/linking.md": {
+      "class": "owned",
+      "sha256": "07b58a05df367ca79b772a261d4bc678888c76889ad956f334c5ddaa977f6075"
+    },
+    ".agents/skills/writing/references/punctuation.md": {
+      "class": "owned",
+      "sha256": "b759dc27057ca4232755ee93b687e77ed74207943075321ce2a4f0ae0220dd34"
+    },
+    ".agents/skills/writing/references/word-list/a.md": {
+      "class": "owned",
+      "sha256": "25b3dbdd3a469b506cf1b7aeaa338e14f564fbf69915cbfbe4d077b1b74b6aab"
+    },
+    ".agents/skills/writing/references/word-list/b.md": {
+      "class": "owned",
+      "sha256": "e36b46089b73d3f04ac0455d09d20b45d4185e7c1cba5092c4f1c66d0009252c"
+    },
+    ".agents/skills/writing/references/word-list/c.md": {
+      "class": "owned",
+      "sha256": "aeb9777fb40fdfb40634cfa2e0cc5965fe7bc8f2171cacd475e4af3ac991fba6"
+    },
+    ".agents/skills/writing/references/word-list/d.md": {
+      "class": "owned",
+      "sha256": "95406ba54ed1537ff4571019f4cb246daee26aaccc12fe4298d64790f1abd043"
+    },
+    ".agents/skills/writing/references/word-list/e.md": {
+      "class": "owned",
+      "sha256": "e93535007e3dc2cde07ec1d3675b097d3d9be3be37a159e8bb0c893faf218fe0"
+    },
+    ".agents/skills/writing/references/word-list/f.md": {
+      "class": "owned",
+      "sha256": "7205d1ea428374a22b7f8b9d8efb4672c096fcd2f7387f169fc8b91ecf7dcbd8"
+    },
+    ".agents/skills/writing/references/word-list/g.md": {
+      "class": "owned",
+      "sha256": "ff2782e71cd37eec397f312adb67605bf2292920185581789c16d9fe75a3e809"
+    },
+    ".agents/skills/writing/references/word-list/h.md": {
+      "class": "owned",
+      "sha256": "63aaa18747228531dc3fbcf3f251a5f2882a9d0e0fe31f284b2057a700cc4e5c"
+    },
+    ".agents/skills/writing/references/word-list/i.md": {
+      "class": "owned",
+      "sha256": "a0caacb5580de3af08bc7b87c92d17d1e3846e91f777471a586dfc99c8481c7e"
+    },
+    ".agents/skills/writing/references/word-list/index.md": {
+      "class": "owned",
+      "sha256": "be18723b7144c09839712679590f142c6bd84a827d18442d34cb2c8deef8461f"
+    },
+    ".agents/skills/writing/references/word-list/j.md": {
+      "class": "owned",
+      "sha256": "fdac045dbeeb8378cb99c74c97ad66bb776e5928e06c7f4bb9ef962ba9ab9beb"
+    },
+    ".agents/skills/writing/references/word-list/k.md": {
+      "class": "owned",
+      "sha256": "3902de27b7ba6adcfb6d761d751b12aacb1d11fdf7a86f45ffc4f3a6dbd25cae"
+    },
+    ".agents/skills/writing/references/word-list/l.md": {
+      "class": "owned",
+      "sha256": "9aaf2d7be8e68ff130c0d387494e493a3e1ba2f10310752365f53f03873f8d03"
+    },
+    ".agents/skills/writing/references/word-list/m.md": {
+      "class": "owned",
+      "sha256": "303cc545037b490a637a85736135cddc6749a50986e109cd9655f77e535a6126"
+    },
+    ".agents/skills/writing/references/word-list/n.md": {
+      "class": "owned",
+      "sha256": "75b7a3306930cfc0a0742447ee35c8cd271072ed6c3770ec11bbca3d90d56240"
+    },
+    ".agents/skills/writing/references/word-list/numbers.md": {
+      "class": "owned",
+      "sha256": "8637610715d210ce9b3ff20064aacebd5f057ddebc114de4b5bf646ec6de298e"
+    },
+    ".agents/skills/writing/references/word-list/o.md": {
+      "class": "owned",
+      "sha256": "844c9eba8f795cd8217046319dc2f0d08e64de61b595282073aa7a9ccb8a952c"
+    },
+    ".agents/skills/writing/references/word-list/p.md": {
+      "class": "owned",
+      "sha256": "addacfb3a3b296eddddd86fd76920155cbe0bc0f618fd13900bbacefcb9fa91d"
+    },
+    ".agents/skills/writing/references/word-list/q.md": {
+      "class": "owned",
+      "sha256": "bea888466789caf11959453585b4d566f0bbb359005d67580c8f51a0b304d0c7"
+    },
+    ".agents/skills/writing/references/word-list/r.md": {
+      "class": "owned",
+      "sha256": "e15dbf62f640f4f379e9761fa940f4ac4aa5d40f42c2b4225468e4c3a8d41936"
+    },
+    ".agents/skills/writing/references/word-list/s.md": {
+      "class": "owned",
+      "sha256": "7b14e61ae06afd74bd69dcb5e82b3388280d81265f748eb41bf301ec4cc9b4b1"
+    },
+    ".agents/skills/writing/references/word-list/symbols.md": {
+      "class": "owned",
+      "sha256": "0a1dfdabc8b118282dc794c4ef5a9b9282b6ac6f6bfe925a456c029b697114c7"
+    },
+    ".agents/skills/writing/references/word-list/t.md": {
+      "class": "owned",
+      "sha256": "2058f6a1ab9a6894ae926c0e470b6cc7d002ec2b5695971f00bb42b0189dbf16"
+    },
+    ".agents/skills/writing/references/word-list/u.md": {
+      "class": "owned",
+      "sha256": "36f87929ec4977a7035167d3937be39b1a32ba2d9e9e655235c7253d2d3dd10d"
+    },
+    ".agents/skills/writing/references/word-list/v.md": {
+      "class": "owned",
+      "sha256": "b8ca0487a52177e4a2e72acd7f6f78c3544e33ce063ce97b85144b29640bd755"
+    },
+    ".agents/skills/writing/references/word-list/w.md": {
+      "class": "owned",
+      "sha256": "b16582434f5f206a3e6ae95d978b93e8b9d8e2d0aed27073876bc14508207f90"
+    },
+    ".agents/skills/writing/references/word-list/x.md": {
+      "class": "owned",
+      "sha256": "21aa21a0a7a75ce2a5b938e4b19151842e64a1281180bb16f5ffed9f95330651"
+    },
+    ".agents/skills/writing/references/word-list/y.md": {
+      "class": "owned",
+      "sha256": "36326b19d134aae5b0e22a527c5fff2d71457ea7a9d906dcfcf38f9d8c73b546"
+    },
+    ".agents/skills/writing/references/word-list/z.md": {
+      "class": "owned",
+      "sha256": "2331c55005c1204a55afacfc04a8b4bb172488b16c1d1a9f7bc8cada96e63719"
     },
     ".config/phpcs-project.xml": {
       "class": "seed",
@@ -117,7 +257,7 @@
     ".reasonix/skills/documentation/SKILL.md": {
       "class": "mirror",
       "from": ".agents/skills/documentation/SKILL.md",
-      "sha256": "99016d874d893c321d57db002720c30c0f88f795c1845c846ae197e0470937bf"
+      "sha256": "f2b0f11cdd0cd5b8a3c672b60f3ad46ac61c35a3e8813e6f2f61451bd821e77b"
     },
     ".reasonix/skills/graft/SKILL.md": {
       "class": "mirror",
@@ -147,7 +287,7 @@
     ".reasonix/skills/qa/SKILL.md": {
       "class": "mirror",
       "from": ".agents/skills/qa/SKILL.md",
-      "sha256": "fff331fcabd71bc0c2e5d0a4020b115a30fb0dd8a53e9f7c0caebf8b15ad19f9"
+      "sha256": "296b4e2436516fccaaa3d6d3792394f67d6324a0b954b585c7cab9cd36593331"
     },
     ".reasonix/skills/release/SKILL.md": {
       "class": "mirror",
@@ -162,7 +302,7 @@
     ".reasonix/skills/reviewer/SKILL.md": {
       "class": "mirror",
       "from": ".agents/skills/reviewer/SKILL.md",
-      "sha256": "d2cfeb48cb898e1f0e53873d029696ec51ceacfbf9a100dc0f5fb6063f99bf9f"
+      "sha256": "6481d142ada4d0ec6dbbaa7a3dd9e76f01380a8b408f2618bf38905f2acd7324"
     },
     ".reasonix/skills/security/SKILL.md": {
       "class": "mirror",
@@ -187,7 +327,182 @@
     ".reasonix/skills/writing/SKILL.md": {
       "class": "mirror",
       "from": ".agents/skills/writing/SKILL.md",
-      "sha256": "64aaf8d9da3eb9b80729eb0ce8ce8e55884e9bccc1b38adcfcf00e44ee07ecd0"
+      "sha256": "1048db6e01e3ff26a866ad2d5e0bb695ba429f130a1102b26ccc3957bd48411c"
+    },
+    ".reasonix/skills/writing/references/developer-content.md": {
+      "class": "mirror",
+      "from": ".agents/skills/writing/references/developer-content.md",
+      "sha256": "323d20f7c826153db95a86db653f74c4c84e0bf675f302e8675db382fb934aab"
+    },
+    ".reasonix/skills/writing/references/formatting.md": {
+      "class": "mirror",
+      "from": ".agents/skills/writing/references/formatting.md",
+      "sha256": "9ff68abe29a7eb195e9dc18da1f0b59f58b4744aae9503f49599888d92925f80"
+    },
+    ".reasonix/skills/writing/references/general-guidelines.md": {
+      "class": "mirror",
+      "from": ".agents/skills/writing/references/general-guidelines.md",
+      "sha256": "d3df9405078598f7b9f7e897ecb3d60208ff856c0e957e22cd10163f618ad36d"
+    },
+    ".reasonix/skills/writing/references/language-and-grammar.md": {
+      "class": "mirror",
+      "from": ".agents/skills/writing/references/language-and-grammar.md",
+      "sha256": "1d14fabee89e1112c148a7548b7f4c149e177a2aac2062619e3d728e9fb7491d"
+    },
+    ".reasonix/skills/writing/references/linking.md": {
+      "class": "mirror",
+      "from": ".agents/skills/writing/references/linking.md",
+      "sha256": "07b58a05df367ca79b772a261d4bc678888c76889ad956f334c5ddaa977f6075"
+    },
+    ".reasonix/skills/writing/references/punctuation.md": {
+      "class": "mirror",
+      "from": ".agents/skills/writing/references/punctuation.md",
+      "sha256": "b759dc27057ca4232755ee93b687e77ed74207943075321ce2a4f0ae0220dd34"
+    },
+    ".reasonix/skills/writing/references/word-list/a.md": {
+      "class": "mirror",
+      "from": ".agents/skills/writing/references/word-list/a.md",
+      "sha256": "25b3dbdd3a469b506cf1b7aeaa338e14f564fbf69915cbfbe4d077b1b74b6aab"
+    },
+    ".reasonix/skills/writing/references/word-list/b.md": {
+      "class": "mirror",
+      "from": ".agents/skills/writing/references/word-list/b.md",
+      "sha256": "e36b46089b73d3f04ac0455d09d20b45d4185e7c1cba5092c4f1c66d0009252c"
+    },
+    ".reasonix/skills/writing/references/word-list/c.md": {
+      "class": "mirror",
+      "from": ".agents/skills/writing/references/word-list/c.md",
+      "sha256": "aeb9777fb40fdfb40634cfa2e0cc5965fe7bc8f2171cacd475e4af3ac991fba6"
+    },
+    ".reasonix/skills/writing/references/word-list/d.md": {
+      "class": "mirror",
+      "from": ".agents/skills/writing/references/word-list/d.md",
+      "sha256": "95406ba54ed1537ff4571019f4cb246daee26aaccc12fe4298d64790f1abd043"
+    },
+    ".reasonix/skills/writing/references/word-list/e.md": {
+      "class": "mirror",
+      "from": ".agents/skills/writing/references/word-list/e.md",
+      "sha256": "e93535007e3dc2cde07ec1d3675b097d3d9be3be37a159e8bb0c893faf218fe0"
+    },
+    ".reasonix/skills/writing/references/word-list/f.md": {
+      "class": "mirror",
+      "from": ".agents/skills/writing/references/word-list/f.md",
+      "sha256": "7205d1ea428374a22b7f8b9d8efb4672c096fcd2f7387f169fc8b91ecf7dcbd8"
+    },
+    ".reasonix/skills/writing/references/word-list/g.md": {
+      "class": "mirror",
+      "from": ".agents/skills/writing/references/word-list/g.md",
+      "sha256": "ff2782e71cd37eec397f312adb67605bf2292920185581789c16d9fe75a3e809"
+    },
+    ".reasonix/skills/writing/references/word-list/h.md": {
+      "class": "mirror",
+      "from": ".agents/skills/writing/references/word-list/h.md",
+      "sha256": "63aaa18747228531dc3fbcf3f251a5f2882a9d0e0fe31f284b2057a700cc4e5c"
+    },
+    ".reasonix/skills/writing/references/word-list/i.md": {
+      "class": "mirror",
+      "from": ".agents/skills/writing/references/word-list/i.md",
+      "sha256": "a0caacb5580de3af08bc7b87c92d17d1e3846e91f777471a586dfc99c8481c7e"
+    },
+    ".reasonix/skills/writing/references/word-list/index.md": {
+      "class": "mirror",
+      "from": ".agents/skills/writing/references/word-list/index.md",
+      "sha256": "be18723b7144c09839712679590f142c6bd84a827d18442d34cb2c8deef8461f"
+    },
+    ".reasonix/skills/writing/references/word-list/j.md": {
+      "class": "mirror",
+      "from": ".agents/skills/writing/references/word-list/j.md",
+      "sha256": "fdac045dbeeb8378cb99c74c97ad66bb776e5928e06c7f4bb9ef962ba9ab9beb"
+    },
+    ".reasonix/skills/writing/references/word-list/k.md": {
+      "class": "mirror",
+      "from": ".agents/skills/writing/references/word-list/k.md",
+      "sha256": "3902de27b7ba6adcfb6d761d751b12aacb1d11fdf7a86f45ffc4f3a6dbd25cae"
+    },
+    ".reasonix/skills/writing/references/word-list/l.md": {
+      "class": "mirror",
+      "from": ".agents/skills/writing/references/word-list/l.md",
+      "sha256": "9aaf2d7be8e68ff130c0d387494e493a3e1ba2f10310752365f53f03873f8d03"
+    },
+    ".reasonix/skills/writing/references/word-list/m.md": {
+      "class": "mirror",
+      "from": ".agents/skills/writing/references/word-list/m.md",
+      "sha256": "303cc545037b490a637a85736135cddc6749a50986e109cd9655f77e535a6126"
+    },
+    ".reasonix/skills/writing/references/word-list/n.md": {
+      "class": "mirror",
+      "from": ".agents/skills/writing/references/word-list/n.md",
+      "sha256": "75b7a3306930cfc0a0742447ee35c8cd271072ed6c3770ec11bbca3d90d56240"
+    },
+    ".reasonix/skills/writing/references/word-list/numbers.md": {
+      "class": "mirror",
+      "from": ".agents/skills/writing/references/word-list/numbers.md",
+      "sha256": "8637610715d210ce9b3ff20064aacebd5f057ddebc114de4b5bf646ec6de298e"
+    },
+    ".reasonix/skills/writing/references/word-list/o.md": {
+      "class": "mirror",
+      "from": ".agents/skills/writing/references/word-list/o.md",
+      "sha256": "844c9eba8f795cd8217046319dc2f0d08e64de61b595282073aa7a9ccb8a952c"
+    },
+    ".reasonix/skills/writing/references/word-list/p.md": {
+      "class": "mirror",
+      "from": ".agents/skills/writing/references/word-list/p.md",
+      "sha256": "addacfb3a3b296eddddd86fd76920155cbe0bc0f618fd13900bbacefcb9fa91d"
+    },
+    ".reasonix/skills/writing/references/word-list/q.md": {
+      "class": "mirror",
+      "from": ".agents/skills/writing/references/word-list/q.md",
+      "sha256": "bea888466789caf11959453585b4d566f0bbb359005d67580c8f51a0b304d0c7"
+    },
+    ".reasonix/skills/writing/references/word-list/r.md": {
+      "class": "mirror",
+      "from": ".agents/skills/writing/references/word-list/r.md",
+      "sha256": "e15dbf62f640f4f379e9761fa940f4ac4aa5d40f42c2b4225468e4c3a8d41936"
+    },
+    ".reasonix/skills/writing/references/word-list/s.md": {
+      "class": "mirror",
+      "from": ".agents/skills/writing/references/word-list/s.md",
+      "sha256": "7b14e61ae06afd74bd69dcb5e82b3388280d81265f748eb41bf301ec4cc9b4b1"
+    },
+    ".reasonix/skills/writing/references/word-list/symbols.md": {
+      "class": "mirror",
+      "from": ".agents/skills/writing/references/word-list/symbols.md",
+      "sha256": "0a1dfdabc8b118282dc794c4ef5a9b9282b6ac6f6bfe925a456c029b697114c7"
+    },
+    ".reasonix/skills/writing/references/word-list/t.md": {
+      "class": "mirror",
+      "from": ".agents/skills/writing/references/word-list/t.md",
+      "sha256": "2058f6a1ab9a6894ae926c0e470b6cc7d002ec2b5695971f00bb42b0189dbf16"
+    },
+    ".reasonix/skills/writing/references/word-list/u.md": {
+      "class": "mirror",
+      "from": ".agents/skills/writing/references/word-list/u.md",
+      "sha256": "36f87929ec4977a7035167d3937be39b1a32ba2d9e9e655235c7253d2d3dd10d"
+    },
+    ".reasonix/skills/writing/references/word-list/v.md": {
+      "class": "mirror",
+      "from": ".agents/skills/writing/references/word-list/v.md",
+      "sha256": "b8ca0487a52177e4a2e72acd7f6f78c3544e33ce063ce97b85144b29640bd755"
+    },
+    ".reasonix/skills/writing/references/word-list/w.md": {
+      "class": "mirror",
+      "from": ".agents/skills/writing/references/word-list/w.md",
+      "sha256": "b16582434f5f206a3e6ae95d978b93e8b9d8e2d0aed27073876bc14508207f90"
+    },
+    ".reasonix/skills/writing/references/word-list/x.md": {
+      "class": "mirror",
+      "from": ".agents/skills/writing/references/word-list/x.md",
+      "sha256": "21aa21a0a7a75ce2a5b938e4b19151842e64a1281180bb16f5ffed9f95330651"
+    },
+    ".reasonix/skills/writing/references/word-list/y.md": {
+      "class": "mirror",
+      "from": ".agents/skills/writing/references/word-list/y.md",
+      "sha256": "36326b19d134aae5b0e22a527c5fff2d71457ea7a9d906dcfcf38f9d8c73b546"
+    },
+    ".reasonix/skills/writing/references/word-list/z.md": {
+      "class": "mirror",
+      "from": ".agents/skills/writing/references/word-list/z.md",
+      "sha256": "2331c55005c1204a55afacfc04a8b4bb172488b16c1d1a9f7bc8cada96e63719"
     },
     "AGENTS.md": {
       "class": "block",

@@ -104,7 +104,7 @@ guardrail you cannot phrase positively, and even then pair it with the target.
 
 ## In this fleet
 
-- **US English**, WordPress Documentation Style Guide for user-facing prose.
+- **US English.** User-facing prose belongs to the `writing` skill: it carries the WordPress Documentation Style Guide rules in `references/` and hands the draft to `humanizer` or `humaniseur-fr`. This skill is for the documents an agent consumes.
 - **A docblock states what the code does, not what it should do.** The fleet's
   most common documentation defect is a docblock that disagrees with the code —
   `'WordPress'` where the function returns `'wordpress'`, a fixed array shape a

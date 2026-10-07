@@ -10,7 +10,7 @@ description: >-
 
 Post-dev gate. **Analyze only** — do not implement.
 
-Reply in US English. Follow the WordPress Documentation Style Guide for all user-facing prose.
+Reply in US English. User-facing prose follows the WordPress Documentation Style Guide, which the `writing` skill carries in `references/`; whether the humanizer pass ran is recorded under **Docs** below.
 
 ## Model tier
 
@@ -61,5 +61,7 @@ Verdict: **Ship** · **Fix then ship** · **Needs rework**
 **Performance:** no queries in loops · transients for remote calls · conditional enqueue
 
 **Coherence:** REST shapes match task contracts · no duplicated logic · i18n wrapped, existing strings untouched
+
+**Docs:** On any diff that adds or rewrites a sentence or more of reader-visible prose — a `README`, a changelog, a commit message, a review note, a task file, a docblock, a user-facing string — record as a finding whether the humanizer pass ran: `humanizer` for an English text, `humaniseur-fr` for a French one (D9 bar). A one-word comment fix is exempt. The prose itself is held to the WordPress Documentation Style Guide, which `writing` carries in `references/`.
 
 **WordPress-specific checklists (audit-tier only):** When running on **audit** tier, use the WordPress checklists from `.agents/docs/audit-checklists.md` (bootstrap, REST API, SQL, i18n, security, admin UI, config/build, multisite, error handling) — shared with `qa` and `security`.
