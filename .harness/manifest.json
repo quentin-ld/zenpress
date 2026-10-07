@@ -1,5 +1,5 @@
 {
-  "commit": "6d72e9f",
+  "commit": "55537c4",
   "files": {
     ".agents/docs/DISTILLATION.md": {
       "class": "owned",
@@ -79,7 +79,7 @@
     },
     ".agents/skills/writing/references/formatting.md": {
       "class": "owned",
-      "sha256": "9ff68abe29a7eb195e9dc18da1f0b59f58b4744aae9503f49599888d92925f80"
+      "sha256": "aca30ba5f385cb8e5febfc3a423dcc081e7a86924e0030e2fdeebdecb1d4afab"
     },
     ".agents/skills/writing/references/general-guidelines.md": {
       "class": "owned",
@@ -147,7 +147,7 @@
     },
     ".agents/skills/writing/references/word-list/l.md": {
       "class": "owned",
-      "sha256": "9aaf2d7be8e68ff130c0d387494e493a3e1ba2f10310752365f53f03873f8d03"
+      "sha256": "13dcb452668cc7d12af3b1d597b5bc6043d38355f73ea36fa32629cd0c59ff31"
     },
     ".agents/skills/writing/references/word-list/m.md": {
       "class": "owned",
@@ -163,11 +163,11 @@
     },
     ".agents/skills/writing/references/word-list/o.md": {
       "class": "owned",
-      "sha256": "844c9eba8f795cd8217046319dc2f0d08e64de61b595282073aa7a9ccb8a952c"
+      "sha256": "72b3f8b09ba748fdfe54dd2cf6899f5791cbcb1a6a406e033daf467d5428d7a3"
     },
     ".agents/skills/writing/references/word-list/p.md": {
       "class": "owned",
-      "sha256": "addacfb3a3b296eddddd86fd76920155cbe0bc0f618fd13900bbacefcb9fa91d"
+      "sha256": "3d5663d5bf394339116cfc21e344882339dd9ff04587a59c434a0cd5f62c8d55"
     },
     ".agents/skills/writing/references/word-list/q.md": {
       "class": "owned",
@@ -175,7 +175,7 @@
     },
     ".agents/skills/writing/references/word-list/r.md": {
       "class": "owned",
-      "sha256": "e15dbf62f640f4f379e9761fa940f4ac4aa5d40f42c2b4225468e4c3a8d41936"
+      "sha256": "526ab3f64933de9c51df022ce93bcf2ca5c26ff873a416b32afb97b1cc05b334"
     },
     ".agents/skills/writing/references/word-list/s.md": {
       "class": "owned",
@@ -337,7 +337,7 @@
     ".reasonix/skills/writing/references/formatting.md": {
       "class": "mirror",
       "from": ".agents/skills/writing/references/formatting.md",
-      "sha256": "9ff68abe29a7eb195e9dc18da1f0b59f58b4744aae9503f49599888d92925f80"
+      "sha256": "aca30ba5f385cb8e5febfc3a423dcc081e7a86924e0030e2fdeebdecb1d4afab"
     },
     ".reasonix/skills/writing/references/general-guidelines.md": {
       "class": "mirror",
@@ -422,7 +422,7 @@
     ".reasonix/skills/writing/references/word-list/l.md": {
       "class": "mirror",
       "from": ".agents/skills/writing/references/word-list/l.md",
-      "sha256": "9aaf2d7be8e68ff130c0d387494e493a3e1ba2f10310752365f53f03873f8d03"
+      "sha256": "13dcb452668cc7d12af3b1d597b5bc6043d38355f73ea36fa32629cd0c59ff31"
     },
     ".reasonix/skills/writing/references/word-list/m.md": {
       "class": "mirror",
@@ -442,12 +442,12 @@
     ".reasonix/skills/writing/references/word-list/o.md": {
       "class": "mirror",
       "from": ".agents/skills/writing/references/word-list/o.md",
-      "sha256": "844c9eba8f795cd8217046319dc2f0d08e64de61b595282073aa7a9ccb8a952c"
+      "sha256": "72b3f8b09ba748fdfe54dd2cf6899f5791cbcb1a6a406e033daf467d5428d7a3"
     },
     ".reasonix/skills/writing/references/word-list/p.md": {
       "class": "mirror",
       "from": ".agents/skills/writing/references/word-list/p.md",
-      "sha256": "addacfb3a3b296eddddd86fd76920155cbe0bc0f618fd13900bbacefcb9fa91d"
+      "sha256": "3d5663d5bf394339116cfc21e344882339dd9ff04587a59c434a0cd5f62c8d55"
     },
     ".reasonix/skills/writing/references/word-list/q.md": {
       "class": "mirror",
@@ -457,7 +457,7 @@
     ".reasonix/skills/writing/references/word-list/r.md": {
       "class": "mirror",
       "from": ".agents/skills/writing/references/word-list/r.md",
-      "sha256": "e15dbf62f640f4f379e9761fa940f4ac4aa5d40f42c2b4225468e4c3a8d41936"
+      "sha256": "526ab3f64933de9c51df022ce93bcf2ca5c26ff873a416b32afb97b1cc05b334"
     },
     ".reasonix/skills/writing/references/word-list/s.md": {
       "class": "mirror",

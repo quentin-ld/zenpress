@@ -517,7 +517,7 @@ number. Use the symbols: *, †, ‡, §, ‖, ¶ – preferably in that order.
 
 **Source:** https://make.wordpress.org/docs/style-guide/formatting/headings/
 
-
+> **EMPTY UPSTREAM EXPORT**: WordPress.org serves this page's `?output_format=md` export with no body. The rule text is on the live page, which stays canonical: https://make.wordpress.org/docs/style-guide/formatting/headings/
 
 ---
 
@@ -536,7 +536,7 @@ such as when introducing or discussing a new concept or a new word, use italics.
  **Not recommended:** An administrator’s tool of sorts, “phpMyAdmin” is a PHPPHP
 PHP (recursive acronym for PHP: Hypertext Preprocessor) is a widely-used open source
 general-purpose scripting language that is especially suited for web development
-and can be embedded into HTML. [https://www.php.net/manual/en/preface.php](https://www.php.net/manual/en/preface.php)
+and can be embedded into HTML. [https://www.php.net/manual/en/index.php](https://www.php.net/manual/en/index.php)
 script meant for giving users the ability to interact with their MySQLMySQL MySQL
 is a relational database management system. A database is a structured collection
 of data where content, configuration and other options are stored. [https://www.mysql.com](https://www.mysql.com/)
@@ -545,7 +545,7 @@ databases.
  **Not recommended:** An administrator’s tool of sorts, **phpMyAdmin** is a PHPPHP
 PHP (recursive acronym for PHP: Hypertext Preprocessor) is a widely-used open source
 general-purpose scripting language that is especially suited for web development
-and can be embedded into HTML. [https://www.php.net/manual/en/preface.php](https://www.php.net/manual/en/preface.php)
+and can be embedded into HTML. [https://www.php.net/manual/en/index.php](https://www.php.net/manual/en/index.php)
 script meant for giving users the ability to interact with their MySQLMySQL MySQL
 is a relational database management system. A database is a structured collection
 of data where content, configuration and other options are stored. [https://www.mysql.com](https://www.mysql.com/)
@@ -554,7 +554,7 @@ databases.
  **Recommended:** An administrator’s tool of sorts, _phpMyAdmin_ is a PHPPHP PHP(
 recursive acronym for PHP: Hypertext Preprocessor) is a widely-used open source
 general-purpose scripting language that is especially suited for web development
-and can be embedded into HTML. [https://www.php.net/manual/en/preface.php](https://www.php.net/manual/en/preface.php)
+and can be embedded into HTML. [https://www.php.net/manual/en/index.php](https://www.php.net/manual/en/index.php)
 script meant for giving users the ability to interact with their MySQLMySQL MySQL
 is a relational database management system. A database is a structured collection
 of data where content, configuration and other options are stored. [https://www.mysql.com](https://www.mysql.com/)
@@ -1529,7 +1529,7 @@ use abbreviations, follow these guidelines:
 
 **Source:** https://make.wordpress.org/docs/style-guide/formatting/obsolete-content/
 
-
+> **EMPTY UPSTREAM EXPORT**: WordPress.org serves this page's `?output_format=md` export with no body. The rule text is on the live page, which stays canonical: https://make.wordpress.org/docs/style-guide/formatting/obsolete-content/
 
 ---
 
@@ -2050,7 +2050,7 @@ WordCamp CentralWordCamp Central Website for all WordCamp activities globally. [
  If you see the error message, “Executable not found.” quit and restart the terminal. |
  |  Filename extensions |  All lowercase. See [Filenames](https://make.wordpress.org/docs/style-guide/formatting/filenames/) |  `.css``.php` |
  |  Filenames |  All lowercase. See [Filenames](https://make.wordpress.org/docs/style-guide/formatting/filenames/). |  `new-cache.php``wp-settings-1.php` |
- |  Key terms |  Italicize the first mention of a new term. See [Key terms](https://make.wordpress.org/docs/style-guide/formatting/key-terms/). |  An administrator’s tool of sorts, _phpMyAdmin_ is a PHPPHP PHP (recursive acronym for PHP: Hypertext Preprocessor) is a widely-used open source general-purpose scripting language that is especially suited for web development and can be embedded into HTML. [https://www.php.net/manual/en/preface.php](https://www.php.net/manual/en/preface.php) script meant for giving users the ability to interact with their MySQLMySQL MySQL is a relational database management system. A database is a structured collection of data where content, configuration and other options are stored. [https://www.mysql.com](https://www.mysql.com/) databases. |
+ |  Key terms |  Italicize the first mention of a new term. See [Key terms](https://make.wordpress.org/docs/style-guide/formatting/key-terms/). |  An administrator’s tool of sorts, _phpMyAdmin_ is a PHPPHP PHP (recursive acronym for PHP: Hypertext Preprocessor) is a widely-used open source general-purpose scripting language that is especially suited for web development and can be embedded into HTML. [https://www.php.net/manual/en/index.php](https://www.php.net/manual/en/index.php) script meant for giving users the ability to interact with their MySQLMySQL MySQL is a relational database management system. A database is a structured collection of data where content, configuration and other options are stored. [https://www.mysql.com](https://www.mysql.com/) databases. |
  |  Markup language elements (tags) |  Use bold text in code font. Capitalization varies. |  **`<link>`****`<!DOCTYPE html>`** |
  |  Mathematical constants and variables |  Use italics. |  _x/y + z = 4_ |
  |  Placeholder variables |  Use italicized code text. See [Placeholders](https://make.wordpress.org/docs/style-guide/developer-content/placeholders/). |  `EMAIL_ADDRESS``PHONE_NUMBER` |

@@ -119,8 +119,7 @@ folder, or a similar target. Don’t use _open_ for menus and commands.
 
 Use _open_, not _opened_, to describe the open state, such as _an open folder_.
 
-For more information, see [Interaction verbs]https://make.wordpress.org/docs/style-
-guide/developer-content/ui-elements/#open).
+For more information, see [Interaction verbs](https://make.wordpress.org/docs/style-guide/developer-content/ui-elements/#open).
 
 See also [close](https://make.wordpress.org/docs/style-guide/word-list/c/#close).
 

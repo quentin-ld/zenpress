@@ -77,18 +77,18 @@ Don’t use _we recommend_ or _WordPress recommends_. Instead, use _recommended_
 
  **Not recommended:** We recommend to use PHPPHP PHP (recursive acronym for PHP:
 Hypertext Preprocessor) is a widely-used open source general-purpose scripting language
-that is especially suited for web development and can be embedded into HTML. [https://www.php.net/manual/en/preface.php](https://www.php.net/manual/en/preface.php)
+that is especially suited for web development and can be embedded into HTML. [https://www.php.net/manual/en/index.php](https://www.php.net/manual/en/index.php)
 version 7.4 or greater.
 
  **Not recommended:** WordPress recommends to use PHPPHP PHP (recursive acronym
 for PHP: Hypertext Preprocessor) is a widely-used open source general-purpose scripting
 language that is especially suited for web development and can be embedded into
-HTML. [https://www.php.net/manual/en/preface.php](https://www.php.net/manual/en/preface.php)
+HTML. [https://www.php.net/manual/en/index.php](https://www.php.net/manual/en/index.php)
 version 7.4 or greater.
 
  **Recommended:** It’s recommended to use PHPPHP PHP (recursive acronym for PHP:
 Hypertext Preprocessor) is a widely-used open source general-purpose scripting language
-that is especially suited for web development and can be embedded into HTML. [https://www.php.net/manual/en/preface.php](https://www.php.net/manual/en/preface.php)
+that is especially suited for web development and can be embedded into HTML. [https://www.php.net/manual/en/index.php](https://www.php.net/manual/en/index.php)
 version 7.4 or greater.
 
  Don’t use _recommend_ when something is required.

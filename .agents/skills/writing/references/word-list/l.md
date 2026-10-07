@@ -34,7 +34,7 @@ database management system. A database is a structured collection of data where
 content, configuration and other options are stored. [https://www.mysql.com](https://www.mysql.com/),
 PHPPHP PHP (recursive acronym for PHP: Hypertext Preprocessor) is a widely-used
 open source general-purpose scripting language that is especially suited for web
-development and can be embedded into HTML. [https://www.php.net/manual/en/preface.php](https://www.php.net/manual/en/preface.php)_.
+development and can be embedded into HTML. [https://www.php.net/manual/en/index.php](https://www.php.net/manual/en/index.php)_.
 Use uppercase.
 
 For more information about spelling out abbreviations, see [Abbreviations](https://make.wordpress.org/docs/style-guide/language-grammar/abbreviations/).

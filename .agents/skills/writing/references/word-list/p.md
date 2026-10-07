@@ -164,7 +164,7 @@ uppercase.
 Don’t use a filename extension to refer to a type of file. For example, use _PHPPHP
 PHP (recursive acronym for PHP: Hypertext Preprocessor) is a widely-used open source
 general-purpose scripting language that is especially suited for web development
-and can be embedded into HTML. [https://www.php.net/manual/en/preface.php](https://www.php.net/manual/en/preface.php)
+and can be embedded into HTML. [https://www.php.net/manual/en/index.php](https://www.php.net/manual/en/index.php)
 file_ file rather than _.php file_.
 
 For more information, see [Referring to file types](https://make.wordpress.org/docs/style-guide/formatting/filenames/#referring-to-file-types).
