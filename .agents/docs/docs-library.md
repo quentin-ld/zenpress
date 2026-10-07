@@ -1,19 +1,22 @@
 # WordPress Plugin & Theme Development — Engineering Documentation Library
 
-Last updated: 2026-07-27
+Last updated: 2026-10-07
 
 > See also: `AGENTS.md` at the plugin root — project facts, lint order, i18n protection, frozen files, and note metadata. Always-applied in compatible agent systems.
 
 **Single document:** Curated sections (tables, Agent Directives, project
-pointers) live here. The fetched page text those **Key Resources** links point at is the fleet mirror, `mirrors/docs-library.md` in the generator repository. Look it up, never open it:
-
-```bash
-./bin/harness docs find "<query>"     # ranked excerpts with line references
-```
+pointers) live here. The fetched page text behind the **Key Resources** links
+is not carried in this repository: follow the links, or fetch the page.
 
 This file is the curated half: the sections, the resource lists, the Agent
 Directives and the project pointers. It is the part a reader wants, and it is
 small enough to open.
+
+For the house rules of writing — capitalization, punctuation, formatting, the
+word list, linking — use the references the `writing` skill carries in
+`.agents/skills/writing/references/`: six category files plus the word list
+split per letter under `references/word-list/`. Open the one you need; they are
+looked up on demand rather than read whole.
 
 This library serves as the authoritative reference for WordPress plugin and theme development, security, optimization, and accessibility. It is designed for both human developers and autonomous agents, ensuring all architectural decisions are grounded in official WordPress standards, W3C protocols, and best practices.
 
@@ -981,15 +984,16 @@ This library serves as the authoritative reference for WordPress plugin and them
 **When to consult:** When an agent produces any user-facing content — readme.txt, inline help text, tooltips, tutorial steps, release notes, or any prose that will be read by humans outside the development team.
 
 **Inside this repo:** For article-level HelpHub rules (capitalization,
-punctuation, formatting, word list, linking), use the fleet mirror
-`mirrors/wordpress-documentation-style-guide-consolidated.md` in the
-generator repository — a Markdown mirror of the official WordPress
-Documentation Style Guide, built from upstream `?output_format=md`. Each
-section carries a **`Source:`** URL for the canonical live page; look it up
-with `./bin/harness docs find "<query>"`. For **PHPDoc and JSDoc block
-structure** (required tags, file headers, hook examples), use **WordPress
-Coding Standards** above and [Inline Documentation Standards](https://developer.wordpress.org/coding-standards/inline-documentation-standards/)
-— the consolidated file does not replace DevHub for that.
+punctuation, formatting, word list, linking), use the references the `writing`
+skill carries in `.agents/skills/writing/references/` — the official WordPress
+Documentation Style Guide cut into six categories, `general-guidelines.md`,
+`language-and-grammar.md`, `punctuation.md`, `formatting.md`, `linking.md` and
+`developer-content.md`, plus the word list split per letter under
+`references/word-list/`. Each section carries a **`Source:`** URL for the
+canonical live page. For **PHPDoc and JSDoc block structure** (required tags,
+file headers, hook examples), use **WordPress Coding Standards** above and
+[Inline Documentation Standards](https://developer.wordpress.org/coding-standards/inline-documentation-standards/)
+— the references do not replace DevHub for that.
 
 ### Key Resources
 - [Documentation Team Handbook](https://make.wordpress.org/docs/handbook/documentation-team-handbook/)
@@ -1237,10 +1241,9 @@ Append entries under the most relevant existing section. Use the established for
 
 > Any agent that modifies `docs-library.md` must update the `Last updated`
 > date at the top of the file to the current date (YYYY-MM-DD). **Edit only
-> the curated region — this whole file.** After adding or removing **Key
-> Resources** links, the fleet mirror's appendix is rebuilt from
-> `mirrors/manifests/docs-library.urls` in the generator repository;
-> `mirrors/README.md` says how.
+> the curated region — this whole file.** Adding or removing a **Key
+> Resources** link is a change to this file alone, and nothing outside this
+> repository reads it.
 
 ### Documentation update reflexes
 
