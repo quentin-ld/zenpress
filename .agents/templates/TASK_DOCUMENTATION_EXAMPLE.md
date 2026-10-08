@@ -82,8 +82,8 @@ Reminder bullets (details and edge cases live in the agent profile and docs abov
 
 - the fleet's `wordpress-documentation-style-guide-consolidated.md` mirror — HelpHub prose; hard constraints and checklist.
 - `.agents/docs/docs-library.md` — WordPress Documentation Standards; DevHub docblock structure.
-- the fleet's `wordpress-documentation-style-guide-consolidated.md` mirror — HelpHub Documentation Style Guide; rebuilt from `mirrors/manifests/style-guide.urls` in the generator repository.
-- `.agents/docs/docs-library.md` — WordPress Documentation Standards, WordPress Coding Standards (Inline Documentation Standards), Internationalization & Localization, **WordPress native updates (core)** (the fetched page text is the fleet mirror, `mirrors/docs-library.md`).
+- the fleet's `wordpress-documentation-style-guide-consolidated.md` mirror — HelpHub Documentation Style Guide.
+- `.agents/docs/docs-library.md` — WordPress Documentation Standards, WordPress Coding Standards (Inline Documentation Standards), Internationalization & Localization, **WordPress native updates (core)** (the fetched page text is the fleet mirror).
 - `.agents/docs/wordpress-native-updates-reference.md` — when a docblock documents behaviour tied to the core update lifecycle (`automatic_updates_complete`, auto-update filters, etc.); cite the frozen reference only.
 
 ## When to use this template instead of X

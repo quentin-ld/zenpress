@@ -227,8 +227,8 @@ git config core.hooksPath .githooks
 
 The budgets are targets, not guarantees, and the hook prints what it actually
 took. A suite that isolates every test in its own process costs roughly PHP
-startup times the number of tests — `updatronix-pro` measures 38 s that way —
-and the honest response is to move that suite to `pre-push`, never to lower the
+startup times the number of tests — a plugin here measures 38 s that way — and
+the honest response is to move that suite to `pre-push`, never to lower the
 number the gate claims.
 
 Bypassing a hook with `--no-verify` is a hard rule violation, not a
@@ -237,9 +237,9 @@ convenience. If a gate is wrong, fix the gate and say so.
 ## Generated files
 
 `bin/harness`, `bin/check-test-antipatterns.php`, `.githooks/*` and this section
-are **generated** and carry a manifest in `.harness/manifest.json`. Edits are
-overwritten by the next sync. Everything else in this repository is
-hand-written and never touched by the generator.
+are **generated** and carry a manifest in `.harness/manifest.json`. Editing one
+does not stick: it is overwritten. Everything else in this repository is
+hand-written and stays as you leave it.
 <!-- harness:end -->
 
 <!-- graft:start -->

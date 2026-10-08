@@ -181,10 +181,10 @@ differs and a test can therefore kill it:
 The list is **asymmetric**, and that is worth knowing before you write a line:
 `array_filter(` appears as a twin and never as a pattern, so a line whose only
 substitution token is `array_filter(` is not substituted at all. A substitution
-you expected and did not get reads exactly like a mutation you killed, so the
-generator's suite holds this table to `_counterfactual_patterns` pair for pair —
-an addition, a removal or a reordering fails the suite until this table moves
-with it.
+you expected and did not get reads exactly like a mutation you killed. An
+addition, a removal or a reordering in this table is a defect for that reason,
+and `bin/harness counterfactual` reports the pair it applied on every line it
+substitutes, so a row can be checked against a run.
 
 A row whose third cell is empty for your operand is an **equivalent mutation**:
 no honest test can kill it, and `bin/harness counterfactual` has a marker for

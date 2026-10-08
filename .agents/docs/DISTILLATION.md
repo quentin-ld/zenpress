@@ -3,25 +3,27 @@
 What came from skills.sh, what was rejected and why, and the rules a third-party
 skill has to pass before it enters this fleet.
 
-The pipeline is `harness skills search | fetch | scan | distil | promote`. Fetch
-lands in quarantine, `scan` applies the deterministic rules below, `distil`
-emits a brief with TODOs, and `promote` accepts a completed one. Nothing reaches
-`sources/skills/` without a person reading it first.
+Not every skill in `.agents/skills/` was written here. Some are distilled from a
+published source: a third-party prompt read in full, reduced to what is true for a
+WordPress codebase, and rewritten in house voice. This is that record — where each
+one came from, why some were refused, and what a source has to pass — because a
+skill you are asked to follow is worth less than a skill you can also check.
 
-This document exists because the scan's rules lived in `skilldoc.py` and were
-not readable by the person deciding whether to promote something.
+The record exists as a document because the rules used to live inside the tooling
+that applied them, where the person deciding whether to adopt something could not
+read them.
 
 ---
 
 ## The rules
 
-Deterministic, run by `harness skills scan`, one line per finding.
+Deterministic, one line per finding.
 
 **Blocking** — the skill does not enter the fleet:
 
 1. **An instruction to ignore or override earlier instructions.** "Ignore the
    above", "disregard your system prompt", "your new instructions are". The
-   canonical prompt injection, and the reason a fetch is quarantined rather than
+   canonical prompt injection, and the reason a source is quarantined rather than
    installed.
 2. **A credential, token or key in the body.** A skill that ships one is a leak,
    whether or not it was meant to.
@@ -39,11 +41,9 @@ Deterministic, run by `harness skills scan`, one line per finding.
    what decides whether the skill is ever reached, so a vague one is a defect
    rather than a style choice.
 
-**The scan is a gate, not a report.** `distil` records the findings in the brief,
-and `promote` runs the same rules again over the text it is about to install —
-the text that becomes a live prompt, running with the owner's permissions — and
-refuses a brief with a blocking finding. A finding nobody acts on is not a
-control.
+**The rules are a gate, not a report.** A finding nobody acts on is not a
+control — and a prompt carrying a credential, an override or a payload is a live
+prompt, running with the owner's permissions, the moment it is read.
 
 ## The locality rule
 
@@ -84,10 +84,10 @@ The install bar is 100. It is not a quality measure — it is a proxy for "enoug
 people have read this that a hostile one would have been noticed".
 
 `blader/humanizer/humanizer` was on this list as "no `SKILL.md` at the declared
-path", and that was a bug in `fetch`, not a property of the source. The
+path", and that was our mistake rather than a property of the source. The
 repository keeps its `SKILL.md` at the root because the repository *is* the
-skill, and the resolver only looked inside a folder named after the id. It
-resolves now.
+skill, and a reader that only looks inside a folder named after the source misses
+it. It resolves now.
 
 ## What was written instead
 
@@ -102,14 +102,14 @@ whole story: the two that hold no API exist as `humanizer` and `humaniseur-fr`,
 and `writing` and `translation` keep the jobs that are not detection — how to
 write, and how to move a string between the two languages.
 
-## Completing a distillation
+## What a distilled skill carries
 
-The brief `harness skills distil` produces has six sections, and each is a
-question the person promoting it has to answer:
+A skill that came from somewhere else records it, in the sections under its
+procedure. Each is a question that had to be answered before the skill was kept:
 
 - **description** — one line, in house voice, saying when to trigger.
-- **House rules this must respect** — filled in from the fleet; the brief
-  arrives with them.
+- **House rules this must respect** — the fleet's own, which arrive with the
+  source and are not negotiable by it.
 - **What survives from upstream** — and why it is still true here.
 - **What is dropped, and why.** A distillation that keeps everything is a copy,
   and a copy cannot be kept current.
@@ -119,13 +119,12 @@ question the person promoting it has to answer:
   WordPress codebase.
 - **Procedure** and **Verification**.
 
-The house names for those sections are the ones in the skills themselves — *What
-this skill kept from upstream*, *What was dropped, and why*, *What upstream was
-missing* — and the header block keeps the `source:` line, so a promoted skill
-carries its provenance into every project. `distilled/<name>.md` is the same
-document, and the two are kept in step: the brief *is* the skill before it is
-installed.
+The house names are the ones in the skills themselves — *What this skill kept
+from upstream*, *What was dropped, and why*, *What upstream was missing* — and the
+header block keeps the `source:` line, so a distilled skill carries its provenance
+with it.
 
-Two gates stand between a brief and a project. A brief with a `TODO(` in it is an
-unread skill. A brief with a blocking scan finding is a live prompt carrying a
-credential, an override or a payload. `promote` refuses both.
+Two things make a distillation unfinished rather than wrong: a `TODO(` left in the
+body, and a blocking finding above. The first is an unread skill; the second is a
+live prompt carrying a credential, an override or a payload. Neither belongs
+beside a skill you are about to trust.

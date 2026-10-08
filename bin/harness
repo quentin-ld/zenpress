@@ -417,7 +417,7 @@ _missing_suite_note() {
 # result would try to execute the sentence as a command.
 _require_test_layer() {
 	[[ "$PROJECT_KIND" == "plugin" ]] && return 0
-	info "${PROJECT_SLUG} is a theme: the harness carries no test layer for themes, so there is nothing to run here (ADR 0009)."
+	info "${PROJECT_SLUG} is a theme: the harness carries no test layer for themes, so there is nothing to run here."
 	return 1
 }
 

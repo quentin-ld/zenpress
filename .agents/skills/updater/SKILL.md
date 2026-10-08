@@ -22,9 +22,6 @@ same mechanism with two substitutions, marked `PLUGIN:` below; it has been
 reasoned rather than walked, so check it first when you use it. Everything else
 here happened.
 
-Read `~/_DDEV/_harness/harness/docs/adr/0028` and `0029` for the evidence behind
-§1 and §2 if a step looks arbitrary — it is not.
-
 ## 0 · Three facts, before anything
 
 | fact | how to get it | what it decides |
@@ -143,8 +140,9 @@ $checker->getVcsApi()->enableReleaseAssets( '/<archive-name>\.zip$/i', Api::REQU
 Four things about that block, each learned the hard way:
 
 - **`PLUGIN:`** a plugin passes the *plugin file*, not `style.css`: PUC reads the
-  plugin headers from it. `bin/harness env` does not print it, but the generator
-  names it — `<slug>.php` in the project root, e.g. `updatronix-pro.php`.
+  plugin headers from it. `bin/harness env` does not print it; it is the
+  project's own entry file, `<slug>.php` in the project root, e.g.
+  `updatronix-pro.php`.
 - **Type the values instead of suppressing the findings.** `buildUpdateChecker()`
   returns a three-way union and only one member declares `setAuthentication()` and
   `getVcsApi()`, so PHPStan reports both; and `getVcsApi()` is annotated as
@@ -177,9 +175,9 @@ wiring file: it is the file that decides which release the site installs.
 
 ## 5 · The release workflow
 
-`.github/workflows/build-release.yml` is **hand-written** — the generator owns no
-part of `.github/`. Its job: build the archive on a published release and attach
-it under the name from §2.
+`.github/workflows/build-release.yml` is **hand-written** — nothing in this
+project generates it. Its job: build the archive on a published release and
+attach it under the name from §2.
 
 - `on: release: types: [published]` **plus** `workflow_dispatch` with a `tag`
   input. A bare `git push origin <tag>` triggers **nothing**, and a release with

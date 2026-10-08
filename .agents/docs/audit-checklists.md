@@ -22,7 +22,7 @@ Used by `qa`, `reviewer`, `security`. Grep one category.
 - `$wpdb->prepare()` for all SQL in callbacks
 - Schema registered (`args` with `type`, `required`, `sanitize_callback`, `validate_callback`)
 - No `rest_ensure_response()` missing
-- Route namespace matches plugin slug (`updatronix/v1`)
+- Route namespace matches the plugin's own slug
 
 ## SQL
 
@@ -82,4 +82,4 @@ Used by `qa`, `reviewer`, `security`. Grep one category.
 - `WP_Error` objects returned from functions, not false/nulls that callers must guess at
 - Try/catch around external calls, with fallback behavior
 - `error_reporting` / `display_errors` not changed by the plugin
-- Logging uses `error_log()` or `updatronix_` logger, not `var_dump()` / `print_r()`
+- Logging uses `error_log()` or the plugin's own logger, not `var_dump()` / `print_r()`

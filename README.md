@@ -1,14 +1,12 @@
-<!--
-    Generated once, because a project without a README has no onboarding at
-    all. Replace every sentence below with the real thing. The harness only
-    ever rewrites the section between its markers; everything else in this
-    file is yours and will not be touched.
--->
-
 # ZenPress
 
-One paragraph on what this is and who it is for. Say what problem it solves
-before saying how — the reader decides in the first two lines.
+ZenPress is the maintenance plugin for a WordPress site you actually have to look
+after. It turns off the features a default install leaves on and nobody uses,
+closes the gaps that default install leaves open, and puts the cache and security
+settings usually spread across half a dozen plugins on one page.
+
+It is for the site owner who wants fewer plugins rather than more: one screen
+where the decisions live, each one explained, nothing buried behind a preset.
 
 <!-- harness:start -->
 ## Development
@@ -69,8 +67,17 @@ project rather than a missing environment.
 1. Install it from the WordPress dashboard, or copy the directory into a
    WordPress install.
 2. Activate it.
-3. …
+3. Open its settings page and work through the sections. The defaults are the
+   safe ones and every switch says what it changes, so nothing here needs an
+   audit before it is turned on.
+
+ZenPress ships through WordPress.org, so updates arrive in the dashboard. The
+toolchain in the Development section below is for working *on* the plugin, not
+for using it.
 
 ## Support & Contribution
 
-Where to ask questions, and how to contribute.
+Questions, bug reports and feature requests belong in the WordPress.org support
+forum, or in this repository's issues. Pull requests are welcome; read
+`AGENTS.md` first, because it carries the conventions this plugin is held to and
+the gates a change has to pass.

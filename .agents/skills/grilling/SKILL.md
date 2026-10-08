@@ -81,7 +81,6 @@ homes:
 |---|---|
 | `.agents/notes/YYYY-MM-DD-grill-<slug>.md` | the round-by-round record: each question, the answer, the decision it settled |
 | `.agents/tasks/` | the plan `/architect` Phase 3 writes, which now has its decisions instead of open questions |
-| `docs/adr/` | one decision per file, where the repository keeps a decision log — this repository does |
 | `AGENTS.md` | a convention the next agent must follow: a name, a boundary, a rule |
 
 Vocabulary is an output too. When the interview settles what a thing is called,
@@ -135,8 +134,8 @@ produces, `mattpocock/skills/grill-me` is a one-line pointer at `grilling`, and
   the doc-producing half is written into this text — which is also why four ids
   became one skill.
 - **The upstream homes for those documents.** `grill-with-docs` names its own
-  conventions; the fleet's are `.agents/notes/`, `.agents/tasks/`, `docs/adr/`
-  and `AGENTS.md`.
+  conventions; the fleet's are `.agents/notes/`, `.agents/tasks/` and
+  `AGENTS.md`.
 - **`disable-model-invocation`.** Upstream hides `grill-me` and
   `grill-with-docs` behind a manual trigger. A description that states the
   trigger is the house mechanism here, and it survives a restart.
