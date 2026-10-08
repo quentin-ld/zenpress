@@ -10,7 +10,7 @@
  *
  * Plugin Name: ZenPress
  * Description: Clean up unused WordPress features, close security gaps, and configure cache integrations from a single settings page.
- * Version: 2.2.7
+ * Version: 2.3.0
  * Plugin URI: https://wordpress.org/plugins/zenpress/
  * Author: Quentin Le Duff
  * Author URI: https://profiles.wordpress.org/quentinldd/

@@ -12,7 +12,7 @@ Messages may arrive in French or English. **Always reply in US English.** WordPr
 |---|---|
 | Slug & text domain | `zenpress` |
 | Bootstrap | `zenpress.php` → direct `require_once` calls (no class-based bootstrap) |
-| Version | `ZENPRESS_VERSION` in `zenpress.php` |
+| Version | `ZENPRESS_VERSION` in `inc/core/constants.php` |
 | PHP / WP | 8.1+ (target 8.1–8.4) · 6.0+ |
 | REST | `zenpress/v1` |
 | Public hooks | `do_action('zenpress_caches_clear')` · `apply_filters('zenpress_disable_wp_rest_api_*')` |

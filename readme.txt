@@ -4,7 +4,7 @@ Donate link: https://github.com/sponsors/quentin-ld/
 Tags: optimization, performance, security, woocommerce
 Requires at least: 6.0
 Tested up to: 7.1
-Stable tag: 2.2.7
+Stable tag: 2.3.0
 Requires PHP: 8.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html/
@@ -164,6 +164,11 @@ ZenPress is compatible with multisite networks. You can activate it across the e
 Visit the official support forum to share ideas. Developers can contribute directly on GitHub.
 
 == Changelog ==
+
+= 2.3.0 =
+- Security : Harden security.
+- Code quality : Harden WordPress Coding Standards.
+- Interface : Update interface components.
 
 = 2.2.7 =
 - Tested up to WordPress 7.1.

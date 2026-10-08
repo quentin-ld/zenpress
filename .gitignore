@@ -397,5 +397,6 @@ test-results/
 artifacts/
 **/artifacts/
 .reasonix/
+reasonix.toml
 /graft/
 /.ignore

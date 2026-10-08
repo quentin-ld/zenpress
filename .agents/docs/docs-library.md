@@ -1258,6 +1258,6 @@ Append entries under the most relevant existing section. Use the established for
 | Translatable string added, removed, or changed | Flag to the human in chat: "Translatable string modified — retranslation required for: `{string}` in `{file}`." Add changelog entry. Run `composer run make:pot` once intentional. | Agent that touched the string |
 | New REST endpoint added | Document the route in the relevant agent note and add changelog entry. | `fullstack` (route), `interface-content` (docblock) |
 | New public hook exposed | PHPDoc on the hook, including `@since` and one example, plus changelog entry. | `interface-content` (PHPDoc), `fullstack` (signature) |
-| Version bump | All four anchors aligned (`Version:`, `ZENPRESS_VERSION`, `composer.json` `version`, `Stable tag:`); promote the active changelog block to a versioned entry. | `release` |
+| Version bump | All three anchors aligned (`Version:`, `ZENPRESS_VERSION`, `Stable tag:`); promote the active changelog block to a versioned entry. | `release` |
 
 **Hard rule on translatable strings:** never silent-edit. Always flag to the human and append a changelog entry. See `AGENTS.md` § Hard Rules — i18n.
