@@ -1,5 +1,5 @@
 === ZenPress ===
-Contributors: @quentinldd
+Contributors: quentinldd
 Donate link: https://github.com/sponsors/quentin-ld/
 Tags: optimization, performance, security, woocommerce
 Requires at least: 6.0
@@ -169,6 +169,7 @@ Visit the official support forum to share ideas. Developers can contribute direc
 - Security : Harden security.
 - Code quality : Harden WordPress Coding Standards.
 - Interface : Update interface components.
+- Documentation : Align the author name across the header, the footer, and the readme contributor tag.
 
 = 2.2.7 =
 - Tested up to WordPress 7.1.

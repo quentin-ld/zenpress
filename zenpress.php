@@ -4,15 +4,15 @@
  *
  * @package   zenpress
  * @link      https://github.com/quentin-ld/zenpress/
- * @author    Quentin Le Duff
- * @copyright 2024-2025 Quentin Le Duff
+ * @author    Quentin Le Duff (--Q--)
+ * @copyright 2024-2025 Quentin Le Duff (--Q--)
  * @license   GPL v2 or later
  *
  * Plugin Name: ZenPress
  * Description: Clean up unused WordPress features, close security gaps, and configure cache integrations from a single settings page.
  * Version: 2.3.0
  * Plugin URI: https://wordpress.org/plugins/zenpress/
- * Author: Quentin Le Duff
+ * Author: Quentin Le Duff (--Q--)
  * Author URI: https://profiles.wordpress.org/quentinldd/
  * Text Domain: zenpress
  * Domain Path: /languages/

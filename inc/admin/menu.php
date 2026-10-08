@@ -86,7 +86,7 @@ function zenpress_options_page(): void {
 						/* translators: 1: decorative heart emoji, 2: author name */
 							__( 'Made with %1$s by %2$s', 'zenpress' ),
 							'<span aria-hidden="true">❤️</span>',
-							'Quentin Le Duff'
+							'Quentin Le Duff (--Q--)'
 						)
 					);
 			?>

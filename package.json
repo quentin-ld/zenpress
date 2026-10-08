@@ -22,7 +22,7 @@
 		"test:js": "bash bin/harness test:js",
 		"test:e2e": "bash bin/harness e2e"
 	},
-	"author": "Quentin Le Duff",
+	"author": "Quentin Le Duff (--Q--)",
 	"license": "GPL-2.0-or-later",
 	"devDependencies": {
 		"@types/node": "^24.13.6",
