@@ -57,6 +57,15 @@
 	<exclude-pattern>*/build/*</exclude-pattern>
 
 	<!--
+		Translations: `wp i18n make-php` writes `languages/*.l10n.php` as one
+		generated line nobody edits. The full lint never opens it, but
+		`lint:files` does, because the pre-commit hook stages it whenever
+		`bin/harness pot` runs, and then reports the generator's formatting as
+		our violations.
+	-->
+	<exclude-pattern>*/languages/*.l10n.php</exclude-pattern>
+
+	<!--
 		The unit bootstrap stubs WordPress functions. It is test scaffolding, not
 		plugin code, and it is deliberately kept out of the gate.
 	-->
