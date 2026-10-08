@@ -5,7 +5,7 @@
  * @package   zenpress
  * @link      https://github.com/quentin-ld/zenpress/
  * @author    Quentin Le Duff (--Q--)
- * @copyright 2024-2025 Quentin Le Duff (--Q--)
+ * @copyright 2024-2027 Quentin Le Duff (--Q--)
  * @license   GPL v2 or later
  *
  * Plugin Name: ZenPress
