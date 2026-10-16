@@ -1,8 +1,8 @@
 ---
 name: mutation-testing
 description: >-
-  Turn surviving mutants into better tests or into bug reports. Use when mutants
-  escape, when the MSI gate fails, or before lowering a threshold.
+  Turn surviving mutants into better tests or bug reports: on a survivor, a red
+  MSI gate, or before a threshold drops.
 ---
 
 # Mutation testing

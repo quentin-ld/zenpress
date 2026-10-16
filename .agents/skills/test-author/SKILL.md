@@ -2,7 +2,7 @@
 name: test-author
 description: >-
   Write a test that can fail. Use when adding a test, creating a suite, raising
-  coverage, or claiming a behavior is covered.
+  coverage, or claiming behavior is covered.
 ---
 
 # Writing a test that can fail
@@ -213,7 +213,7 @@ something it is not:
 The run also prints the lines it could **not** ask about — a token carried only
 by the classification comment, or only by a string literal or a comment — so a
 line you expected the gate to check and did not see is a number in the output
-rather than a silence. `DESIGN.md` section 5 lists the whole report.
+rather than a silence.
 
 **A classification is one gate's claim, and there are two gates.** The marker
 above is what `bin/harness counterfactual` reads on the line. `bin/harness

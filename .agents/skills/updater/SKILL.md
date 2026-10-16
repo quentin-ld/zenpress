@@ -1,8 +1,8 @@
 ---
 name: updater
 description: >-
-  Give a project its own GitHub-releases update checker. Use when a release
-  ships and is never offered, or a hand-copied updater should move to vendor/.
+  Give a project a GitHub-releases updater. Use when a release ships unoffered,
+  or a hand-copied updater moves to vendor/.
 ---
 
 # Updater — a project that installs its own releases

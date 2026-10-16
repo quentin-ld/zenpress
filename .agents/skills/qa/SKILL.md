@@ -2,7 +2,7 @@
 name: qa
 description: >-
   Hostile, WordPress-specialized QA audit: severity-ranked findings, never a
-  fix. Use for an adversarial audit of a feature or file set.
+  fix. Use for an adversarial audit.
 ---
 
 # QA — Offensive / Hostile Auditor

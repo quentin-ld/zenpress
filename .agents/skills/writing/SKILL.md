@@ -1,8 +1,8 @@
 ---
 name: writing
 description: >-
-  Write anything the fleet produces for a person to read — a README, a changelog,
-  a commit message, a docblock. Carries the WordPress Style Guide.
+  Write anything a person reads — a README, a changelog, a commit message, a
+  docblock. Carries the WordPress Style Guide.
 ---
 
 # Writing
@@ -220,9 +220,9 @@ wearing a claim's clothes.
 | code comments and docblocks | the next reader of the line above them |
 | user-facing strings | someone reading the screen, in their own language |
 
-**Not** the harness's own internal docs: `DESIGN.md`, the ADRs and the
-migrations notes are written for whoever maintains the harness, and prose that
-argues a decision is doing a different job from prose that reports one.
+**Not** the harness's internal design and migration notes: those are written for
+whoever maintains the harness, and prose that argues a decision is doing a
+different job from prose that reports one.
 
 ## The one rule
 

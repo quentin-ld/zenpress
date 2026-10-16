@@ -11,7 +11,7 @@
 	<description>WordPress Coding Standards for zenpress.</description>
 
 	<!--
-		The fleet's standard, one line per standard (docs/TOOLCHAIN.md).
+		The fleet's standard, one line per standard.
 		`WordPress` is Core + Extra + Docs; the other two are the strict packages
 		the floor installs, and a package that is installed and never referenced
 		is a package nothing runs — which is what these two were.
@@ -60,7 +60,7 @@
 		Translations: `wp i18n make-php` writes `languages/*.l10n.php` as one
 		generated line nobody edits. The full lint never opens it, but
 		`lint:files` does, because the pre-commit hook stages it whenever
-		`bin/harness pot` runs, and then reports the generator's formatting as
+		`bin/harness pot` runs, and then reports `make-php`'s formatting as
 		our violations.
 	-->
 	<exclude-pattern>*/languages/*.l10n.php</exclude-pattern>

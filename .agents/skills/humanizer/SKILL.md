@@ -1,8 +1,8 @@
 ---
 name: humanizer
 description: >-
-  Remove AI tells from English prose — a README, a changelog, a comment, a
-  user-facing string, a review. French text is `humaniseur-fr`.
+  Remove AI tells from English prose — a README, a comment, a user-facing string,
+  a review. French is `humaniseur-fr`.
 source: >-
   distilled from blader/humanizer/humanizer (https://raw.githubusercontent.com/blader/humanizer/main/SKILL.md)
   sha256 e8269e236bed06ed0fe4824c274112e54950b0cb46b0bafe5e1576ef7c9f93d5

@@ -1,8 +1,8 @@
 ---
 name: graft
 description: >-
-  Locate and understand code through the project's graft graph before grepping
-  or reading files. Use for any where-is-X, how-does-Y or what-calls-Z task.
+  Locate and understand code through the project's graft graph before reading:
+  where-is-X, how-does-Y or what-calls-Z.
 ---
 
 # graft

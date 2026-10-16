@@ -5,7 +5,7 @@
 # put your own parameters here rather than in there, where they would be
 # overwritten.
 #
-# The floor is level 8 with the strict and deprecation rules (docs/TOOLCHAIN.md).
+# The floor is level 8 with the strict and deprecation rules.
 # Two rules of thumb before adding an entry to `ignoreErrors`:
 #
 #   - An exclusion is a decision, not a fix. Say why, in a comment here.
