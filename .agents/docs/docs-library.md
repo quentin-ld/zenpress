@@ -857,7 +857,7 @@ This library serves as the authoritative reference for WordPress plugin and them
 
 ### Canonical project reference
 
-> **Frozen file.** `.agents/docs/wordpress-native-updates-reference.md` is **read-only for all agents**. Do not modify, rewrite, append to, or restructure this file under any circumstances. Only the project owner may authorize changes.
+> **Not carried in this repository.** `.agents/docs/wordpress-native-updates-reference.md` is not present here. Where it exists it is **read-only for all agents**: do not modify, rewrite, append to, or restructure it.
 
 - **`.agents/docs/wordpress-native-updates-reference.md`** — **WordPress core only:** discovery (§1.1–§1.10) vs application (§2.1–§2.13), **upgrader skins** (§2.5), **`wp-config.php` constants** (§5.10), **rollback** (§2.7), **locks** (§2.8), **Site Health** (§4.3), **`WP_Plugin_Dependencies`** (§2.6), entry points (§5.1–§5.13), **in-admin notices** vs **`wp_mail`** (§4.1–§4.6), **`automatic_updates_complete`** / results payload (**§4.7**), branch policy (`Core_Upgrader::should_update_to_version()` method and `auto_update_core` filter in **§1.3**, **§3.7**), full hook and filter reference (§6.1–§6.8), key core file paths and class reference (§7.1–§7.2).
 - **ZenPress plugin:** how this codebase consumes core (hooks, logger, REST, settings) lives in **`inc/`** and **`zenpress.php`** — there is no separate integration markdown; trace behaviour from source and the frozen reference above.

@@ -28,7 +28,7 @@ bin/harness package    # build + pot + zip
 bin/harness help       # everything else
 ```
 
-**Tests.** This project carries the full test layer: `bin/harness test` (unit), `bin/harness integration` (real WordPress), `bin/harness coverage`, `bin/harness test:js` (Vitest) and `bin/harness e2e` (Playwright).
+**Tests.** This project carries the harness's test layer: `bin/harness test` (unit), `bin/harness integration` (real WordPress, where the project has an integration suite), `bin/harness coverage`, `bin/harness test:js` (Vitest, where `tests/js/` exists), and `bin/harness e2e` (Playwright, where a config exists).
 
 **Anti-tautology.** A test that cannot fail is worse than no test, because it still reports coverage. This is machine-enforced:
 

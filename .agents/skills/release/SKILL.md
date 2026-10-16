@@ -24,7 +24,7 @@ Do not bump versions without explicit owner authorization in this conversation.
 
 Every place the version is written, changed in one commit:
 
-`zenpress.php` (`Version:` header, plus the version constant where the project defines one) · `composer.json` and `package.json` `version` · `readme.txt` `Stable tag:`
+`zenpress.php` (`Version:` header, plus the version constant where the project defines one) · `readme.txt` `Stable tag:` · any `version` the project declares in `composer.json` or `package.json`
 
 Confirm version with owner before writing.
 

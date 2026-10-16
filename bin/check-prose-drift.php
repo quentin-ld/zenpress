@@ -9,7 +9,7 @@
  * Infection mutates code, and it is blind to comments. So a change that rewrites
  * a docblock, reflows a comment, or restates a `@return` while the function
  * underneath does not move passes every gate the fleet has. The owner named it
- * as its own requirement (REQUIREMENTS.md R22): comments must not mutate when
+ * as its own requirement: comments must not mutate when
  * the functionality does not.
  *
  * It is not always wrong. Rewriting a comment because it was inaccurate is

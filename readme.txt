@@ -157,7 +157,7 @@ No. ZenPress does not collect, store, or transmit any personal data. All setting
 
 = Is ZenPress multisite compatible? =
 
-ZenPress is compatible with multisite networks. You can activate it across the entire network or on individual sites. Only Network Administrators can manage these settings across the network.
+ZenPress is compatible with multisite networks. You can activate it across the entire network or on individual sites; each site's settings are its own.
 
 = I have a suggestion =
 

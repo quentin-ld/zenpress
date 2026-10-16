@@ -19,7 +19,7 @@
  * Requires at least: 6.0
  * Tested up to: 7.1
  * Requires PHP: 8.1
- * License URI: https://www.gnu.org/licenses/old-licenses/gpl-2.0.html/
+ * License URI: https://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  * License: GPL v2 or later
  *
  * This program is free software; you can redistribute it and/or modify

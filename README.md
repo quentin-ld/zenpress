@@ -32,13 +32,13 @@ bin/harness setup   # one-time: dependencies and this project's toolchain
 | `npm run test:all` | every linter, and the suites the project has |
 | `npm run build:all` | `test:all`, then the `.pot`, then the bundle |
 | `composer run verify:php` | the pre-push gate: standards and static analysis |
-| `composer run verify:all` | the same, plus the suites the project has |
+| `composer run verify:all` | the same, plus the integration suite where the project has one |
 | `composer run lint:wpcs` / `npm run lint` / `npm run lint:css` | WPCS, ESLint, Stylelint — the `:fix` variants rewrite |
 | `composer run lint:pcp` | Plugin Check, where the project ships through WordPress.org |
 | `composer run make:pot` | regenerate `languages/zenpress.pot` |
 | `npm run zip` | the distributable archive |
 
-**Tests.** This project carries the full test layer: `bin/harness test` (unit), `bin/harness integration` (real WordPress), `bin/harness coverage`, `bin/harness test:js` (Vitest) and `bin/harness e2e` (Playwright).
+**Tests.** This project carries the harness's test layer: `bin/harness test` (unit), `bin/harness integration` (real WordPress, where the project has an integration suite), `bin/harness coverage`, `bin/harness test:js` (Vitest, where `tests/js/` exists), and `bin/harness e2e` (Playwright, where a config exists).
 
 **Anti-tautology.** A test that cannot fail is worse than no test, because it still reports coverage. This is machine-enforced:
 

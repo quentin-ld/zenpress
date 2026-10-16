@@ -2,7 +2,7 @@
 
 ## Communication
 
-Messages may arrive in French or English. **Always reply in US English.** WordPress prose style: the fleet's `wordpress-documentation-style-guide-consolidated.md` mirror (look a section up with `./bin/harness docs find "<query>"` — never load the full file).
+Messages may arrive in French or English. **Always reply in US English.** WordPress prose style: the fleet's `wordpress-documentation-style-guide-consolidated.md` mirror is not carried in this repository — look a section up in the fleet's workspace rather than reading the file whole.
 
 **Reply verbosity:** Conclusion first, then evidence. No preamble ("Here's what I'll do…"), no recap ("I did X. Done with X."), no closing remarks ("Let me know if…"). Action over explanation. Scale detail to complexity — 1–4 lines unless the task needs more. **Stop when done**; do not offer follow-ups.
 
@@ -17,7 +17,7 @@ Messages may arrive in French or English. **Always reply in US English.** WordPr
 | REST | `zenpress/v1` |
 | Public hooks | `do_action('zenpress_caches_clear')` · `apply_filters('zenpress_disable_wp_rest_api_*')` |
 | Code | `inc/core/` · `inc/classes/` · `inc/admin/` · `inc/settings/` · `inc/snippets/` · `assets/src/` → `assets/build/` · `languages/` |
-| Storage | `zenpress_settings` (option, autoloaded) · `zenpress_{snippet}_active` options |
+| Storage | `zenpress_active_snippets` (option) · `zenpress_admin_bar_enabled` (option) |
 | Build & test | `workflow.md` |
 
 ## Workflow — Delegate, Don't Micromanage
@@ -100,7 +100,7 @@ Large mirrors live in `.agents/docs/`. **Never read an entire mirror file.**
 | File | Size | How to use |
 |------|------|------------|
 | `docs-library.md` | ~1.2k lines | Read **one** `## Section`. It is the curated half; the fetched page text is the fleet mirror. |
-| the fleet's `wordpress-documentation-style-guide-consolidated.md` mirror | ~35k lines | Look a section up (`./bin/harness docs find "<query>"`) when writing user-facing prose; it is not in this repository. |
+| the fleet's `wordpress-documentation-style-guide-consolidated.md` mirror | ~35k lines | Look a section up in the fleet's workspace when writing user-facing prose; the file is not in this repository. |
 
 Default: read **`inc/` source** and **`workflow.md`** first. Open docs only when the API or style rule is unclear.
 
@@ -134,7 +134,7 @@ When required, the architect sets `review_required: yes` in task frontmatter and
 
 | Command | When |
 |---------|------|
-| `composer run verify:php` | PHP changes (CS Fixer + PHPStan + unit tests) |
+| `composer run verify:php` | PHP changes (WordPress Coding Standards + PHPStan + unit tests) |
 | `npm run lint` / `npm run lint:css` | JS / SCSS |
 | `npm run test:all` | End of dev cycle |
 | `composer run lint:pcp` | Pre-release |
@@ -186,7 +186,7 @@ broken project rather than a broken environment.
 | translations | `bin/harness pot` |
 | distributable | `bin/harness zip` / `bin/harness package` |
 
-**Tests.** This project carries the full test layer: `bin/harness test` (unit), `bin/harness integration` (real WordPress), `bin/harness coverage`, `bin/harness test:js` (Vitest) and `bin/harness e2e` (Playwright).
+**Tests.** This project carries the harness's test layer: `bin/harness test` (unit), `bin/harness integration` (real WordPress, where the project has an integration suite), `bin/harness coverage`, `bin/harness test:js` (Vitest, where `tests/js/` exists), and `bin/harness e2e` (Playwright, where a config exists).
 
 **Anti-tautology.** A test that cannot fail is worse than no test, because it still reports coverage. This is machine-enforced:
 
@@ -222,7 +222,7 @@ git config core.hooksPath .githooks
 | stage | budget | contents |
 |---|---|---|
 | `pre-commit` | target < 10 s | staged-file lint, anti-pattern scan, unit tests when PHP changed |
-| `pre-push` | target < 90 s | full lint, the suite, Infection and counterfactual on the diff |
+| `pre-push` | target < 270 s | full lint, the suite, Infection and counterfactual on the diff |
 | `pre-release` | unbounded | integration suite, Plugin Check, i18n, packaging |
 
 The budgets are targets, not guarantees, and the hook prints what it actually
