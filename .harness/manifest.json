@@ -1,5 +1,5 @@
 {
-  "commit": "d60f622",
+  "commit": "fffb277",
   "files": {
     ".agents/docs/DISTILLATION.md": {
       "class": "owned",
@@ -522,7 +522,7 @@
     },
     "bin/harness": {
       "class": "owned",
-      "sha256": "38f6b2d7268a91b4f49cc788bf925b7ba33e29484c985e6696648561b1817249"
+      "sha256": "25c12516c592389900f1ec91543b2ba06667a1675e6fdb87801af41285222f4b"
     },
     "bin/install-wp-tests.sh": {
       "class": "owned",

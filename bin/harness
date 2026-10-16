@@ -4316,6 +4316,15 @@ _readme_check() {
 	_readme_expect DR8 'PHP requires' "$(_readme_txt 'Requires PHP')" \
 		"$php" 'readme.txt'
 
+	# A link to nowhere: `](` closed with nothing between. One project's version
+	# badge pointed at nothing for its whole life, and a reader could see the
+	# badge and not follow it.
+	local empty_links
+	empty_links="$(grep -nE '\]\([[:space:]]*\)' "$readme" | cut -d: -f1 | paste -sd, - || true)"
+	if [[ -n "$empty_links" ]]; then
+		_readme_finding LK2 "README.md has a link with an empty target at line(s) ${empty_links}"
+	fi
+
 	if [[ "$_README_FINDINGS" -eq 0 ]]; then
 		info 'no findings.'
 		return 0
