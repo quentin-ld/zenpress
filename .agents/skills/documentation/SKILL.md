@@ -1,8 +1,8 @@
 ---
 name: documentation
 description: >-
-  Writing documents an agent consumes. Use when creating or editing a skill, an
-  AGENTS.md, a README section, a docblock, or any file reached by a pointer.
+  Write a document an agent consumes — a skill, an AGENTS.md, a README, a
+  docblock, or any file reached by a pointer.
 ---
 
 # Documentation
@@ -76,12 +76,12 @@ The strongest criteria are both checkable and exhaustive.
 
 A **leading word** is a compact concept already in the model's pretraining that
 the agent thinks with: _lesson_, _fog of war_, _tracer bullets_. Repeated as a
-token, never as a sentence, it anchors a whole region of behaviour in the fewest
+token, never as a sentence, it anchors a whole region of behavior in the fewest
 tokens by recruiting priors the model already holds. A coined word recruits no
 priors: you pay in definition tokens what a pretrained word gives free.
 
 **Negation is the failure mode beside this lever.** Steering by prohibition
-drags the forbidden behaviour into context and makes it _more_ available.
+drags the forbidden behavior into context and makes it _more_ available.
 _Don't think of an elephant._ Prompt the **positive**: "write one-line comments"
 so the banned one is never spoken. A prohibition earns its place only as a hard
 guardrail you cannot phrase positively, and even then pair it with the target.

@@ -1,6 +1,8 @@
 ---
 name: test-author
-description: Write a test that can fail. Use whenever adding a test, when a suite is being created for a project that has none, when asked to raise coverage, or before claiming a behaviour is covered. Covers the oracle problem, when to choose the integration suite over the unit one, and how to prove the test is not tautological.
+description: >-
+  Write a test that can fail. Use when adding a test, creating a suite, raising
+  coverage, or claiming a behavior is covered.
 ---
 
 # Writing a test that can fail
@@ -15,7 +17,7 @@ watched it fail. A test you have not seen fail is a test you have not written.
 
 ## Four questions before writing a line
 
-1. **What behaviour am I pinning?** Not "the function exists" and not "it
+1. **What behavior am I pinning?** Not "the function exists" and not "it
    returns an array" — that is a shape, and shapes are already checked by the
    type declaration. Pick a decision the code makes.
 2. **What input makes it choose differently?** The branch you are not testing
@@ -29,17 +31,17 @@ watched it fail. A test you have not seen fail is a test you have not written.
 **A test that stubs the thing it is testing asserts the stub.**
 
 `zenpress_sanitize_snippets_option()` is mostly `sanitize_file_name()`'s
-behaviour: a stub standing in for WordPress would have had to re-implement it,
+behavior: a stub standing in for WordPress would have had to re-implement it,
 and the test would then have been checking the stub. A path-traversal case would
 have passed against the stub and against WordPress, or failed against both, for
 reasons unrelated to the plugin.
 
 Choose the suite by the oracle, not by speed:
 
-| the behaviour depends on | suite |
+| the behavior depends on | suite |
 |---|---|
 | only this plugin's own logic | **unit** — fast, no WordPress |
-| a WordPress function's real behaviour | **integration** — real core, slower, honest |
+| a WordPress function's real behavior | **integration** — real core, slower, honest |
 
 When in doubt pick integration. A unit suite that stubs WordPress is cheap and
 is often measuring the stubs.
@@ -112,9 +114,8 @@ is an **explicit comparison** — `0 !== $x`, `'' !== $x`, `count( $x ) > 0`,
 mutant no honest test can kill. The cast is right only on a `mixed` operand, and
 only where a test can reach a **non-numeric string**.
 
-The table, the reason, and the four lines the last raise reformed are in
-`docs/TOOLCHAIN.md`, "How to write a condition, and why the cast is the wrong
-default" — read it before deciding what a line's fix should be, and before
+The cast rule above, and the generated `.config/phpstan.neon` that applies it, are
+the reference — read them before deciding what a line's fix should be, and before
 concluding that a survivor is your test's fault.
 
 ## Step five, worked
@@ -131,7 +132,7 @@ part:
 | `sanitize_text_field()` removed from `title` | **survived** | no shipped title contains anything the sanitiser would change |
 
 Both survivors are **equivalent mutations**: the change genuinely cannot alter
-behaviour *for the data that exists*. That is a different finding from "the test
+behavior *for the data that exists*. That is a different finding from "the test
 is weak", and the difference matters — one calls for a better test, the other
 calls for a decision about the code.
 
@@ -156,7 +157,7 @@ file the suite creates is testing the file.
 pattern it finds, from the list below, in this order — first match wins, which
 is why a line carrying both `false` and `(bool)` is substituted at `false` and
 never at the cast. You cannot avoid a substitution you have not seen, so here is
-the whole list, with one operand shape per row where the twin's behaviour
+the whole list, with one operand shape per row where the twin's behavior
 differs and a test can therefore kill it:
 
 | the line contains | it is replaced by | a shape where the twin is **not** equivalent |

@@ -1,9 +1,8 @@
 ---
 name: resume
 description: >-
-  Continue dev work on worker tier. Use after thread rotation, turn limits,
-  crashes, or fixing review/security findings. Reads the task file and resumes
-  from the first unchecked task.
+  Continue dev work from a task file after a rotation, a crash or a review —
+  pick up at the first unchecked task.
 ---
 
 # Resume
@@ -39,4 +38,4 @@ Follow `review_required` and lint tiers from the task file and `AGENTS.md`.
 
 ## Project specifics
 
-Paths, commands and build steps for this project are in `AGENTS.md` and `workflow.md`. Read them rather than assuming the layout of another project in this fleet.
+Paths, commands and build steps for this project are in `AGENTS.md` (and `workflow.md` when the project has one). Read them rather than assuming the layout of another project in this fleet.

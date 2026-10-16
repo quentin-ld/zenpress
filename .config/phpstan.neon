@@ -6,7 +6,7 @@
 #
 # The level and the three includes are the fleet's floor (docs/TOOLCHAIN.md).
 # Raising either is a change to `sources/php/phpstan.neon` in the generator, not
-# a change to thirteen project files -- which is what it was, and how three
+# a change to every project's file -- which is what it was, and how three
 # plugins came to be on level 6 while four themes were on level 5.
 #
 # `includes` and `excludePaths` resolve from THIS file's directory, which is why

@@ -405,10 +405,11 @@ _missing_suite_note() {
 
 # A plugin carries a test layer; a theme does not. ADR 0009.
 #
-# This is the one place the runtime says it. Nine callers ask: `test`,
+# This is the one place the runtime says it. Ten callers ask: `test`,
 # `integration`, `suite`, `coverage`, `mutation`, `counterfactual`, `test:js`,
-# `e2e`, and `setup`'s test-stack step. Each prints this one sentence and
-# returns success, because a gate that fails for the sole reason that a decision
+# `e2e`, `verify`, and `setup`'s test-stack step. Each prints this one
+# sentence and returns success, because a gate that fails for the sole reason
+# that a decision
 # removed its subject is a gate people turn off -- and it would read as a broken
 # project rather than a deliberate one.
 #
@@ -3635,8 +3636,8 @@ _ARCHIVE_NEVER_ANYWHERE=(
 # The check reads Composer's own `dev` flag rather than comparing the archive
 # against `require-dev`. Composer writes that flag from exactly the decision that
 # produced the tree, so the two cannot disagree; a list of package names kept in
-# the runtime would have to be kept in agreement with fourteen manifests, which
-# is the defect `.distignore` and the deleted `zip.js` already demonstrated.
+# the runtime would have to be kept in agreement with every project's manifest,
+# which is the defect `.distignore` and the deleted `zip.js` already demonstrated.
 #
 # `vendor/bin/` is deliberately NOT asserted absent: a runtime dependency that
 # ships a binary populates it under `--no-dev` too, and a check that fails a
@@ -4215,7 +4216,7 @@ ${PROJECT_SLUG} harness ${HARNESS_VERSION} — backend: ${BACKEND:-unresolved}
   bin/harness lint:wpcs           WPCS only
   bin/harness lint:fix            WPCS autofix
   bin/harness lint:files <files…> WPCS on named files (used by the git hooks)
-  bin/harness test:js             Jest, through @wordpress/scripts
+  bin/harness test:js             Vitest, through @wordpress/scripts
   bin/harness e2e [args]         Playwright against the local site. Creates a
                                dedicated admin on first run; credentials come
                                from .config/wp-tests.env
@@ -4225,7 +4226,6 @@ ${PROJECT_SLUG} harness ${HARNESS_VERSION} — backend: ${BACKEND:-unresolved}
   bin/harness prose [--base=<ref>]
                                comments that changed while the code did not.
                                Reports, never fails
-                                  scan tests for assertions that cannot fail
   bin/harness lint:js|lint:css|format
   bin/harness build|start         assets via @wordpress/scripts
   bin/harness test                unit suite

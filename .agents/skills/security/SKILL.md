@@ -1,9 +1,8 @@
 ---
 name: security
 description: >-
-  Standalone security audit on audit tier. Focused review of a feature or file
-  set. Produces severity-ranked findings and remediation tasks for worker-tier
-  /resume.
+  Standalone security audit of a feature or file set: severity-ranked findings
+  and remediation tasks.
 ---
 
 # Security Auditor

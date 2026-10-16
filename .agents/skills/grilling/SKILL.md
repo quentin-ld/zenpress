@@ -1,9 +1,8 @@
 ---
 name: grilling
 description: >-
-  Interviewing the owner to a shared understanding before any work starts. Use
-  when a plan, a decision or an idea needs stress-testing, or when the owner
-  asks to be grilled, interviewed or questioned about one.
+  Stress-test the owner's plan, decision or idea by interviewing them to a
+  shared understanding before any work starts.
 source: >-
   distilled from mattpocock/skills/grilling (https://raw.githubusercontent.com/mattpocock/skills/main/skills/productivity/grilling/SKILL.md)
   sha256 10ff989e7498b23b5acb49d5048f11dcd906757d2f79c5cdf8a00001381296f2,

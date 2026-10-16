@@ -1,9 +1,8 @@
 ---
 name: reviewer
 description: >-
-  Integration review after stable code. Audit tier for high-risk surfaces;
-  planning tier for optional low-risk review. Produces a review note and fix
-  list — no implementation.
+  Integration review of stable code: a review note and a fix list, no
+  implementation. Use before shipping.
 ---
 
 # Reviewer

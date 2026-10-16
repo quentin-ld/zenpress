@@ -236,10 +236,13 @@ convenience. If a gate is wrong, fix the gate and say so.
 
 ## Generated files
 
-`bin/harness`, `bin/check-test-antipatterns.php`, `.githooks/*` and this section
-are **generated** and carry a manifest in `.harness/manifest.json`. Editing one
-does not stick: it is overwritten. Everything else in this repository is
-hand-written and stays as you leave it.
+Most of this repository's tooling is **generated** and recorded in
+`.harness/manifest.json`: `bin/`, `.config/`, `.githooks/`, `.agents/skills/`,
+`.agents/docs/`, `.reasonix/`, `composer.json`, `package.json`, `.gitignore`,
+`.distignore` and this section. Editing one does not stick: `harness sync`
+overwrites it. What the manifest does not own — your code, `readme.txt`, a seeded
+file once it exists, and any text outside a marked region — is yours, and stays
+as you leave it.
 <!-- harness:end -->
 
 <!-- graft:start -->

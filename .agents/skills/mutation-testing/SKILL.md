@@ -1,6 +1,8 @@
 ---
 name: mutation-testing
-description: Turn surviving mutants into better tests, or into bug reports. Use when a mutation run reports escaped mutants, when the MSI gate fails, when asked whether a test suite is actually testing anything, or before proposing to lower a threshold.
+description: >-
+  Turn surviving mutants into better tests or into bug reports. Use when mutants
+  escape, when the MSI gate fails, or before lowering a threshold.
 ---
 
 # Mutation testing
@@ -82,13 +84,13 @@ Every survivor is one of these. Deciding which is the job; guessing is how a
 real bug gets closed as "equivalent".
 
 **1 · The test is too weak.** Most common. The assertion checks the outcome for
-one input, and the mutation changes behaviour for an input nobody tried.
+one input, and the mutation changes behavior for an input nobody tried.
 
 Fix: assert on the branch. If the condition is `$a && $b`, there are four cases
 and the test suite should name all four in its intent, even when two share an
 assertion.
 
-**2 · The mutant is equivalent.** The change genuinely cannot alter behaviour:
+**2 · The mutant is equivalent.** The change genuinely cannot alter behavior:
 logic that is already dominated by an earlier return, a defensive branch that
 cannot be reached, `$x = 1` where `$x` is unused.
 
@@ -101,14 +103,14 @@ mutation config.
 guard contradicts something upstream. This is a bug, and the survivor found it
 for free.
 
-Fix: report it. Do not quietly write a test that pins the current behaviour —
+Fix: report it. Do not quietly write a test that pins the current behavior —
 that converts a bug into a specification.
 
 ## Procedure
 
 1. Run `bin/harness mutation`. Read the escaped list from
-   `build/infection.json`; group it by `mutatorName` before looking at
-   individual mutants. Twenty survivors are usually three causes, not twenty.
+   `.cache/infection/infection.json`; group it by `mutatorName` before looking
+   at individual mutants. Twenty survivors are usually three causes, not twenty.
 2. For each **group**, open the mutant's line and read its `originalCode` and
    `mutatedCode`. The mutation says exactly which decision the suite cannot
    see.

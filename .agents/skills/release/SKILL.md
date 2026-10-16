@@ -1,8 +1,8 @@
 ---
 name: release
 description: >-
-  Release cycle on worker tier. Version bump, readme.txt, changelog, build,
-  Plugin Check, zip. Owner must explicitly authorize the version bump.
+  Cut a release: version bump, readme.txt, changelog, build, Plugin Check, zip.
+  The owner must authorize the bump.
 ---
 
 # Release

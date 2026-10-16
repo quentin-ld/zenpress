@@ -1,12 +1,8 @@
 ---
 name: updater
 description: >-
-  Give a harness project its own GitHub-releases update checker: the Composer
-  dependency, the name of the release archive, the per-project credential, the
-  release workflow, and the five checks that catch an updater which is silently
-  doing nothing. Use when a project should install its own releases, when a
-  release is published and never offered, or when a hand-copied update checker
-  should move to vendor/.
+  Give a project its own GitHub-releases update checker. Use when a release
+  ships and is never offered, or a hand-copied updater should move to vendor/.
 ---
 
 # Updater — a project that installs its own releases
@@ -51,7 +47,7 @@ the fleet changes, because nothing else requires a package.
 
 - Do not assume Composer gives you what the copy has. A copy is often a
   *cosmetically modified* tag — `holdmywp-theme`'s was the v5.7 tag run through
-  `php-cs-fixer`, and `composer.json` alone cannot tell you that. Normalise both
+  `php-cs-fixer`, and `composer.json` alone cannot tell you that. Normalize both
   sides before deleting anything: strip comments and whitespace, map
   `array(…)`/`[…]` to one form, and compare. Then check the other direction —
   `master` may carry lines the copy lacks, which is how you know the copy is the

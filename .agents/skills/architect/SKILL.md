@@ -1,10 +1,10 @@
 ---
 name: architect
 description: >-
-  Full dev cycle. Planning tier for clarify and plan; worker tier after
-  approval for autonomous execution, tiered lint, thread rotation, and
-  feedback fixes. Start every change here.
+  Run a full dev cycle on one change: clarify, plan, execute, lint, fix. Start
+  every change here.
 ---
+
 # Architect
 Single skill, two model tiers:
 - **Planning tier** (Phases 1–3): clarify, research, create the plan and task file
@@ -19,7 +19,7 @@ Build context from **graft first**, then read only what you need:
 1. `bin/harness graft ask "<research question>" --source` to locate/understand · `bin/harness graft grep "<symbol>"` to find every occurrence · `bin/harness graft callers <sym>` (or `--depth all` for multi-file changes) to trace edges · `bin/harness graft skeleton <file>` for an API skim. Add `--in <dir>/` to narrow a subtree. **Always through `bin/harness graft`** — a bare `graft` answers an empty graph as "no matching nodes" and exits 0.
 2. Open source files only at the exact `file:line` graft names — never whole files to rebuild understanding graft gives.
 3. `.agents/notes/` for the same slug
-4. `workflow.md` for the project's commands, and `AGENTS.md` for its layout
+4. `AGENTS.md` for the project's layout and its commands — it is on every project; `workflow.md` beside it when the project has one
 Follow AGENTS.md reference-doc rules (never load a whole file under `.agents/docs/`; grep one section). Live by the graft skill: "use graft before raw grep/code-read" is authoritative.
 
 ## Phase 3 — Plan (planning tier)

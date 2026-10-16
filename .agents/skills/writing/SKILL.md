@@ -1,11 +1,8 @@
 ---
 name: writing
 description: >-
-  Writing anything the fleet produces for a person to read: a README, a
-  changelog, a commit message, a review note, a task file, a docblock, a
-  user-facing string. Carries the WordPress Documentation Style Guide rules in
-  `references/`. Use before drafting or rewriting prose, then run the pass that
-  takes the machine out: `humanizer` for English, `humaniseur-fr` for French.
+  Write anything the fleet produces for a person to read — a README, a changelog,
+  a commit message, a docblock. Carries the WordPress Style Guide.
 ---
 
 # Writing

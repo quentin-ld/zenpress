@@ -1,11 +1,8 @@
 ---
 name: graft
 description: >-
-  This repo is indexed by graft/. For ANY task here, whether understanding how
-  something works, finding where code lives, tracing what calls a symbol or
-  what a change breaks, or scoping an edit, get your context from the graph
-  before grepping or reading source files. Every command runs through
-  `bin/harness graft`.
+  Locate and understand code through the project's graft graph before grepping
+  or reading files. Use for any where-is-X, how-does-Y or what-calls-Z task.
 ---
 
 # graft

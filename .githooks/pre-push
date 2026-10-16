@@ -72,7 +72,7 @@ cd "$ROOT"
 # hooks cost 130 s and 421 s, mostly for judging the whole `major/harness`
 # migration rather than the push, and a one-line edit read as 94 changed lines.
 #
-# One budget has to hold for thirteen projects, so the target is the fleet's
+# One budget has to hold for every project, so the target is the fleet's
 # slowest, rounded up: the two large stages scale with the diff, and two runs of
 # the same gate a few minutes apart measured 384 s and 421 s under the old base,
 # so a target set at the measurement itself would report an overrun every other

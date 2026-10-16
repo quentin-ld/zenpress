@@ -1,8 +1,7 @@
 ---
 name: humanizer
 description: >-
-  Editing English prose that reads as machine-written. Use when reviewing or
-  rewriting a draft for AI tells — a README, a changelog entry, a comment, a
+  Remove AI tells from English prose — a README, a changelog, a comment, a
   user-facing string, a review. French text is `humaniseur-fr`.
 source: >-
   distilled from blader/humanizer/humanizer (https://raw.githubusercontent.com/blader/humanizer/main/SKILL.md)
@@ -199,7 +198,7 @@ one-line paragraph restating it before the content starts. Remove the repeated
 sentence.
 
 **24 · Writing about the previous version.** Documentation and comments
-describing what the text replaced instead of the current behaviour. Mention the
+describing what the text replaced instead of the current behavior. Mention the
 previous version only in change logs, release notes and migration guides.
 
 ## When not to act
@@ -227,7 +226,7 @@ self-correction.
 
 ## In this fleet
 
-- **Do not reword an existing i18n string.** A `.po` catalogue is regenerated
+- **Do not reword an existing i18n string.** A `.po` catalog is regenerated
   from the source string, and a reworded English source invalidates every
   translation of it.
 - **The most common defect in this fleet is a docblock that disagrees with the
@@ -290,7 +289,7 @@ Upstream is 25 numbered patterns from Wikipedia's *Signs of AI writing*. Kept:
   this fleet's most common defect; upstream has never seen a WordPress codebase
   and does not separate that bug from a style tell.
 - **i18n strings.** Rewording an English source string invalidates every
-  translation of it, and no upstream prose skill knows a translation catalogue
+  translation of it, and no upstream prose skill knows a translation catalog
   exists.
 - **Generated files.** Half the prose an agent is tempted to "humanize" in this
   fleet is generated, and editing it by hand is work the next sync deletes.

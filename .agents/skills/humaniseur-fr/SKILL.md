@@ -1,9 +1,8 @@
 ---
 name: humaniseur-fr
 description: >-
-  Removing AI tells from French prose without lowering its register. Use when
-  rewriting or reviewing French text — a reply to the owner, a `.po` target, a
-  French post — that reads like a machine wrote it.
+  Remove AI tells from French prose without lowering its register — a reply, a
+  `.po` target, a French post.
 source: >-
   distilled from samber/cc-skills/humaniseur-fr (https://raw.githubusercontent.com/samber/cc-skills/main/skills/humaniseur-fr/SKILL.md)
   sha256 80ffd1cdca7bf6323b236d7f2618fcf1d8443970a99fe6910050a50463ea45c3
@@ -21,7 +20,7 @@ the two languages.
 **Never lower the register of the input.** An input in *langage soutenu* stays
 soutenu. Formal is not the same as machine-made: a subordinate clause, a precise
 connector and a long periodic sentence are features of good French, not
-artefacts. Only what is genuinely mechanical comes out — inflated significance,
+artifacts. Only what is genuinely mechanical comes out — inflated significance,
 copula avoidance, synonym cycling, promotional filler.
 
 So step zero is the target register (*soutenu*, *courant*, *familier*) and the
@@ -172,7 +171,7 @@ straight quotes, curly quotes and chevrons in one text, or `'` and `’`
 alternating. Match the register — chevrons `« … »` with non-breaking spaces in
 worked official prose, curly quotes elsewhere — and keep it consistent.
 
-**20 · Conversation artefacts.** `J'espère que cela vous aide`, `Bien sûr !`,
+**20 · Conversation artifacts.** `J'espère que cela vous aide`, `Bien sûr !`,
 `Absolument !`, `Vous avez tout à fait raison`, `Souhaitez-vous que …`,
 `N'hésitez pas à`, `Voici un …`. Remove the wrapper, keep the content.
 
@@ -201,7 +200,7 @@ the tail.** Also here: sentence-start anaphora (`Cela …`, `Cette approche …`
 paragraphs, `Et là… tout a changé`, relentlessly upbeat — which now reads as
 machine-made even when a human wrote it.
 
-**26 · Residual Markdown and technical artefacts.** Unrendered `**mot**` or `##`
+**26 · Residual Markdown and technical artifacts.** Unrendered `**mot**` or `##`
 in a medium that does not render Markdown, `- **Titre :**` bullets pasted the
 same way, `:contentReference[oaicite:2]{index=2}`, a leftover refusal (`Je suis
 désolé, mais je ne peux pas …`). These are the strongest tells of all, because no
@@ -267,7 +266,7 @@ there is none, ask the author for it.
 Removing tells is half the job. Sterile text is as suspicious as `crucial`.
 
 **Know the limit.** Experienced French readers no longer rely on style. What they
-trust is behavioural: publishing cadence, whether the author exists, whether the
+trust is behavioral: publishing cadence, whether the author exists, whether the
 sources check out. No amount of scrubbing fixes a text with nothing situated in
 it. When the input has no anchored content, ask for one real example, one date,
 one source, and build the rewrite around them rather than polishing the surface.
@@ -303,10 +302,10 @@ carry is a hallucination, not a human touch.
 
 ## In this fleet
 
-- **French has two homes**: a `.po` catalogue target and a reply to the owner.
+- **French has two homes**: a `.po` catalog target and a reply to the owner.
   French anywhere else in the repository is drift the next reader pays for — the
   `translation` skill's rule, which this skill does not relax.
-- **Never reword an existing i18n string.** The catalogue is regenerated from the
+- **Never reword an existing i18n string.** The catalog is regenerated from the
   source string.
 - **Do not translate what WordPress translates.** `article`, `page`,
   `extension`, `tableau de bord`: where WordPress already renders the term, a
@@ -338,7 +337,7 @@ The skill was followed correctly when:
 - **The pattern taxonomy**, compacted from 38 entries, with the French triggers
   kept verbatim because the triggers *are* the tool.
 - **Part 4, soul.** Upstream is unusual in saying that removing tells is only
-  half the job, and in naming the behavioural signals no style fix reaches.
+  half the job, and in naming the behavioral signals no style fix reaches.
 - **The typography details**: zero-width characters out, non-breaking spaces in.
 - **The measured French figures** — `également` at four times human rate, the
   sentence-length distribution, the tense and pronoun profile — because they are
@@ -370,7 +369,7 @@ The skill was followed correctly when:
 - **The house homes for French.** A `.po` target and a reply to the owner, and
   the `translation` skill's rule that French anywhere else is drift.
 - **The i18n rule.** Rewording an English source string invalidates every
-  translation of it, and no upstream prose skill knows a catalogue exists.
+  translation of it, and no upstream prose skill knows a catalog exists.
 - **WordPress vocabulary.** `article`, `page`, `extension`, `tableau de bord` —
   terms WordPress already translates, so translating them again produces a page
   where one concept has two names.

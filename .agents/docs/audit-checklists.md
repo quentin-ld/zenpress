@@ -63,7 +63,7 @@ Used by `qa`, `reviewer`, `security`. Grep one category.
 
 - `.gitignore` covers all generated files (`.env`, `.config/wp-tests.env`, `*.zip`, `node_modules/`, `vendor/`, `assets/build/`, `.phpunit.cache/`)
 - `.distignore` matches `.gitattributes` export-ignore for release zips
-- `composer.json` / `package.json` scripts match `workflow.md`
+- `composer.json` / `package.json` scripts match the project's `AGENTS.md` and, where it has one, `workflow.md`
 - No hardcoded paths or platform assumptions (Linux-only paths, macOS-only paths, missing `python3`)
 - Plugin Check exclusions justified in comments
 - ZIP builder excludes dev files correctly
