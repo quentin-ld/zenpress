@@ -4270,6 +4270,127 @@ _readme_expect() {
 	_readme_finding "$1" "$5 announces $2 '$announced'; the header declares '$declared'"
 }
 
+# The rest of the contract's checkable clauses are about the README's own shape:
+# a table with no separator row renders as text, an image path that resolves to
+# nothing shows a broken icon where the project's icon was meant to be, and a
+# features bullet that does not open with a bold lead-in is the prose rule that
+# is a gate. Each is a fact about the file, readable with no judgement, so each
+# is a finding rather than a review.
+#
+# One awk pass apiece, and the loops read from a process substitution rather
+# than a pipe so the findings counter stays in this shell.
+
+_readme_tables() {
+	# A run of lines that start with a pipe is one table, and the second line of
+	# the run has to be the alignment row. `lone` is a run of one: the pipes are
+	# left as text either way.
+	awk '
+		function flush() {
+			if (!open) return
+			if (rows < 2) { print start "\tlone" }
+			else if (sep !~ /^[[:space:]]*\|[[:space:]:|-]*\|?[[:space:]]*$/ || sep !~ /-/) {
+				print start "\tnosep"
+			}
+			open = 0; rows = 0; sep = ""
+		}
+		/^[[:space:]]*(```|~~~)/ { flush(); fence = !fence; next }
+		fence { next }
+		/^[[:space:]]*\|/ {
+			if (!open) { open = 1; start = NR }
+			rows++
+			if (rows == 2) sep = $0
+			next
+		}
+		{ flush() }
+		END { flush() }
+	' "$PROJECT_ROOT/README.md"
+}
+
+_readme_images() {
+	# Every image the README asks the reader to load, in the two spellings a
+	# README uses -- markdown and the `<img src=…>` that centers a banner -- as
+	# `line<TAB>path`. Absolute targets are included; the caller is what knows
+	# which of them means "inside this project".
+	awk '
+		BEGIN { q = "\"" sprintf("%c", 39) }
+		{
+			rest = $0
+			while (match(rest, /!\[[^]]*\]\([^)[:space:]]+/)) {
+				path = substr(rest, RSTART, RLENGTH)
+				sub(/^!\[[^]]*\]\(/, "", path)
+				sub(/^</, "", path)
+				print NR "\t" path
+				rest = substr(rest, RSTART + RLENGTH)
+			}
+			rest = $0
+			while (match(rest, "<[Ii][Mm][Gg][^>]*[Ss][Rr][Cc][[:space:]]*=[[:space:]]*[" q "]")) {
+				rest = substr(rest, RSTART + RLENGTH)
+				path = rest
+				sub("[" q "].*", "", path)
+				print NR "\t" path
+			}
+		}
+	' "$PROJECT_ROOT/README.md"
+}
+
+_readme_bullets() {
+	# A bullet inside a features or docs block whose text does not open with
+	# `**`. The block is found by its heading -- the contract's synonym set --
+	# and ends at the next H1 or H2, so a `###` inside it does not close it.
+	awk '
+		BEGIN {
+			head["## Features"] = 1
+			head["## What it does"] = 1
+			head["## Documentation"] = 1
+			head["## Docs"] = 1
+			head["## Documentation index"] = 1
+		}
+		/^[[:space:]]*(```|~~~)/ { fence = !fence; next }
+		fence { next }
+		/^#{1,2} / {
+			line = $0
+			sub(/[[:space:]]+$/, "", line)
+			inside = (line in head)
+			next
+		}
+		!inside { next }
+		/^[[:space:]]*[-*+] / {
+			rest = $0
+			sub(/^[[:space:]]*[-*+] +/, "", rest)
+			if (substr(rest, 1, 2) != "**") print NR "\t" $0
+		}
+	' "$PROJECT_ROOT/README.md"
+}
+
+_readme_check_shape() {
+	local line kind path text message
+	while IFS=$'\t' read -r line kind; do
+		[[ -n "$line" ]] || continue
+		if [[ "$kind" == "lone" ]]; then
+			message="is a table row with no header and separator row above it"
+		else
+			message="opens a table whose second row is not a separator row"
+		fi
+		_readme_finding ST5 "README.md:${line} ${message}"
+	done < <(_readme_tables)
+
+	while IFS=$'\t' read -r line path; do
+		[[ -n "$path" ]] || continue
+		path="${path%%#*}"
+		path="${path%%\?*}"
+		[[ -n "$path" ]] || continue
+		[[ "$path" == /* || "$path" == "//"* || "$path" == "#"* ]] && continue
+		[[ "$path" =~ ^[[:alpha:]][[:alnum:]+.-]*: ]] && continue
+		[[ -e "$PROJECT_ROOT/$path" ]] && continue
+		_readme_finding LK1 "README.md:${line} references '${path}', which is not in the project"
+	done < <(_readme_images)
+
+	while IFS=$'\t' read -r line text; do
+		[[ -n "$line" ]] || continue
+		_readme_finding PR2 "README.md:${line} opens a features or docs bullet without a bold lead-in"
+	done < <(_readme_bullets)
+}
+
 _readme_check() {
 	step 'README conformance — announced facts vs the header'
 	local readme="$PROJECT_ROOT/README.md"
@@ -4277,7 +4398,7 @@ _readme_check() {
 
 	_README_FINDINGS=0
 
-	local version requires tested php
+	local version requires tested php declared=""
 	version="$(_readme_header 'Version')"
 	requires="$(_readme_header 'Requires at least')"
 	tested="$(_readme_header 'Tested up to')"
@@ -4307,6 +4428,15 @@ _readme_check() {
 		"$(_readme_badge 'WordPress%20tested')" "$tested" 'a badge'
 	_readme_expect DR6 'PHP requires' "$(_readme_badge 'PHP')" "$php" 'a badge'
 
+	# Where an absence *is* a finding. `readme.txt` is the file WordPress.org
+	# parses and the stable tag is part of its header block; the comparison below
+	# skips whatever the file does not declare, which is how six themes carried
+	# none while this check was marked enforced.
+	if [[ -f "$PROJECT_ROOT/readme.txt" && -z "$(_readme_txt 'Stable tag')" ]]; then
+		declared=""
+		[[ -n "$version" ]] && declared="; the header declares '$version'"
+		_readme_finding DR7 "readme.txt declares no 'Stable tag'${declared}"
+	fi
 	_readme_expect DR7 'the stable tag' "$(_readme_txt 'Stable tag')" \
 		"$version" 'readme.txt'
 	_readme_expect DR8 'WordPress requires' \
@@ -4324,6 +4454,8 @@ _readme_check() {
 	if [[ -n "$empty_links" ]]; then
 		_readme_finding LK2 "README.md has a link with an empty target at line(s) ${empty_links}"
 	fi
+
+	_readme_check_shape
 
 	if [[ "$_README_FINDINGS" -eq 0 ]]; then
 		info 'no findings.'
