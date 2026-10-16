@@ -4195,12 +4195,151 @@ done
 	fi
 }
 
+# ---------------------------------------------------------------------------
+# README conformance — the announced facts, read back from the header
+# ---------------------------------------------------------------------------
+#
+# A README states four things about itself: the WordPress floor, the version it
+# was tested against, the PHP floor, and the version it ships as. The generated
+# `compat` region cannot drift, because it is written from the header. The badges
+# and `readme.txt` are typed by a person, and nothing compared them: a release
+# that bumped the header and left a badge behind was a silent lie.
+#
+# This lives here, and not in a tool the project does not carry, because a gate
+# runs where the push is. No project may depend on another repository; that is
+# the rule AGENTS.md states first.
+#
+# Absent is not a finding on either side. A project that declares nothing has
+# nothing to disagree with, and filling in a default is the defect this exists to
+# prevent rather than a repair.
+
+_readme_header() {
+	# One field of the project header. `PROJECT_MAIN_FILE` is `style.css` for a
+	# theme and the plugin file for a plugin, so the header is one path either
+	# way and this does not have to ask which kind it is.
+	local file="$PROJECT_ROOT/$PROJECT_MAIN_FILE"
+	[[ -f "$file" ]] || return 0
+	sed -nE "s|^[[:space:]/#*@]*$1[[:space:]]*:[[:space:]]*(.*)|\1|Ip" "$file" \
+		| head -n1 || true
+}
+
+_readme_txt() {
+	# One field of `readme.txt`, the file WordPress.org parses. Two projects in
+	# the fleet do not ship one; an absent file is not a finding.
+	local file="$PROJECT_ROOT/readme.txt"
+	[[ -f "$file" ]] || return 0
+	sed -nE "s|^$1:[[:space:]]*(.*)|\1|Ip" "$file" | head -n1 || true
+}
+
+_readme_region() {
+	sed -n '/<!-- harness:compat:start -->/,/<!-- harness:compat:end -->/p' \
+		"$PROJECT_ROOT/README.md" || true
+}
+
+_readme_region_field() {
+	# $1 is an extended pattern whose group 1 is the value. The markup is
+	# stripped first, so the pattern reads `- WordPress 6.2+ (tested up to 7.1)`
+	# rather than count asterisks.
+	_readme_region | sed -E 's/[*`]//g' | sed -nE "s|$1|\1|p" | head -n1 || true
+}
+
+_readme_badge() {
+	# $1 is the badge's slug as shields.io spells it. Digits and dots only, so
+	# `PHP-8.1%2B` yields `8.1` and the URL-encoded plus needs no decoding.
+	local slug="$1" found
+	found="$(grep -oE "badge/${slug}-[0-9][0-9.]*" "$PROJECT_ROOT/README.md" 2>/dev/null | head -n1 || true)"
+	[[ -n "$found" ]] || return 0
+	printf '%s' "${found#badge/${slug}-}"
+}
+
+_readme_norm() {
+	printf '%s' "$1" | sed -e 's/%2[bB]/+/g' -e 's/%20//g' | tr -d '[:space:]' \
+		| sed 's/+$//' || true
+}
+
+_readme_finding() {
+	printf '  [%s] %s\n' "$1" "$2" >&2
+	_README_FINDINGS=$((_README_FINDINGS + 1))
+}
+
+_readme_expect() {
+	# $1 check id, $2 what, $3 announced, $4 declared, $5 where it was announced.
+	local announced="$3" declared="$4"
+	[[ -n "$announced" && -n "$declared" ]] || return 0
+	[[ "$(_readme_norm "$announced")" == "$(_readme_norm "$declared")" ]] && return 0
+	_readme_finding "$1" "$5 announces $2 '$announced'; the header declares '$declared'"
+}
+
+_readme_check() {
+	step 'README conformance — announced facts vs the header'
+	local readme="$PROJECT_ROOT/README.md"
+	[[ -f "$readme" ]] || fail 'README.md is missing'
+
+	_README_FINDINGS=0
+
+	local version requires tested php
+	version="$(_readme_header 'Version')"
+	requires="$(_readme_header 'Requires at least')"
+	tested="$(_readme_header 'Tested up to')"
+	php="$(_readme_header 'Requires PHP')"
+
+	if grep -q '<!-- harness:compat:start -->' "$readme"; then
+		_readme_expect DR1 'WordPress requires' \
+			"$(_readme_region_field '^- WordPress ([0-9][0-9.]*)[+]?.*')" \
+			"$requires" 'the compatibility region'
+		_readme_expect DR2 'WordPress tested up to' \
+			"$(_readme_region_field '.*[(]tested up to ([0-9][0-9.]*)[)].*')" \
+			"$tested" 'the compatibility region'
+		_readme_expect DR3 'PHP requires' \
+			"$(_readme_region_field '^- PHP ([0-9][0-9.]*)[+]?.*')" \
+			"$php" 'the compatibility region'
+		_readme_expect DR4 'version' \
+			"$(_readme_region_field '^- Version (.+)')" \
+			"$version" 'the compatibility region'
+	else
+		_readme_finding ST3 "README.md has no 'compat' region; the announced requirements are hand-written or absent"
+	fi
+
+	_readme_expect DR5 'version' "$(_readme_badge 'version')" "$version" 'a badge'
+	_readme_expect DR6 'WordPress requires' \
+		"$(_readme_badge 'WordPress%20requires')" "$requires" 'a badge'
+	_readme_expect DR6 'WordPress tested up to' \
+		"$(_readme_badge 'WordPress%20tested')" "$tested" 'a badge'
+	_readme_expect DR6 'PHP requires' "$(_readme_badge 'PHP')" "$php" 'a badge'
+
+	_readme_expect DR7 'the stable tag' "$(_readme_txt 'Stable tag')" \
+		"$version" 'readme.txt'
+	_readme_expect DR8 'WordPress requires' \
+		"$(_readme_txt 'Requires at least')" "$requires" 'readme.txt'
+	_readme_expect DR8 'WordPress tested up to' \
+		"$(_readme_txt 'Tested up to')" "$tested" 'readme.txt'
+	_readme_expect DR8 'PHP requires' "$(_readme_txt 'Requires PHP')" \
+		"$php" 'readme.txt'
+
+	if [[ "$_README_FINDINGS" -eq 0 ]]; then
+		info 'no findings.'
+		return 0
+	fi
+	printf '\n' >&2
+	fail "$_README_FINDINGS README finding(s): an announced fact disagrees with the header."
+}
+
+cmd_readme() {
+	local action="${1:-check}"
+	shift || true
+	case "$action" in
+	check) _readme_check "$@" ;;
+	*) fail "unknown readme action: $action (try: bin/harness readme check)" ;;
+	esac
+}
+
 usage() {
 	cat <<EOF
 ${PROJECT_SLUG} harness ${HARNESS_VERSION} — backend: ${BACKEND:-unresolved}
 
   bin/harness env                 resolved project + backend
   bin/harness doctor              tool availability, graft, manifest
+  bin/harness readme check        README announced facts vs the project header
   bin/harness exec <cmd...>       run anything in the project backend
 
   bin/harness php|composer|wp|node|npm|npx <args...>
@@ -4265,6 +4404,7 @@ main() {
 	"") usage ;;
 	env) cmd_env ;;
 	doctor) cmd_doctor ;;
+	readme) cmd_readme "$@" ;;
 	exec) run "$@" ;;
 	php | composer | wp | node | npm | npx) require_tool "$command"; run "$command" "$@" ;;
 	graft) cmd_graft "$@" ;;

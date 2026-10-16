@@ -89,6 +89,14 @@ status=0
 
 "$ROOT/bin/harness" lint || status=1
 
+# The README's announced facts, read back from the project header: the WordPress
+# and PHP floors, the version tested against, the version shipped as. The
+# generated region cannot drift, but the badges and `readme.txt` are hand-typed,
+# and nothing compared them until this — a release that bumped the header and
+# left a badge behind was a silent lie, and the owner's own text pass found it
+# twice. Unconditional: every project carries a README, both kinds.
+"$ROOT/bin/harness" readme check || status=1
+
 # The code graph the agents read, verified against the tree being pushed.
 #
 # `graft check` refreshes and then verifies, in that order, and the order is the
