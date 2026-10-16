@@ -8,6 +8,29 @@ settings usually spread across half a dozen plugins on one page.
 It is for the site owner who wants fewer plugins rather than more: one screen
 where the decisions live, each one explained, nothing buried behind a preset.
 
+## Compatibility
+
+### Requirements
+
+<!-- harness:compat:start -->
+- WordPress **6.0+** (tested up to **7.1**)
+- PHP **8.1+**
+- Version **2.3.0**
+<!-- harness:compat:end -->
+
+## Installation
+
+1. Install it from the WordPress dashboard, or copy the directory into a
+   WordPress install.
+2. Activate it.
+3. Open its settings page and work through the sections. The defaults are the
+   safe ones and every switch says what it changes, so nothing here needs an
+   audit before it is turned on.
+
+ZenPress ships through WordPress.org, so updates arrive in the dashboard. The
+toolchain in the Development section below is for working *on* the plugin, not
+for using it.
+
 <!-- harness:start -->
 ## Development
 
@@ -61,19 +84,6 @@ bin/harness help            # every command
 resolved per project, and a direct call fails in a way that looks like a broken
 project rather than a missing environment.
 <!-- harness:end -->
-
-## Installation
-
-1. Install it from the WordPress dashboard, or copy the directory into a
-   WordPress install.
-2. Activate it.
-3. Open its settings page and work through the sections. The defaults are the
-   safe ones and every switch says what it changes, so nothing here needs an
-   audit before it is turned on.
-
-ZenPress ships through WordPress.org, so updates arrive in the dashboard. The
-toolchain in the Development section below is for working *on* the plugin, not
-for using it.
 
 ## Support & Contribution
 
