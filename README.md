@@ -1,5 +1,14 @@
 # ZenPress
 
+<img src=".wordpress-org/banner-1544x500.png" alt="ZenPress banner" width="100%" />
+
+[![WordPress tested](https://img.shields.io/badge/WordPress%20tested-7.1-21759b)](https://wordpress.org/plugins/zenpress/)
+[![WordPress requires](https://img.shields.io/badge/WordPress%20requires-6.0%2B-21759b)](https://wordpress.org/plugins/zenpress/)
+[![PHP](https://img.shields.io/badge/PHP-8.1%2B-8892BF)](https://www.php.net/)
+[![Version](https://img.shields.io/badge/version-2.3.0-2E77BC)](https://wordpress.org/plugins/zenpress/)
+[![License](https://img.shields.io/badge/license-GPL--2.0--or--later-brightgreen)](https://www.gnu.org/licenses/gpl-2.0.html)
+[![WordPress downloads](https://img.shields.io/wordpress/plugin/dt/zenpress)](https://wordpress.org/plugins/zenpress/)
+
 ZenPress is the maintenance plugin for a WordPress site you actually have to look
 after. It turns off the features a default install leaves on and nobody uses,
 closes the gaps that default install leaves open, and puts the cache and security

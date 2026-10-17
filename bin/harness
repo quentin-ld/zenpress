@@ -4391,6 +4391,102 @@ _readme_check_shape() {
 	done < <(_readme_bullets)
 }
 
+_readme_opening() {
+	# `[ST1]` and `[ST2]`: the first non-blank line is the H1, the first image
+	# is the banner, and the first shields.io line is the badge row that has to
+	# follow it directly. A reader who scrolls past prose to find the badges is
+	# looking at a product page that starts in the middle.
+	awk '
+		function trim(s) { sub(/^[[:space:]]+/, "", s); sub(/[[:space:]]+$/, "", s); return s }
+		{
+			raw = $0
+			line = trim(raw)
+			if (!first && line != "") {
+				first = NR
+				if (line !~ /^#[[:space:]]+[^[:space:]]/)
+					print "ST1\t" NR "\tREADME.md does not start with an H1 title"
+			}
+			if (image == 0 && raw !~ /img\.shields\.io/ && (raw ~ /!\[[^]]*\]\(/ || raw ~ /<[Ii][Mm][Gg][^>]*[Ss][Rr][Cc][[:space:]]*=/)) {
+				image = NR
+				if (badge > 0) print "ST2\t" image "\tREADME.md puts the badge row before its banner"
+				between = 0
+				next
+			}
+			if (badge == 0 && raw ~ /img\.shields\.io/) {
+				badge = NR
+				if (image == 0) print "ST2\t" NR "\tREADME.md puts the badge row before its banner"
+				else if (between) print "ST2\t" image "\tREADME.md banner is not followed directly by the badge row"
+				next
+			}
+			if (image > 0 && badge == 0 && line != "" && line !~ /^<!--/) between = 1
+		}
+		END {
+			if (image == 0) print "ST2\t0\tREADME.md has no banner image"
+			else if (badge == 0) print "ST2\t0\tREADME.md has no badge row after its banner"
+		}
+	' "$PROJECT_ROOT/README.md"
+}
+
+_readme_badges() {
+	# `[ST6]`: the minimum row every project carries. A public plugin adds the
+	# tested version and the live WordPress.org downloads count, which is why
+	# `.harness/public` exists: three plugins carry `.wordpress-org/` assets and
+	# only two are public.
+	local readme="$PROJECT_ROOT/README.md" public=0 declared=""
+	if [[ -f "$PROJECT_ROOT/.harness/public" ]]; then
+		declared="$(tr -d '[:space:]' < "$PROJECT_ROOT/.harness/public" | tr '[:upper:]' '[:lower:]')"
+		case "$declared" in
+			""|0|false|no|off) public=0 ;;
+			*) public=1 ;;
+		esac
+	fi
+
+	grep -qE 'badge/WordPress%20requires-[0-9][0-9.]*' "$readme" \
+		|| _readme_finding ST6 'README.md has no WordPress requires badge'
+	grep -qE 'badge/PHP-[0-9][0-9.]*' "$readme" \
+		|| _readme_finding ST6 'README.md has no PHP badge'
+	grep -qE 'badge/version-[^-)]' "$readme" \
+		|| _readme_finding ST6 'README.md has no version badge'
+	grep -qE 'badge/license-[^)]' "$readme" \
+		|| _readme_finding ST6 'README.md has no license badge'
+
+	if [[ "$public" == 1 ]]; then
+		grep -qE 'badge/WordPress%20tested-[0-9][0-9.]*' "$readme" \
+			|| _readme_finding ST6 'README.md has no WordPress tested badge'
+		grep -qE 'img\.shields\.io/wordpress/plugin/dt/' "$readme" \
+			|| _readme_finding ST6 'README.md has no WordPress downloads badge'
+	fi
+}
+
+_readme_license() {
+	# `[LIC1]`: GPLv2 in the file, the header, `readme.txt` and the package
+	# metadata. The fleet is GPL-2.0-or-later; a GPLv3 text beside a GPLv2
+	# header is a legal ambiguity, not a formatting preference.
+	local license="$PROJECT_ROOT/LICENSE" value
+	if [[ ! -f "$license" ]]; then
+		_readme_finding LIC1 'LICENSE is missing'
+	elif ! grep -qi 'GNU GENERAL PUBLIC LICENSE' "$license" \
+		|| ! grep -qE 'Version[[:space:]]+2' "$license"; then
+		_readme_finding LIC1 'LICENSE does not carry the GNU GPL version 2 text'
+	fi
+
+	value="$(_readme_header 'License')"
+	if [[ -z "$value" ]]; then
+		_readme_finding LIC1 'the plugin/theme header declares no License'
+	elif ! grep -qiE 'gpl|general public license' <<<"$value"; then
+		_readme_finding LIC1 "the header declares '${value}', which is not GPLv2"
+	elif grep -qiE 'gpl[- ]?v?3|version[[:space:]]*3|v3\b' <<<"$value"; then
+		_readme_finding LIC1 "the header declares '${value}', which is not GPLv2"
+	elif ! grep -qiE 'gpl[- ]?v?2|version[[:space:]]*2|v2\b|gpl-2' <<<"$value"; then
+		_readme_finding LIC1 "the header declares '${value}', which is not GPLv2"
+	fi
+
+	value="$(_readme_txt 'License')"
+	if [[ -n "$value" ]] && ! grep -qiE 'gpl[- ]?v?2|version[[:space:]]*2|v2\b|gpl-2' <<<"$value"; then
+		_readme_finding LIC1 "readme.txt declares '${value}', which is not GPLv2"
+	fi
+}
+
 _readme_check() {
 	step 'README conformance — announced facts vs the header'
 	local readme="$PROJECT_ROOT/README.md"
@@ -4432,7 +4528,9 @@ _readme_check() {
 	# parses and the stable tag is part of its header block; the comparison below
 	# skips whatever the file does not declare, which is how six themes carried
 	# none while this check was marked enforced.
-	if [[ -f "$PROJECT_ROOT/readme.txt" && -z "$(_readme_txt 'Stable tag')" ]]; then
+	if [[ ! -f "$PROJECT_ROOT/readme.txt" ]]; then
+		_readme_finding ST7 'readme.txt is missing'
+	elif [[ -z "$(_readme_txt 'Stable tag')" ]]; then
 		declared=""
 		[[ -n "$version" ]] && declared="; the header declares '$version'"
 		_readme_finding DR7 "readme.txt declares no 'Stable tag'${declared}"
@@ -4456,6 +4554,9 @@ _readme_check() {
 	fi
 
 	_readme_check_shape
+	_readme_opening
+	_readme_badges
+	_readme_license
 
 	if [[ "$_README_FINDINGS" -eq 0 ]]; then
 		info 'no findings.'
